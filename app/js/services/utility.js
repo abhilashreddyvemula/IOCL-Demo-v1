@@ -15,6 +15,7 @@ angular.module('myApp.utility',[])
     }
 
     this.setCredentials = function(userdetails){
+        console.log(userdetails);
         user = userdetails;
         // $http.defaults.headers.common['Authorization'] = this.generateToken(user.name, user.password);
     }
