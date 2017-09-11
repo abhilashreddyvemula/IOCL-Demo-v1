@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group ">
-                                        <span class="mandatory-fields">  * <label>Bay Name </label></span>
+                                        <span class="mandatory-fields"> <label>Bay Name </label>*</span>
                                         <input class="form-control" ng-model="newBay.bayName" name="bayName" value="" size="35" data-error="Required" required="" type="text">
                                         <span ng-show="myForm.bayName.$touched && myForm.bayName.$invalid" class="input-field-errors">Bay name is required.</span>
                                         <span ng-if="errorMessageBayName" class="input-field-errors">Bay name already exist!</span>
@@ -52,7 +52,7 @@
                             <div class="row">
                                 <div class=" col-12 col-sm-6">
                                     <div class="form-group ">
-                                        <span class="mandatory-fields">   *<label>Bay Number </label></span>
+                                        <span class="mandatory-fields">   <label>Bay Number </label>*</span>
                                         <!--<input class="form-control " name="" value="" size="35" data-error="Required" required="" type="text">-->
                                         <input class="form-control" ng-model="newBay.bayNum" name="bayNum" value="" ng-maxlength="2" size="35" data-error="Required" required="" type="number">
                                         <span ng-show="myForm.bayNum.$touched && myForm.bayNum.$invalid" class="input-field-errors">Bay number is required(0 - 99).</span>
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class=" col-12 col-sm-6">
                                     <div class="form-group lname">
-                                        <span class="mandatory-fields">  * <label>Bay Type </label></span>
+                                        <span class="mandatory-fields">   <label>Bay Type </label>*</span>
                                         <select name="bayType" ng-init="newBay.bayType = dropDownValues.bayTypes[0]" ng-model="newBay.bayType" ng-options="item for item in dropDownValues.bayTypes" class="form-control" required>
                     <option>Select </option>
                   </select>
@@ -77,7 +77,7 @@
                             <div class="row nobdr">
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group lname">
-                                        <span class="mandatory-fields"> * <label>Functional Status </label></span>
+                                        <span class="mandatory-fields">  <label>Functional Status </label>*</span>
                                         <select name="bayStatus" ng-init="newBay.bayStatus = dropDownValues.bayStatus[0]" ng-model="newBay.functionalStatus" ng-options="item for item in dropDownValues.bayStatus" class="form-control" required>
                     <option>Select </option>
                   </select>
