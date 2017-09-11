@@ -1,73 +1,92 @@
-<div ng-controller="BayController">
-  <section class="bay title" style="">
-    <div class="row first">
-      <div class=" col-12" ng-show="addClicked" id="bay-save-btns">
-        <h2> <i class="fa fa-tint" aria-hidden="true"> </i><span></span><strong> Add  Bay</strong></h2>
-        <ul class="buttons">
-          <li>
-            <button class="submit" type="submit" ng-click="addClicked = false;saveBay(newBay)"><i class="fa fa-check"> </i> <span>Save</span></button>
-          </li>
-          <li>
-            <button class="cancel" type="button" ng-click="addClicked = false"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
-          </li>
-        </ul>
-      </div>
-      <div class=" col-12" style="display: block;" ng-hide="addClicked" id="bay-add-btns">
-        <h2> <i class="fa fa-tint"> </i><span></span><strong> Bay</strong></h2>
-        <ul class="buttons">
-          <li>
-            <button class="submit" ng-click="addClicked = true" type="button"><i class="fa fa-plus"> </i> <span>Add</span></button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <div class="bay">
-    <div class="container">
-      <div class="" id="addBay">
-        <div ng-show="addClicked" class="row">
-          <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-            <div class="row">
-              <div class="col-12 col-sm-12">
-                <div class="form-group ">
-                  <label>Bay Name </label>
-                  <input class="form-control" ng-model="newBay.bayName" name="" value="" size="35" data-error="Required" required="" type="text">
+<form name="myForm">
+    <div ng-controller="BayController">
+        <section class="bay title" style="">
+            <div class="row first">
+
+                <div class=" col-12" ng-show="addClicked" id="bay-save-btns">
+
+                    <h2> <i class="fa fa-tint" aria-hidden="true"> </i><span></span><strong> Add  Bay</strong></h2>
+                    <ul class="buttons">
+                        <li>
+                            <button class="submit" type="submit" ng-click="addClicked;saveBay(newBay);" ng-disabled="myForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                        </li>
+                        <li>
+                            <button class="cancel" type="button" ng-click="onCancel()"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
+                        </li>
+                    </ul>
                 </div>
-              </div>
+                <div class=" col-12" style="display: block;" ng-hide="addClicked" id="bay-add-btns">
+                    <h2> <i class="fa fa-tint"> </i><span></span><strong> Bay</strong></h2>
+                    <ul class="buttons">
+                        <li>
+                            <button class="submit" ng-click="addNewBay(); 
+                            addClicked;
+                            myForm.bayName.$touched=false;
+                            myForm.bayNum.$touched=false;
+                            myForm.bayType.$touched=false;
+                            myForm.bayStatus.$touched=false;" type="button"><i class="fa fa-plus"> </i> <span>Add</span></button>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </div>
-          <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-            <div class="row  ">
-              <div class=" col-12 col-sm-6">
-                <div class="form-group ">
-                  <label>Bay Number </label>
-                  <!--<input class="form-control " name="" value="" size="35" data-error="Required" required="" type="text">-->
-                  <input class="form-control" ng-model="newBay.bayNum" name="" value="" size="35" data-error="Required" required="" type="number">
-                </div>
-              </div>
-              <div class=" col-12 col-sm-6">
-                <div class="form-group lname">
-                  <label>Bay Type </label>
-                  <select name="usertype" ng-init="newBay.bayType = dropDownValues.bayTypes[0]" ng-model="newBay.bayType" ng-options="item for item in dropDownValues.bayTypes" class="form-control" required>
+        </section>
+        <div class="bay">
+            <div class="container">
+                <div class="" id="addBay">
+                    <div ng-show="addClicked" class="row" style="padding-left: 15px;"> <span class="mandatory-fields"> *</span> Fields are mandatory.</div>
+                    <div ng-show="addClicked" class="row">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="row">
+                                <div class="col-12 col-sm-12">
+                                    <div class="form-group ">
+                                        <span class="mandatory-fields">  * <label>Bay Name </label></span>
+                                        <input class="form-control" ng-model="newBay.bayName" name="bayName" value="" size="35" data-error="Required" required="" type="text">
+                                        <span ng-show="myForm.bayName.$touched && myForm.bayName.$invalid" class="input-field-errors">Bay name is required.</span>
+                                        <span ng-if="errorMessageBayName" class="input-field-errors">Bay name already exist!</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="row">
+                                <div class=" col-12 col-sm-6">
+                                    <div class="form-group ">
+                                        <span class="mandatory-fields">   *<label>Bay Number </label></span>
+                                        <!--<input class="form-control " name="" value="" size="35" data-error="Required" required="" type="text">-->
+                                        <input class="form-control" ng-model="newBay.bayNum" name="bayNum" value="" ng-maxlength="2" size="35" data-error="Required" required="" type="number">
+                                        <span ng-show="myForm.bayNum.$touched && myForm.bayNum.$invalid" class="input-field-errors">Bay number is required(0 - 99).</span>
+                                        <span ng-if="errorMessageBayNum" class="input-field-errors">Bay number already exist!</span>
+
+
+                                    </div>
+                                </div>
+                                <div class=" col-12 col-sm-6">
+                                    <div class="form-group lname">
+                                        <span class="mandatory-fields">  * <label>Bay Type </label></span>
+                                        <select name="bayType" ng-init="newBay.bayType = dropDownValues.bayTypes[0]" ng-model="newBay.bayType" ng-options="item for item in dropDownValues.bayTypes" class="form-control" required>
                     <option>Select </option>
                   </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-            <div class="row nobdr">
-              <div class=" col-12 col-sm-12">
-                <div class="form-group lname">
-                  <label>Functional Status </label>
-                  <select name="usertype" ng-init="newBay.bayType = dropDownValues.bayStatus[0]" ng-model="newBay.functionalStatus" ng-options="item for item in dropDownValues.bayStatus" class="form-control" required>
+                                        <span ng-show="myForm.bayType.$touched && myForm.bayType.$invalid" class="input-field-errors">Bay type is required.</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="row nobdr">
+                                <div class=" col-12 col-sm-12">
+                                    <div class="form-group lname">
+                                        <span class="mandatory-fields"> * <label>Functional Status </label></span>
+                                        <select name="bayStatus" ng-init="newBay.bayStatus = dropDownValues.bayStatus[0]" ng-model="newBay.functionalStatus" ng-options="item for item in dropDownValues.bayStatus" class="form-control" required>
                     <option>Select </option>
                   </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                                        <span ng-show="myForm.bayStatus.$touched && myForm.bayStatus.$invalid" class="input-field-errors">Functional status is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
             <div class="row  ">
               <div class=" col-12 col-sm-12">
                 <div class="form-group lname">
@@ -81,16 +100,17 @@
               </div>
             </div>
           </div> -->
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+                    </div>
 
-          <div class="grid-list">
-            <div class="table-responsive">
-              <div class="row">
-                <div class="col-sm-12 col-md-6 select-div">
-                  <label>Show
+                </div>
+                <div class="row">
+                    <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+
+                        <div class="grid-list">
+                            <div class="table-responsive">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 select-div">
+                                        <label>Show
                   <select ng-model="viewby" ng-change="setItemsPerPage(viewby)" class="form-control form-control-sm">
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -99,46 +119,46 @@
                   </select>
                   entries
                 </label>
-                </div>
-                <div class="col-sm-12 col-md-6 search-div">
-                  <label>Search:<input type="search" class="form-control form-control-sm" ng-model="baySearchKey" placeholder=""></label>
-                </div>
-              </div>
-              <table width="100%" class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th class="sorting" ng-click="sort('bayName')" ng-class="{'sorting_asc': (sortByKey == 'bayName') && !sortReverse, 'sorting_desc': (sortByKey == 'bayName') && sortReverse}">Bay Name</th>
-                    <th class="sorting" ng-click="sort('bayNum')" ng-class="{'sorting_asc': (sortByKey == 'bayNum') && !sortReverse, 'sorting_desc': (sortByKey == 'bayNum') && sortReverse}">Bay Number</th>
-                    <th class="sorting" ng-click="sort('bayType')" ng-class="{'sorting_asc': (sortByKey == 'bayType') && !sortReverse, 'sorting_desc': (sortByKey == 'bayType') && sortReverse}">Bay Type</th>
-                    <th class="sorting" ng-click="sort('functionalStatus')" ng-class="{'sorting_asc': (sortByKey == 'functionalStatus') && !sortReverse, 'sorting_desc': (sortByKey == 'functionalStatus') && sortReverse}">Functional Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="bay in bayItems.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:sortByKey:sortReverse | filter:baySearchKey">
-                    <td class="center">{{bay.bayName}}</td>
-                    <td class="center">{{bay.bayNum}}</td>
-                    <td class="center">{{bay.bayType}}</td>
-                    <td class="center">{{bay.functionalStatus}}</td>
-                    <td class="center"><a href="#" class="btn btn-primary" data-toggle="modal" data-target=".bay1" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                      </td>
-                  </tr>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 search-div">
+                                        <label>Search:<input type="search" class="form-control form-control-sm" ng-model="baySearchKey" placeholder=""></label>
+                                    </div>
+                                </div>
+                                <table width="100%" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="sorting" ng-click="sort('bayName')" ng-class="{'sorting_asc': (sortByKey == 'bayName') && !sortReverse, 'sorting_desc': (sortByKey == 'bayName') && sortReverse}">Bay Name</th>
+                                            <th class="sorting" ng-click="sort('bayNum')" ng-class="{'sorting_asc': (sortByKey == 'bayNum') && !sortReverse, 'sorting_desc': (sortByKey == 'bayNum') && sortReverse}">Bay Number</th>
+                                            <th class="sorting" ng-click="sort('bayType')" ng-class="{'sorting_asc': (sortByKey == 'bayType') && !sortReverse, 'sorting_desc': (sortByKey == 'bayType') && sortReverse}">Bay Type</th>
+                                            <th class="sorting" ng-click="sort('functionalStatus')" ng-class="{'sorting_asc': (sortByKey == 'functionalStatus') && !sortReverse, 'sorting_desc': (sortByKey == 'functionalStatus') && sortReverse}">Functional Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="bay in bayItems.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:sortByKey:sortReverse | filter:baySearchKey">
+                                            <td class="center">{{bay.bayName}}</td>
+                                            <td class="center">{{bay.bayNum}}</td>
+                                            <td class="center">{{bay.bayType}}</td>
+                                            <td class="center">{{bay.functionalStatus}}</td>
+                                            <td class="center"><a href="#" class="btn btn-primary" data-toggle="modal" data-target=".bay1" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
+                                        </tr>
 
-                </tbody>
-              </table>
-              <div class="row">
-                <div class="col-sm-12 col-md-6">
-                  <p style="margin-top: 7px;">Showing {{((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((bayItems | filter:baySearchKey).length))? ((bayItems | filter:baySearchKey).length)
-                    : currentPage * itemsPerPage}} 0f {{(bayItems | filter:baySearchKey).length}} entries <span ng-show="baySearchKey.length > 0">(filtered from {{bayItems.length}} total entries)</span></p>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <p style="margin-top: 7px;">Showing {{((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((bayItems | filter:baySearchKey).length))? ((bayItems | filter:baySearchKey).length) : currentPage * itemsPerPage}} 0f {{(bayItems
+                                            | filter:baySearchKey).length}} entries <span ng-show="baySearchKey.length > 0">(filtered from {{bayItems.length}} total entries)</span></p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <ul uib-pagination total-items="(bayItems | filter:baySearchKey).length" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-12 col-md-6">
-                  <ul uib-pagination total-items="(bayItems | filter:baySearchKey).length" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage"
-                    boundary-link-numbers="true" rotate="false"></ul>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
+</form>

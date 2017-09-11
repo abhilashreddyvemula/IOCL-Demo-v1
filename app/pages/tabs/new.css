@@ -1,0 +1,11 @@
+.mandatory-fields {
+    color: red;
+}
+
+.mandatory-fields>label {
+    display: inline-block;
+}
+
+.input-field-errors {
+    color: red;
+}
