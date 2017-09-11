@@ -1,0 +1,216 @@
+<div ng-controller="ContractorsController">
+    <section class="Contractors title" style="">
+        <div class="row first">
+            <div class=" col-12" ng-show="addClicked" id="contractor-save-btns">
+                <h2> <i class="fa fa-user-secret"> </i><span></span><strong>Add Contractor</strong></h2>
+                <ul class="buttons">
+                    <li>
+                        <button class="submit" type="button" ng-click="addClicked = false;saveContractor(newContractor)"><i class="fa fa-check"> </i> <span>Save</span></button>
+                    </li>
+                    <li>
+                        <button class="cancel" type="button" ng-click="addClicked = false"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12" style="display: block;" ng-hide="addClicked" id="contractor-add-btns">
+                <h2> <i class="fa fa-user-secret"> </i><span></span><strong>Contractors</strong></h2>
+                <ul class="buttons">
+                    <li>
+                        <button class="submit" type="button" ng-click="addClicked = true"><i class="fa fa-plus"> </i> <span>Add</span></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <div class="Contractors">
+        <div class="container">
+            <div ng-show="addClicked" id="addContractor">
+                <div class="row">
+                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-6">
+                        <div class="row  ">
+                            <div class=" col-12 col-sm-12">
+                                <div class="form-group ">
+                                    <label>Contractor Name </label>
+                                    <input class="form-control" ng-model="newContractor.contractorName" name="" value="" size="35" data-error="Required" required="" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                        <div class="row  ">
+                            <div class=" col-12 col-sm-12">
+                                <div class="form-group ">
+                                    <label>Contractor Type </label>
+                                    <select class="form-control" ng-model="newContractor.contractorType">
+                                        <option>Select </option>
+                                        <option>LPG</option>
+                                        <option>LPG</option>
+                                        <option>LPG</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                        <div class="row  ">
+                            <div class=" col-12 col-sm-12">
+                                <div class="form-group ">
+                                    <label>Operational Status </label>
+                                    <select class="form-control" ng-model="newContractor.contractorOperationalStatus">
+                                        <option>Select </option>
+                                        <option>Active</option>
+                                        <option>Black-listed</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                        <div class="form-group address">
+                            <label>Address <span class="req">*</span></label>
+                            <input class="form-control address" ng-model="newContractor.contractorAddress" size="64" name="name" value="" data-error="Required" required="" type="text">
+                        </div>
+                    </div>
+                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                        <div class="form-group city">
+                            <label>City <span class="req">*</span></label>
+                            <input class="form-control city" ng-model="newContractor.contractorCity" size="32" name="name" value="" data-error="Required" required="" type="text">
+                        </div>
+                    </div>
+                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                        <div class="form-group state">
+                            <label>State <span class="req">*</span></label>
+                            <select name="state" class="form-control state" ng-model="newContractor.contractorState">
+                                <option value="" selected="">Select </option>
+                                <option value="AB">Alberta</option>
+                                <option value="AK">Alaska</option>
+                                <option value="AL">Alabama</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="AS">American Samoa</option>
+                                <option value="AZ">Arizona</option>
+                                <option value="BC">British Columbia</option>
+                                <option value="CA">California</option>
+                                <option value="CO">Colorado</option>
+                                <option value="CT">Connecticut</option>
+                                <option value="DC">District of Columbia</option>
+                                <option value="DE">Delaware</option>
+                                <option value="FL">Florida</option>
+                                <option value="FM">Federated States of Micronesia</option>
+                                <option value="GA">Georgia</option>
+                                <option value="GU">Guam</option>
+                                <option value="HI">Hawaii</option>
+                                <option value="IA">Iowa</option>
+                                <option value="ID">Idaho</option>
+                                <option value="IL">Illinois</option>
+                                <option value="IN">Indiana</option>
+                                <option value="KS">Kansas</option>
+                                <option value="KY">Kentucky</option>
+                                <option value="LA">Louisiana</option>
+                                <option value="MA">Massachusetts</option>
+                                <option value="MB">Manitoba</option>
+                                <option value="MD">Maryland</option>
+                                <option value="ME">Maine</option>
+                                <option value="MH">Marshall Islands</option>
+                                <option value="MI">Michigan</option>
+                                <option value="MN">Minnesota</option>
+                                <option value="MO">Missouri</option>
+                                <option value="MP">Northern Mariana Islands</option>
+                                <option value="MS">Mississippi</option>
+                                <option value="MT">Montana</option>
+                                <option value="NB">New Brunswick</option>
+                                <option value="NC">North Carolina</option>
+                                <option value="ND">North Dakota</option>
+                                <option value="NE">Nebraska</option>
+                                <option value="NH">New hampshire</option>
+                                <option value="NJ">New Jersey</option>
+                                <option value="NL">Newfoundland and Labrador</option>
+                                <option value="NM">New Mexico</option>
+                                <option value="NS">Nova Scotia</option>
+                                <option value="NT">Northwest Territories</option>
+                                <option value="NU">Nunavut</option>
+                                <option value="NV">Nevada</option>
+                                <option value="NY" selected="">New York</option>
+                                <option value="OH">Ohio</option>
+                                <option value="OK">Oklahoma</option>
+                                <option value="ON">Ontario</option>
+                                <option value="OR">Oregon</option>
+                                <option value="PA">Pennsylvania</option>
+                                <option value="PE">Prince Edward Island</option>
+                                <option value="PR">Puerto Rico</option>
+                                <option value="PW">Palau</option>
+                                <option value="QC">Quebec</option>
+                                <option value="RI">Rhode Island</option>
+                                <option value="SC">South Carolina</option>
+                                <option value="SD">South Dakota</option>
+                                <option value="SK">Saskatchewan</option>
+                                <option value="TN">Tennessee</option>
+                                <option value="TX">Texas</option>
+                                <option value="UT">Utah</option>
+                                <option value="VA">Virginia</option>
+                                <option value="VI">Virgin Islands</option>
+                                <option value="VT">Vermont</option>
+                                <option value="WA">Washington</option>
+                                <option value="WI">Wisconsin</option>
+                                <option value="WV">West Virginia</option>
+                                <option value="WY">Wyoming</option>
+                                <option value="YT">Yukon</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                        <div class="form-group zip">
+                            <label>Zip Code <span class="req">*</span></label>
+                            <input class="form-control zip" ng-model="newContractor.contractorPinCode" size="5" name="name" value="" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+                    <div class="grid-list">
+                        <div class="table-responsive">
+                            <table width="100%" class="table table-bordered" data-toggle="table">
+                                <thead>
+                                    <tr>
+                                        <th>Contractor Name</th>
+                                        <th>Contractor Type</th>
+                                        <th>Address</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>PinCode</th>
+                                        <th>Operational Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in contractorList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                                        <td class="center">{{item.contractorName}}</td>
+                                        <td class="center">{{item.contractorType}}</td>
+                                        <td class="center">{{item.contractorAddress}}</td>
+                                        <td class="center">{{item.contractorCity}}</td>
+                                        <td class="center">{{item.contractorState}}</td>
+                                        <td class="center">{{item.contractorPinCode}}</td>
+                                        <td class="center">{{item.contractorOperationalStatus}}</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".con1" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <p style="margin-top: 7px;">Showing {{((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > totalItems)?
+                                        totalItems : currentPage * itemsPerPage}} 0f {{totalItems}} entries</p>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage"
+                                        boundary-link-numbers="true" rotate="false"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

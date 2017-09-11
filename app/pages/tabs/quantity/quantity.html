@@ -1,0 +1,147 @@
+<div ng-controller="QuantityController">
+    <section class="Quantity  title" style="">
+        <div class="row first">
+            <div class=" col-12" style="display:none  ;" id="quantity-save-btns">
+                <h2> <i class="fa fa-map-marker    " aria-hidden="true"> </i><span></span><strong> Add  Quantity</strong></h2>
+                <ul class="buttons">
+                    <li>
+                        <button class="submit" type="button" data-toggle="collapse" data-target="#addQuantity" onClick="jQuery('#addUser').show();jQuery('#quantity-save-btns').hide();jQuery('#quantity-add-btns').show();"><i class="fa fa-check" aria-hidden="true"> </i> <span>Save</span></button>
+                    </li>
+                    <li>
+                        <button class="cancel" type="button" data-toggle="collapse" data-target="#addQuantity" onClick="jQuery('#addUser').show();jQuery('#quantity-save-btns').hide();jQuery('#quantity-add-btns').show();"><i class="fa fa-remove" aria-hidden="true"> </i> <span>Cancel</span></button>
+                    </li>
+                </ul>
+            </div>
+            <div class=" col-12" style="display: block;" id="quantity-add-btns">
+                <h2> <i class="fa fa-map-marker    " aria-hidden="true"> </i><span></span><strong> Quantity</strong></h2>
+                <ul class="buttons">
+                    <li>
+                        <button class="submit" type="button" data-toggle="collapse" data-target="#addQuantity" onClick="jQuery('#addUser').hide();jQuery('#quantity-save-btns').show();jQuery('#quantity-add-btns').hide(); "><i class="fa fa-plus" aria-hidden="true"> </i> <span>Add</span></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <div class="Quantity">
+        <div class="container">
+            <div class="collapse" id="addQuantity">
+                <div class="row">
+                    <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group ">
+                            <label>Quantity Name </label>
+                            <input class="form-control " name="" value="" size="35" data-error="Required" required="" type="text">
+                        </div>
+                    </div>
+                    <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group ">
+                            <label>Quantity (MT)  </label>
+                            <input class="form-control " name="" value="" size="35" data-error="Required" required="" type="text">
+                        </div>
+                    </div>
+                    <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group lname">
+                            <label>Operational Status </label>
+                            <select name="usertype" class="form-control  ">
+                <option>Select </option>
+                <option>Active</option>
+                <option>Inactive</option>
+              </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+                    <div class="grid-list">
+                        <div class="table-responsive">
+                            <table width="100%" class="table table-bordered" data-toggle="table">
+                                <thead>
+                                    <tr>
+                                        <th>Quantity Name</th>
+                                        <th>Quantity (MT)</th>
+                                        <th>Operational Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="center">Quantity A</td>
+                                        <td class="center">100 MT</td>
+                                        <td class="center">Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty1" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">Quantity B</td>
+                                        <td class="center">200 MT</td>
+                                        <td class="center">In-Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty2" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">Quantity C</td>
+                                        <td class="center">100 MT</td>
+                                        <td class="center">Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty3" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">Quantity D </td>
+                                        <td class="center">200 MT</td>
+                                        <td class="center">In-Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty4" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">Quantity E</td>
+                                        <td class="center">300 MT</td>
+                                        <td class="center">Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty5" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">Quantity F</td>
+                                        <td class="center">200 MT</td>
+                                        <td class="center">In-Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty6" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">Quantity G</td>
+                                        <td class="center">100 MT</td>
+                                        <td class="center">Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty7" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">Quantity H</td>
+                                        <td class="center">200 MT</td>
+                                        <td class="center">In-Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty8" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">Quantity I</td>
+                                        <td class="center">100 MT</td>
+                                        <td class="center">Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty9" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">Quantity J</td>
+                                        <td class="center">200 MT</td>
+                                        <td class="center">In-Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty10" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">Quantity K</td>
+                                        <td class="center">300 MT</td>
+                                        <td class="center">Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty11" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">Quantity L</td>
+                                        <td class="center">200 MT</td>
+                                        <td class="center">In-Active</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty12" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

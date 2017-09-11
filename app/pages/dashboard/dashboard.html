@@ -1,0 +1,48 @@
+<div class="container">
+  <section class="top">
+    <div class="row">
+      <div class="col-3"><a href="#"><img src="images/logo.png" alt="Digital Rx Logo" ></a> </div>
+      <div class="col-6 text-center">
+        <h3>Indane TT - Balasore</h3>
+      </div>
+      <div class="col-3 text-right"> <a href="index.html"> <span class="glyphicon glyphicon-off"></span> <b>Log Out</b></a> </div>
+    </div>
+  </section>
+  <section class="practice title">
+    <div class="row first">
+      <div class=" col-12">
+        <h2><i class="fa fa-group" aria-hidden="true"></i> <span>Super Admin</span> </h2>
+        <!--<uib-tabset active="active">-->
+        <!--<uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}">-->
+        <!--Tabs-->
+        <!--</uib-tab>-->
+        <!--</uib-tabset>-->
+        <ul class="links">
+          <li> <a ng-class="main.active.tab == 'bay'? 'active': 'in_active'" ng-click="main.active.tab = 'bay'"> <i class="fa fa-tint" aria-hidden="true"> </i> <span>Bay </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a></li>
+          <li> <a ng-class="main.active.tab == 'users'? 'active': 'in_active'" ng-click="main.active.tab = 'users'"> <i class="fa fa-user" aria-hidden="true"> </i> <span>Users </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a></li>
+          <li> <a ng-class="main.active.tab == 'contractors'? 'active': 'in_active'" ng-click="main.active.tab = 'contractors'"> <i class="fa fa-user-secret" aria-hidden="true"> </i> <span>Contractors </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a></li>
+          <li> <a ng-class="main.active.tab == 'locations'? 'active': 'in_active'" ng-click="main.active.tab = 'locations'"> <i class="fa fa-map-marker" aria-hidden="true"> </i> <span>Locations </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a></li>
+          <li> <a ng-class="main.active.tab == 'quantity'? 'active': 'in_active'" ng-click="main.active.tab = 'quantity'"> <i class="fa fa-thermometer-half" aria-hidden="true"> </i> <span>Quantity </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <div ng-switch="main.active.tab" class="tabs-div">
+    <div ng-switch-when="bay" class="" id="Bay">
+      <div ng-include="'pages/tabs/bay/bay.html'"></div>
+    </div>
+    <div ng-switch-when="users" class="" id="Users">
+      <div ng-include="'pages/tabs/users/users.html'"></div>
+    </div>
+
+    <div ng-switch-when="contractors" class="" id="Contractors">
+      <div ng-include="'pages/tabs/contractors/contractors.html'"></div>
+    </div>
+    <div ng-switch-when="locations" class="" id="Location">
+      <div ng-include="'pages/tabs/locations/locations.html'"></div>
+    </div>
+    <div ng-switch-when="quantity" class="" id="Quantity">
+      <div ng-include="'pages/tabs/quantity/quantity.html'"></div>
+    </div>
+  </div>
+</div>
