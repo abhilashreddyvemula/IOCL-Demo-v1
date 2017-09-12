@@ -19,7 +19,7 @@
                     <h2> <i class="fa fa-tint"> </i><span></span><strong> Bay</strong></h2>
                     <ul class="buttons">
                         <li>
-                            <button class="submit" ng-click="addNewBay(); 
+                            <button class="submit" ng-show="isAddAvailable()" ng-click="addNewBay(); 
                             addClicked;
                             myForm.bayName.$touched=false;
                             myForm.bayNum.$touched=false;
@@ -135,7 +135,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="bay in bayItems.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:sortByKey:sortReverse | filter:baySearchKey">
+                                       <tr ng-repeat="bay in (bayItems | orderBy:sortByKey:sortReverse | filter:baySearchKey).slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
                                             <td class="center">{{bay.bayName}}</td>
                                             <td class="center">{{bay.bayNum}}</td>
                                             <td class="center">{{bay.bayType}}</td>

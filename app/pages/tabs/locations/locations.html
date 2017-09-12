@@ -1,22 +1,22 @@
 <div ng-controller="LocationsController">
-    <section class="Locations  title" style="">
+    <section class="Locations title" style="">
         <div class="row first">
-            <div class=" col-12" style="display:none  ;" id="location-save-btns">
-                <h2> <i class="fa fa-map-marker    " aria-hidden="true"> </i><span></span><strong> Add  Location</strong></h2>
+            <div class="col-12" ng-show="addClicked" id="location-save-btns">
+                <h2> <i class="fa fa-map-marker"> </i><span></span><strong> Add  Location</strong></h2>
                 <ul class="buttons">
                     <li>
-                        <button class="submit" type="button" data-toggle="collapse" data-target="#addLocation" onClick="jQuery('#addUser').show();jQuery('#location-save-btns').hide();jQuery('#location-add-btns').show();"><i class="fa fa-check" aria-hidden="true"> </i> <span>Save</span></button>
+                        <button class="submit" type="button" ng-click="addClicked = false;saveLocation(newContractor)"><i class="fa fa-check"> </i> <span>Save</span></button>
                     </li>
                     <li>
-                        <button class="cancel" type="button" data-toggle="collapse" data-target="#addLocation" onClick="jQuery('#addUser').show();jQuery('#location-save-btns').hide();jQuery('#location-add-btns').show();"><i class="fa fa-remove" aria-hidden="true"> </i> <span>Cancel</span></button>
+                        <button class="cancel" type="button" ng-click="addClicked = false"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
                     </li>
                 </ul>
             </div>
-            <div class=" col-12" style="display: block;" id="location-add-btns">
-                <h2> <i class="fa fa-map-marker    " aria-hidden="true"> </i><span></span><strong> Locations</strong></h2>
+            <div class=" col-12" style="display: block;" ng-hide="addClicked" id="location-add-btns">
+                <h2> <i class="fa fa-map-marker"> </i><span></span><strong> Locations</strong></h2>
                 <ul class="buttons">
                     <li>
-                        <button class="submit" type="button" data-toggle="collapse" data-target="#addLocation" onClick="jQuery('#addUser').hide();jQuery('#location-save-btns').show();jQuery('#location-add-btns').hide(); "><i class="fa fa-plus" aria-hidden="true"> </i> <span>Add</span></button>
+                        <button class="submit" type="button" ng-show="isAddAvailable()" ng-click="addClicked = true" ><i class="fa fa-plus"> </i> <span>Add</span></button>
                     </li>
                 </ul>
             </div>
@@ -24,7 +24,7 @@
     </section>
     <div class="Locations">
         <div class="container">
-            <div class="collapse" id="addLocation">
+            <div ng-show="addClicked" id="addLocation">
                 <div class="row">
                     <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ltn">

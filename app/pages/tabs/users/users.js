@@ -1,5 +1,6 @@
 angular.module('myApp.dashboard')
-    .controller('UsersController', ['$scope', 'UsersService', function($scope, usersService) {
+    .controller('UsersController', ['$scope', 'utility', 'UsersService', function ($scope, utility, usersService) {
+        $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
         $scope.currentPage = 1;
         $scope.itemsPerPage = $scope.viewby;
@@ -21,6 +22,13 @@ angular.module('myApp.dashboard')
             $scope.currentPage = 1; //reset to first page
         }
 
+        $scope.isAddAvailable = function(){
+            if($scope.userRole === 'Super Admin' || $scope.userRole === 'Admin')
+                return true;
+            else
+                return false;
+        }
+
         $scope.loadAllUsers = function() {
             usersService.getUsersList().then(function(response) {
                 $scope.usersList = response.data;
@@ -29,7 +37,7 @@ angular.module('myApp.dashboard')
         }
 
         $scope.loadDropdownsData = function() {
-            alert("load user static data")
+            //alert("load user static data")
             usersService.getStaticUserData().then(function(response) {
                 $scope.dropDownValues.UserTypes = response.data.data.UserTypes;
                 $scope.dropDownValues.UserStatus = response.data.data.UserStatus;

@@ -1,10 +1,10 @@
 angular.module('myApp.dashboard')
-    .controller('ContractorsController', ['$scope', 'ContractorsService', function($scope, contractorsService) {
-        $scope.viewby = 10;
-        $scope.currentPage = 1;
-        $scope.itemsPerPage = $scope.viewby;
-        $scope.errorMessage = '';
-        $scope.errorMessageUserName = false;
+.controller('ContractorsController', ['$scope', 'utility', 'ContractorsService', function ($scope, utility, contractorsService) {
+    $scope.userRole = utility.getUserRole();
+
+    $scope.viewby = 10;
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = $scope.viewby;
 
         $scope.formInvalid = false;
         $scope.addClicked = false;
@@ -21,20 +21,20 @@ angular.module('myApp.dashboard')
             $scope.currentPage = 1; //reset to first page
         }
 
-        $scope.loadAllContractors = function() {
-            contractorsService.getContractorsList().then(function(response) {
-                $scope.contractorList = response.data;
-                $scope.totalItems = $scope.contractorList.length;
-            }, function(error) {});
-        }
-        $scope.loadDropdownsData = function() {
-            //  alert("load user static data")
-            contractorsService.getContractorsStaticData().then(function(response) {
-                $scope.dropDownValues.UserTypes = response.data.data.UserTypes;
-                $scope.dropDownValues.UserStatus = response.data.data.UserStatus;
-                console.log(response.data);
-            }, function(error) {});
-        }
+
+    $scope.isAddAvailable = function(){
+        if($scope.userRole === 'Super Admin')
+            return true;
+        else
+            return false;
+    }
+    
+    $scope.loadAllContractors = function(){
+        contractorsService.getContractorsList().then(function(response){
+            $scope.contractorList = response.data;
+            $scope.totalItems = $scope.contractorList.length;
+        }, function(error){});
+    }
 
 
         $scope.addNewContractor = function() {
@@ -79,5 +79,5 @@ angular.module('myApp.dashboard')
         }
 
         $scope.loadAllContractors();
-        $scope.loadDropdownsData();
+        //$scope.loadDropdownsData();
     }]);

@@ -1,5 +1,7 @@
 angular.module('myApp.dashboard')
-    .controller('BayController', ['$scope', 'BayService', function($scope, bayService) {
+    .controller('BayController', ['$scope', 'utility', 'BayService', function ($scope, utility, bayService) {
+        $scope.userRole = utility.getUserRole();
+
         $scope.bayItems = [];
         $scope.newBay = { "bayName": "", "bayNum": null, "bayType": "", "functionalStatus": "" }
         $scope.viewby = 10;
@@ -15,7 +17,13 @@ angular.module('myApp.dashboard')
         $scope.sortReverse = 'bayId';
         $scope.dropDownValues = { 'bayStatus': [], 'bayTypes': [] }
 
-        $scope.pageChanged = function() {
+        $scope.isAddAvailable = function(){
+            if($scope.userRole === 'Super Admin')
+                return true;
+            else
+                return false;
+        }
+        $scope.pageChanged = function () {
             console.log('Page changed to: ' + $scope.currentPage);
         };
         $scope.setItemsPerPage = function(num) {
@@ -64,7 +72,7 @@ angular.module('myApp.dashboard')
 
             var body = { 'bayName': bay.bayName, 'bayNum': parseInt(bay.bayNum), 'bayType': bay.bayType, 'functionalStatus': bay.functionalStatus };
             bayService.addBay(body).then(function(success) {
-
+		$scope.newBay = { "bayName": "", "bayNum": null, "bayType": "", "functionalStatus": "" }
                 $scope.addClicked = false;
                 $scope.loadBayList();
 

@@ -14,10 +14,14 @@ angular.module('myApp.home', ['ngRoute'])
   $scope.submit = function(user){
     console.log(user);
     utility.setCredentials(user);
-    loginService.userValidation(user).then(function(success){
-      console.log(success);
-      //if(user.name === 'superadmin' && user.password === 'superadmin')
+    loginService.userValidation(user).then(function(result){
+      console.log(result);
+      if(result.status === 200){
+        utility.setUserRole(result.data.userRole);
         $location.path('dashboard');
+      }
+      //if(user.name === 'superadmin' && user.password === 'superadmin')
+        
       //else
        // alert("Invalid Username or password");
     });

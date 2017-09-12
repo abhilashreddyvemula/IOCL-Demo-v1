@@ -9,14 +9,15 @@ angular.module('myApp.dashboard', ['ngRoute', 'ui.bootstrap'])
     });
   }])
 
-  .controller('DashboardCtrl', ['$scope', 'BayService', function ($scope, bayService) {
-    
-    $scope.tabs = [
-      { 'title': 'Bay', 'templateUrl': '' },
-      { 'title': 'Users', 'templateUrl': '' },
-      { 'title': 'Contractors', 'templateUrl': '' },
-      { 'title': 'Locations', 'templateUrl': '' },
-      { 'title': 'Quantity', 'templateUrl': '' }];
+  .controller('DashboardCtrl', ['$scope', 'utility', 'BayService', function ($scope, utility, bayService) {
+    $scope.userRole = utility.getUserRole();
+    console.log($scope.userRole);
+    if($scope.userRole === 'Super Admin'){
+      $scope.userPrivilages = {'bay': true, 'users': true, 'contractors': true, 'locations': true, 'quantity': true, 'reports': false};
+    }
+    else{
+      $scope.userPrivilages = {'bay': true, 'users': true, 'contractors': true, 'locations': true, 'quantity': true, 'reports': true}; 
+    }
 
       $scope.main = {};
       $scope.main.active = {};

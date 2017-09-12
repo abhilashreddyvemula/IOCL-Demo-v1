@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-.controller('LocationsController', ['$scope', 'utility', function ($scope, utility) {
+.controller('QuantityController', ['$scope','utility', function ($scope, utility) {
     $scope.userRole = utility.getUserRole();
 
     $scope.viewby = 10;
@@ -14,7 +14,7 @@ angular.module('myApp.dashboard')
     }
 
     $scope.isAddAvailable = function(){
-        if($scope.userRole === 'Super Admin')
+        if($scope.userRole === 'Super Admin' || $scope.userRole === 'Admin')
             return true;
         else
             return false;

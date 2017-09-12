@@ -17,7 +17,7 @@
                     <h2> <i class="fa fa-user"> </i><span></span><strong> Users</strong></h2>
                     <ul class="buttons">
                         <li>
-                            <button class="submit" type="button" ng-click="addNewUser(); 
+                            <button class="submit" ng-show="isAddAvailable()" type="button" ng-click="addNewUser(); 
                             addClicked;
                             userForm.userName.$touched=false;
                             userForm.fname.$touched=false;

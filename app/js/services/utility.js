@@ -2,6 +2,15 @@ angular.module('myApp.utility',[])
 .service('utility', ['$http', function($http){
     var token = '';
     var user = {'name': '', 'password': ''};
+    var userRole = '';
+    this.setUserRole = function(role){
+        userRole = role;
+    }
+
+    this.getUserRole = function(){
+        return userRole;
+    }
+
     this.getToken = function(){
         return this.token;
     }
@@ -15,7 +24,6 @@ angular.module('myApp.utility',[])
     }
 
     this.setCredentials = function(userdetails){
-        console.log(userdetails);
         user = userdetails;
         // $http.defaults.headers.common['Authorization'] = this.generateToken(user.name, user.password);
     }
