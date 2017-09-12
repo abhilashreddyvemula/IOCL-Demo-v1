@@ -1,88 +1,106 @@
-<div ng-controller="ContractorsController">
-    <section class="Contractors title" style="">
-        <div class="row first">
-            <div class=" col-12" ng-show="addClicked" id="contractor-save-btns">
-                <h2> <i class="fa fa-user-secret"> </i><span></span><strong>Add Contractor</strong></h2>
-                <ul class="buttons">
-                    <li>
-                        <button class="submit" type="button" ng-click="addClicked = false;saveContractor(newContractor)"><i class="fa fa-check"> </i> <span>Save</span></button>
-                    </li>
-                    <li>
-                        <button class="cancel" type="button" ng-click="addClicked = false"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
-                    </li>
-                </ul>
+<form name="contractorForm">
+    <div ng-controller="ContractorsController">
+        <section class="Contractors title" style="">
+            <div class="row first">
+                <div class=" col-12" ng-show="addClicked" id="contractor-save-btns">
+                    <h2> <i class="fa fa-user-secret"> </i><span></span><strong>Add Contractor</strong></h2>
+                    <ul class="buttons">
+                        <li>
+                            <button class="submit" type="button" ng-click="addClicked;saveContractor(newContractor)" ng-disabled="userForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                        </li>
+                        <li>
+                            <button class="cancel" type="button" ng-click="onCancel()"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12" style="display: block;" ng-hide="addClicked" id="contractor-add-btns">
+                    <h2> <i class="fa fa-user-secret"> </i><span></span><strong>Contractors</strong></h2>
+                    <ul class="buttons">
+                        <li>
+                            <button class="submit" type="button" ng-click="addNewContractor(); 
+                            addClicked;
+                            contractorForm.contractorName.$touched=false;
+                            contractorForm.contractorType.$touched=false;
+                            contractorForm.contractorAddress.$touched=false;
+                            contractorForm.contractorOperationalStatus.$touched=false;
+                            contractorForm.contractorPinCode.$touched=false;
+                            contractorForm.contractorCity.$touched=false;
+                            contractorForm.contractorState.$touched=false;
+                            "><i class="fa fa-plus"> </i> <span>Add</span></button>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-12" style="display: block;" ng-hide="addClicked" id="contractor-add-btns">
-                <h2> <i class="fa fa-user-secret"> </i><span></span><strong>Contractors</strong></h2>
-                <ul class="buttons">
-                    <li>
-                        <button class="submit" type="button" ng-click="addClicked = true"><i class="fa fa-plus"> </i> <span>Add</span></button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <div class="Contractors">
-        <div class="container">
-            <div ng-show="addClicked" id="addContractor">
-                <div class="row">
-                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-6">
-                        <div class="row  ">
-                            <div class=" col-12 col-sm-12">
-                                <div class="form-group ">
-                                    <label>Contractor Name </label>
-                                    <input class="form-control" ng-model="newContractor.contractorName" name="" value="" size="35" data-error="Required" required="" type="text">
+        </section>
+        <div class="Contractors">
+            <div class="container">
+                <div ng-show="addClicked" id="addContractor">
+                    <div class="row">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-6">
+                            <div class="row  ">
+                                <div class=" col-12 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Contractor Name </label>
+                                        <input class="form-control" ng-model="newContractor.contractorName" name="contractorName" value="" size="35" data-error="Required" required="" type="text">
+
+                                        <span ng-show="contractorForm.contractorName.$touched && userForm.contractorName.$invalid" class="input-field-errors">Contractor name is required.</span>
+                                        <span ng-if="errorMessageContractorName" class="input-field-errors">Contractor name already exist!</span></div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-                        <div class="row  ">
-                            <div class=" col-12 col-sm-12">
-                                <div class="form-group ">
-                                    <label>Contractor Type </label>
-                                    <select class="form-control" ng-model="newContractor.contractorType">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="row  ">
+                                <div class=" col-12 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Contractor Type </label>
+                                        <select name="contractorType" class="form-control" ng-model="newContractor.contractorType">
                                         <option>Select </option>
                                         <option>LPG</option>
                                         <option>LPG</option>
                                         <option>LPG</option>
                                     </select>
+                                        <span ng-show="contractorForm.contractorType.$touched && contractorForm.contractorType.$invalid" class="input-field-errors">Contractor Type is required.</span>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-                        <div class="row  ">
-                            <div class=" col-12 col-sm-12">
-                                <div class="form-group ">
-                                    <label>Operational Status </label>
-                                    <select class="form-control" ng-model="newContractor.contractorOperationalStatus">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="row  ">
+                                <div class=" col-12 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Operational Status </label>
+                                        <select class="form-control" ng-model="newContractor.contractorOperationalStatus" name="contractorOperationalStatus">
                                         <option>Select </option>
                                         <option>Active</option>
                                         <option>Black-listed</option>
                                     </select>
+                                        <span ng-show="contractorForm.contractorOperationalStatus.$touched && contractorForm.contractorOperationalStatus.$invalid" class="input-field-errors">Status is required.</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-                        <div class="form-group address">
-                            <label>Address <span class="req">*</span></label>
-                            <input class="form-control address" ng-model="newContractor.contractorAddress" size="64" name="name" value="" data-error="Required" required="" type="text">
+                    <div class="row">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group address">
+                                <label>Address <span class="req">*</span></label>
+                                <input class="form-control address" ng-model="newContractor.contractorAddress" size="64" name="contractorAddress" value="" data-error="Required" required="" type="text">
+                                <span ng-show="contractorForm.contractorAddress.$touched && contractorForm.contractorAddress.$invalid" class="input-field-errors">Contractor address is required.</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-                        <div class="form-group city">
-                            <label>City <span class="req">*</span></label>
-                            <input class="form-control city" ng-model="newContractor.contractorCity" size="32" name="name" value="" data-error="Required" required="" type="text">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group city">
+                                <label>City <span class="req">*</span></label>
+                                <input class="form-control city" ng-model="newContractor.contractorCity" size="32" name="contractorCity" value="" data-error="Required" required="" type="text">
+
+                                <span ng-show="contractorForm.contractorType.$touched && contractorForm.contractorType.$invalid" class="input-field-errors">Contractor Type is required.</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-                        <div class="form-group state">
-                            <label>State <span class="req">*</span></label>
-                            <select name="state" class="form-control state" ng-model="newContractor.contractorState">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group state">
+                                <label>State <span class="req">*</span></label>
+                                <select name="contractorState" class="form-control state" ng-model="newContractor.contractorState">
                                 <option value="" selected="">Select </option>
                                 <option value="AB">Alberta</option>
                                 <option value="AK">Alaska</option>
@@ -157,54 +175,53 @@
                                 <option value="WY">Wyoming</option>
                                 <option value="YT">Yukon</option>
                             </select>
+                                <span ng-show="contractorForm.contractorState.$touched && contractorForm.contractorState.$invalid" class="input-field-errors">Contractor State is required.</span> </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-                        <div class="form-group zip">
-                            <label>Zip Code <span class="req">*</span></label>
-                            <input class="form-control zip" ng-model="newContractor.contractorPinCode" size="5" name="name" value="" type="text">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group zip">
+                                <label>Zip Code <span class="req">*</span></label>
+                                <input class="form-control zip" ng-model="newContractor.contractorPinCode" size="5" name="contractorPinCode" value="" type="text">
+                                <span ng-show="contractorForm.contractorPinCode.$touched && contractorForm.contractorPinCode.$invalid" class="input-field-errors">Contractor pincode is required.</span> </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
-                    <div class="grid-list">
-                        <div class="table-responsive">
-                            <table width="100%" class="table table-bordered" data-toggle="table">
-                                <thead>
-                                    <tr>
-                                        <th>Contractor Name</th>
-                                        <th>Contractor Type</th>
-                                        <th>Address</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>PinCode</th>
-                                        <th>Operational Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="item in contractorList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
-                                        <td class="center">{{item.contractorName}}</td>
-                                        <td class="center">{{item.contractorType}}</td>
-                                        <td class="center">{{item.contractorAddress}}</td>
-                                        <td class="center">{{item.contractorCity}}</td>
-                                        <td class="center">{{item.contractorState}}</td>
-                                        <td class="center">{{item.contractorPinCode}}</td>
-                                        <td class="center">{{item.contractorOperationalStatus}}</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".con1" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                            </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6">
-                                    <p style="margin-top: 7px;">Showing {{((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > totalItems)?
-                                        totalItems : currentPage * itemsPerPage}} 0f {{totalItems}} entries</p>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage"
-                                        boundary-link-numbers="true" rotate="false"></ul>
+                <div class="row">
+                    <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+                        <div class="grid-list">
+                            <div class="table-responsive">
+                                <table width="100%" class="table table-bordered" data-toggle="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Contractor Name</th>
+                                            <th>Contractor Type</th>
+                                            <th>Address</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>PinCode</th>
+                                            <th>Operational Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in contractorList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                                            <td class="center">{{item.contractorName}}</td>
+                                            <td class="center">{{item.contractorType}}</td>
+                                            <td class="center">{{item.contractorAddress}}</td>
+                                            <td class="center">{{item.contractorCity}}</td>
+                                            <td class="center">{{item.contractorState}}</td>
+                                            <td class="center">{{item.contractorPinCode}}</td>
+                                            <td class="center">{{item.contractorOperationalStatus}}</td>
+                                            <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".con1" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <p style="margin-top: 7px;">Showing {{((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > totalItems)? totalItems : currentPage * itemsPerPage}} 0f {{totalItems}} entries</p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -213,4 +230,4 @@
             </div>
         </div>
     </div>
-</div>
+</form>

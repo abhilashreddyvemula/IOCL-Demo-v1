@@ -79,8 +79,8 @@
                                     <div class="form-group lname">
                                         <span class="mandatory-fields">  <label>Functional Status </label>*</span>
                                         <select name="bayStatus" ng-init="newBay.bayStatus = dropDownValues.bayStatus[0]" ng-model="newBay.functionalStatus" ng-options="item for item in dropDownValues.bayStatus" class="form-control" required>
-                    <option>Select </option>
-                  </select>
+                                            <option>Select </option>
+                                        </select>
                                         <span ng-show="myForm.bayStatus.$touched && myForm.bayStatus.$invalid" class="input-field-errors">Functional status is required.</span>
                                     </div>
                                 </div>
