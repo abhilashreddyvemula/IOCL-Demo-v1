@@ -108,16 +108,16 @@
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group ">
                                         <label>User Type</label>
-                                        <select name="usertype" ng-model="newUser.userType" class="form-control" required>
+                                        <!-- <select name="usertype" ng-model="newUser.userType" class="form-control" required>
                                         <option>Select User Type</option>
                                         <option>Super User</option>
                                         <option>Admin</option>
                                         <option>Supervisor</option>
                                         <option>TTES Operator</option>
-                                    </select>
-                                        <!-- <select name="usertype" ng-init="newUser.userType = dropDownValues.userType[0]" ng-model="newUser.userType" class="form-control" required ng-options="item for item in dropDownValues.userType">
-                                        <option>Select </option>
                                     </select> -->
+                                        <select name="usertype" ng-init="newUser.userType = dropDownValues.userType[0]" ng-model="newUser.userType" class="form-control" required ng-options="item for item in dropDownValues.UserTypes">
+                                        <option>Select User Type</option>
+                                    </select>
                                         <span ng-show="userForm.usertype.$touched && userForm.usertype.$invalid" class="input-field-errors">User type is required.</span>
                                     </div>
                                 </div>
@@ -128,15 +128,16 @@
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group ">
                                         <label>Status </label>
-                                        <select name="userStatus" ng-model="newUser.userStatus" class="form-control" required>
+                                        <!-- <select name="userStatus" ng-model="newUser.userStatus" class="form-control" required>
                                         <option>Select Status</option>
                                         <option>Active</option>
                                         <option>Inactive</option>
                                         <option>Locked</option>
-                                    </select>
-                                        <!-- <select name="userStatus" ng-init="newUser.userStatus = dropDownValues.userStatus[0]" ng-model="newUser.userStatus" class="form-control" required ng-options="item for item in dropDownValues.userStatus">
-                                        <option>Select </option>
                                     </select> -->
+                                        <select name="userStatus" ng-init="newUser.userStatus = dropDownValues.userStatus[0]" ng-model="newUser.userStatus" class="form-control" required ng-options="item for item in dropDownValues.UserStatus">
+                                        <option>Select Status</option>
+                                    </select>
+
                                         <span ng-show="userForm.userStatus.$touched && userForm.userStatus.$invalid" class="input-field-errors">User Status is required.</span>
                                     </div>
                                 </div>

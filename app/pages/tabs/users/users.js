@@ -64,6 +64,7 @@ angular.module('myApp.dashboard')
                 $scope.loadAllUsers();
                 $scope.addClicked = false;
             }, function(error) {
+
                 $scope.addClicked = true;
                 console.log(error);
                 console.log(error.data);
@@ -84,5 +85,5 @@ angular.module('myApp.dashboard')
         }
 
         $scope.loadAllUsers();
-        // $scope.loadDropdownsData();
+        $scope.loadDropdownsData();
     }]);
