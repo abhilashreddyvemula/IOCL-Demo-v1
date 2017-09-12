@@ -62,8 +62,6 @@ angular.module('myApp.dashboard')
 
         $scope.saveBay = function(bay) {
 
-
-
             var body = { 'bayName': bay.bayName, 'bayNum': parseInt(bay.bayNum), 'bayType': bay.bayType, 'functionalStatus': bay.functionalStatus };
             bayService.addBay(body).then(function(success) {
 

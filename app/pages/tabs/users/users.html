@@ -1,187 +1,212 @@
-<div ng-controller="UsersController">
-    <section class="Users  title" style="">
-        <div class="row first">
-            <div class=" col-12" ng-show="addClicked" id="user-save-btns">
-                <h2> <i class="fa fa-user"> </i><span></span><strong> Add  User</strong></h2>
-                <ul class="buttons">
-                    <li>
-                        <button class="submit" type="button" ng-click="addClicked = false; saveUser(newUser)"><i class="fa fa-check"> </i><span>Save</span></button>
-                    </li>
-                    <li>
-                        <button class="cancel" type="button" ng-click="addClicked = false"><i class="fa fa-remove" > </i> <span>Cancel</span></button>
-                    </li>
-                </ul>
+<form name="userForm">
+    <div ng-controller="UsersController">
+        <section class="Users  title" style="">
+            <div class="row first">
+                <div class=" col-12" ng-show="addClicked" id="user-save-btns">
+                    <h2> <i class="fa fa-user"> </i><span></span><strong> Add  User</strong></h2>
+                    <ul class="buttons">
+                        <li>
+                            <button class="submit" type="button" ng-click="addClicked;saveUser(newUser)" ng-disabled="userForm.$invalid"><i class="fa fa-check"> </i><span>Save</span></button>
+                        </li>
+                        <li>
+                            <button class="cancel" type="button" ng-click="onCancel()"><i class="fa fa-remove" > </i> <span>Cancel</span></button>
+                        </li>
+                    </ul>
+                </div>
+                <div class=" col-12" style="display: block;" ng-hide="addClicked" id="user-add-btns">
+                    <h2> <i class="fa fa-user"> </i><span></span><strong> Users</strong></h2>
+                    <ul class="buttons">
+                        <li>
+                            <button class="submit" type="button" ng-click="addNewUser(); 
+                            addClicked;
+                            userForm.userName.$touched=false;
+                            userForm.fname.$touched=false;
+                            userForm.lname.$touched=false;
+                            userForm.date.$touched=false;
+                            userForm.userMobileNum.$touched=false;
+                            userForm.userAadharNum.$touched=false;
+                            userForm.usertype.$touched=false;
+                            userForm.userStatus.$touched=false;
+                            userForm.userPassword.$touched=false;
+                            userForm.rePassword.$touched=false;"><i class="fa fa-plus"> </i> <span>Add</span></button>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class=" col-12" style="display: block;" ng-hide="addClicked" id="user-add-btns">
-                <h2> <i class="fa fa-user"> </i><span></span><strong> Users</strong></h2>
-                <ul class="buttons">
-                    <li>
-                        <button class="submit" type="button" ng-click="addClicked = true"><i class="fa fa-plus"> </i> <span>Add</span></button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <div class="Users">
-        <div class="container">
-            <div ng-show="addClicked" id="addUser">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                        <div class="row  ">
-                            <div class=" col-12 col-sm-12">
-                                <div class="form-group ">
-                                    <label>User Name </label>
-                                    <input class="form-control" ng-model="newUser.userName" name="" value="" size="35" data-error="Required" required="" type="text">
+        </section>
+        <div class="Users">
+            <div class="container">
+                <div ng-show="addClicked" id="addUser">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                            <div class="row  ">
+                                <div class=" col-12 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>User Name </label>
+                                        <input class="form-control" ng-model="newUser.userName" name="userName" value="" size="35" data-error="Required" required="" type="text">
+                                        <span ng-show="userForm.userName.$touched && userForm.userName.$invalid" class="input-field-errors">User name is required.</span>
+                                        <span ng-if="errorMessageUserName" class="input-field-errors">User name already exist!</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                        <div class="row  ">
-                            <div class=" col-12 col-sm-6">
-                                <div class="form-group ">
-                                    <label>First Name </label>
-                                    <input class="form-control" ng-model="newUser.userFirstName" name="" value="" size="35" data-error="Required" required=""
-                                        type="text">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                            <div class="row  ">
+                                <div class=" col-12 col-sm-6">
+                                    <div class="form-group ">
+                                        <label>First Name </label>
+                                        <input class="form-control" ng-model="newUser.userFirstName" name="fname" value="" size="35" data-error="Required" required="" type="text">
+                                        <span ng-show="userForm.fname.$touched && userForm.fname.$invalid" class="input-field-errors">First name is required.</span>
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class=" col-12 col-sm-6">
-                                <div class="form-group lname">
-                                    <label>Last Name </label>
-                                    <input class="form-control lname" ng-model="newUser.userLastName" name="lname" value="" size="35" data-error="Required" required=""
-                                        type="text">
+                                <div class=" col-12 col-sm-6">
+                                    <div class="form-group lname">
+                                        <label>Last Name </label>
+                                        <input class="form-control lname" ng-model="newUser.userLastName" name="lname" value="" size="35" data-error="Required" required="" type="text">
+                                        <span ng-show="userForm.lname.$touched && userForm.lname.$invalid" class="input-field-errors">Last name is required.</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                        <div class="row nobdr">
-                            <div class=" col-12 col-sm-6">
-                                <div class="form-group  date">
-                                    <label>Date of Birth </label>
-                                    <input size="20" class="form-control date" ng-model="newUser.userDOB" name="name" value="" type="text">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                            <div class="row nobdr">
+                                <div class=" col-12 col-sm-6">
+                                    <div class="form-group  date">
+                                        <label>Date of Birth </label>
+                                        <input size="20" class="form-control date" ng-model="newUser.userDOB" name="date" value="" required type="text">
+                                        <span ng-show="userForm.date.$touched && userForm.date.$invalid" class="input-field-errors">Please enter valid date(yyyy-mm-dd).</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class=" col-12 col-sm-6">
-                                <div class="form-group hph">
-                                    <label> Mobile Number</label>
-                                    <input size="20" class="form-control" ng-model="newUser.userMobileNum" name="name" value="" type="text">
-                                    <!--   <input class="form-control p1" name="name" value=" " type="text">
+                                <div class=" col-12 col-sm-6">
+                                    <div class="form-group hph">
+                                        <label> Mobile Number</label>
+                                        <input size="20" class="form-control" ng-model="newUser.userMobileNum" ng-maxlength="12" name="userMobileNum" value="" required type="text">
+                                        <span ng-show="userForm.userMobileNum.$touched && userForm.userMobileNum.$invalid" class="input-field-errors">Please enter mobile number.</span>
+                                        <!--   <input class="form-control p1" name="name" value=" " type="text">
                                     <input class="form-control p2" name="name" value=" " type="text">
                                     <input class="form-control p3" name="name" value=" " type="text"> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                            <div class="row  ">
+                                <div class=" col-12 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Aadhaar No</label>
+                                        <input class="form-control " ng-model="newUser.userAadharNum" name="userAadharNum" value="" size="35" ng-maxlength="12" data-error="Required" required="" type="text">
+                                        <span ng-show="userForm.userAadharNum.$touched && userForm.userAadharNum.$invalid" class="input-field-errors">Please enter Aadhar number.</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                        <div class="row  ">
-                            <div class=" col-12 col-sm-12">
-                                <div class="form-group ">
-                                    <label>Aadhaar No</label>
-                                    <input class="form-control " ng-model="newUser.userAadharNum" name="" value="" size="35" data-error="Required" required=""
-                                        type="text">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-                        <div class="row  ">
-                            <div class=" col-12 col-sm-12">
-                                <div class="form-group ">
-                                    <label>User Type</label>
-                                    <select name="usertype" ng-model="newUser.userType" class="form-control  ">
+                    <div class="row">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="row  ">
+                                <div class=" col-12 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>User Type</label>
+                                        <select name="usertype" ng-model="newUser.userType" class="form-control" required>
                                         <option>Select User Type</option>
                                         <option>Super User</option>
                                         <option>Admin</option>
                                         <option>Supervisor</option>
                                         <option>TTES Operator</option>
                                     </select>
+                                        <!-- <select name="usertype" ng-init="newUser.userType = dropDownValues.userType[0]" ng-model="newUser.userType" class="form-control" required ng-options="item for item in dropDownValues.userType">
+                                        <option>Select </option>
+                                    </select> -->
+                                        <span ng-show="userForm.usertype.$touched && userForm.usertype.$invalid" class="input-field-errors">User type is required.</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-                        <div class="row  ">
-                            <div class=" col-12 col-sm-12">
-                                <div class="form-group ">
-                                    <label>Status </label>
-                                    <select name="usertype" ng-model="newUser.userStatus" class="form-control  ">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="row  ">
+                                <div class=" col-12 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Status </label>
+                                        <select name="userStatus" ng-model="newUser.userStatus" class="form-control" required>
                                         <option>Select Status</option>
                                         <option>Active</option>
                                         <option>Inactive</option>
                                         <option>Locked</option>
                                     </select>
+                                        <!-- <select name="userStatus" ng-init="newUser.userStatus = dropDownValues.userStatus[0]" ng-model="newUser.userStatus" class="form-control" required ng-options="item for item in dropDownValues.userStatus">
+                                        <option>Select </option>
+                                    </select> -->
+                                        <span ng-show="userForm.userStatus.$touched && userForm.userStatus.$invalid" class="input-field-errors">User Status is required.</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-                        <div class="row  ">
-                            <div class=" col-12 col-sm-12">
-                                <div class="form-group ">
-                                    <label>Password </label>
-                                    <input class="form-control " ng-model="newUser.userPassword" name="" value="" size="35" data-error="Required" required=""
-                                        type="text">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="row  ">
+                                <div class=" col-12 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Password </label>
+                                        <input class="form-control " ng-model="newUser.userPassword" name="userPassword" value="" size="35" data-error="Required" required="" type="text">
+                                        <span ng-show="userForm.userPassword.$touched && userForm.userPassword.$invalid" class="input-field-errors">Please enter password.</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-                        <div class="row  ">
-                            <div class=" col-12 col-sm-12">
-                                <div class="form-group ">
-                                    <label>Confirm Password </label>
-                                    <input class="form-control " ng-model="newUser.rePassword" name="" value="" size="35" data-error="Required" required="" type="text">
+                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                            <div class="row  ">
+                                <div class=" col-12 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Confirm Password </label>
+                                        <input class="form-control " ng-model="newUser.rePassword" name="rePassword" value="" size="35" data-error="Required" required="" type="text">
+                                        <span ng-show="userForm.rePassword.$touched && userForm.rePassword.$invalid" class="input-field-errors">Please confirm password.</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
-                    <div class="grid-list">
-                        <div class="table-responsive">
-                            <table width="100%" class="table table-bordered" data-toggle="table">
-                                <thead>
-                                    <tr>
-                                        <th>User Name</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Date of Birth</th>
-                                        <th>Aadhaar No</th>
-                                        <th>Mobile Number</th>
-                                        <th>User Type</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="item in usersList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
-                                        <td class="center">{{item.userName}}<br></td>
-                                        <td class="center">{{item.userFirstName}} <br></td>
-                                        <td class="center">{{item.userLastName}}</td>
-                                        <td class="center">{{item.userDOB}}</td>
-                                        <td class="center">{{item.userAadharNum}}</td>
-                                        <td class="center">{{item.userMobileNum}}</td>
-                                        <td class="center">{{item.userType[0]}}</td>
-                                        <td class="center">{{item.userStatus}} </td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".user1" title="Change"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger " data-toggle="tooltip" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6">
-                                    <p style="margin-top: 7px;">Showing {{((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > totalItems)?
-                                        totalItems : currentPage * itemsPerPage}} 0f {{totalItems}} entries</p>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage"
-                                        boundary-link-numbers="true" rotate="false"></ul>
+                <div class="row">
+                    <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+                        <div class="grid-list">
+                            <div class="table-responsive">
+                                <table width="100%" class="table table-bordered" data-toggle="table">
+                                    <thead>
+                                        <tr>
+                                            <th>User Name</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Date of Birth</th>
+                                            <th>Aadhaar No</th>
+                                            <th>Mobile Number</th>
+                                            <th>User Type</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in usersList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                                            <td class="center">{{item.userName}}<br></td>
+                                            <td class="center">{{item.userFirstName}} <br></td>
+                                            <td class="center">{{item.userLastName}}</td>
+                                            <td class="center">{{item.userDOB}}</td>
+                                            <td class="center">{{item.userAadharNum}}</td>
+                                            <td class="center">{{item.userMobileNum}}</td>
+                                            <td class="center">{{item.userType[0]}}</td>
+                                            <td class="center">{{item.userStatus}} </td>
+                                            <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".user1" title="Change"><span class="glyphicon glyphicon-edit"></span></a>
+                                                <a href="#" class="btn btn-danger " data-toggle="tooltip" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <p style="margin-top: 7px;">Showing {{((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > totalItems)? totalItems : currentPage * itemsPerPage}} 0f {{totalItems}} entries</p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -190,4 +215,4 @@
             </div>
         </div>
     </div>
-</div>
+</form>
