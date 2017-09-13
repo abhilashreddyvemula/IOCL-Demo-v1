@@ -7,6 +7,13 @@ angular.module('myApp.dashboard')
         $scope.errorMessage = '';
         $scope.errorMessageUserName = false;
 
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+        $scope.altInputFormats = ['M!/d!/yyyy'];
+        $scope.popup1 = {
+            opened: false
+          };
+        
         $scope.formInvalid = false;
         $scope.addClicked = false;
         $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": "", "userStatus": "" };
@@ -21,6 +28,10 @@ angular.module('myApp.dashboard')
             $scope.itemsPerPage = num;
             $scope.currentPage = 1; //reset to first page
         }
+
+        $scope.open1 = function() {
+            $scope.popup1.opened = true;
+        };
 
         $scope.isAddAvailable = function(){
             if($scope.userRole === 'Super Admin' || $scope.userRole === 'Admin')

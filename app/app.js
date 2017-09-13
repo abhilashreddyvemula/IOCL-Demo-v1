@@ -2,7 +2,7 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ngRoute', 'ui.bootstrap',
+  'ngRoute', 'mp.datePicker', 'ui.bootstrap',
   'myApp.home',
   'myApp.dashboard', 'myApp.services', 'myApp.utility',
   'myApp.version'

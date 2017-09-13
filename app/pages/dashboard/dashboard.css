@@ -873,13 +873,6 @@ border:none;
    padding: 20px 0 10px 0;
 }
 
-.Locations .first  [class^="col-"] { 
-  background: #d8ebf9; /* Old browsers */
-background: -moz-linear-gradient(top, #d8ebf9 5%, #ffffff 45%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, #d8ebf9 5%,#ffffff 45%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, #d8ebf9 5%,#ffffff 45%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8ebf9', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-}
 
   
 .Locations   .grid-list {

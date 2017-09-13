@@ -33,6 +33,7 @@ angular.module('myApp.dashboard')
 
         $scope.loadAllQuantities = function() {
             quantityService.getQuantityList().then(function(response) {
+                console.log('quantityList',response.data);
                 $scope.quantityList = response.data;
                 $scope.totalItems = $scope.quantityList.length;
             }, function(error) {});

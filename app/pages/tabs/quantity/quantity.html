@@ -6,7 +6,7 @@
                     <h2> <i class="fa fa-map-marker"> </i><span></span><strong> Add  Quantity</strong></h2>
                     <ul class="buttons">
                         <li>
-                            <button class="submit" type="button" ng-click="addClicked;saveQuantity(newQuantity)" ng-disabled="quantityForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                            <button class="submit" type="button" ng-click="addClicked; saveQuantity(newQuantity)" ng-disabled="quantityForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
                         </li>
                         <li>
                             <button class="cancel" type="button" ng-click="onCancel()"> </i> <span>Cancel</span></button>
@@ -21,9 +21,7 @@
                             addClicked;
                             quantityForm.name.$touched=false;
                             quantityForm.quantity.$touched=false;
-                            quantityForm.status.$touched=false;
-                            
-                            "><i class="fa fa-plus"> </i> <span>Add</span></button>
+                            quantityForm.status.$touched=false;"><i class="fa fa-plus"> </i> <span>Add</span></button>
                         </li>
                     </ul>
                 </div>
@@ -51,14 +49,9 @@
                     <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
                         <div class="form-group lname">
                             <label>Operational Status </label>
-                            <!-- <select name="status" class="form-control  ">
-                <option>Select </option>
-                <option>Active</option>
-                <option>Inactive</option>
-              </select> -->
                             <select name="status" ng-init="newQuantity.status = dropDownValues.status[0]" ng-model="newQuantity.status" class="form-control" required ng-options="item for item in dropDownValues.status">
-                                        <option>Select Contractor Type</option>
-                                    </select>
+                                <option>Select Contractor Type</option>
+                            </select>
                             <span ng-show="quantityForm.status.$touched && quantityForm.status.$invalid" class="input-field-errors">Status  is required.</span>
                         </div>
                     </div>
@@ -78,77 +71,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr >
                                         <td class="center">Quantity A</td>
                                         <td class="center">100 MT</td>
                                         <td class="center">Active</td>
                                         <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty1" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity B</td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty2" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity C</td>
-                                        <td class="center">100 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty3" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity D </td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty4" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity E</td>
-                                        <td class="center">300 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty5" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity F</td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty6" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity G</td>
-                                        <td class="center">100 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty7" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity H</td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty8" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity I</td>
-                                        <td class="center">100 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty9" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity J</td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty10" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity K</td>
-                                        <td class="center">300 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty11" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity L</td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty12" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
                                     </tr>
                                 </tbody>
                             </table>

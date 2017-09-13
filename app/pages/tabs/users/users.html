@@ -74,7 +74,11 @@
                                 <div class=" col-12 col-sm-6">
                                     <div class="form-group  date">
                                         <label>Date of Birth </label>
-                                        <input size="20" class="form-control date" ng-model="newUser.userDOB" name="date" value="" required type="text">
+                                        <date-picker ng-show="showDatepicker" on-date-selected="showDatepicker = false" ng-model="newUser.userDOB">
+                                            </date-picker>
+                                        <!-- <input date-time format="dd-MM-yyyy"> -->
+                                        <input size="20" class="form-control date" ng-click="showDatepicker = true" ng-model="newUser.userDOB" name="date" value="" required type="text">
+                                        <!-- <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" /> -->
                                         <span ng-show="userForm.date.$touched && userForm.date.$invalid" class="input-field-errors">Please enter valid date(yyyy-mm-dd).</span>
                                     </div>
                                 </div>

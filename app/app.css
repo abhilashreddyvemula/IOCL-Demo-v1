@@ -33,3 +33,15 @@
   width: 100%;
   background-color: rgba(0,0,0,0.5);
 }
+
+.angular-date-picker{
+  position: absolute;
+  z-index: 2;
+  top: 80px;
+}
+
+.angular-date-picker > ._month > button._previous, .angular-date-picker > ._month > button._next{
+  padding: 0px;
+  margin: 0px;
+  width: auto;
+}

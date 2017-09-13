@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('LocationsController', ['$scope', 'utility', 'LocationService', function($scope, utility, locationService) {
+    .controller('LocationsController', ['$scope', 'utility', 'LocationService', function ($scope, utility, locationService) {
         $scope.userRole = utility.getUserRole();
 
         $scope.viewby = 10;
@@ -9,66 +9,61 @@ angular.module('myApp.dashboard')
 
         $scope.formInvalid = false;
         $scope.addClicked = false;
-        $scope.newLocation = { "locationName": "", "locationCode": "", "address": "", "status": "" };
+        $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "operationalStatus": "" };
         $scope.locationList = [];
 
-        $scope.dropDownValues = { 'Status': [] };
+        $scope.dropDownValues = { 'status': [] };
 
 
 
-        $scope.pageChanged = function() {
+        $scope.pageChanged = function () {
             console.log('Page changed to: ' + $scope.currentPage);
         };
-        $scope.setItemsPerPage = function(num) {
+        $scope.setItemsPerPage = function (num) {
             $scope.itemsPerPage = num;
             $scope.currentPage = 1; //reset to first page
         }
 
-        $scope.isAddAvailable = function() {
+        $scope.isAddAvailable = function () {
             if ($scope.userRole === 'Super Admin')
                 return true;
             else
                 return false;
         }
 
-        $scope.loadAllLocations = function() {
-            locationService.getLocationsList().then(function(response) {
+        $scope.loadAllLocations = function () {
+            locationService.getLocationsList().then(function (response) {
+                console.log('locationList',response.data);
                 $scope.locationList = response.data;
                 $scope.totalItems = $scope.locationList.length;
-            }, function(error) {});
+            }, function (error) { });
         }
 
-        $scope.loadDropdownsData = function() {
+        $scope.loadDropdownsData = function () {
             //  alert("load user static data")
-            locationService.getStaticLocationData().then(function(response) {
-                $scope.dropDownValues.status = response.data.data.status;
+            locationService.getStaticLocationData().then(function (response) {
+                $scope.dropDownValues.status = response.data.data.LocationStatus;
 
                 console.log(response.data);
-            }, function(error) {});
+            }, function (error) { });
         }
 
-        $scope.addNewLocation = function() {
-
+        $scope.addNewLocation = function () {
             $scope.addClicked = true;
             $scope.errorMessageLocationName = false;
-            $scope.newLocation = { "locationName": "", "locationCode": "", "address": "", "status": "" };
-
-
-
+            $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "operationalStatus": "" };
         }
 
-        $scope.onCancel = function() {
+        $scope.onCancel = function () {
             $scope.addClicked = false;
-
-
         }
-        $scope.saveLocation = function(location) {
-            var body = { "locationName": newLocation.locationName, "locationCode": newLocation.locationCode, "address": newLocation.address, "status": newLocation.status };
-            locationService.addLocation(body).then(function(success) {
-                $scope.newLocation = { "locationName": "", "locationCode": "", "address": "", "status": "" };
+        $scope.saveLocation = function (location) {
+            var body = { "locationName": location.locationName, "locationCode": location.locationCode, "locationAddress": location.locationAddress, "operationalStatus": location.operationalStatus };
+            locationService.addLocation(body).then(function (success) {
+                $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "operationalStatus": "" };
                 $scope.loadAllLocations();
                 $scope.addClicked = false;
-            }, function(error) {
+            }, function (error) {
                 $scope.addClicked = true;
                 console.log(error);
                 console.log(error.data);

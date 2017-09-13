@@ -127,10 +127,10 @@ angular.module('myApp.services', [])
             headers: headers
         });
     }
-}]);
+}])
 
 // Location Services
-/*.service('LocationService', ['$http', 'utility', function($http, utility) {
+.service('LocationService', ['$http', 'utility', function($http, utility) {
     var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/locationsmanagement';
     this.getLocationsList = function() {
         var headers = utility.getHeaders();
@@ -163,10 +163,10 @@ angular.module('myApp.services', [])
             headers: headers
         });
     }
-}]);*/
+}])
 
 // Quantity Services
-/*.service('QuantityService', ['$http', 'utility', function($http, utility) {
+.service('QuantityService', ['$http', 'utility', function($http, utility) {
     var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/quantitymanagement';
     this.getQuantityList = function() {
         var headers = utility.getHeaders();
@@ -199,4 +199,4 @@ angular.module('myApp.services', [])
             headers: headers
         });
     }
-}]);*/
+}]);
