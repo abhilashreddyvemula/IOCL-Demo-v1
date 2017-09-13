@@ -128,3 +128,75 @@ angular.module('myApp.services', [])
         });
     }
 }]);
+
+// Location Services
+/*.service('LocationService', ['$http', 'utility', function($http, utility) {
+    var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/locationsmanagement';
+    this.getLocationsList = function() {
+        var headers = utility.getHeaders();
+        var url = baseUrl + '/getLocationDetails';
+        return $http({
+            method: 'GET',
+            url: url,
+            headers: headers
+        });
+    }
+
+    this.addLocation = function(location) {
+        var headers = utility.getHeaders();
+        var url = baseUrl + '/addLocation';
+
+        return $http({
+            method: 'POST',
+            url: url,
+            headers: headers,
+            data: JSON.stringify(location)
+        });
+    }
+
+    this.getStaticLocationData = function() {
+        var headers = utility.getHeaders();
+        var url = baseUrl + '/getStaticLocationData';
+        return $http({
+            method: 'GET',
+            url: url,
+            headers: headers
+        });
+    }
+}]);*/
+
+// Quantity Services
+/*.service('QuantityService', ['$http', 'utility', function($http, utility) {
+    var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/quantitymanagement';
+    this.getQuantityList = function() {
+        var headers = utility.getHeaders();
+        var url = baseUrl + '/getQuantityDetails';
+        return $http({
+            method: 'GET',
+            url: url,
+            headers: headers
+        });
+    }
+
+    this.addQuantity = function(location) {
+        var headers = utility.getHeaders();
+        var url = baseUrl + '/addQuantity';
+
+        return $http({
+            method: 'POST',
+            url: url,
+            headers: headers,
+            data: JSON.stringify(location)
+        });
+    }
+
+    this.getStaticQuantityData = function() {
+        var headers = utility.getHeaders();
+        var url = baseUrl + '/getQuantityStaticData';
+        return $http({
+            method: 'GET',
+            url: url,
+            headers: headers
+        });
+    }
+}]);*/
