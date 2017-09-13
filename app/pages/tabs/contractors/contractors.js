@@ -1,10 +1,10 @@
 angular.module('myApp.dashboard')
-.controller('ContractorsController', ['$scope', 'utility', 'ContractorsService', function ($scope, utility, contractorsService) {
-    $scope.userRole = utility.getUserRole();
+    .controller('ContractorsController', ['$scope', 'utility', 'ContractorsService', function($scope, utility, contractorsService) {
+        $scope.userRole = utility.getUserRole();
 
-    $scope.viewby = 10;
-    $scope.currentPage = 1;
-    $scope.itemsPerPage = $scope.viewby;
+        $scope.viewby = 10;
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = $scope.viewby;
 
         $scope.formInvalid = false;
         $scope.addClicked = false;
@@ -22,20 +22,29 @@ angular.module('myApp.dashboard')
         }
 
 
-    $scope.isAddAvailable = function(){
-        if($scope.userRole === 'Super Admin')
-            return true;
-        else
-            return false;
-    }
-    
-    $scope.loadAllContractors = function(){
-        contractorsService.getContractorsList().then(function(response){
-            $scope.contractorList = response.data;
-            $scope.totalItems = $scope.contractorList.length;
-        }, function(error){});
-    }
+        $scope.isAddAvailable = function() {
+            if ($scope.userRole === 'Super Admin')
+                return true;
+            else
+                return false;
+        }
 
+        $scope.loadAllContractors = function() {
+            contractorsService.getContractorsList().then(function(response) {
+                $scope.contractorList = response.data;
+                $scope.totalItems = $scope.contractorList.length;
+            }, function(error) {});
+        }
+
+        $scope.loadDropdownsData = function() {
+            //  alert("load user static data")
+            contractorsService.getContractorsStaticData().then(function(response) {
+                $scope.dropDownValues.ContractorStatus = response.data.data.ContractorStatus;
+                $scope.dropDownValues.States = response.data.data.States;
+                $scope.dropDownValues.Types = response.data.data.Types;
+                console.log(response.data);
+            }, function(error) {});
+        }
 
         $scope.addNewContractor = function() {
 
@@ -63,8 +72,8 @@ angular.module('myApp.dashboard')
                 console.log(error);
                 console.log(error.data);
                 $scope.errorMessage = error.data.errorMessage;
-                if ($scope.errorMessage == "User Already Exist!!") {
-                    $scope.errorMessageUserName = true;
+                if ($scope.errorMessage == "Contractor with contractor name Already Exist!") {
+                    $scope.errorMessageContractorName = true;
 
                 }
 
@@ -79,5 +88,5 @@ angular.module('myApp.dashboard')
         }
 
         $scope.loadAllContractors();
-        //$scope.loadDropdownsData();
+        $scope.loadDropdownsData();
     }]);
