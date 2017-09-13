@@ -1,5 +1,6 @@
 angular.module('myApp.dashboard')
     .controller('LocationsController', ['$scope', 'utility', 'LocationService', function ($scope, utility, locationService) {
+
         $scope.userRole = utility.getUserRole();
 
         $scope.viewby = 10;
@@ -43,7 +44,6 @@ angular.module('myApp.dashboard')
             //  alert("load user static data")
             locationService.getStaticLocationData().then(function (response) {
                 $scope.dropDownValues.status = response.data.data.LocationStatus;
-
                 console.log(response.data);
             }, function (error) { });
         }

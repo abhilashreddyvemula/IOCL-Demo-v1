@@ -71,11 +71,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr >
-                                        <td class="center">Quantity A</td>
-                                        <td class="center">100 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty1" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
+                                    <tr ng-repeat="item in contractorList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                                        <td class="center">{{item.quantityName}}</td>
+                                        <td class="center">{{item.quantity}}</td>
+                                        <td class="center">{{item.status}}</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".con1" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
                                     </tr>
                                 </tbody>
                             </table>
