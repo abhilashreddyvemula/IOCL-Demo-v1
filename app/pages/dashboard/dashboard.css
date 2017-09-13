@@ -777,7 +777,8 @@ border-bottom: 1px solid #ccc;
     margin: 0px;
 }
 .table-responsive table{
-    margin-top: 6px
+    margin-top: 6px;
+    border: 1px solid #c7c9eb !important;
 }
 /*.bay .first  [class^="col-"] { */
   /*background: #d8ebf9; !* Old browsers *!*/
