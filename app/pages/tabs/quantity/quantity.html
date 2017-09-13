@@ -78,77 +78,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="center">Quantity A</td>
-                                        <td class="center">100 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty1" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity B</td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty2" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity C</td>
-                                        <td class="center">100 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty3" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity D </td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty4" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity E</td>
-                                        <td class="center">300 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty5" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity F</td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty6" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity G</td>
-                                        <td class="center">100 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty7" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity H</td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty8" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity I</td>
-                                        <td class="center">100 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty9" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity J</td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty10" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity K</td>
-                                        <td class="center">300 MT</td>
-                                        <td class="center">Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty11" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="center">Quantity L</td>
-                                        <td class="center">200 MT</td>
-                                        <td class="center">In-Active</td>
-                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".qty12" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
+                                    <tr ng-repeat="item in contractorList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                                        <td class="center">{{item.quantityName}}</td>
+                                        <td class="center">{{item.quantity}}</td>
+                                        <td class="center">{{item.status}}</td>
+                                        <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".con1" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
                                     </tr>
                                 </tbody>
                             </table>

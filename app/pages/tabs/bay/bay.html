@@ -54,7 +54,7 @@
                                     <div class="form-group ">
                                         <span class="mandatory-fields">   <label>Bay Number </label>*</span>
                                         <!--<input class="form-control " name="" value="" size="35" data-error="Required" required="" type="text">-->
-                                        <input class="form-control" ng-model="newBay.bayNum" name="bayNum" value="" ng-maxlength="2" size="35" data-error="Required" required="" type="number">
+                                        <input class="form-control" ng-model="newBay.bayNum" name="bayNum" value="" ng-maxlength="2" size="35" data-error="Required" required="" type="text" ng-pattern=/^[0-9]{1}[0-9]{1}$/>
                                         <span ng-show="myForm.bayNum.$touched && myForm.bayNum.$invalid" class="input-field-errors">Bay number is required(0 - 99).</span>
                                         <span ng-if="errorMessageBayNum" class="input-field-errors">Bay number already exist!</span>
 
@@ -135,7 +135,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       <tr ng-repeat="bay in (bayItems | orderBy:sortByKey:sortReverse | filter:baySearchKey).slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                                        <tr ng-repeat="bay in (bayItems | orderBy:sortByKey:sortReverse | filter:baySearchKey).slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
                                             <td class="center">{{bay.bayName}}</td>
                                             <td class="center">{{bay.bayNum}}</td>
                                             <td class="center">{{bay.bayType}}</td>

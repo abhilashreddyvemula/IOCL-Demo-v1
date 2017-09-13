@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('LocationsController', ['$scope', 'utility', 'LocationService', function($scope, utility, locationService) {
+    .controller('LocationsController', ['$scope', 'utility', 'LocService', function($scope, utility, locService) {
         $scope.userRole = utility.getUserRole();
 
         $scope.viewby = 10;
@@ -32,7 +32,7 @@ angular.module('myApp.dashboard')
         }
 
         $scope.loadAllLocations = function() {
-            locationService.getLocationsList().then(function(response) {
+            locService.getLocationsList().then(function(response) {
                 $scope.locationList = response.data;
                 $scope.totalItems = $scope.locationList.length;
             }, function(error) {});
@@ -40,7 +40,7 @@ angular.module('myApp.dashboard')
 
         $scope.loadDropdownsData = function() {
             //  alert("load user static data")
-            locationService.getStaticLocationData().then(function(response) {
+            locService.getStaticLocationData().then(function(response) {
                 $scope.dropDownValues.status = response.data.data.status;
 
                 console.log(response.data);
@@ -64,7 +64,7 @@ angular.module('myApp.dashboard')
         }
         $scope.saveLocation = function(location) {
             var body = { "locationName": newLocation.locationName, "locationCode": newLocation.locationCode, "address": newLocation.address, "status": newLocation.status };
-            locationService.addLocation(body).then(function(success) {
+            locService.addLocation(body).then(function(success) {
                 $scope.newLocation = { "locationName": "", "locationCode": "", "address": "", "status": "" };
                 $scope.loadAllLocations();
                 $scope.addClicked = false;

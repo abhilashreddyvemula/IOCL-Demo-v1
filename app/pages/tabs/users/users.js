@@ -1,12 +1,12 @@
 angular.module('myApp.dashboard')
-    .controller('UsersController', ['$scope', 'utility', 'UsersService', function ($scope, utility, usersService) {
+    .controller('UsersController', ['$scope', 'utility', 'UsersService', function($scope, utility, usersService) {
         $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
         $scope.currentPage = 1;
         $scope.itemsPerPage = $scope.viewby;
         $scope.errorMessage = '';
         $scope.errorMessageUserName = false;
-
+        $scope.passwordErrorFlag = false;
         $scope.formInvalid = false;
         $scope.addClicked = false;
         $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": "", "userStatus": "" };
@@ -22,8 +22,8 @@ angular.module('myApp.dashboard')
             $scope.currentPage = 1; //reset to first page
         }
 
-        $scope.isAddAvailable = function(){
-            if($scope.userRole === 'Super Admin' || $scope.userRole === 'Admin')
+        $scope.isAddAvailable = function() {
+            if ($scope.userRole === 'Super Admin' || $scope.userRole === 'Admin')
                 return true;
             else
                 return false;
@@ -57,11 +57,20 @@ angular.module('myApp.dashboard')
         }
 
         $scope.onCancel = function() {
-            $scope.addClicked = false;
+                $scope.addClicked = false;
 
 
-        }
-
+            }
+            // for password checking
+            // if ($scope.newUser.rePassword && $scope.newUser.userPassword) {
+            //     $scope.myFunction = function() {
+            //         if ($scope.newUser.rePassword! == $scope.newUser.userPassword) {
+            //             $scope.passwordErrorFlag = true;
+            //         } else {
+            //             $scope.passwordErrorFlag = false;
+            //         }
+            //     }
+            // }
 
         $scope.saveUser = function(user) {
             var userType = [];

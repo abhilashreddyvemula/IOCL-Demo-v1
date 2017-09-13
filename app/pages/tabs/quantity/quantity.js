@@ -1,5 +1,8 @@
 angular.module('myApp.dashboard')
-    .controller('QuantityController', ['$scope', 'utility', 'QuantityService', function($scope, utility, quantityService) {
+    .controller('QuantityController', ['$scope', 'utility', function($scope, utility) {
+
+        //'QuantityService', 
+        //quantityService
         $scope.userRole = utility.getUserRole();
 
         $scope.viewby = 10;
@@ -32,19 +35,19 @@ angular.module('myApp.dashboard')
 
 
         $scope.loadAllQuantities = function() {
-            quantityService.getQuantityList().then(function(response) {
-                $scope.quantityList = response.data;
-                $scope.totalItems = $scope.quantityList.length;
-            }, function(error) {});
+            // quantityService.getQuantityList().then(function(response) {
+            //     $scope.quantityList = response.data;
+            //     $scope.totalItems = $scope.quantityList.length;
+            // }, function(error) {});
         }
 
         $scope.loadDropdownsData = function() {
             //  alert("load user static data")
-            quantityService.getStaticQuantityData().then(function(response) {
-                $scope.dropDownValues.status = response.data.data.status;
+            // quantityService.getStaticQuantityData().then(function(response) {
+            //     $scope.dropDownValues.status = response.data.data.status;
 
-                console.log(response.data);
-            }, function(error) {});
+            //     console.log(response.data);
+            // }, function(error) {});
         }
 
         $scope.addNewQuantity = function() {
@@ -63,29 +66,29 @@ angular.module('myApp.dashboard')
 
         }
         $scope.saveQuantity = function(location) {
-            var body = { "quantityName": newQuantity.locationName, "quantity": newQuantity.locationCode, "status": newQuantity.address };
-            quantityService.addQuantity(body).then(function(success) {
-                $scope.newQuantity = { "quantityName": "", "quantity": "", "status": "" };
-                $scope.loadAllQuantities();
-                $scope.addClicked = false;
-            }, function(error) {
-                $scope.addClicked = true;
-                console.log(error);
-                console.log(error.data);
-                $scope.errorMessage = error.data.errorMessage;
-                if ($scope.errorMessage == "Quantity  name Already Exist!") {
-                    $scope.errorMessageQuantityName = true;
+            // var body = { "quantityName": newQuantity.locationName, "quantity": newQuantity.locationCode, "status": newQuantity.address };
+            // quantityService.addQuantity(body).then(function(success) {
+            //     $scope.newQuantity = { "quantityName": "", "quantity": "", "status": "" };
+            //     $scope.loadAllQuantities();
+            //     $scope.addClicked = false;
+            // }, function(error) {
+            //     $scope.addClicked = true;
+            //     console.log(error);
+            //     console.log(error.data);
+            //     $scope.errorMessage = error.data.errorMessage;
+            //     if ($scope.errorMessage == "Quantity  name Already Exist!") {
+            //         $scope.errorMessageQuantityName = true;
 
-                }
+            //     }
 
-                if ($scope.errorMessage !== null) {
-                    $scope.formInvalid = true;
+            //     if ($scope.errorMessage !== null) {
+            //         $scope.formInvalid = true;
 
-                }
-                console.log($scope.errorMessage);
+            //     }
+            //     console.log($scope.errorMessage);
 
-                return;
-            });
+            //     return;
+            // });
         }
 
         $scope.loadAllQuantities();

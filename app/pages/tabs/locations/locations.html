@@ -6,7 +6,7 @@
                     <h2> <i class="fa fa-map-marker"> </i><span></span><strong> Add  Location</strong></h2>
                     <ul class="buttons">
                         <li>
-                            <button class="submit" type="button" ng-click="addClicked;saveLocation(newLocation)"><i class="fa fa-check"> </i> <span>Save</span></button>
+                            <button class="submit" type="button" ng-click="addClicked;saveLocation(newLocation)" ng-disabled="locationsForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
                         </li>
                         <li>
                             <button class="cancel" type="button" ng-click="onCancel()"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
@@ -23,7 +23,6 @@
                             locationsForm.locationCode.$touched=false;
                             locationsForm.address.$touched=false;
                             locationsForm.status.$touched=false;
-                            
                             "><i class="fa fa-plus"> </i> <span>Add</span></button>
                         </li>
                     </ul>
