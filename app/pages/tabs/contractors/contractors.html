@@ -41,7 +41,8 @@
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group ">
                                         <label>Contractor Name </label>
-                                        <input class="form-control" ng-model="newContractor.contractorName" name="contractorName" value="" size="35" data-error="Required" required="" type="text">
+                                        <input class="form-control" ng-model="newContractor.contractorName" name="contractorName" value="" size="35" data-error="Required"
+                                            required="" type="text">
 
                                         <span ng-show="contractorForm.contractorName.$touched && contractorForm.contractorName.$invalid" class="input-field-errors">Contractor name is required.</span>
                                         <span ng-if="errorMessageContractorName" class="input-field-errors">Contractor with contractor name Already Exist!</span></div>
@@ -53,14 +54,9 @@
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group ">
                                         <label>Contractor Type </label>
-                                        <!-- <select name="contractorType" class="form-control" ng-model="newContractor.contractorType" required>
-                                            <option>Select </option>
-                                            <option>LPG</option>
-                                            <option>LPG</option>
-                                            <option>LPG</option>
-                                        </select> -->
-                                        <select name="contractorType" ng-init="newContractor.contractorType = dropDownValues.Types[0]" ng-model="newContractor.contractorType" class="form-control" required ng-options="item for item in dropDownValues.Types">
-                                        <option>Select Contractor Type</option>
+                                        <select name="contractorType" ng-init="newContractor.contractorType = dropDownValues.Types[0]" ng-model="newContractor.contractorType"
+                                            class="form-control" required ng-options="item for item in dropDownValues.Types">
+                                        <option value="">Select</option>
                                     </select>
                                         <span ng-show="contractorForm.contractorType.$touched && contractorForm.contractorType.$invalid" class="input-field-errors">Contractor Type is required.</span>
 
@@ -73,15 +69,13 @@
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group ">
                                         <label>Operational Status </label>
-                                        <!-- <select class="form-control" ng-model="newContractor.contractorOperationalStatus" name="contractorOperationalStatus" required>
-                                        <option>Select </option>
-                                        <option>Active</option>
-                                        <option>Black-listed</option>
-                                    </select> -->
-                                        <select name="contractorOperationalStatus" ng-init="newContractor.contractorOperationalStatus = dropDownValues.ContractorStatus[0]" ng-model="newContractor.contractorOperationalStatus" class="form-control" required ng-options="item for item in dropDownValues.ContractorStatus">
-                                        <option>Select Status</option>
+                                        <select name="contractorOperationalStatus"
+                                            ng-model="newContractor.contractorOperationalStatus" class="form-control" required
+                                            ng-options="item for item in dropDownValues.ContractorStatus">
+                                        <option value="">Select</option>
                                     </select>
-                                        <span ng-show="contractorForm.contractorOperationalStatus.$touched && contractorForm.contractorOperationalStatus.$invalid" class="input-field-errors">Status is required.</span>
+                                        <span ng-show="contractorForm.contractorOperationalStatus.$touched && contractorForm.contractorOperationalStatus.$invalid"
+                                            class="input-field-errors">Status is required.</span>
                                     </div>
                                 </div>
                             </div>
@@ -91,14 +85,16 @@
                         <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
                             <div class="form-group address">
                                 <label>Address <span class="req">*</span></label>
-                                <input class="form-control address" ng-model="newContractor.contractorAddress" size="64" name="contractorAddress" value="" data-error="Required" required="" type="text">
+                                <input class="form-control address" ng-model="newContractor.contractorAddress" size="64" name="contractorAddress" value=""
+                                    data-error="Required" required="" type="text">
                                 <span ng-show="contractorForm.contractorAddress.$touched && contractorForm.contractorAddress.$invalid" class="input-field-errors">Contractor address is required.</span>
                             </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
                             <div class="form-group city">
                                 <label>City <span class="req">*</span></label>
-                                <input class="form-control city" ng-model="newContractor.contractorCity" size="32" name="contractorCity" value="" data-error="Required" required="" type="text">
+                                <input class="form-control city" ng-model="newContractor.contractorCity" size="32" name="contractorCity" value="" data-error="Required"
+                                    required="" type="text">
 
                                 <span ng-show="contractorForm.contractorCity.$touched && contractorForm.contractorCity.$invalid" class="input-field-errors">Contractor City is required.</span>
                             </div>
@@ -181,16 +177,18 @@
                                     <option value="WY">Wyoming</option>
                                     <option value="YT">Yukon</option>
                             </select> -->
-                                <select name="contractorState" ng-init="newContractor.contractorState = dropDownValues.States[0]" ng-model="newContractor.contractorState" class="form-control" required ng-options="item for item in dropDownValues.States">
-                                        <option>Select State</option>
+                                <select name="contractorState" ng-init="newContractor.contractorState = dropDownValues.States[0]" ng-model="newContractor.contractorState"
+                                    class="form-control" required ng-options="item for item in dropDownValues.States">
+                                        <option value="">Select</option>
                                     </select>
-                                <span ng-show="contractorForm.contractorState.$touched && contractorForm.contractorState.$invalid" class="input-field-errors">Contractor State is required.</span> </div>
+                                <span ng-show="contractorForm.contractorState.$touched && contractorForm.contractorState.$invalid" class="input-field-errors">Contractor State is required.</span>                                </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
                             <div class="form-group zip">
                                 <label>Zip Code <span class="req">*</span></label>
-                                <input class="form-control zip" ng-model="newContractor.contractorPinCode" size="5" name="contractorPinCode" value="" type="text" required ng-pattern="/^[0-9]{6}$/ " maxlength="6">
-                                <span ng-show="contractorForm.contractorPinCode.$touched && contractorForm.contractorPinCode.$invalid" class="input-field-errors">Please enter 6 digit  pincode</span> </div>
+                                <input class="form-control zip" ng-model="newContractor.contractorPinCode" size="5" name="contractorPinCode" value="" type="text"
+                                    required ng-pattern="/^[0-9]{6}$/ " maxlength="6">
+                                <span ng-show="contractorForm.contractorPinCode.$touched && contractorForm.contractorPinCode.$invalid" class="input-field-errors">Please enter 6 digit  pincode</span>                                </div>
                         </div>
                     </div>
                 </div>
@@ -198,21 +196,37 @@
                     <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
                         <div class="grid-list">
                             <div class="table-responsive">
-                                <table width="100%" class="table table-bordered" data-toggle="table">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 select-div">
+                                        <label>Show
+                                            <select ng-model="viewby" convert-to-number ng-change="setItemsPerPage(viewby)" class="form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                            <option value="100">100</option>
+                                            </select>
+                                            entries
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 search-div">
+                                        <label>Search:<input type="search" class="form-control form-control-sm" ng-model="contractorsSearchKey" placeholder=""></label>
+                                    </div>
+                                </div>
+                                <table width="100%" class="table table-bordered dataTable" data-toggle="table">
                                     <thead>
                                         <tr>
-                                            <th>Contractor Name</th>
-                                            <th>Contractor Type</th>
-                                            <th>Address</th>
-                                            <th>City</th>
-                                            <th>State</th>
-                                            <th>PinCode</th>
-                                            <th>Operational Status</th>
+                                            <th class="sorting" ng-click="orderByField='contractorName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractorName') && !reverseSort, 'sorting_desc': (orderByField == 'contractorName') && reverseSort}">Contractor Name</th>
+                                            <th class="sorting" ng-click="orderByField='contractorType'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractorType') && !reverseSort, 'sorting_desc': (orderByField == 'contractorType') && reverseSort}">Contractor Type</th>
+                                            <th class="sorting" ng-click="orderByField='contractorAddress'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractorAddress') && !reverseSort, 'sorting_desc': (orderByField == 'contractorAddress') && reverseSort}">Address</th>
+                                            <th class="sorting" ng-click="orderByField='contractorCity'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractorCity') && !reverseSort, 'sorting_desc': (orderByField == 'contractorCity') && reverseSort}">City</th>
+                                            <th class="sorting" ng-click="orderByField='contractorState'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractorState') && !reverseSort, 'sorting_desc': (orderByField == 'contractorState') && reverseSort}">State</th>
+                                            <th class="sorting" ng-click="orderByField='contractorPinCode'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractorPinCode') && !reverseSort, 'sorting_desc': (orderByField == 'contractorPinCode') && reverseSort}">PinCode</th>
+                                            <th class="sorting" ng-click="orderByField='contractorOperationalStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractorOperationalStatus') && !reverseSort, 'sorting_desc': (orderByField == 'contractorOperationalStatus') && reverseSort}">Operational Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="item in contractorList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                                        <tr ng-repeat="item in (contractorList | orderBy: orderByField: reverseSort | search:contractorsSearchKey:'contractors').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
                                             <td class="center">{{item.contractorName}}</td>
                                             <td class="center">{{item.contractorType}}</td>
                                             <td class="center">{{item.contractorAddress}}</td>
@@ -220,16 +234,21 @@
                                             <td class="center">{{item.contractorState}}</td>
                                             <td class="center">{{item.contractorPinCode}}</td>
                                             <td class="center">{{item.contractorOperationalStatus}}</td>
-                                            <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".con1" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
+                                            <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".con1"
+                                                    title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <p style="margin-top: 7px;">Showing {{((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > totalItems)? totalItems : currentPage * itemsPerPage}} 0f {{totalItems}} entries</p>
+                                        <p style="margin-top: 7px;">Showing {{((contractorList | search:contractorsSearchKey:'contractors').length == 0 )? 0:((currentPage-1)
+                                            * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((contractorList | search:contractorsSearchKey:'contractors').length))?
+                                            ((contractorList | search:contractorsSearchKey:'contractors').length) : currentPage * itemsPerPage}}
+                                            0f {{(contractorList | search:contractorsSearchKey:'contractors').length }} entries <span ng-show="contractorsSearchKey.length > 0">(filtered from {{contractorList.length}} total entries)</span></p>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
-                                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
+                                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage"
+                                            boundary-link-numbers="true" rotate="false"></ul>
                                     </div>
                                 </div>
                             </div>

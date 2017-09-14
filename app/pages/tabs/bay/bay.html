@@ -35,7 +35,7 @@
                 <div class="" id="addBay">
                     <div ng-show="addClicked" class="row" style="padding-left: 15px;"> <span class="mandatory-fields"> *</span> Fields are mandatory.</div>
                     <div ng-show="addClicked" class="row">
-                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <div class="row">
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group ">
@@ -49,9 +49,9 @@
                             </div>
 
                         </div>
-                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             <div class="row">
-                                <div class=" col-12 col-sm-6">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group ">
                                         <span class="mandatory-fields">   <label>Bay Number </label>*</span>
                                         <!--<input class="form-control " name="" value="" size="35" data-error="Required" required="" type="text">-->
@@ -60,27 +60,26 @@
                                         <span ng-if="errorMessageBayNum" class="input-field-errors">Bay number already exist!</span>
                                     </div>
                                 </div>
-                                <div class=" col-12 col-sm-6">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group lname">
                                         <span class="mandatory-fields">   <label>Bay Type </label>*</span>
-                                        <select name="bayType" ng-init="newBay.bayType = dropDownValues.bayTypes[0]" ng-model="newBay.bayType" ng-options="item for item in dropDownValues.bayTypes"
+                                        <select name="bayType" ng-model="newBay.bayType" ng-options="item for item in dropDownValues.bayTypes"
                                             class="form-control" required>
-                                            <option>Select </option>
+                                            <option value="">Select </option>
                                         </select>
                                         <span ng-show="myForm.bayType.$touched && myForm.bayType.$invalid" class="input-field-errors">Bay type is required.</span>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                        <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
                             <div class="row nobdr">
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group lname">
                                         <span class="mandatory-fields">  <label>Functional Status </label>*</span>
-                                        <select name="bayStatus" ng-init="newBay.bayStatus = dropDownValues.bayStatus[0]" ng-model="newBay.functionalStatus" ng-options="item for item in dropDownValues.bayStatus"
+                                        <select name="bayStatus" ng-model="newBay.functionalStatus" ng-options="item for item in dropDownValues.bayStatus"
                                             class="form-control" required>
-                                            <option>Select </option>
+                                            <option value="">Select </option>
                                         </select>
                                         <span ng-show="myForm.bayStatus.$touched && myForm.bayStatus.$invalid" class="input-field-errors">Functional status is required.</span>
                                     </div>
@@ -98,11 +97,11 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6 select-div">
                                         <label>Show
-                                            <select ng-model="viewby" ng-change="setItemsPerPage(viewby)" class="form-control form-control-sm">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
+                                            <select ng-model="viewby" convert-to-number ng-change="setItemsPerPage(viewby)" class="form-control form-control-sm">
+                                                <option value=10>10</option>
+                                                <option value=25>25</option>
+                                                <option value=50>50</option>
+                                                <option value=100>100</option>
                                             </select>
                                             entries
                                         </label>
@@ -111,36 +110,36 @@
                                         <label>Search:<input type="search" class="form-control form-control-sm" ng-model="baySearchKey" placeholder=""></label>
                                     </div>
                                 </div>
-                                <table width="100%" class="table table-bordered">
+                                <table width="100%" class="table table-bordered dataTable">
                                     <thead>
                                         <tr>
-                                            <th class="sorting" ng-click="sort('bayName')" ng-class="{'sorting_asc': (sortByKey == 'bayName') && !sortReverse, 'sorting_desc': (sortByKey == 'bayName') && sortReverse}">Bay Name</th>
-                                            <th class="sorting" ng-click="sort('bayNum')" ng-class="{'sorting_asc': (sortByKey == 'bayNum') && !sortReverse, 'sorting_desc': (sortByKey == 'bayNum') && sortReverse}">Bay Number</th>
-                                            <th class="sorting" ng-click="sort('bayType')" ng-class="{'sorting_asc': (sortByKey == 'bayType') && !sortReverse, 'sorting_desc': (sortByKey == 'bayType') && sortReverse}">Bay Type</th>
-                                            <th class="sorting" ng-click="sort('functionalStatus')" ng-class="{'sorting_asc': (sortByKey == 'functionalStatus') && !sortReverse, 'sorting_desc': (sortByKey == 'functionalStatus') && sortReverse}">Functional Status</th>
+                                            <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}">Bay Name</th>
+                                            <th class="sorting" ng-click="orderByField='bayNum'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayNum') && !reverseSort, 'sorting_desc': (orderByField == 'bayNum') && reverseSort}">Bay Number</th>
+                                            <th class="sorting" ng-click="orderByField='bayType'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayType') && !reverseSort, 'sorting_desc': (orderByField == 'bayType') && reverseSort}">Bay Type</th>
+                                            <th class="sorting" ng-click="orderByField='functionalStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'functionalStatus') && !reverseSort, 'sorting_desc': (orderByField == 'functionalStatus') && reverseSort}">Functional Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="bay in (bayItems | orderBy:sortByKey:sortReverse | filter:baySearchKey).slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                                        <tr ng-repeat="bay in (bayItems | orderBy: orderByField: reverseSort | search:baySearchKey:'bay').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
                                             <td class="center">{{bay.bayName}}</td>
                                             <td class="center">{{bay.bayNum}}</td>
                                             <td class="center">{{bay.bayType}}</td>
                                             <td class="center">{{bay.functionalStatus}}</td>
-                                            <td class="center"><a href="#" class="btn btn-primary" data-toggle="modal" data-target=".bay1" title="Change"><span class="glyphicon glyphicon-edit"></span></a>                                                </td>
+                                            <td class="center"><a href="#" class="btn btn-primary" data-toggle="modal" data-target=".bay1" title="Change"><span class="glyphicon glyphicon-edit"></span></a></td>
                                         </tr>
 
                                     </tbody>
                                 </table>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <p style="margin-top: 7px;">Showing {{((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage >
-                                            ((bayItems | filter:baySearchKey).length))? ((bayItems | filter:baySearchKey).length)
-                                            : currentPage * itemsPerPage}} 0f {{(bayItems | filter:baySearchKey).length}}
+                                        <p style="margin-top: 7px;">Showing {{((bayItems | search:baySearchKey:'bay').length == 0 )? 0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage >
+                                            ((bayItems | search:baySearchKey:'bay').length))? ((bayItems | search:baySearchKey:'bay').length)
+                                            : currentPage * itemsPerPage}} 0f {{(bayItems | search:baySearchKey:'bay').length }}
                                             entries <span ng-show="baySearchKey.length > 0">(filtered from {{bayItems.length}} total entries)</span></p>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
-                                        <ul uib-pagination total-items="(bayItems | filter:baySearchKey).length" ng-model="currentPage" class="pagination-sm pagination"
+                                        <ul uib-pagination total-items="(bayItems | search:baySearchKey:'bay').length" ng-model="currentPage" class="pagination-sm pagination"
                                             items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
                                     </div>
                                 </div>

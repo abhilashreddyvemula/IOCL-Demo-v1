@@ -30,7 +30,7 @@ h1 { font-size:18px;  line-height:36px; margin:0; font-weight:bold;  }
   overflow: hidden; 
 }
  input , select, textarea , .form-control { outline:none;  border:none;    background: none;     -webkit-appearance: none;  -moz-appearance: none;  appearance: none; }
-label {     display: block; color: #f6661b ; font-size:11px; text-transform:uppercase; font-weight:600;  }	
+.login label {     display: block; color: #f6661b ; font-size:11px; text-transform:uppercase; font-weight:600;  }	
 .form-control {       color:#666; font-weight:bold; border:none;  border-bottom:2px solid #666; box-shadow:none !important; padding:0; line-height:normal !important;  font-size:14px !important;       height: 26px ;  background-color:transparent  }
 .form-control:focus { background-color:transparent }
 .login-container form {

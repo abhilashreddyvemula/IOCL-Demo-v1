@@ -64,14 +64,9 @@
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group lname">
                                 <label>Operational Status </label>
-                                <!-- <select name="status" class="form-control  ">
-                                <option>Select </option>
-                                <option>Active</option>
-                                <option>Inactive</option>
-                            </select> -->
-                                <select name="status" ng-init="newLocation.status = dropDownValues.status[0]" ng-model="newLocation.operationalStatus" class="form-control"
+                                <select name="status" ng-model="newLocation.operationalStatus" class="form-control"
                                     required ng-options="item for item in dropDownValues.status">
-                                        <option>Select status</option>
+                                        <option value="">Select</option>
                                     </select>
                                 <span ng-show="locationsForm.status.$touched && locationsForm.status.$invalid" class="input-field-errors">Location status is required.</span>
                             </div>
@@ -82,18 +77,34 @@
                     <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
                         <div class="grid-list">
                             <div class="table-responsive">
-                                <table width="100%" class="table table-bordered" data-toggle="table">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 select-div">
+                                        <label>Show
+                                        <select ng-model="viewby" convert-to-number ng-change="setItemsPerPage(viewby)" class="form-control form-control-sm">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                        entries
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 search-div">
+                                        <label>Search:<input type="search" class="form-control form-control-sm" ng-model="locationsSearchKey" placeholder=""></label>
+                                    </div>
+                                </div>
+                                <table width="100%" class="table table-bordered dataTable" data-toggle="table">
                                     <thead>
                                         <tr>
-                                            <th>Location Name</th>
-                                            <th>Location Code</th>
-                                            <th>Address</th>
-                                            <th>Operational Status</th>
+                                            <th class="sorting" ng-click="orderByField='locationName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'locationName') && !reverseSort, 'sorting_desc': (orderByField == 'locationName') && reverseSort}">Location Name</th>
+                                            <th class="sorting" ng-click="orderByField='locationCode'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'locationCode') && !reverseSort, 'sorting_desc': (orderByField == 'locationCode') && reverseSort}">Location Code</th>
+                                            <th class="sorting" ng-click="orderByField='locationAddress'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'locationAddress') && !reverseSort, 'sorting_desc': (orderByField == 'locationAddress') && reverseSort}">Address</th>
+                                            <th class="sorting" ng-click="orderByField='operationalStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'operationalStatus') && !reverseSort, 'sorting_desc': (orderByField == 'operationalStatus') && reverseSort}">Operational Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="location in (locationList | orderBy:sortByKey:sortReverse | filter:baySearchKey).slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                                        <tr ng-repeat="location in (locationList | orderBy: orderByField: reverseSort | search:locationsSearchKey:'locations').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
                                             <td class="center">{{location.locationName}}</td>
                                             <td class="center">{{location.locationCode}}</td>
                                             <td class="center">{{location.locationAddress}}</td>
@@ -104,8 +115,11 @@
                                 </table>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <p style="margin-top: 7px;">Showing {{((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage >
-                                            totalItems)? totalItems : currentPage * itemsPerPage}} 0f {{totalItems}} entries</p>
+                                        <p style="margin-top: 7px;">Showing {{((locationList | search:locationsSearchKey:'locations').length == 0 )?
+                                            0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((locationList
+                                            | search: locationsSearchKey: 'locations').length))? ((locationList | search:
+                                            locationsSearchKey: 'locations').length) : currentPage * itemsPerPage}} 0f {{(locationList
+                                            | search: locationsSearchKey: 'locations').length }} entries <span ng-show="locationsSearchKey.length > 0">(filtered from {{locationList.length}} total entries)</span></p>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
                                         <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage"

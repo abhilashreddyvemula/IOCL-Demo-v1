@@ -14,7 +14,7 @@ angular.module('myApp.dashboard')
 
         $scope.addClicked = false;
 
-        $scope.sortReverse = 'bayId';
+        $scope.orderByField = 'bayId';
         $scope.dropDownValues = { 'bayStatus': [], 'bayTypes': [] }
 
         $scope.isAddAvailable = function(){
@@ -102,15 +102,15 @@ angular.module('myApp.dashboard')
 
         }
 
-        $scope.sort = function(key) {
-            //console.log(key);
-            if ($scope.sortByKey === key) {
-                $scope.sortReverse = !$scope.sortReverse;
-            } else {
-                $scope.sortByKey = key;
-                $scope.sortReverse = false;
-            }
-        }
+        // $scope.sort = function(key) {
+        //     //console.log(key);
+        //     if ($scope.sortByKey === key) {
+        //         $scope.sortReverse = !$scope.sortReverse;
+        //     } else {
+        //         $scope.sortByKey = key;
+        //         $scope.sortReverse = false;
+        //     }
+        // }
 
         $scope.loadBayList();
         $scope.loadDropdownsData();
