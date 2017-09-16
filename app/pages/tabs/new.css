@@ -13,3 +13,10 @@
 .errorFlaglogin {
     text-align: center;
 }
+
+.seePwd {
+    position: absolute;
+    top: 50%;
+    /* float: right; */
+    left: 90%;
+}

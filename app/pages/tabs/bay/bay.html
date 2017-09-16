@@ -8,7 +8,10 @@
                     <h2> <i class="fa fa-tint" aria-hidden="true"> </i><span></span><strong> Add  Bay</strong></h2>
                     <ul class="buttons">
                         <li>
-                            <button class="submit" type="submit" ng-click="addClicked;saveBay(newBay);" ng-disabled="myForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                            <button class="submit hoverMsg" type="submit" ng-click="addClicked;saveBay(newBay);" ng-disabled="myForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span>
+                           </button>
+                            <span ng-if="myForm.$invalid" class="tooltiptext">Please fill all fields</span>
+
                         </li>
                         <li>
                             <button class="cancel" type="button" ng-click="onCancel()"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
@@ -40,8 +43,7 @@
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group ">
                                         <span class="mandatory-fields"> <label>Bay Name </label>*</span>
-                                        <input class="form-control" ng-model="newBay.bayName" name="bayName" value="" size="35" data-error="Required" required=""
-                                            type="text">
+                                        <input class="form-control" ng-model="newBay.bayName" name="bayName" value="" size="35" data-error="Required" required="" type="text">
                                         <span ng-show="myForm.bayName.$touched && myForm.bayName.$invalid" class="input-field-errors">Bay name is required.</span>
                                         <span ng-if="errorMessageBayName" class="input-field-errors">Bay name already exist!</span>
                                     </div>
@@ -55,7 +57,7 @@
                                     <div class="form-group ">
                                         <span class="mandatory-fields">   <label>Bay Number </label>*</span>
                                         <!--<input class="form-control " name="" value="" size="35" data-error="Required" required="" type="text">-->
-                                        <input class="form-control" ng-model="newBay.bayNum" name="bayNum" value="" maxlength="2" size="35" data-error="Required" required="" type="text" ng-pattern=/^[0-9]{1}$/>
+                                        <input class="form-control" ng-model="newBay.bayNum" name="bayNum" value="" maxlength="2" size="35" data-error="Required" required="" type="text" ng-pattern=/^[0-9]*$/>
                                         <span ng-show="myForm.bayNum.$touched && myForm.bayNum.$invalid" class="input-field-errors">Bay number is required(0 - 99).</span>
                                         <span ng-if="errorMessageBayNum" class="input-field-errors">Bay number already exist!</span>
                                     </div>
@@ -63,8 +65,7 @@
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group lname">
                                         <span class="mandatory-fields">   <label>Bay Type </label>*</span>
-                                        <select name="bayType" ng-model="newBay.bayType" ng-options="item for item in dropDownValues.bayTypes"
-                                            class="form-control" required>
+                                        <select name="bayType" ng-model="newBay.bayType" ng-options="item for item in dropDownValues.bayTypes" class="form-control" required>
                                             <option value="">Select </option>
                                         </select>
                                         <span ng-show="myForm.bayType.$touched && myForm.bayType.$invalid" class="input-field-errors">Bay type is required.</span>
@@ -77,8 +78,7 @@
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group lname">
                                         <span class="mandatory-fields">  <label>Functional Status </label>*</span>
-                                        <select name="bayStatus" ng-model="newBay.functionalStatus" ng-options="item for item in dropDownValues.bayStatus"
-                                            class="form-control" required>
+                                        <select name="bayStatus" ng-model="newBay.functionalStatus" ng-options="item for item in dropDownValues.bayStatus" class="form-control" required>
                                             <option value="">Select </option>
                                         </select>
                                         <span ng-show="myForm.bayStatus.$touched && myForm.bayStatus.$invalid" class="input-field-errors">Functional status is required.</span>
@@ -133,14 +133,11 @@
                                 </table>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <p style="margin-top: 7px;">Showing {{((bayItems | search:baySearchKey:'bay').length == 0 )? 0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage >
-                                            ((bayItems | search:baySearchKey:'bay').length))? ((bayItems | search:baySearchKey:'bay').length)
-                                            : currentPage * itemsPerPage}} 0f {{(bayItems | search:baySearchKey:'bay').length }}
-                                            entries <span ng-show="baySearchKey.length > 0">(filtered from {{bayItems.length}} total entries)</span></p>
+                                        <p style="margin-top: 7px;">Showing {{((bayItems | search:baySearchKey:'bay').length == 0 )? 0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((bayItems | search:baySearchKey:'bay').length))? ((bayItems | search:baySearchKey:'bay').length)
+                                            : currentPage * itemsPerPage}} 0f {{(bayItems | search:baySearchKey:'bay').length }} entries <span ng-show="baySearchKey.length > 0">(filtered from {{bayItems.length}} total entries)</span></p>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
-                                        <ul uib-pagination total-items="(bayItems | search:baySearchKey:'bay').length" ng-model="currentPage" class="pagination-sm pagination"
-                                            items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
+                                        <ul uib-pagination total-items="(bayItems | search:baySearchKey:'bay').length" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
                                     </div>
                                 </div>
                             </div>

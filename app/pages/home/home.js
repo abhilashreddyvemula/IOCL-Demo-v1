@@ -12,6 +12,8 @@ angular.module('myApp.home', ['ngRoute'])
 .controller('HomeCtrl', ['$scope', '$location', 'utility', 'loginService', 'LoaderService', function($scope, $location, utility, loginService, loader) {
     $scope.user = { 'name': '', 'password': '' };
     $scope.errorFlag = false;
+    $scope.inActiveFlag = false;
+    $scope.inValidFlag = false;
     $scope.submit = function(user) {
         console.log(user);
         loader.show();
@@ -24,7 +26,9 @@ angular.module('myApp.home', ['ngRoute'])
                     $location.path('dashboard');
                     loader.hide();
                 }
-                $scope.errorFlag = false;
+                $scope.inActiveFlag = false;
+                $scope.inValidFlag = false;
+                //$scope.errorFlag = false;
                 //if(user.name === 'superadmin' && user.password === 'superadmin')
 
                 //else
@@ -33,10 +37,16 @@ angular.module('myApp.home', ['ngRoute'])
             function(error) {
                 console.log("login error");
                 console.log(error.data);
-                if (error.data != null);
-                $scope.errorFlag = true;
-                loader.hide();
 
+                if (error.data['errorMessage'] == "User Locked or In Active. Please contact administrator") {
+                    $scope.inActiveFlag = true;
+                    $scope.inValidFlag = false;
+
+                } else if (error.data['errorMessage'] == "Please give correct password") {
+                    $scope.inValidFlag = true;
+                    $scope.inActiveFlag = false;
+                }
+                loader.hide();
             });
 
     }
