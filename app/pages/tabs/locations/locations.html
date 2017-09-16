@@ -6,7 +6,8 @@
                     <h2> <i class="fa fa-map-marker"> </i><span></span><strong> Add  Location</strong></h2>
                     <ul class="buttons">
                         <li>
-                            <button class="submit" type="button" ng-click="addClicked;saveLocation(newLocation)" ng-disabled="locationsForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                            <button class="submit hoverMsg" type="button" ng-click="addClicked;saveLocation(newLocation)" ng-disabled="locationsForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                            <span ng-if="locationsForm.$invalid" class="tooltiptext">Please fill all fields</span>
                         </li>
                         <li>
                             <button class="cancel" type="button" ng-click="onCancel()"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
@@ -32,22 +33,23 @@
         <div class="Locations">
             <div class="container">
                 <div ng-show="addClicked" id="addLocation">
+                    <div ng-show="addClicked" class="row" style="padding-left: 15px;"> <span class="mandatory-fields"> *</span> Fields are mandatory.</div>
                     <div class="row">
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ltn">
                                 <div class="form-group ">
-                                    <label>Location Name </label>
-                                    <input class="form-control " name="locationName" ng-model="newLocation.locationName" value="" size="35" data-error="Required"
-                                        required="" type="text">
+                                    <!-- <label>Location Name </label> -->
+                                    <span class="mandatory-fields"> <label>Location Name</label>*</span>
+                                    <input class="form-control " name="locationName" ng-model="newLocation.locationName" value="" size="35" data-error="Required" required="" type="text">
                                     <span ng-show="locationsForm.locationName.$touched && locationsForm.locationName.$invalid" class="input-field-errors">Location name is required.</span>
                                     <span ng-if="errorMessageLocationName" class="input-field-errors">Location name Already Exist!</span>
                                 </div>
                             </div>
                             <div class="col-xs-12  col-sm-6 col-md-6 col-lg-6 ltn">
                                 <div class="form-group ">
-                                    <label>Location Code </label>
-                                    <input class="form-control " name="locationCode" ng-model="newLocation.locationCode" value="" size="35" data-error="Required"
-                                        required="" type="text">
+                                    <!-- <label>Location Code </label> -->
+                                    <span class="mandatory-fields"> <label>Location Code</label>*</span>
+                                    <input class="form-control " name="locationCode" ng-model="newLocation.locationCode" value="" size="35" data-error="Required" required="" type="text">
                                     <span ng-show="locationsForm.locationCode.$touched && locationsForm.locationCode.$invalid" class="input-field-errors">Location code is required.</span>
                                     <span ng-if="errorMessagelocationCode" class="input-field-errors">Location code  Already Exist!</span>
                                 </div>
@@ -55,17 +57,17 @@
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group ">
-                                <label>Address</label>
-                                <input class="form-control " name="address" ng-model="newLocation.locationAddress" value="" size="35" data-error="Required"
-                                    required="" type="text">
+                                <!-- <label>Address</label> -->
+                                <span class="mandatory-fields"> <label>Address </label>*</span>
+                                <input class="form-control " name="address" ng-model="newLocation.locationAddress" value="" size="35" data-error="Required" required="" type="text">
                                 <span ng-show="locationsForm.address.$touched && locationsForm.address.$invalid" class="input-field-errors">Location address is required.</span>
                             </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group lname">
-                                <label>Operational Status </label>
-                                <select name="status" ng-model="newLocation.operationalStatus" class="form-control"
-                                    required ng-options="item for item in dropDownValues.status">
+                                <!-- <label>Operational Status </label> -->
+                                <span class="mandatory-fields"> <label>Operational Status </label>*</span>
+                                <select name="status" ng-model="newLocation.operationalStatus" class="form-control" required ng-options="item for item in dropDownValues.status">
                                         <option value="">Select</option>
                                     </select>
                                 <span ng-show="locationsForm.status.$touched && locationsForm.status.$invalid" class="input-field-errors">Location status is required.</span>
@@ -115,15 +117,11 @@
                                 </table>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <p style="margin-top: 7px;">Showing {{((locationList | search:locationsSearchKey:'locations').length == 0 )?
-                                            0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((locationList
-                                            | search: locationsSearchKey: 'locations').length))? ((locationList | search:
-                                            locationsSearchKey: 'locations').length) : currentPage * itemsPerPage}} 0f {{(locationList
-                                            | search: locationsSearchKey: 'locations').length }} entries <span ng-show="locationsSearchKey.length > 0">(filtered from {{locationList.length}} total entries)</span></p>
+                                        <p style="margin-top: 7px;">Showing {{((locationList | search:locationsSearchKey:'locations').length == 0 )? 0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((locationList | search: locationsSearchKey: 'locations').length))?
+                                            ((locationList | search: locationsSearchKey: 'locations').length) : currentPage * itemsPerPage}} 0f {{(locationList | search: locationsSearchKey: 'locations').length }} entries <span ng-show="locationsSearchKey.length > 0">(filtered from {{locationList.length}} total entries)</span></p>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
-                                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage"
-                                            boundary-link-numbers="true" rotate="false"></ul>
+                                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
                                     </div>
                                 </div>
                             </div>

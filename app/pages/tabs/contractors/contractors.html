@@ -6,7 +6,8 @@
                     <h2> <i class="fa fa-user-secret"> </i><span></span><strong>Add Contractor</strong></h2>
                     <ul class="buttons">
                         <li>
-                            <button class="submit" type="button" ng-click="addClicked;saveContractor(newContractor)" ng-disabled="contractorForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                            <button class="submit hoverMsg" type="button" ng-click="addClicked;saveContractor(newContractor)" ng-disabled="contractorForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                            <span ng-if="contractorForm.$invalid" class="tooltiptext">Please fill all fields</span>
                         </li>
                         <li>
                             <button class="cancel" type="button" ng-click="onCancel()"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
@@ -35,14 +36,15 @@
         <div class="Contractors">
             <div class="container">
                 <div ng-show="addClicked" id="addContractor">
+                    <div ng-show="addClicked" class="row" style="padding-left: 15px;"> <span class="mandatory-fields"> *</span> Fields are mandatory.</div>
                     <div class="row">
                         <div class="col-xs-12  col-sm-12 col-md-6 col-lg-6">
                             <div class="row  ">
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group ">
-                                        <label>Contractor Name </label>
-                                        <input class="form-control" ng-model="newContractor.contractorName" name="contractorName" value="" size="35" data-error="Required"
-                                            required="" type="text">
+                                        <!-- <label>Contractor Name </label> -->
+                                        <span class="mandatory-fields"> <label>Contractor Name</label>*</span>
+                                        <input class="form-control" ng-model="newContractor.contractorName" name="contractorName" value="" size="35" data-error="Required" required="" type="text">
 
                                         <span ng-show="contractorForm.contractorName.$touched && contractorForm.contractorName.$invalid" class="input-field-errors">Contractor name is required.</span>
                                         <span ng-if="errorMessageContractorName" class="input-field-errors">Contractor with contractor name Already Exist!</span></div>
@@ -53,9 +55,9 @@
                             <div class="row  ">
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group ">
-                                        <label>Contractor Type </label>
-                                        <select name="contractorType" ng-init="newContractor.contractorType = dropDownValues.Types[0]" ng-model="newContractor.contractorType"
-                                            class="form-control" required ng-options="item for item in dropDownValues.Types">
+                                        <!-- <label>Contractor Type </label> -->
+                                        <span class="mandatory-fields"> <label>Contractor Type </label>*</span>
+                                        <select name="contractorType" ng-init="newContractor.contractorType = dropDownValues.Types[0]" ng-model="newContractor.contractorType" class="form-control" required ng-options="item for item in dropDownValues.Types">
                                         <option value="">Select</option>
                                     </select>
                                         <span ng-show="contractorForm.contractorType.$touched && contractorForm.contractorType.$invalid" class="input-field-errors">Contractor Type is required.</span>
@@ -68,14 +70,12 @@
                             <div class="row  ">
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group ">
-                                        <label>Operational Status </label>
-                                        <select name="contractorOperationalStatus"
-                                            ng-model="newContractor.contractorOperationalStatus" class="form-control" required
-                                            ng-options="item for item in dropDownValues.ContractorStatus">
+                                        <!-- <label>Operational Status </label> -->
+                                        <span class="mandatory-fields"> <label>Operational Status </label>*</span>
+                                        <select name="contractorOperationalStatus" ng-model="newContractor.contractorOperationalStatus" class="form-control" required ng-options="item for item in dropDownValues.ContractorStatus">
                                         <option value="">Select</option>
                                     </select>
-                                        <span ng-show="contractorForm.contractorOperationalStatus.$touched && contractorForm.contractorOperationalStatus.$invalid"
-                                            class="input-field-errors">Status is required.</span>
+                                        <span ng-show="contractorForm.contractorOperationalStatus.$touched && contractorForm.contractorOperationalStatus.$invalid" class="input-field-errors">Status is required.</span>
                                     </div>
                                 </div>
                             </div>
@@ -84,111 +84,37 @@
                     <div class="row">
                         <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
                             <div class="form-group address">
-                                <label>Address <span class="req">*</span></label>
-                                <input class="form-control address" ng-model="newContractor.contractorAddress" size="64" name="contractorAddress" value=""
-                                    data-error="Required" required="" type="text">
+                                <!-- <label>Address <span class="req">*</span></label> -->
+                                <span class="mandatory-fields"> <label>Address</label>*</span>
+                                <input class="form-control address" ng-model="newContractor.contractorAddress" size="64" name="contractorAddress" value="" data-error="Required" required="" type="text">
                                 <span ng-show="contractorForm.contractorAddress.$touched && contractorForm.contractorAddress.$invalid" class="input-field-errors">Contractor address is required.</span>
                             </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
                             <div class="form-group city">
-                                <label>City <span class="req">*</span></label>
-                                <input class="form-control city" ng-model="newContractor.contractorCity" size="32" name="contractorCity" value="" data-error="Required"
-                                    required="" type="text">
+                                <!-- <label>City <span class="req">*</span></label> -->
+                                <span class="mandatory-fields"> <label>City</label>*</span>
+                                <input class="form-control city" ng-model="newContractor.contractorCity" size="32" name="contractorCity" value="" data-error="Required" required="" type="text">
 
                                 <span ng-show="contractorForm.contractorCity.$touched && contractorForm.contractorCity.$invalid" class="input-field-errors">Contractor City is required.</span>
                             </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
                             <div class="form-group state">
-                                <label>State <span class="req">*</span></label>
-                                <!-- <select name="contractorState" class="form-control state" ng-model="newContractor.contractorState" required>
-                                    <option value="" selected="">Select </option>
-                                    <option value="AB">Alberta</option>
-                                    <option value="AK">Alaska</option>
-                                    <option value="AL">Alabama</option>
-                                    <option value="AR">Arkansas</option>
-                                    <option value="AS">American Samoa</option>
-                                    <option value="AZ">Arizona</option>
-                                    <option value="BC">British Columbia</option>
-                                    <option value="CA">California</option>
-                                    <option value="CO">Colorado</option>
-                                    <option value="CT">Connecticut</option>
-                                    <option value="DC">District of Columbia</option>
-                                    <option value="DE">Delaware</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="FM">Federated States of Micronesia</option>
-                                    <option value="GA">Georgia</option>
-                                    <option value="GU">Guam</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="IA">Iowa</option>
-                                    <option value="ID">Idaho</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="IN">Indiana</option>
-                                    <option value="KS">Kansas</option>
-                                    <option value="KY">Kentucky</option>
-                                    <option value="LA">Louisiana</option>
-                                    <option value="MA">Massachusetts</option>
-                                    <option value="MB">Manitoba</option>
-                                    <option value="MD">Maryland</option>
-                                    <option value="ME">Maine</option>
-                                    <option value="MH">Marshall Islands</option>
-                                    <option value="MI">Michigan</option>
-                                    <option value="MN">Minnesota</option>
-                                    <option value="MO">Missouri</option>
-                                    <option value="MP">Northern Mariana Islands</option>
-                                    <option value="MS">Mississippi</option>
-                                    <option value="MT">Montana</option>
-                                    <option value="NB">New Brunswick</option>
-                                    <option value="NC">North Carolina</option>
-                                    <option value="ND">North Dakota</option>
-                                    <option value="NE">Nebraska</option>
-                                    <option value="NH">New hampshire</option>
-                                    <option value="NJ">New Jersey</option>
-                                    <option value="NL">Newfoundland and Labrador</option>
-                                    <option value="NM">New Mexico</option>
-                                    <option value="NS">Nova Scotia</option>
-                                    <option value="NT">Northwest Territories</option>
-                                    <option value="NU">Nunavut</option>
-                                    <option value="NV">Nevada</option>
-                                    <option value="NY" selected="">New York</option>
-                                    <option value="OH">Ohio</option>
-                                    <option value="OK">Oklahoma</option>
-                                    <option value="ON">Ontario</option>
-                                    <option value="OR">Oregon</option>
-                                    <option value="PA">Pennsylvania</option>
-                                    <option value="PE">Prince Edward Island</option>
-                                    <option value="PR">Puerto Rico</option>
-                                    <option value="PW">Palau</option>
-                                    <option value="QC">Quebec</option>
-                                    <option value="RI">Rhode Island</option>
-                                    <option value="SC">South Carolina</option>
-                                    <option value="SD">South Dakota</option>
-                                    <option value="SK">Saskatchewan</option>
-                                    <option value="TN">Tennessee</option>
-                                    <option value="TX">Texas</option>
-                                    <option value="UT">Utah</option>
-                                    <option value="VA">Virginia</option>
-                                    <option value="VI">Virgin Islands</option>
-                                    <option value="VT">Vermont</option>
-                                    <option value="WA">Washington</option>
-                                    <option value="WI">Wisconsin</option>
-                                    <option value="WV">West Virginia</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="YT">Yukon</option>
-                            </select> -->
-                                <select name="contractorState" ng-init="newContractor.contractorState = dropDownValues.States[0]" ng-model="newContractor.contractorState"
-                                    class="form-control" required ng-options="item for item in dropDownValues.States">
+                                <!-- <label>State <span class="req">*</span></label> -->
+                                <span class="mandatory-fields"> <label>State</label>*</span>
+
+                                <select name="contractorState" ng-init="newContractor.contractorState = dropDownValues.States[0]" ng-model="newContractor.contractorState" class="form-control" required ng-options="item for item in dropDownValues.States">
                                         <option value="">Select</option>
                                     </select>
-                                <span ng-show="contractorForm.contractorState.$touched && contractorForm.contractorState.$invalid" class="input-field-errors">Contractor State is required.</span>                                </div>
+                                <span ng-show="contractorForm.contractorState.$touched && contractorForm.contractorState.$invalid" class="input-field-errors">Contractor State is required.</span> </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
                             <div class="form-group zip">
-                                <label>Zip Code <span class="req">*</span></label>
-                                <input class="form-control zip" ng-model="newContractor.contractorPinCode" size="5" name="contractorPinCode" value="" type="text"
-                                    required ng-pattern="/^[0-9]{6}$/ " maxlength="6">
-                                <span ng-show="contractorForm.contractorPinCode.$touched && contractorForm.contractorPinCode.$invalid" class="input-field-errors">Please enter 6 digit  pincode</span>                                </div>
+                                <!-- <label>Zip Code <span class="req">*</span></label> -->
+                                <span class="mandatory-fields"> <label>Zip Code </label>*</span>
+                                <input class="form-control zip" ng-model="newContractor.contractorPinCode" size="5" name="contractorPinCode" value="" type="text" required ng-pattern="/^[0-9]{6}$/ " maxlength="6">
+                                <span ng-show="contractorForm.contractorPinCode.$touched && contractorForm.contractorPinCode.$invalid" class="input-field-errors">Please enter 6 digit  pincode</span> </div>
                         </div>
                     </div>
                 </div>
@@ -234,21 +160,17 @@
                                             <td class="center">{{item.contractorState}}</td>
                                             <td class="center">{{item.contractorPinCode}}</td>
                                             <td class="center">{{item.contractorOperationalStatus}}</td>
-                                            <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".con1"
-                                                    title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
+                                            <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".con1" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <p style="margin-top: 7px;">Showing {{((contractorList | search:contractorsSearchKey:'contractors').length == 0 )? 0:((currentPage-1)
-                                            * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((contractorList | search:contractorsSearchKey:'contractors').length))?
-                                            ((contractorList | search:contractorsSearchKey:'contractors').length) : currentPage * itemsPerPage}}
-                                            0f {{(contractorList | search:contractorsSearchKey:'contractors').length }} entries <span ng-show="contractorsSearchKey.length > 0">(filtered from {{contractorList.length}} total entries)</span></p>
+                                        <p style="margin-top: 7px;">Showing {{((contractorList | search:contractorsSearchKey:'contractors').length == 0 )? 0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((contractorList | search:contractorsSearchKey:'contractors').length))?
+                                            ((contractorList | search:contractorsSearchKey:'contractors').length) : currentPage * itemsPerPage}} 0f {{(contractorList | search:contractorsSearchKey:'contractors').length }} entries <span ng-show="contractorsSearchKey.length > 0">(filtered from {{contractorList.length}} total entries)</span></p>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
-                                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage"
-                                            boundary-link-numbers="true" rotate="false"></ul>
+                                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
                                     </div>
                                 </div>
                             </div>

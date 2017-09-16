@@ -12,6 +12,8 @@ angular.module('myApp.home', ['ngRoute'])
 .controller('HomeCtrl', ['$scope', '$location', 'utility', 'loginService', function($scope, $location, utility, loginService) {
     $scope.user = { 'name': '', 'password': '' };
     $scope.errorFlag = false;
+    $scope.inActiveFlag = false;
+    $scope.inValidFlag = false;
     $scope.submit = function(user) {
         console.log(user);
         utility.setCredentials(user);
@@ -22,7 +24,9 @@ angular.module('myApp.home', ['ngRoute'])
                     utility.setUserRole(response.data.userRole);
                     $location.path('dashboard');
                 }
-                $scope.errorFlag = false;
+                $scope.inActiveFlag = false;
+                $scope.inValidFlag = false;
+                //$scope.errorFlag = false;
                 //if(user.name === 'superadmin' && user.password === 'superadmin')
 
                 //else
@@ -31,8 +35,17 @@ angular.module('myApp.home', ['ngRoute'])
             function(error) {
                 console.log("login error");
                 console.log(error.data);
-                if (error.data != null);
-                $scope.errorFlag = true;
+
+                if (error.data['errorMessage'] == "User Locked or In Active. Please contact administrator") {
+                    $scope.inActiveFlag = true;
+                    $scope.inValidFlag = false;
+
+                } else if (error.data['errorMessage'] == "Please give correct password") {
+                    $scope.inValidFlag = true;
+                    $scope.inActiveFlag = false;
+                }
+
+
 
             });
 
