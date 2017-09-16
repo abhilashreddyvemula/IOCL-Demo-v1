@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('LocationsController', ['$scope', 'utility', 'LocationService', function ($scope, utility, locationService) {
+    .controller('LocationsController', ['$scope', 'utility', 'LocationService', 'LoaderService', function ($scope, utility, locationService, loader) {
 
         $scope.userRole = utility.getUserRole();
 
@@ -33,10 +33,12 @@ angular.module('myApp.dashboard')
         }
 
         $scope.loadAllLocations = function () {
+            loader.show();
             locationService.getLocationsList().then(function (response) {
                 console.log('locationList',response.data);
                 $scope.locationList = response.data;
                 $scope.totalItems = $scope.locationList.length;
+                loader.hide();
             }, function (error) { });
         }
 
@@ -58,27 +60,24 @@ angular.module('myApp.dashboard')
             $scope.addClicked = false;
         }
         $scope.saveLocation = function (location) {
+            loader.show();
             var body = { "locationName": location.locationName, "locationCode": location.locationCode, "locationAddress": location.locationAddress, "operationalStatus": location.operationalStatus };
             locationService.addLocation(body).then(function (success) {
                 $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "operationalStatus": "" };
                 $scope.loadAllLocations();
                 $scope.addClicked = false;
+                loader.hide();
             }, function (error) {
                 $scope.addClicked = true;
-                console.log(error);
-                console.log(error.data);
                 $scope.errorMessage = error.data.errorMessage;
                 if ($scope.errorMessage == "Location  name Already Exist!") {
                     $scope.errorMessageLocationName = true;
 
                 }
-
                 if ($scope.errorMessage !== null) {
                     $scope.formInvalid = true;
-
                 }
-                console.log($scope.errorMessage);
-
+                loader.hide();
                 return;
             });
         }

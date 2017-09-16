@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('QuantController', ['$scope', 'utility', 'QuantityService', function ($scope, utility, quantityService) {
+    .controller('QuantController', ['$scope', 'utility', 'QuantityService', 'LoaderService', function ($scope, utility, quantityService, loader) {
 
         //'QuantityService', 
         //quantityService
@@ -35,10 +35,12 @@ angular.module('myApp.dashboard')
 
 
         $scope.loadAllQuantities = function () {
+            loader.show();
             quantityService.getQuantityList().then(function (response) {
                 console.log('quantityList', response.data);
                 $scope.quantityList = response.data;
                 $scope.totalItems = $scope.quantityList.length;
+                loader.hide();
             }, function (error) { });
         }
 
@@ -46,7 +48,6 @@ angular.module('myApp.dashboard')
             // alert("load user static data")
             quantityService.getStaticQuantityData().then(function(response) {
                 $scope.dropDownValues.status = response.data.data.Status;
-
                 console.log(response.data);
             }, function(error) {});
         }
@@ -63,15 +64,15 @@ angular.module('myApp.dashboard')
 
         }
         $scope.saveQuantity = function (newQuantity) {
+            loader.show();
             var body = { "quantityName": newQuantity.quantityName, "quantity": newQuantity.quantity, "quantityStatus": newQuantity.operationalStatus };
             quantityService.addQuantity(body).then(function (success) {
                 $scope.newQuantity = { "quantityName": "", "quantity": "", "operationalStatus": "" };
                 $scope.loadAllQuantities();
                 $scope.addClicked = false;
+                loader.hide();
             }, function (error) {
                 $scope.addClicked = true;
-                console.log(error);
-                console.log(error.data);
                 $scope.errorMessage = error.data.errorMessage;
                 if ($scope.errorMessage == "Quantity name Already Exist!") {
                     $scope.errorMessageQuantityName = true;
@@ -82,8 +83,7 @@ angular.module('myApp.dashboard')
                     $scope.formInvalid = true;
 
                 }
-                console.log($scope.errorMessage);
-
+                loader.hide();
                 return;
             });
         }

@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('UsersController', ['$scope', 'utility', 'UsersService', function ($scope, utility, usersService) {
+    .controller('UsersController', ['$scope', 'utility', 'UsersService', 'LoaderService', function ($scope, utility, usersService, loader) {
         $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
         $scope.currentPage = 1;
@@ -46,10 +46,14 @@ angular.module('myApp.dashboard')
         };
 
         $scope.loadAllUsers = function () {
+            loader.show();
             usersService.getUsersList().then(function (response) {
                 $scope.usersList = response.data;
                 $scope.totalItems = $scope.usersList.length;
-            }, function (error) { });
+                loader.hide();
+            }, function (error) {
+                loader.hide();
+             });
         }
 
         $scope.loadDropdownsData = function () {
@@ -63,13 +67,9 @@ angular.module('myApp.dashboard')
 
 
         $scope.addNewUser = function () {
-
             $scope.addClicked = true;
             $scope.errorMessageUserName = false;
             $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": "", "userStatus": "" };
-
-
-
         }
 
         $scope.onCancel = function () {
@@ -84,6 +84,7 @@ angular.module('myApp.dashboard')
                     }
         }
         $scope.saveUser = function (user) {
+            loader.show();
             var userType = [];
             userType.push(user.userType);
             var body = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": user.userDOB, "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": userType, "userStatus": user.userStatus };
@@ -91,11 +92,10 @@ angular.module('myApp.dashboard')
                 $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": "", "userStatus": "" };
                 $scope.loadAllUsers();
                 $scope.addClicked = false;
+                loader.hide();
             }, function (error) {
 
                 $scope.addClicked = true;
-                console.log(error);
-                console.log(error.data);
                 $scope.errorMessage = error.data.errorMessage;
                 if ($scope.errorMessage == "User Already Exist!!") {
                     $scope.errorMessageUserName = true;
@@ -106,7 +106,7 @@ angular.module('myApp.dashboard')
                     $scope.formInvalid = true;
 
                 }
-                console.log($scope.errorMessage);
+                loader.hide();
 
                 return;
             });

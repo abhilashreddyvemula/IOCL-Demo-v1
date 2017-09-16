@@ -7,34 +7,53 @@
 <!--<![endif]-->
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Indian Oil</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="css/font-awesome.css">
-    <link rel="stylesheet" href="css/bootstrap-grid.css">
-    <link rel="stylesheet" href="css/bootstrap-reboot.css">
-    <link rel="stylesheet" href="bower_components/angular-datepicker/angular-date-picker.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Indian Oil</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="css/font-awesome.css">
+  <link rel="stylesheet" href="css/bootstrap-grid.css">
+  <link rel="stylesheet" href="css/bootstrap-reboot.css">
+  <link rel="stylesheet" href="bower_components/angular-datepicker/angular-date-picker.css">
 
-    <link rel="stylesheet" href="app.css">
-    <link rel="stylesheet" href="pages/home/home.css">
-    <link rel="stylesheet" href="pages/dashboard/dashboard.css">
-    <link rel="stylesheet" href="pages/tabs/new.css">
-    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="pages/home/home.css">
+  <link rel="stylesheet" href="pages/dashboard/dashboard.css">
+  <link rel="stylesheet" href="pages/tabs/new.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
 
-    <!--[if lt IE 7]>
+  <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
   <div ng-view></div>
-  <div id="loader-div" class="loader-div"></div>
+  <div id="loader-div" class="loader-div">
+    <div class="outer">
+      <div class="middle">
+        <div class="lds-css ng-scope" style="">
+            <div id="fountainG">
+                <div id="fountainG_1" class="fountainG"></div>
+                <div id="fountainG_2" class="fountainG"></div>
+                <div id="fountainG_3" class="fountainG"></div>
+                <div id="fountainG_4" class="fountainG"></div>
+                <div id="fountainG_5" class="fountainG"></div>
+                <div id="fountainG_6" class="fountainG"></div>
+                <div id="fountainG_7" class="fountainG"></div>
+                <div id="fountainG_8" class="fountainG"></div>
+              </div>
+              
+
+        </div>
+      </div>
+
+    </div>
 
 
     <!-- In production use:
@@ -54,6 +73,7 @@
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
     <script src="bower_components/angular-datepicker/angular-date-picker.js"></script>
     <script src="app.js"></script>
+    <script src="js/services/loader-service.js"></script>
     <script src="js/services/utility.js"></script>
     <script src="js/services/services.js"></script>
     <script src="js/filters/filters.js"></script>
@@ -64,7 +84,7 @@
     <script src="pages/tabs/contractors/contractors.js"></script>
     <script src="pages/tabs/locations/locations.js"></script>
     <script src="pages/tabs/quantity/quantity.js"></script>
-  	<script src="pages/tabs/reports/reports.js"></script>
+    <script src="pages/tabs/reports/reports.js"></script>
 
 
     <script src="components/version/version.js"></script>

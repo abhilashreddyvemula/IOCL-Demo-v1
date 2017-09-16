@@ -9,11 +9,12 @@ angular.module('myApp.home', ['ngRoute'])
     });
 }])
 
-.controller('HomeCtrl', ['$scope', '$location', 'utility', 'loginService', function($scope, $location, utility, loginService) {
+.controller('HomeCtrl', ['$scope', '$location', 'utility', 'loginService', 'LoaderService', function($scope, $location, utility, loginService, loader) {
     $scope.user = { 'name': '', 'password': '' };
     $scope.errorFlag = false;
     $scope.submit = function(user) {
         console.log(user);
+        loader.show();
         utility.setCredentials(user);
         loginService.userValidation(user).then(function(response) {
                 console.log(response);
@@ -21,6 +22,7 @@ angular.module('myApp.home', ['ngRoute'])
                 if (response.status === 200) {
                     utility.setUserRole(response.data.userRole);
                     $location.path('dashboard');
+                    loader.hide();
                 }
                 $scope.errorFlag = false;
                 //if(user.name === 'superadmin' && user.password === 'superadmin')
@@ -33,6 +35,7 @@ angular.module('myApp.home', ['ngRoute'])
                 console.log(error.data);
                 if (error.data != null);
                 $scope.errorFlag = true;
+                loader.hide();
 
             });
 

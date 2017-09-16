@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('ContractorsController', ['$scope', 'utility', 'ContractorsService', function($scope, utility, contractorsService) {
+    .controller('ContractorsController', ['$scope', 'utility', 'ContractorsService', 'LoaderService', function($scope, utility, contractorsService, loader) {
         $scope.userRole = utility.getUserRole();
 
         $scope.viewby = 10;
@@ -30,10 +30,14 @@ angular.module('myApp.dashboard')
         }
 
         $scope.loadAllContractors = function() {
+            loader.show();
             contractorsService.getContractorsList().then(function(response) {
                 $scope.contractorList = response.data;
                 $scope.totalItems = $scope.contractorList.length;
-            }, function(error) {});
+                loader.hide();
+            }, function(error) {
+                loader.hide();
+            });
         }
 
         $scope.loadDropdownsData = function() {
@@ -47,13 +51,9 @@ angular.module('myApp.dashboard')
         }
 
         $scope.addNewContractor = function() {
-
             $scope.addClicked = true;
             $scope.errorMessageContractorName = false;
             $scope.newContractor = { "contractorName": "", "contractorType": "", "contractorState": "", "contractorPinCode": "", "contractorOperationalStatus": "", "contractorCity": "", "contractorAddress": "" };
-
-
-
         }
 
         $scope.onCancel = function() {
@@ -62,15 +62,15 @@ angular.module('myApp.dashboard')
 
         }
         $scope.saveContractor = function(contractor) {
+            loader.show();
             var body = { "contractorName": contractor.contractorName, "contractorType": contractor.contractorType, "contractorState": contractor.contractorState, "contractorPinCode": contractor.contractorPinCode, "contractorOperationalStatus": contractor.contractorOperationalStatus, "contractorCity": contractor.contractorCity, "contractorAddress": contractor.contractorAddress };
             contractorsService.addContractor(body).then(function(success) {
                 $scope.newContractor = { "contractorName": "", "contractorType": "", "contractorState": "", "contractorPinCode": "", "contractorOperationalStatus": "", "contractorCity": "", "contractorAddress": "" };
                 $scope.loadAllContractors();
                 $scope.addClicked = false;
+                loader.hide();
             }, function(error) {
                 $scope.addClicked = true;
-                console.log(error);
-                console.log(error.data);
                 $scope.errorMessage = error.data.errorMessage;
                 if ($scope.errorMessage == "Contractor with contractor name Already Exist!") {
                     $scope.errorMessageContractorName = true;
@@ -81,7 +81,7 @@ angular.module('myApp.dashboard')
                     $scope.formInvalid = true;
 
                 }
-                console.log($scope.errorMessage);
+                loader.hide();
 
                 return;
             });

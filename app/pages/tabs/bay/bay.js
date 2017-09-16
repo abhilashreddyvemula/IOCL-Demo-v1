@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('BayController', ['$scope', 'utility', 'BayService', function ($scope, utility, bayService) {
+    .controller('BayController', ['$scope', 'utility', 'BayService', 'LoaderService', function ($scope, utility, bayService, loader) {
         $scope.userRole = utility.getUserRole();
 
         $scope.bayItems = [];
@@ -17,8 +17,8 @@ angular.module('myApp.dashboard')
         $scope.orderByField = 'bayId';
         $scope.dropDownValues = { 'bayStatus': [], 'bayTypes': [] }
 
-        $scope.isAddAvailable = function(){
-            if($scope.userRole === 'Super Admin')
+        $scope.isAddAvailable = function () {
+            if ($scope.userRole === 'Super Admin')
                 return true;
             else
                 return false;
@@ -26,31 +26,34 @@ angular.module('myApp.dashboard')
         $scope.pageChanged = function () {
             console.log('Page changed to: ' + $scope.currentPage);
         };
-        $scope.setItemsPerPage = function(num) {
+        $scope.setItemsPerPage = function (num) {
             $scope.itemsPerPage = num;
             $scope.currentPage = 1; //reset to first paghe
         }
 
-        $scope.loadBayList = function() {
-            bayService.getBayList().then(function(response) {
+        $scope.loadBayList = function () {
+            loader.show();
+            bayService.getBayList().then(function (response) {
                 if (response.status == 200) {
                     $scope.bayItems = response.data;
                     $scope.totalItems = $scope.bayItems.length;
+                    loader.hide();
                 }
 
-            }, function(error) {
+            }, function (error) {
                 console.log(error);
+                loader.hide();
             });
         }
 
-        $scope.loadDropdownsData = function() {
-            bayService.getBayStaticData().then(function(response) {
+        $scope.loadDropdownsData = function () {
+            bayService.getBayStaticData().then(function (response) {
                 $scope.dropDownValues.bayStatus = response.data.data.BayStatus;
                 $scope.dropDownValues.bayTypes = response.data.data.BayTypes;
-            }, function(error) {});
+            }, function (error) { });
         }
 
-        $scope.addNewBay = function() {
+        $scope.addNewBay = function () {
 
             $scope.addClicked = true;
             $scope.errorMessageBayNum = false;
@@ -60,7 +63,7 @@ angular.module('myApp.dashboard')
 
         }
 
-        $scope.onCancel = function() {
+        $scope.onCancel = function () {
             $scope.addClicked = false;
 
 
@@ -68,19 +71,17 @@ angular.module('myApp.dashboard')
 
 
 
-        $scope.saveBay = function(bay) {
-
+        $scope.saveBay = function (bay) {
+            loader.show();
             var body = { 'bayName': bay.bayName, 'bayNum': parseInt(bay.bayNum), 'bayType': bay.bayType, 'functionalStatus': bay.functionalStatus };
-            bayService.addBay(body).then(function(success) {
-		$scope.newBay = { "bayName": "", "bayNum": null, "bayType": "", "functionalStatus": "" }
+            bayService.addBay(body).then(function (success) {
+                $scope.newBay = { "bayName": "", "bayNum": null, "bayType": "", "functionalStatus": "" }
                 $scope.addClicked = false;
                 $scope.loadBayList();
-
-            }, function(error) {
+                loader.hide();
+            }, function (error) {
 
                 $scope.addClicked = true;
-                console.log(error);
-                console.log(error.data);
                 $scope.errorMessage = error.data.errorMessage;
                 if ($scope.errorMessage == "Bay with a bay num already exist!") {
                     $scope.errorMessageBayNum = true;
@@ -94,7 +95,7 @@ angular.module('myApp.dashboard')
                     $scope.formInvalid = true;
 
                 }
-                console.log($scope.errorMessage);
+                loader.hide();
 
                 return;
             });
