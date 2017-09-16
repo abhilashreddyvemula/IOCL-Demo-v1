@@ -55,78 +55,78 @@ angular.module('myApp.dashboard')
             }, function (error) {
                 loader.hide();
             });
+        }
+        $scope.loadDropdownsData = function () {
+            //alert("load user static data")
+            usersService.getStaticUserData().then(function (response) {
+                $scope.dropDownValues.UserTypes = response.data.data.UserTypes;
+                $scope.dropDownValues.UserStatus = response.data.data.UserStatus;
+                console.log(response.data);
+            }, function (error) { });
+        }
 
-            $scope.loadDropdownsData = function () {
-                //alert("load user static data")
-                usersService.getStaticUserData().then(function (response) {
-                    $scope.dropDownValues.UserTypes = response.data.data.UserTypes;
-                    $scope.dropDownValues.UserStatus = response.data.data.UserStatus;
-                    console.log(response.data);
-                }, function (error) { });
+
+        $scope.addNewUser = function () {
+            $scope.addClicked = true;
+            $scope.errorMessageUserName = false;
+            $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": "", "userStatus": "" };
+        }
+
+        $scope.onCancel = function () {
+            $scope.addClicked = false;
+        }
+
+        $scope.showPwd = function () {
+            let obj = document.getElementById('myPassword');
+            obj.type = "text";
+        }
+        $scope.isPasswordSame = function () {
+            if ($scope.newUser.rePassword !== '' && $scope.newUser.userPassword !== '' && $scope.newUser.rePassword !== $scope.newUser.userPassword) {
+                return true;
+            } else {
+                return false;
             }
-
-
-            $scope.addNewUser = function () {
-                $scope.addClicked = true;
-                $scope.errorMessageUserName = false;
+        }
+        $scope.saveUser = function (user) {
+            loader.show();
+            var userType = [];
+            userType.push(user.userType);
+            var body = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": user.userDOB, "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": userType, "userStatus": user.userStatus };
+            usersService.addUser(body).then(function (success) {
                 $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": "", "userStatus": "" };
-            }
-
-            $scope.onCancel = function () {
+                $scope.loadAllUsers();
                 $scope.addClicked = false;
-            }
+                loader.hide();
+            }, function (error) {
 
-            $scope.showPwd = function () {
-                let obj = document.getElementById('myPassword');
-                obj.type = "text";
-            }
-            $scope.isPasswordSame = function () {
-                if ($scope.newUser.rePassword !== '' && $scope.newUser.userPassword !== '' && $scope.newUser.rePassword !== $scope.newUser.userPassword) {
-                    return true;
-                } else {
-                    return false;
+                $scope.addClicked = true;
+                $scope.errorMessage = error.data.errorMessage;
+                if ($scope.errorMessage == "User Already Exist!!") {
+                    $scope.errorMessageUserName = true;
+
                 }
-            }
-            $scope.saveUser = function (user) {
-                loader.show();
-                var userType = [];
-                userType.push(user.userType);
-                var body = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": user.userDOB, "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": userType, "userStatus": user.userStatus };
-                usersService.addUser(body).then(function (success) {
-                    $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": "", "userStatus": "" };
-                    $scope.loadAllUsers();
-                    $scope.addClicked = false;
-                    loader.hide();
-                }, function (error) {
 
-                    $scope.addClicked = true;
-                    $scope.errorMessage = error.data.errorMessage;
-                    if ($scope.errorMessage == "User Already Exist!!") {
-                        $scope.errorMessageUserName = true;
+                if ($scope.errorMessage !== null) {
+                    $scope.formInvalid = true;
 
-                    }
+                }
+                loader.hide();
 
-                    if ($scope.errorMessage !== null) {
-                        $scope.formInvalid = true;
+                return;
+            });
+        }
 
-                    }
-                    loader.hide();
+        $scope.loadAllUsers();
+        $scope.loadDropdownsData();
 
-                    return;
-                });
-            }
+        // function mouseoverPass(obj) {
+        //     var obj = document.getElementById('myPassword');
+        //     obj.type = "text";
+        // }
 
-            $scope.loadAllUsers();
-            $scope.loadDropdownsData();
+        // function mouseoutPass(obj) {
+        //     var obj = document.getElementById('myPassword');
+        //     obj.type = "password";
+        // }
 
-            // function mouseoverPass(obj) {
-            //     var obj = document.getElementById('myPassword');
-            //     obj.type = "text";
-            // }
-
-            // function mouseoutPass(obj) {
-            //     var obj = document.getElementById('myPassword');
-            //     obj.type = "password";
-            // }
-
-        }]);
+    }]);

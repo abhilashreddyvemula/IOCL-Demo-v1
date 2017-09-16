@@ -5,6 +5,10 @@ angular.module('myApp.loader',[])
         loader.classList.add('show-loader');
     }
     this.hide = function(){
-        loader.classList.remove('show-loader');
+        setTimeout(
+            function(){
+                loader.classList.remove('show-loader');
+            }, 1000);
+        
     }
 });
