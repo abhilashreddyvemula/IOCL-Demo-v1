@@ -337,9 +337,6 @@ input.pid { width: 150px; }
 .modal-dialog table tr td:nth-child(1)  { 
     font-weight:bold; 
 }
-.modal-dialog table tr td:nth-child(1)  { 
-    width:35%; 
-}
 .modal-dialog table tr:nth-child(odd) { 
     background:#f4f4f4;
 }

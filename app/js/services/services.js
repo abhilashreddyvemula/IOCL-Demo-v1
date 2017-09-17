@@ -52,6 +52,18 @@ angular.module('myApp.services', [])
             headers: headers
         });
     }
+
+    this.updateBay = function(bay){
+        var headers = utility.getHeaders();
+        var url = baseUrl + '/upadateBay';
+
+        return $http({
+            method: 'PUT',
+            url: url,
+            headers: headers,
+            data: JSON.stringify(bay)
+        });
+    }
 }])
 
 // Users Services

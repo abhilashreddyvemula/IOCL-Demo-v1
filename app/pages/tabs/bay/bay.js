@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('BayController', ['$scope', 'utility', 'BayService', 'LoaderService', function ($scope, utility, bayService, loader) {
+    .controller('BayController', ['$scope', '$uibModal', 'utility', 'BayService', 'LoaderService', function ($scope, $uibModal, utility, bayService, loader) {
         $scope.userRole = utility.getUserRole();
 
         $scope.bayItems = [];
@@ -103,16 +103,21 @@ angular.module('myApp.dashboard')
 
         }
 
-        // $scope.sort = function(key) {
-        //     //console.log(key);
-        //     if ($scope.sortByKey === key) {
-        //         $scope.sortReverse = !$scope.sortReverse;
-        //     } else {
-        //         $scope.sortByKey = key;
-        //         $scope.sortReverse = false;
-        //     }
-        // }
+        $scope.openEditModal = function (size, item) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'pages/tabs/modals/bay-edit-modal.html',
+                controller: 'BayEditModalCtrl',
+                controllerAs: '$ctrl',
+                size: size,
+                resolve: {
+                    items: function () {
+                        return {'bay': item, 'dropDownValues': $scope.dropDownValues};
+                    }
+                }
+            });
 
+        };
         $scope.loadBayList();
         $scope.loadDropdownsData();
     }]);

@@ -11,7 +11,8 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.filters',
   'myApp.utility',
-  'myApp.version'
+  'myApp.version',
+  'myApp.modals'
 ])
   .config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
     $locationProvider.hashPrefix('!');
