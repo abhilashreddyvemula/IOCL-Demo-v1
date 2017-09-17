@@ -81,6 +81,16 @@ angular.module('myApp.services', [])
         });
     }
 
+    this.deleteUser = function(userId) {
+        var headers = utility.getHeaders();
+        var url = baseUrl + '/deleteUser?UserID=' + userId;
+        return $http({
+            method: 'DELETE',
+            url: url,
+            headers: headers
+        });
+    }
+
     this.getStaticUserData = function() {
         var headers = utility.getHeaders();
         var url = baseUrl + '/getStaticUserData';

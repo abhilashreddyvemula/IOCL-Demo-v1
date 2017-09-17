@@ -220,8 +220,9 @@
                                             <td class="center">{{item.userMobileNum}}</td>
                                             <td class="center">{{item.userType[0]}}</td>
                                             <td class="center">{{item.userStatus}} </td>
-                                            <td class="center"><a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".user1" title="Change"><span class="glyphicon glyphicon-edit"></span></a>
-                                                <a href="#" class="btn btn-danger " data-toggle="tooltip" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
+                                            <td class="center">
+                                                <button class="btn btn-primary  edit-delete-icon" data-toggle="modal" title="Change" ng-click="editUser()"><span class="glyphicon glyphicon-edit"></span></button>
+                                                <button class="btn btn-danger edit-delete-icon" data-toggle="tooltip" title="Delete" ng-click="deleteUser()"><span class="glyphicon glyphicon-trash"></span></button>
                                             </td>
                                         </tr>
                                     </tbody>

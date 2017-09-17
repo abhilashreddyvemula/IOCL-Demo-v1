@@ -49,8 +49,10 @@ angular.module('myApp.dashboard')
         $scope.loadAllUsers = function() {
             loader.show();
             usersService.getUsersList().then(function(response) {
+
                 $scope.usersList = response.data;
                 $scope.totalItems = $scope.usersList.length;
+                console.log($scope.usersList);
                 loader.hide();
             }, function(error) {
                 loader.hide();
@@ -96,7 +98,20 @@ angular.module('myApp.dashboard')
             $scope.errorMessageUserName = false;
             $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": "", "userStatus": "" };
         }
+        $scope.deleteUser = function() {
 
+            let userId = $scope.usersList.userId;
+            usersService.deleteUser(userId).then(function(success) {
+                console.log('deleted user record', userId);
+                $scope.loadAllUsers();
+            }, function(error) {
+                console.log('error');
+            });
+
+        }
+        $scope.editUser = function() {
+            console.log('Edit user details');
+        }
         $scope.onCancel = function() {
             $scope.addClicked = false;
         }
