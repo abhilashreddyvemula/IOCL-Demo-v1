@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('UsersController', ['$scope', 'utility', 'UsersService', 'LoaderService', function($scope, utility, usersService, loader) {
+    .controller('UsersController', ['$scope', '$uibModal', 'utility', 'UsersService', 'LoaderService', function($scope, $uibModal, utility, usersService, loader) {
 
         $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
@@ -10,7 +10,7 @@ angular.module('myApp.dashboard')
         $scope.passwordErrorFlag = false;
         $scope.formInvalid = false;
         $scope.addClicked = false;
-        $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": "", "userStatus": "" };
+        $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": [], "userStatus": "" };
         $scope.usersList = [];
 
         $scope.dropDownValues = { 'UserStatus': [], 'UserTypes': [] };
@@ -96,13 +96,13 @@ angular.module('myApp.dashboard')
         $scope.addNewUser = function() {
             $scope.addClicked = true;
             $scope.errorMessageUserName = false;
-            $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": "", "userStatus": "" };
+            $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": [], "userStatus": "" };
         }
-        $scope.deleteUser = function() {
+        $scope.deleteUser = function(user) {
 
-            let userId = $scope.usersList.userId;
-            usersService.deleteUser(userId).then(function(success) {
-                console.log('deleted user record', userId);
+            let userId = user.userID;
+            usersService.deleteUser(userId).then(function(response) {
+                console.log('deleted user record', response);
                 $scope.loadAllUsers();
             }, function(error) {
                 console.log('error');
@@ -126,11 +126,11 @@ angular.module('myApp.dashboard')
         }
         $scope.saveUser = function(user) {
             loader.show();
-            var userType = [];
-            userType.push(user.userType);
-            var body = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": user.userDOB, "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": userType, "userStatus": user.userStatus };
+            //var userType = [];
+            //userType.push(user.userType);
+            var body = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": user.userDOB, "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": user.userType, "userStatus": user.userStatus };
             usersService.addUser(body).then(function(success) {
-                $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": "", "userStatus": "" };
+                $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": [], "userStatus": "" };
                 $scope.loadAllUsers();
                 $scope.addClicked = false;
                 loader.hide();
@@ -151,6 +151,36 @@ angular.module('myApp.dashboard')
 
                 return;
             });
+        }
+
+        $scope.openEditModal = function (size, item) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'pages/tabs/modals/user-edit-modal.html',
+                controller: 'UserEditModalCtrl',
+                controllerAs: '$ctrl',
+                size: size,
+                resolve: {
+                    items: function () {
+                        return {'user': item, 'dropDownValues': $scope.dropDownValues};
+                    }
+                }
+            });
+
+        };
+
+        $scope.toggle_password = function(target){
+            var d = document;
+            var tag = d.getElementById('myPassword');
+            var tag2 = d.getElementById('eye');
+            if(tag.getAttribute('type') === 'text'){
+                tag.setAttribute('type', 'password');
+                tag2.classList.toggle("glyphicon-eye-close");  
+            }
+            else{
+                tag.setAttribute('type', 'text'); 
+                tag2.classList.toggle("glyphicon-eye-close");
+            } 
         }
 
         $scope.loadAllUsers();

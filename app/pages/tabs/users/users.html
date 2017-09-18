@@ -45,7 +45,7 @@
                                 <div class=" col-12 col-sm-12">
                                     <div class="form-group ">
                                         <!-- <label>User Name </label> -->
-                                        <span class="mandatory-fields"> <label>User Name </label>*</span>
+                                        <span class="mandatory-fields"> <label>User Name</label>*</span>
                                         <input class="form-control" ng-model="newUser.userName" name="userName" value="" size="35" data-error="Required" required="" type="text" ng-pattern="/^[a-zA-Z]*$/">
                                         <span ng-show="userForm.userName.$touched && userForm.userName.$invalid" class="input-field-errors">User name is required.Enter only alphabets</span>
                                         <span ng-if="errorMessageUserName" class="input-field-errors">User name already exist!</span>
@@ -123,7 +123,7 @@
                                     <div class="form-group ">
                                         <!-- <label>User Type</label> -->
                                         <span class="mandatory-fields"> <label>User Type</label>*</span>
-                                        <select name="usertype" ng-model="newUser.userType" class="form-control" required ng-options="item for item in dropDownValues.UserTypes">
+                                        <select name="usertype" ng-model="newUser.userType[0]" class="form-control" required ng-options="item for item in dropDownValues.UserTypes">
                                             <option value="">Select User Type</option>
                                         </select>
                                         <span ng-show="userForm.usertype.$touched && userForm.usertype.$invalid" class="input-field-errors">User type is required.</span>
@@ -164,7 +164,7 @@
                                         <!-- <label>Confirm Password </label> -->
                                         <span class="mandatory-fields"> <label>Confirm Password  </label>*</span>
                                         <input id="myPassword" class="form-control " ng-model="newUser.rePassword" name="rePassword" value="" size="35" data-error="Required" required="" type="password" ng-blur="myFunction()">
-                                        <span class="glyphicon glyphicon-eye-open seePwd">
+                                        <span id="eye" class="glyphicon glyphicon-eye-open seePwd" ng-click="toggle_password()">
                                              <!-- <span ng-if="newUser.rePassword" class="tooltiptext">{{newUser.rePassword}}</span> --> </span>
 
                                     </div>
@@ -221,8 +221,8 @@
                                             <td class="center">{{item.userType[0]}}</td>
                                             <td class="center">{{item.userStatus}} </td>
                                             <td class="center">
-                                                <button class="btn btn-primary  edit-delete-icon" data-toggle="modal" title="Change" ng-click="editUser()"><span class="glyphicon glyphicon-edit"></span></button>
-                                                <button class="btn btn-danger edit-delete-icon" data-toggle="tooltip" title="Delete" ng-click="deleteUser()"><span class="glyphicon glyphicon-trash"></span></button>
+                                                <button class="btn btn-primary  edit-delete-icon" title="Change" ng-click="openEditModal('ls', item)"><span class="glyphicon glyphicon-edit"></span></button>
+                                                <button class="btn btn-danger edit-delete-icon" title="Delete" ng-click="deleteUser(item)"><span class="glyphicon glyphicon-trash"></span></button>
                                             </td>
                                         </tr>
                                     </tbody>

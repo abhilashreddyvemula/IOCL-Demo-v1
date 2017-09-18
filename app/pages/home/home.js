@@ -35,18 +35,17 @@ angular.module('myApp.home', ['ngRoute'])
                 // alert("Invalid Username or password");
             },
             function(error) {
-                console.log("login error");
-                console.log(error.data);
+                loader.hide();
 
-                if (error.data['errorMessage'] == "User Locked or In Active. Please contact administrator") {
+                if (error.data !== null && error.data !== undefined && error.data['errorMessage'] == "User Locked or In Active. Please contact administrator") {
                     $scope.inActiveFlag = true;
                     $scope.inValidFlag = false;
 
-                } else if (error.data['errorMessage'] == "Please give correct password") {
+                } else if (error.data !== null && error.data !== undefined && error.data['errorMessage'] == "Please give correct password") {
                     $scope.inValidFlag = true;
                     $scope.inActiveFlag = false;
                 }
-                loader.hide();
+                
             });
 
     }
