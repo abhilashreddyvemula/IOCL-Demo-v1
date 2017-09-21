@@ -61,32 +61,33 @@ angular.module('myApp.dashboard')
         $scope.loadDropdownsData = function() {
             //alert("load user static data")
             usersService.getStaticUserData().then(function(response) {
-                let userTypes = response.data.data.UserTypes;
-                let userTypesArray = [];
-                if ($scope.userRole === 'Super Admin') {
-                    console.log(userTypes);
-                    userTypesArray = userTypes;
+                /* let userTypes = response.data.data.UserTypes;
+                 let userTypesArray = [];
+                 if ($scope.userRole === 'Super Admin') {
+                     console.log(userTypes);
+                     userTypesArray = userTypes;
 
-                } else if ($scope.userRole === 'Admin') {
-                    for (let i = 0; i < userTypes.length; i++) {
-                        if (userTypes[i] == 'Supervisor') {
-                            userTypesArray.push('Supervisor');
-                        }
-                        if (userTypes[i] == 'TTES Operator') {
-                            userTypesArray.push('TTES Operator');
-                        }
-                    }
-                } else if ($scope.userRole === 'Supervisor') {
-                    for (let i = 0; i < userTypes.length; i++) {
-                        if (userTypes[i] == 'TTES Operator') {
-                            userTypesArray.push('TTES Operator');
-                        }
-                    }
-                }
+                 } else if ($scope.userRole === 'Admin') {
+                     for (let i = 0; i < userTypes.length; i++) {
+                         if (userTypes[i] == 'Supervisor') {
+                             userTypesArray.push('Supervisor');
+                         }
+                         if (userTypes[i] == 'TTES Operator') {
+                             userTypesArray.push('TTES Operator');
+                         }
+                     }
+                 } else if ($scope.userRole === 'Supervisor') {
+                     for (let i = 0; i < userTypes.length; i++) {
+                         if (userTypes[i] == 'TTES Operator') {
+                             userTypesArray.push('TTES Operator');
+                         }
+                     }
+                 }*/
 
 
-                $scope.dropDownValues.UserTypes = userTypesArray;
-                // $scope.dropDownValues.UserTypes = response.data.data.UserTypes;
+                //$scope.dropDownValues.UserTypes = userTypesArray;
+                console.log(response);
+                $scope.dropDownValues.UserTypes = response.data.data.UserTypes;
                 $scope.dropDownValues.UserStatus = response.data.data.UserStatus;
                 console.log(response.data);
             }, function(error) {});
@@ -153,7 +154,7 @@ angular.module('myApp.dashboard')
             });
         }
 
-        $scope.openEditModal = function (size, item) {
+        $scope.openEditModal = function(size, item) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'pages/tabs/modals/user-edit-modal.html',
@@ -161,26 +162,25 @@ angular.module('myApp.dashboard')
                 controllerAs: '$ctrl',
                 size: size,
                 resolve: {
-                    items: function () {
-                        return {'user': item, 'dropDownValues': $scope.dropDownValues};
+                    items: function() {
+                        return { 'user': item, 'dropDownValues': $scope.dropDownValues };
                     }
                 }
             });
 
         };
 
-        $scope.toggle_password = function(target){
+        $scope.toggle_password = function(target) {
             var d = document;
             var tag = d.getElementById('myPassword');
             var tag2 = d.getElementById('eye');
-            if(tag.getAttribute('type') === 'text'){
+            if (tag.getAttribute('type') === 'text') {
                 tag.setAttribute('type', 'password');
-                tag2.classList.toggle("glyphicon-eye-close");  
-            }
-            else{
-                tag.setAttribute('type', 'text'); 
                 tag2.classList.toggle("glyphicon-eye-close");
-            } 
+            } else {
+                tag.setAttribute('type', 'text');
+                tag2.classList.toggle("glyphicon-eye-close");
+            }
         }
 
         $scope.loadAllUsers();

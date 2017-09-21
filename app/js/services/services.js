@@ -53,7 +53,7 @@ angular.module('myApp.services', [])
         });
     }
 
-    this.updateBay = function(bay){
+    this.updateBay = function(bay) {
         var headers = utility.getHeaders();
         var url = baseUrl + '/upadateBay';
 
@@ -69,10 +69,11 @@ angular.module('myApp.services', [])
 // Users Services
 .service('UsersService', ['$http', 'utility', function($http, utility) {
     var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/usermanagement';
-
+    let userRole = utility.getUserRole();
+    console.log(userRole);
     this.getUsersList = function() {
         var headers = utility.getHeaders();
-        var url = baseUrl + '/getUsers';
+        var url = baseUrl + '/getUsers?UserRole=' + userRole;
         return $http({
             method: 'GET',
             url: url,
@@ -105,7 +106,7 @@ angular.module('myApp.services', [])
 
     this.getStaticUserData = function() {
         var headers = utility.getHeaders();
-        var url = baseUrl + '/getStaticUserData';
+        var url = baseUrl + '/getStaticUserData?UserRole=' + userRole;
         return $http({
             method: 'GET',
             url: url,
