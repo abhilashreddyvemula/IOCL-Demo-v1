@@ -55,7 +55,7 @@ angular.module('myApp.services', [])
 
     this.updateBay = function(bay) {
         var headers = utility.getHeaders();
-        var url = baseUrl + '/upadateBay';
+        var url = baseUrl + '/baysupdation';
 
         return $http({
             method: 'PUT',
