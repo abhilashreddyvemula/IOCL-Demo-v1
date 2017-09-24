@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('LocationsController', ['$scope', 'utility', 'LocationService', 'LoaderService', function ($scope, utility, locationService, loader) {
+    .controller('LocationsController', ['$scope', '$uibModal', 'utility', 'LocationService', 'LoaderService', function ($scope, $uibModal, utility, locationService, loader) {
 
         $scope.userRole = utility.getUserRole();
 
@@ -10,7 +10,7 @@ angular.module('myApp.dashboard')
 
         $scope.formInvalid = false;
         $scope.addClicked = false;
-        $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "operationalStatus": "" };
+        $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "state": "", "city": "", "pinCode": "", "operationalStatus": "" };
         $scope.locationList = [];
 
         $scope.dropDownValues = { 'status': [] };
@@ -53,7 +53,7 @@ angular.module('myApp.dashboard')
         $scope.addNewLocation = function () {
             $scope.addClicked = true;
             $scope.errorMessageLocationName = false;
-            $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "operationalStatus": "" };
+            $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "state": "", "city": "", "pinCode": "", "operationalStatus": "" };
         }
 
         $scope.onCancel = function () {
@@ -61,9 +61,9 @@ angular.module('myApp.dashboard')
         }
         $scope.saveLocation = function (location) {
             loader.show();
-            var body = { "locationName": location.locationName, "locationCode": location.locationCode, "locationAddress": location.locationAddress, "operationalStatus": location.operationalStatus };
+            var body = { "locationName": location.locationName, "locationCode": location.locationCode, "locationAddress": location.locationAddress, "state": location.state, "city": location.city, "pinCode": location.pinCode, "operationalStatus": location.operationalStatus };
             locationService.addLocation(body).then(function (success) {
-                $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "operationalStatus": "" };
+                $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "state": "", "city": "", "pinCode": "", "operationalStatus": "" };
                 $scope.loadAllLocations();
                 $scope.addClicked = false;
                 loader.hide();
@@ -81,6 +81,22 @@ angular.module('myApp.dashboard')
                 return;
             });
         }
+
+        $scope.openEditModal = function (size, item) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'pages/tabs/modals/location-edit-modal.html',
+                controller: 'LocationEditModalCtrl',
+                controllerAs: '$ctrl',
+                size: size,
+                resolve: {
+                    items: function () {
+                        return {'location': item, 'dropDownValues': $scope.dropDownValues};
+                    }
+                }
+            });
+
+        };
 
         $scope.loadAllLocations();
         $scope.loadDropdownsData();

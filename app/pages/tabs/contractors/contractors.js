@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('ContractorsController', ['$scope', 'utility', 'ContractorsService', 'LoaderService', function($scope, utility, contractorsService, loader) {
+    .controller('ContractorsController', ['$scope', '$uibModal', 'utility', 'ContractorsService', 'LoaderService', function($scope, $uibModal, utility, contractorsService, loader) {
         $scope.userRole = utility.getUserRole();
 
         $scope.viewby = 10;
@@ -86,6 +86,22 @@ angular.module('myApp.dashboard')
                 return;
             });
         }
+
+        $scope.openEditModal = function (size, item) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'pages/tabs/modals/contractor-edit-modal.html',
+                controller: 'ContractorEditModalCtrl',
+                controllerAs: '$ctrl',
+                size: size,
+                resolve: {
+                    items: function () {
+                        return {'contractor': item, 'dropDownValues': $scope.dropDownValues};
+                    }
+                }
+            });
+
+        };
 
         $scope.loadAllContractors();
         $scope.loadDropdownsData();

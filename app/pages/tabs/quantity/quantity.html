@@ -52,10 +52,10 @@
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group lname">
                                 <!-- <label>Operational Status </label> -->
-                                <span class="mandatory-fields"> <label>Operational Status   </label>*</span>
+                                <span class="mandatory-fields"> <label>Operational Status</label>*</span>
                                 <select name="status" ng-model="newQuantity.operationalStatus" class="form-control" required ng-options="item for item in dropDownValues.status">
-                                <option value="">Select</option>
-                            </select>
+                                    <option value="">Select</option>
+                                </select>
                                 <span ng-show="quantityForm.status.$touched && quantityForm.status.$invalid" class="input-field-errors">Status  is required.</span>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                         <td class="center">{{item.quantityName}}</td>
                                         <td class="center">{{item.quantity}}</td>
                                         <td class="center">{{item.operationalStatus}}</td>
-                                        <td class="center"><a href="#" class="btn btn-primary" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
+                                        <td class="center"><a class="btn btn-primary" ng-click="openEditModal('lg', item)" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
                                     </tr>
                                 </tbody>
                             </table>

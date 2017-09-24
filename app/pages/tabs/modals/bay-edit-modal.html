@@ -6,21 +6,21 @@
                 <tr>
                     <td width="50%" align="right">Bay Name</td>
                     <td width="50%">
-                        <input class="form-control width-50" ng-model="$ctrl.bay.bayName" name="bayName" value="" size="35" data-error="Required" required=""
+                        <input class="form-control" style="width: 50%;" ng-model="$ctrl.bay.bayName" name="bayName" value="" size="35" data-error="Required" required=""
                             type="text">
                     </td>
                 </tr>
                 <tr>
                     <td align="right">Bay Number</td>
                     <td>
-                        <input class="form-control width-50" ng-model="$ctrl.bay.bayNum" name="bayNum" value="" maxlength="2" size="35" data-error="Required"
+                        <input class="form-control" style="width: 50%;" ng-model="$ctrl.bay.bayNum" name="bayNum" value="" maxlength="2" size="35" data-error="Required"
                             required="" type="text" ng-pattern=/^[0-9]*$/>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">Bay Type</td>
                     <td>
-                        <select name="bayType" class="width-50" ng-model="$ctrl.bay.bayType" ng-options="item for item in $ctrl.dropDownValues.bayTypes" class="form-control"
+                        <select style="width: 50%;" name="bayType" ng-model="$ctrl.bay.bayType" ng-options="item for item in $ctrl.dropDownValues.bayTypes" class="form-control"
                             required>
                             <option value="">Select </option>
                         </select>
@@ -29,7 +29,7 @@
                 <tr>
                     <td align="right">Functional Status</td>
                     <td>
-                        <select name="bayStatus" class="width-50" ng-model="$ctrl.bay.functionalStatus" ng-options="item for item in $ctrl.dropDownValues.bayStatus"
+                        <select style="width: 50%;" name="bayStatus" ng-model="$ctrl.bay.functionalStatus" ng-options="item for item in $ctrl.dropDownValues.bayStatus"
                             class="form-control" required>
                             <option value="">Select </option>
                         </select>

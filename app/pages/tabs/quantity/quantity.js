@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('QuantController', ['$scope', 'utility', 'QuantityService', 'LoaderService', function ($scope, utility, quantityService, loader) {
+    .controller('QuantController', ['$scope', '$uibModal', 'utility', 'QuantityService', 'LoaderService', function ($scope, $uibModal, utility, quantityService, loader) {
 
         //'QuantityService', 
         //quantityService
@@ -87,6 +87,22 @@ angular.module('myApp.dashboard')
                 return;
             });
         }
+
+        $scope.openEditModal = function (size, item) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'pages/tabs/modals/quantity-edit-modal.html',
+                controller: 'QuantityEditModalCtrl',
+                controllerAs: '$ctrl',
+                size: size,
+                resolve: {
+                    items: function () {
+                        return {'quantity': item, 'dropDownValues': $scope.dropDownValues};
+                    }
+                }
+            });
+
+        };
 
         $scope.loadAllQuantities();
         $scope.loadDropdownsData();

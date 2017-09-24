@@ -22,7 +22,7 @@ angular.module('myApp.filters', [])
                 }
                 else if (tab === 'locations') {
                     output = input.filter(function (obj) {
-                        return !searchKey || obj.locationName.toLowerCase().indexOf(searchKey) !== -1 || obj.locationCode.toLowerCase().indexOf(searchKey) !== -1 || obj.locationAddress.toLowerCase().indexOf(searchKey) !== -1 || obj.operationalStatus.toLowerCase().indexOf(searchKey) !== -1;
+                        return !searchKey || obj.locationName.toLowerCase().indexOf(searchKey) !== -1 || obj.locationCode.toLowerCase().indexOf(searchKey) !== -1 || obj.locationAddress.toLowerCase().indexOf(searchKey) !== -1 || obj.state.toLowerCase().indexOf(searchKey) !== -1 || obj.city.toLowerCase().indexOf(searchKey) !== -1 || obj.pinCode.toLowerCase().indexOf(searchKey) !== -1 || obj.operationalStatus.toLowerCase().indexOf(searchKey) !== -1;
                     });
                 }
                 else if (tab === 'quantity') {

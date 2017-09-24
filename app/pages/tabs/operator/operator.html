@@ -1,250 +1,104 @@
 <form name="operatorForm">
-    <div ng-controller="OperatorsController">
-            <div class="" id="Operator">
-                    <section class="Contractors  title" style="">
-                      <div class="row first">
-                        <div class=" col-12" style="display:none  ;" id="contractor-save-btns">
-                          <h2> <i class="fa fa-truck" aria-hidden="true"> </i><span></span><strong> Add Truck Operations</strong></h2>
-                          <ul class="buttons" >
-                            <li>
-                              <button class="submit" type="button" data-toggle="collapse" data-target="#addOperator"  onClick="jQuery('#addUser').show();jQuery('#contractor-save-btns').hide();jQuery('#contractor-add-btns').show();" ><i class="fa fa-check" aria-hidden="true"> </i> <span>Save</span></button>
-                            </li>
-                            <li>
-                              <button class="cancel" type="button" data-toggle="collapse" data-target="#addOperator"  onClick="jQuery('#addUser').show();jQuery('#contractor-save-btns').hide();jQuery('#contractor-add-btns').show();"  ><i class="fa fa-remove" aria-hidden="true"> </i> <span>Cancel</span></button>
-                            </li>
-                          </ul>
+  <div ng-controller="OperatorsController">
+    <div class="" id="Operator">
+      <section class="Contractors  title" style="">
+        <div class="row first">
+          <div class=" col-12" style="display:none;"  ng-show="addClicked" id="contractor-save-btns">
+            <h2> <i class="fa fa-truck" aria-hidden="true"> </i><span></span><strong> Add Truck Operations</strong></h2>
+            <ul class="buttons">
+              <li>
+                <button class="submit" type="button" ng-click="addClicked;saveBay(newBay);" ng-disabled="myForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                <span ng-if="myForm.$invalid" class="tooltiptext">Please fill all fields</span>
+              </li>
+              <li>
+                <button class="cancel" type="button" ng-click="onCancel()"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
+              </li>
+            </ul>
+          </div>
+          <div class=" col-12" style="display: block;" ng-hide="addClicked" id="contractor-add-btns">
+            <h2> <i class="fa fa-truck"> </i><span></span><strong> Truck Operations</strong></h2>
+          </div>
+        </div>
+      </section>
+      <div class="Contractors">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+              <div class="grid-list">
+                <div class="table-responsive">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 select-div">
+                            <label>Show
+                                <select ng-model="viewby" convert-to-number ng-change="setItemsPerPage(viewby)" class="form-control form-control-sm">
+                                    <option value=10>10</option>
+                                    <option value=25>25</option>
+                                    <option value=50>50</option>
+                                    <option value=100>100</option>
+                                </select>
+                                entries
+                            </label>
                         </div>
-                        <div class=" col-12" style="display: block;"  id="contractor-add-btns">
-                          <h2> <i class="fa fa-truck" aria-hidden="true"> </i><span></span><strong> Truck Operations</strong></h2>
+                        <div class="col-sm-12 col-md-6 search-div">
+                            <label>Search:<input type="search" class="form-control form-control-sm" ng-model="fanSlipSearchKey" placeholder=""></label>
                         </div>
-                      </div>
-                    </section>
-                    <div class="Contractors">
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
-                            <div class="grid-list">
-                              <div   class="table-responsive">
-                                  <table width="100%" class="table table-bordered" data-toggle="table" >
-                                  <thead>
-                                    <tr>
-                                      <th width="11%">Truck Registration Number</th>
-                                      <th width="11%">Driver Name</th>
-                                      <th width="13%">FAN Slip Number</th>
-                                      <th width="7%">Customer</th>
-                                      <th width="6%">Quantity</th>
-                                      <th width="7%">Contractor</th>
-                                      <th width="8%">Destination</th>
-                                      <th width="6%">Location Code</th>
-                                      <th width="3%">Bay Number</th>
-                                      <th width="9%">Bay Status</th>
-                                      <th width="10%">Expiration Date</th>
-                                      <th width="9%">Actions</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr class="green">
-                                      <td class="center">MH-01-54321</td>
-                                      <td class="center">Donald Oswany </td>
-                                      <td class="center">3423</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">100 MT</td>
-                                      <td class="center">Contractor 1</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">1</td>
-                                      <td class="center">Completed</td>
-                                      <td class="center">08-08-2017</td>
-                                      <td class="center operator-actions">
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator1" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                          
-                                                          </td>
-                                    </tr>
-                                    <tr class="red">
-                                      <td class="center">MH-02-78321</td>
-                                      <td class="center">Michel Clark</td>
-                                      <td class="center">3424</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">109 MT</td>
-                                      <td class="center">Contractor 2</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">2</td>
-                                      <td class="center"></td>
-                                      <td class="center">20-08-2017</td>
-                                      <td class="center operator-actions">
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator2" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="center">MH-03-78321</td>
-                                      <td class="center">John</td>
-                                      <td class="center">3425</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">109 MT</td>
-                                      <td class="center">Contractor 3</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">3</td>
-                                      <td class="center">Filling</td>
-                                      <td class="center">16-08-2017</td>
-                                      <td class="center operator-actions">
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator3" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                                          </td>
-                                    </tr>
-                                    <tr class="green">
-                                      <td class="center">MH-03-63478</td>
-                                      <td class="center">Smith</td>
-                                      <td class="center">3426</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">109 MT</td>
-                                      <td class="center">Contractor 4</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">4</td>
-                                      <td class="center">Completed</td>
-                                      <td class="center">09-08-2017</td>
-                                      <td class="center operator-actions">
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator4" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                                          </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="center">MH-33-54534</td>
-                                      <td class="center">AnthonyMichell</td>
-                                      <td class="center">3427</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">109 MT</td>
-                                      <td class="center">Contractor 5</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">5</td>
-                                      <td class="center">Filling</td>
-                                      <td class="center"> 16-08-2017</td>
-                                      <td class="center operator-actions">
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator5" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                                          </td>
-                                    </tr>
-                                    <tr class="red">
-                                      <td class="center">MH-33-52324</td>
-                                      <td class="center">MarkPhillips</td>
-                                      <td class="center">3428</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">109 MT</td>
-                                      <td class="center">Contractor 6</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">6</td>
-                                      <td class="center"></td>
-                                      <td class="center">28-08-2017</td>
-                                      <td class="center operator-actions">
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator6" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="center">MH-01-54321</td>
-                                      <td class="center">Donald Oswany </td>
-                                      <td class="center">3429</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">100 MT</td>
-                                      <td class="center">Contractor 7</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">7</td>
-                                      <td class="center">Filling</td>
-                                      <td class="center">16-08-2017</td>
-                                      <td class="center operator-actions">
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator7" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                      </td>
-                                    </tr>
-                                    <tr class="green">
-                                      <td class="center">MH-02-78321</td>
-                                      <td class="center">Michel Clark</td>
-                                      <td class="center">3430</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">109 MT</td>
-                                      <td class="center">Contractor 8</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">8</td>
-                                      <td class="center">Completed</td>
-                                      <td class="center">12-08-2017</td>
-                                      <td class="center operator-actions">
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator8" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="center">MH-03-78321</td>
-                                      <td class="center">John</td>
-                                      <td class="center">3431</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">109 MT</td>
-                                      <td class="center">Contractor 9</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">1</td>
-                                      <td class="center">Filling</td>
-                                      <td class="center">16-08-2017</td>
-                                      <td class="center operator-actions">
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator9" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                      </td>
-                                    </tr>
-                                    <tr class="red">
-                                      <td class="center">MH-03-63478</td>
-                                      <td class="center">Smith</td>
-                                      <td class="center">3432</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">109 MT</td>
-                                      <td class="center">Contractor 10</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">2</td>
-                                      <td class="center"></td>
-                                      <td class="center">29-08-2017</td>
-                                      <td class="center operator-actions"> 
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator10" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="center">MH-33-54534</td>
-                                      <td class="center">AnthonyMichell</td>
-                                      <td class="center">3433</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">109 MT</td>
-                                      <td class="center">Contractor 11</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">3</td>
-                                      <td class="center">Filling</td>
-                                      <td class="center">16-08-2017</td>
-                                      <td class="center operator-actions">
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator11" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                      </td>
-                                    </tr>
-                                    <tr class="red">
-                                      <td class="center">MH-33-52324</td>
-                                      <td class="center">MarkPhillips</td>
-                                      <td class="center">3434</td>
-                                      <td class="center">IOCL</td>
-                                      <td class="center">109 MT</td>
-                                      <td class="center">Contractor 12</td>
-                                      <td class="center">Hyderabad</td>
-                                      <td class="center">Kakde Group</td>
-                                      <td class="center">4</td>
-                                      <td class="center"></td>
-                                      <td class="center">26-08-2017</td>
-                                      <td class="center operator-actions">
-                                      <a href="#" class="btn btn-primary  " data-toggle="modal" data-target=".truck-operator12" title="View"><span data-toggle="tooltip" title="View" class="fa fa-eye"></span></a>&nbsp;<a href="#" class="btn btn-success  " data-toggle="tooltip" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;<a href="#" class="btn btn-danger  " data-toggle="tooltip" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default  " data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
-                                      </td>
-                                    </tr>
-                                </tbody>
-                                </table>
-                  
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
+                  <table width="100%" class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th width="11%">Truck Registration Number</th>
+                        <th width="11%">Driver Name</th>
+                        <th width="13%">FAN Slip Number</th>
+                        <th width="7%">Customer</th>
+                        <th width="6%">Quantity</th>
+                        <th width="7%">Contractor</th>
+                        <th width="8%">Destination</th>
+                        <th width="6%">Location Code</th>
+                        <th width="3%">Bay Number</th>
+                        <th width="9%">Bay Status</th>
+                        <th width="10%">Expiration Date</th>
+                        <th width="9%">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="green" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                        <td class="center">{{fanSlip.truckNo}}</td>
+                        <td class="center">{{fanSlip.driverName}}</td>
+                        <td class="center">{{fanSlip.driverName}}</td>
+                        <td class="center">{{fanSlip.customer}}</td>
+                        <td class="center">{{fanSlip.quantity}}</td>
+                        <td class="center">{{fanSlip.driverName}}</td>
+                        <td class="center">{{fanSlip.destination}}</td>
+                        <td class="center">{{fanSlip.locationCode}}</td>
+                        <td class="center">{{fanSlip.bayNum}}</td>
+                        <td class="center">{{fanSlip.driverName}}</td>
+                        <td class="center">{{fanSlip.driverName}}</td>
+                        <td class="center operator-actions">
+                          <a href="#" class="btn btn-primary" title="View"><span title="View" class="fa fa-eye"></span></a>&nbsp;
+                          <a href="#" class="btn btn-success" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;
+                          <a
+                            href="#" class="btn btn-danger" title="Re-Generate"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;<a href="#" class="btn btn-default"
+                              title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
+
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <p style="margin-top: 7px;">Showing {{((fanSlips | search: fanSlipSearchKey:'fanSlip').length == 0 )? 0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((fanSlips | search: fanSlipSearchKey:'fanSlip').length))? ((fanSlips | search: fanSlipSearchKey:'fanSlip').length)
+                            : currentPage * itemsPerPage}} 0f {{(fanSlips | search: fanSlipSearchKey:'fanSlip').length }} entries <span ng-show="fanSlipSearchKey.length > 0">(filtered from {{fanSlips.length}} total entries)</span></p>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <ul uib-pagination total-items="(fanSlips | search: fanSlipSearchKey:'fanSlip').length" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
+                    </div>
+                </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </form>

@@ -1,0 +1,42 @@
+<div class="modal-content">
+    <h2> <i class="fa fa-tint" aria-hidden="true"></i> Quantity Details:</h2>
+    <div class="modal-body">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <tbody>
+                <tr>
+                    <td width="50%" align="right">Quantity Name</td>
+                    <td width="50%">
+                        <input class="form-control " style="width: 50%;" name="name" value="" ng-model="$ctrl.quantity.quantityName" size="35" data-error="Required"
+                            required="" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Quantity (MT)</td>
+                    <td>
+                        <input style="width: 50%;" class="form-control" name="quantity" value="" size="35" ng-model="$ctrl.quantity.quantity" data-error="Required" required=""
+                            type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Operational Status</td>
+                    <td>
+                        <select style="width: 50%;" name="status" ng-model="$ctrl.quantity.operationalStatus" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.status">
+                            <option value="">Select</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="buttons" cellspacing="0" cellpadding="0" width="100%">
+            <tr>
+                <td style="text-align: right;">
+                    <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()"><i class="fa fa-check"> </i> <span>Update</span>
+                   </button>
+                </td>
+                <td>
+                    <button class="cancel" type="button" ng-click="$ctrl.cancel()"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

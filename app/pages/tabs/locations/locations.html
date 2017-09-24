@@ -23,6 +23,9 @@
                             locationsForm.locationName.$touched=false;
                             locationsForm.locationCode.$touched=false;
                             locationsForm.address.$touched=false;
+                            locationsForm.state.$touched=false;
+                            locationsForm.city.$touched=false;
+                            locationsForm.pinCode.$touched=false;
                             locationsForm.status.$touched=false;
                             "><i class="fa fa-plus"> </i> <span>Add</span></button>
                         </li>
@@ -40,16 +43,18 @@
                                 <div class="form-group ">
                                     <!-- <label>Location Name </label> -->
                                     <span class="mandatory-fields"> <label>Location Name</label>*</span>
-                                    <input class="form-control " name="locationName" ng-model="newLocation.locationName" value="" size="35" data-error="Required" required="" type="text">
+                                    <input class="form-control " name="locationName" ng-model="newLocation.locationName" value="" size="35" data-error="Required"
+                                        required="" type="text">
                                     <span ng-show="locationsForm.locationName.$touched && locationsForm.locationName.$invalid" class="input-field-errors">Location name is required.</span>
                                     <span ng-if="errorMessageLocationName" class="input-field-errors">Location name Already Exist!</span>
                                 </div>
                             </div>
-                            <div class="col-xs-12  col-sm-6 col-md-6 col-lg-6 ltn">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ltn">
                                 <div class="form-group ">
                                     <!-- <label>Location Code </label> -->
                                     <span class="mandatory-fields"> <label>Location Code</label>*</span>
-                                    <input class="form-control " name="locationCode" ng-model="newLocation.locationCode" value="" size="35" data-error="Required" required="" type="text">
+                                    <input class="form-control " name="locationCode" ng-model="newLocation.locationCode" value="" size="35" data-error="Required"
+                                        required="" type="text">
                                     <span ng-show="locationsForm.locationCode.$touched && locationsForm.locationCode.$invalid" class="input-field-errors">Location code is required.</span>
                                     <span ng-if="errorMessagelocationCode" class="input-field-errors">Location code  Already Exist!</span>
                                 </div>
@@ -59,8 +64,35 @@
                             <div class="form-group ">
                                 <!-- <label>Address</label> -->
                                 <span class="mandatory-fields"> <label>Address </label>*</span>
-                                <input class="form-control " name="address" ng-model="newLocation.locationAddress" value="" size="35" data-error="Required" required="" type="text">
+                                <input class="form-control " name="address" ng-model="newLocation.locationAddress" value="" size="35" data-error="Required"
+                                    required="" type="text">
                                 <span ng-show="locationsForm.address.$touched && locationsForm.address.$invalid" class="input-field-errors">Location address is required.</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group lname">
+                                <!-- <label>State </label> -->
+                                <span class="mandatory-fields"> <label>State</label>*</span>
+                                <input class="form-control " name="state" ng-model="newLocation.state" value="" size="35" data-error="Required" required=""
+                                    type="text">
+                                <span ng-show="locationsForm.state.$touched && locationsForm.state.$invalid" class="input-field-errors">Location State is required.</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group lname">
+                                <span class="mandatory-fields"> <label>City</label>*</span>
+                                <input class="form-control " name="city" ng-model="newLocation.city" value="" size="35" data-error="Required" required=""
+                                    type="text">
+                                <span ng-show="locationsForm.city.$touched && locationsForm.city.$invalid" class="input-field-errors">Location City is required.</span>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group lname">
+                                <span class="mandatory-fields"> <label>Pin code</label>*</span>
+                                <input class="form-control " name="pinCode" ng-model="newLocation.pinCode" value="" size="35" data-error="Required" required=""
+                                    type="text">
+                                <span ng-show="locationsForm.pinCode.$touched && locationsForm.pinCode.$invalid" class="input-field-errors">Location Pin code is required.</span>
                             </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
@@ -101,6 +133,9 @@
                                             <th class="sorting" ng-click="orderByField='locationName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'locationName') && !reverseSort, 'sorting_desc': (orderByField == 'locationName') && reverseSort}">Location Name</th>
                                             <th class="sorting" ng-click="orderByField='locationCode'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'locationCode') && !reverseSort, 'sorting_desc': (orderByField == 'locationCode') && reverseSort}">Location Code</th>
                                             <th class="sorting" ng-click="orderByField='locationAddress'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'locationAddress') && !reverseSort, 'sorting_desc': (orderByField == 'locationAddress') && reverseSort}">Address</th>
+                                            <th class="sorting" ng-click="orderByField='state'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'state') && !reverseSort, 'sorting_desc': (orderByField == 'state') && reverseSort}">State</th>
+                                            <th class="sorting" ng-click="orderByField='city'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'city') && !reverseSort, 'sorting_desc': (orderByField == 'city') && reverseSort}">City</th>
+                                            <th class="sorting" ng-click="orderByField='pinCode'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'pinCode') && !reverseSort, 'sorting_desc': (orderByField == 'pinCode') && reverseSort}">Pin Code</th>
                                             <th class="sorting" ng-click="orderByField='operationalStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'operationalStatus') && !reverseSort, 'sorting_desc': (orderByField == 'operationalStatus') && reverseSort}">Operational Status</th>
                                             <th>Actions</th>
                                         </tr>
@@ -110,18 +145,25 @@
                                             <td class="center">{{location.locationName}}</td>
                                             <td class="center">{{location.locationCode}}</td>
                                             <td class="center">{{location.locationAddress}}</td>
-                                            <td class="center">{{location.operationalStatus}}</td>
-                                            <td class="center"><a href="#" class="btn btn-primary" title="Change"><span class="glyphicon glyphicon-edit"></span></a></td>
+                                            <td class="center">{{location.locationAddress}}</td>
+                                            <td class="center">{{location.state}}</td>
+                                            <td class="center">{{location.city}}</td>
+                                            <td class="center">{{location.pinCode}}</td>
+                                            <td class="center"><a class="btn btn-primary" ng-click="openEditModal('lg', location)" title="Change"><span class="glyphicon glyphicon-edit"></span></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
-                                        <p style="margin-top: 7px;">Showing {{((locationList | search:locationsSearchKey:'locations').length == 0 )? 0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((locationList | search: locationsSearchKey: 'locations').length))?
-                                            ((locationList | search: locationsSearchKey: 'locations').length) : currentPage * itemsPerPage}} 0f {{(locationList | search: locationsSearchKey: 'locations').length }} entries <span ng-show="locationsSearchKey.length > 0">(filtered from {{locationList.length}} total entries)</span></p>
+                                        <p style="margin-top: 7px;">Showing {{((locationList | search:locationsSearchKey:'locations').length == 0 )?
+                                            0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((locationList
+                                            | search: locationsSearchKey: 'locations').length))? ((locationList | search:
+                                            locationsSearchKey: 'locations').length) : currentPage * itemsPerPage}} 0f {{(locationList
+                                            | search: locationsSearchKey: 'locations').length }} entries <span ng-show="locationsSearchKey.length > 0">(filtered from {{locationList.length}} total entries)</span></p>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
-                                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
+                                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage"
+                                            boundary-link-numbers="true" rotate="false"></ul>
                                     </div>
                                 </div>
                             </div>
