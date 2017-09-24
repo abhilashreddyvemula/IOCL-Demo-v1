@@ -14,7 +14,6 @@ angular.module('myApp.services', [])
             });
         }
     }])
-
     // Bay Services
     .service('BayService', ['$http', 'utility', function ($http, utility) {
         var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/baysmanagement';
@@ -69,7 +68,6 @@ angular.module('myApp.services', [])
     // Users Services
     .service('UsersService', ['$http', 'utility', function ($http, utility) {
         var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/usermanagement';
-
         this.getUsersList = function () {
             var headers = utility.getHeaders();
             var url = baseUrl + '/getUsers?UserRole=' + utility.getUserRole();
