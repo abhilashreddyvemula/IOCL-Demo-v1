@@ -22,26 +22,26 @@
                 <!--</uib-tab>-->
                 <!--</uib-tabset>-->
                 <ul class="links">
-                    <li>
-                        <a ng-class="main.active.tab == 'bay'? 'active': 'in_active'" ng-click="main.active.tab = 'bay'" ng-show="userPrivilages.bay"> <i class="fa fa-tint" aria-hidden="true"> </i> <span>Bay </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+                    <li ng-show="userPrivilages.bay">
+                        <a ng-class="main.active.tab == 'bay'? 'active': 'in_active'" ng-click="main.active.tab = 'bay'" > <i class="fa fa-tint" aria-hidden="true"> </i> <span>Bay </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
                     </li>
-                    <li>
-                        <a ng-class="main.active.tab == 'users'? 'active': 'in_active'" ng-click="main.active.tab = 'users'" ng-show="userPrivilages.users"> <i class="fa fa-user" aria-hidden="true"> </i> <span>Users </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+                    <li ng-show="userPrivilages.users">
+                        <a ng-class="main.active.tab == 'users'? 'active': 'in_active'" ng-click="main.active.tab = 'users'" > <i class="fa fa-user" aria-hidden="true"> </i> <span>Users </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
                     </li>
-                    <li>
-                        <a ng-class="main.active.tab == 'contractors'? 'active': 'in_active'" ng-click="main.active.tab = 'contractors'" ng-show="userPrivilages.contractors"> <i class="fa fa-user-secret" aria-hidden="true"> </i> <span>Contractors </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+                    <li ng-show="userPrivilages.contractors">
+                        <a ng-class="main.active.tab == 'contractors'? 'active': 'in_active'" ng-click="main.active.tab = 'contractors'" > <i class="fa fa-user-secret" aria-hidden="true"> </i> <span>Contractors </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
                     </li>
-                    <li>
-                        <a ng-class="main.active.tab == 'locations'? 'active': 'in_active'" ng-click="main.active.tab = 'locations'" ng-show="userPrivilages.locations"> <i class="fa fa-map-marker" aria-hidden="true"> </i> <span>Locations </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+                    <li ng-show="userPrivilages.locations">
+                        <a ng-class="main.active.tab == 'locations'? 'active': 'in_active'" ng-click="main.active.tab = 'locations'" > <i class="fa fa-map-marker" aria-hidden="true"> </i> <span>Locations </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
                     </li>
-                    <li>
-                        <a ng-class="main.active.tab == 'quantity'? 'active': 'in_active'" ng-click="main.active.tab = 'quantity'" ng-show="userPrivilages.quantity"> <i class="fa fa-thermometer-half" aria-hidden="true"> </i> <span>Quantity </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+                    <li ng-show="userPrivilages.quantity">
+                        <a ng-class="main.active.tab == 'quantity'? 'active': 'in_active'" ng-click="main.active.tab = 'quantity'" > <i class="fa fa-thermometer-half" aria-hidden="true"> </i> <span>Quantity </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
                     </li>
-                    <li>
-                        <a ng-class="main.active.tab == 'reports'? 'active': 'in_active'" ng-click="main.active.tab = 'reports'" ng-show="userPrivilages.reports"> <i class="fa fa-file" aria-hidden="true"> </i> <span>Reports </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+                    <li ng-show="userPrivilages.reports">
+                        <a ng-class="main.active.tab == 'reports'? 'active': 'in_active'" ng-click="main.active.tab = 'reports'" > <i class="fa fa-file" aria-hidden="true"> </i> <span>Reports </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
                     </li>
-                    <li>
-                        <a ng-class="main.active.tab == 'operator'? 'active': 'in_active'" ng-click="main.active.tab = 'operator'" ng-show="userPrivilages.operator"> <i class="fa fa-file" aria-hidden="true"> </i> <span>Truck operator </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+                    <li ng-show="userPrivilages.operator">
+                        <a ng-class="main.active.tab == 'operator'? 'active': 'in_active'" ng-click="main.active.tab = 'operator'" > <i class="fa fa-file" aria-hidden="true"> </i> <span>Truck operator </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
                     </li>
                 </ul>
             </div>

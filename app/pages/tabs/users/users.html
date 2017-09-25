@@ -221,7 +221,7 @@
                                             <td class="center">{{item.userType[0]}}</td>
                                             <td class="center">{{item.userStatus}} </td>
                                             <td class="center">
-                                                <button ng-if="item.userEditFlag" class="btn btn-primary  edit-delete-icon" title="Change" ng-click="openEditModal('ls', item)"><span class="glyphicon glyphicon-edit"></span></button>
+                                                <button ng-disabled="item.userEditFlag" class="btn btn-primary  edit-delete-icon" title="Change" ng-click="openEditModal('ls', item)"><span class="glyphicon glyphicon-edit"></span></button>
                                                 <button class="btn btn-danger edit-delete-icon" title="Delete" ng-click="deleteUser(item)"><span class="glyphicon glyphicon-trash"></span></button>
                                             </td>
                                         </tr>

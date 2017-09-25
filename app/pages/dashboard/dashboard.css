@@ -65,6 +65,9 @@ button.cancel{
     opacity: 1;
 }
 
+
+
+
 a.active  .fa-angle-down { display:none; }
 a.in_active  .fa-angle-down { display:inline-block;   }
 a.active  .fa-angle-up { display:inline-block;    }
@@ -998,4 +1001,39 @@ button, select {
 }
 button, input {
    overflow: visible;
+}
+
+
+.table tbody tr.green, .table tbody tr.green:hover {
+    background-color: #006400;
+    color: #ffffff;
+}
+
+.table tbody tr.red, .table tbody tr.red:hover {
+    background-color: #f00;
+    color: #ffffff;
+}
+
+.btn{
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.operator-actions .btn {
+    padding: 0.5rem 3px;
 }

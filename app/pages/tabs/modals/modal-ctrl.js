@@ -2,11 +2,21 @@ angular.module('myApp.modals', [])
   .controller('BayEditModalCtrl', function ($uibModalInstance, items, BayService) {
     var $ctrl = this;
     $ctrl.bay = items.bay;
+    let oldBay = $ctrl.bay;
     $ctrl.dropDownValues = items.dropDownValues;
 
     $ctrl.update = function () {
       //$uibModalInstance.close($ctrl.selected.item);
-      let bay = { 'bayName': $ctrl.bay.bayName, 'bayNum': $ctrl.bay.bayNum, 'bayType': $ctrl.bay.bayType, 'functionalStatus': $ctrl.bay.functionalStatus, 'editbayNumFlag': true, 'editbayNameFlag': true, 'bayId': $ctrl.bay.bayId }
+      let editbayNumFlag = false;
+      let editbayNameFlag = false;
+      if($ctrl.bay.bayName !== oldBay.bayName){
+        editbayNameFlag = true;
+      }
+      if($ctrl.bay.bayNum !== oldBay.bayNum){
+        editbayNumFlag = true;
+      }
+      let bay = { 'bayName': $ctrl.bay.bayName, 'bayNum': $ctrl.bay.bayNum, 'bayType': $ctrl.bay.bayType, 'functionalStatus': $ctrl.bay.functionalStatus, 'editbayNumFlag': editbayNumFlag, 'editbayNameFlag': editbayNameFlag, 'bayId': $ctrl.bay.bayId }
+      
       BayService.updateBay(bay).then(function (response) {
         console.log('Response', response);
         $ctrl.cancel();
