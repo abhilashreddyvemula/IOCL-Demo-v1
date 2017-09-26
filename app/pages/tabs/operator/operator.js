@@ -54,7 +54,7 @@ angular.module('myApp.dashboard')
 
         $scope.addNewFanSlip = function () {
             $scope.addClicked = true;
-            $scope.newFanSlip = { "truckNo": "", "driverName": "", "driverLicNo": "", "customer": "", "quantity": "", "vehicleWgt": "", "destination": "", "locationCode": "", "bayNum": null, "mobileNumber": "", "contractorName": "", "fanCreatedBy": "" };
+            $scope.newFanSlip = { "truckNumber": "", "driverName": "", "driverLicNo": "", "customer": "", "quantity": "", "vehicleWgt": "", "destination": "", "locationCode": "", "bayNum": null, "mobileNumber": "", "contractorName": "", "fanCreatedBy": "" };
         }
 
         $scope.onCancel = function () {

@@ -24,7 +24,7 @@ angular.module('myApp.dashboard', ['ngRoute', 'ui.bootstrap'])
         $scope.main.active.tab = 'users';
         $scope.userPrivilages = { 'bay': false, 'users': true, 'contractors': false, 'locations': false, 'quantity': false, 'operator': true };
     } else {
-        $scope.main.active.tab = 'users';
+        $scope.main.active.tab = 'operator';
         $scope.userPrivilages = { 'bay': false, 'users': false, 'contractors': false, 'locations': false, 'quantity': false, 'operator': true };
     }
 

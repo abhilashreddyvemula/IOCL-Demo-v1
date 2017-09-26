@@ -156,45 +156,44 @@
                   <table width="100%" class="table table-bordered">
                     <thead>
                       <tr>
-                        <th class="sorting" ng-click="orderByField='truckNo'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'truckNo') && !reverseSort, 'sorting_desc': (orderByField == 'truckNo') && reverseSort}"
+                        <th class="sorting" ng-click="orderByField='truckNumber'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'truckNumber') && !reverseSort, 'sorting_desc': (orderByField == 'truckNumber') && reverseSort}"
                           width="11%">Truck Registration Number</th>
-                        <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}"
+                        <th class="sorting" ng-click="orderByField='driverName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'driverName') && !reverseSort, 'sorting_desc': (orderByField == 'driverName') && reverseSort}"
                           width="11%">Driver Name</th>
-                        <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}"
+                        <th class="sorting" ng-click="orderByField='fanPin'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPin') && !reverseSort, 'sorting_desc': (orderByField == 'fanPin') && reverseSort}"
                           width="13%">FAN Slip Number</th>
-                        <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}"
+                        <th class="sorting" ng-click="orderByField='customer'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'customer') && !reverseSort, 'sorting_desc': (orderByField == 'customer') && reverseSort}"
                           width="7%">Customer</th>
-                        <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}"
+                        <th class="sorting" ng-click="orderByField='quantity'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'quantity') && !reverseSort, 'sorting_desc': (orderByField == 'quantity') && reverseSort}"
                           width="6%">Quantity</th>
-                        <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}"
+                        <th class="sorting" ng-click="orderByField='contractorName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractorName') && !reverseSort, 'sorting_desc': (orderByField == 'contractorName') && reverseSort}"
                           width="7%">Contractor</th>
-                        <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}"
+                        <th class="sorting" ng-click="orderByField='destination'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'destination') && !reverseSort, 'sorting_desc': (orderByField == 'destination') && reverseSort}"
                           width="8%">Destination</th>
-                        <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}"
+                        <th class="sorting" ng-click="orderByField='locationCode'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'locationCode') && !reverseSort, 'sorting_desc': (orderByField == 'locationCode') && reverseSort}"
                           width="6%">Location Code</th>
-                        <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}"
+                        <th class="sorting" ng-click="orderByField='bayNum'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayNum') && !reverseSort, 'sorting_desc': (orderByField == 'bayNum') && reverseSort}"
                           width="3%">Bay Number</th>
-                        <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}"
+                        <th class="sorting" ng-click="orderByField='bayStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayStatus') && !reverseSort, 'sorting_desc': (orderByField == 'bayStatus') && reverseSort}"
                           width="9%">Bay Status</th>
-                        <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}"
+                        <th class="sorting" ng-click="orderByField='fanPinExpiration'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPinExpiration') && !reverseSort, 'sorting_desc': (orderByField == 'fanPinExpiration') && reverseSort}"
                           width="10%">Expiration Date</th>
-                        <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}"
-                          width="9%">Actions</th>
+                        <th width="9%">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <!-- <tr class="green" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
-                        <td class="center">{{fanSlip.truckNo}}</td>
+                      <tr ng-class="{'green': fanSlip.bayStatus == 'Completed', 'red': fanSlip.bayStatus == 'Not Reached'}" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                        <td class="center">{{fanSlip.truckNumber}}</td>
                         <td class="center">{{fanSlip.driverName}}</td>
-                        <td class="center">{{fanSlip.driverName}}</td>
+                        <td class="center">{{fanSlip.fanPin}}</td>
                         <td class="center">{{fanSlip.customer}}</td>
                         <td class="center">{{fanSlip.quantity}}</td>
-                        <td class="center">{{fanSlip.driverName}}</td>
+                        <td class="center">{{fanSlip.contractorName}}</td>
                         <td class="center">{{fanSlip.destination}}</td>
                         <td class="center">{{fanSlip.locationCode}}</td>
                         <td class="center">{{fanSlip.bayNum}}</td>
-                        <td class="center">{{fanSlip.driverName}}</td>
-                        <td class="center">{{fanSlip.driverName}}</td>
+                        <td class="center">{{fanSlip.bayStatus}}</td>
+                        <td class="center">{{fanSlip.fanPinExpiration}}</td>
                         <td class="center operator-actions">
                           <a href="#" class="btn btn-primary" title="View"><span title="View" class="fa fa-eye"></span></a>&nbsp;
                           <a href="#" class="btn btn-success" title="Print"><span class="glyphicon glyphicon-print"></span></a>&nbsp;
@@ -203,8 +202,8 @@
                               title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
 
                         </td>
-                      </tr> -->
-                      <tr class="green odd" role="row">
+                      </tr>
+                      <!-- <tr class="green odd" role="row">
                         <td class="center">MH-01-54321</td>
                         <td class="center">Donald Oswany </td>
                         <td class="center">3423</td>
@@ -224,7 +223,7 @@
                               data-toggle="tooltip" title="Cancel"><span class="glyphicon glyphicon-remove"></span></a>
 
                         </td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
                   <div class="row">
