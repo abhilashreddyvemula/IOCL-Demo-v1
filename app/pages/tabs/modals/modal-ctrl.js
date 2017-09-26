@@ -34,7 +34,7 @@ angular.module('myApp.modals', [])
     let oldUser = $ctrl.user;
     $ctrl.dropDownValues = items.dropDownValues;
     console.log($ctrl.user, $ctrl.dropDownValues);
-    $ctrl.save = function () {
+    $ctrl.update = function () {
       let editUserNameFlag = false;
       if($ctrl.user.userName !== oldUser.userName){
         editUserNameFlag = true;
@@ -58,7 +58,7 @@ angular.module('myApp.modals', [])
     let oldContractor = $ctrl.contractor;
     $ctrl.dropDownValues = items.dropDownValues;
     console.log($ctrl.contractor, $ctrl.dropDownValues);
-    $ctrl.save = function () {
+    $ctrl.update = function () {
       let editContractorNameFlag = false;
       if($ctrl.contractor.contractorName !== oldContractor.contractorName){
         editContractorNameFlag = true;
@@ -82,7 +82,7 @@ angular.module('myApp.modals', [])
     let oldLocation = $ctrl.location;
     $ctrl.dropDownValues = items.dropDownValues;
     console.log($ctrl.location, $ctrl.dropDownValues);
-    $ctrl.save = function () {
+    $ctrl.update = function () {
       let editLocationNameFlag = false;
       let editLocationCodeFlag = false;
       if($ctrl.location.locationName !== oldLocation.locationName){
@@ -110,7 +110,7 @@ angular.module('myApp.modals', [])
     let oldQuantity = $ctrl.quantity;
     $ctrl.dropDownValues = items.dropDownValues;
     console.log($ctrl.quantity, $ctrl.dropDownValues);
-    $ctrl.save = function () {
+    $ctrl.update = function () {
       let editQuantityFlag = false;
       let editQuantityNameFlag = false;
       if($ctrl.quantity.quantity !== oldQuantity.quantity){
