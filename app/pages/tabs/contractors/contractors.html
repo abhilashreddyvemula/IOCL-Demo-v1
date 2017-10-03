@@ -5,8 +5,8 @@
                 <div class=" col-12" ng-show="addClicked" id="contractor-save-btns">
                     <h2> <i class="fa fa-user-secret"> </i><span></span><strong>Add Contractor</strong></h2>
                     <ul class="buttons">
-                        <li>
-                            <button class="submit hoverMsg" type="button" ng-click="addClicked;saveContractor(newContractor)" ng-disabled="contractorForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                        <li class="hoverMsg">
+                            <button class="submit " type="button" ng-click="addClicked;saveContractor(newContractor)" ng-disabled="contractorForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
                             <span ng-if="contractorForm.$invalid" class="tooltiptext">Please fill all fields</span>
                         </li>
                         <li>

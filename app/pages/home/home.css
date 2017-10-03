@@ -44,17 +44,17 @@ form.form-horizontal {
 	border-radius:3px;  
 }
 .form-horizontal {  width:100px; }
-button {
-    border: none;
+.login-container button {
+    /* border: none;
     line-height: 50px;
-    padding: 5px 20px ;
+    padding: 5px 20px ; */
     margin: 5px;
 	width:100px; 
 }
 button.btn-primary span { color:white;}
-button span {
+.login-container button span {
     text-transform: uppercase;
-    color: #333;
+    /* color: #333; */
     font-size: 14px;
     vertical-align: middle;
 	line-height: 30px;
@@ -101,4 +101,4 @@ text-align: center;
 } 
 
 .btns { text-align:center; } 
-.btn-default { background-color:#eee; }
+.reset { background-color:#eee; }

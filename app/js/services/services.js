@@ -295,7 +295,7 @@ angular.module('myApp.services', [])
             });
         }
 
-        this.getStaticFanSlipsData = function () {
+        this.getfanSlipStaticData = function () {
             var headers = utility.getHeaders();
             var url = baseUrl + '/getFanStaticData';
             return $http({
@@ -314,6 +314,18 @@ angular.module('myApp.services', [])
                 url: url,
                 headers: headers,
                 data: JSON.stringify(quantity)
+            });
+        }
+
+        this.regenerateFanSlip = function(fanSlip){
+            var headers = utility.getHeaders();
+            var url = baseUrl + '/fanslipReGeneration';
+
+            return $http({
+                method: 'POST',
+                url: url,
+                headers: headers,
+                data: JSON.stringify(fanSlip)
             });
         }
     }]);

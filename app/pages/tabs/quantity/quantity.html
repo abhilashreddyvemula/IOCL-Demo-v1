@@ -5,8 +5,8 @@
                 <div class="col-12" ng-show="addClicked" id="quantity-save-btns">
                     <h2> <i class="fa fa-map-marker"> </i><span></span><strong> Add  Quantity</strong></h2>
                     <ul class="buttons">
-                        <li>
-                            <button class="submit hoverMsg" type="button" ng-click="addClicked; saveQuantity(newQuantity)" ng-disabled="quantityForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                        <li class="hoverMsg">
+                            <button class="submit" type="button" ng-click="addClicked; saveQuantity(newQuantity)" ng-disabled="quantityForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
                             <span ng-if="quantityForm.$invalid" class="tooltiptext">Please fill all fields</span>
                         </li>
                         <li>

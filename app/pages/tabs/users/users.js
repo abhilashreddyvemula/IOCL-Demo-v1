@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('UsersController', ['$scope', '$uibModal', 'utility', 'UsersService', 'LoaderService', function($scope, $uibModal, utility, usersService, loader) {
+    .controller('UsersController', ['$scope', '$filter', '$uibModal', 'utility', 'UsersService', 'LoaderService', function ($scope, $filter, $uibModal, utility, usersService, loader) {
 
         $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
@@ -10,27 +10,29 @@ angular.module('myApp.dashboard')
         $scope.passwordErrorFlag = false;
         $scope.formInvalid = false;
         $scope.addClicked = false;
-        $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": [], "userStatus": "" };
+        $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": null, "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": [], "userStatus": "" };
         $scope.usersList = [];
 
         $scope.dropDownValues = { 'UserStatus': [], 'UserTypes': [] };
 
-        $scope.pageChanged = function() {
+        $scope.format = 'yyyy-MM-dd';
+
+        $scope.pageChanged = function () {
             console.log('Page changed to: ' + $scope.currentPage);
         };
-        $scope.setItemsPerPage = function(num) {
+        $scope.setItemsPerPage = function (num) {
             $scope.itemsPerPage = num;
             $scope.currentPage = 1; //reset to first page
         }
 
-        $scope.isAddAvailable = function() {
+        $scope.isAddAvailable = function () {
             if ($scope.userRole === 'Super Admin' || $scope.userRole === 'Admin' || $scope.userRole === 'Supervisor')
                 return true;
             else
                 return false;
         }
 
-        $scope.formatDate = function(date) {
+        $scope.formatDate = function (date) {
             function pad(n) {
                 return n < 10 ? '0' + n : n;
             }
@@ -40,27 +42,27 @@ angular.module('myApp.dashboard')
                 '-' + pad(date.getDate());
         };
 
-        $scope.parseDate = function(s) {
+        $scope.parseDate = function (s) {
             var tokens = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
 
             return tokens && new Date(tokens[1], tokens[2] - 1, tokens[3]);
         };
 
-        $scope.loadAllUsers = function() {
+        $scope.loadAllUsers = function () {
             loader.show();
-            usersService.getUsersList().then(function(response) {
+            usersService.getUsersList().then(function (response) {
 
                 $scope.usersList = response.data;
                 $scope.totalItems = $scope.usersList.length;
                 console.log($scope.usersList);
                 loader.hide();
-            }, function(error) {
+            }, function (error) {
                 loader.hide();
             });
         }
-        $scope.loadDropdownsData = function() {
+        $scope.loadDropdownsData = function () {
             //alert("load user static data")
-            usersService.getStaticUserData().then(function(response) {
+            usersService.getStaticUserData().then(function (response) {
                 /* let userTypes = response.data.data.UserTypes;
                  let userTypesArray = [];
                  if ($scope.userRole === 'Super Admin') {
@@ -90,52 +92,53 @@ angular.module('myApp.dashboard')
                 $scope.dropDownValues.UserTypes = response.data.data.UserTypes;
                 $scope.dropDownValues.UserStatus = response.data.data.UserStatus;
                 console.log(response.data);
-            }, function(error) {});
+            }, function (error) { });
         }
 
 
-        $scope.addNewUser = function() {
+        $scope.addNewUser = function () {
             $scope.addClicked = true;
             $scope.errorMessageUserName = false;
-            $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": [], "userStatus": "" };
+            $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": null, "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": [], "userStatus": "" };
         }
-        $scope.deleteUser = function(user) {
+        $scope.deleteUser = function (user) {
 
-            let userId = user.userID;
-            usersService.deleteUser(userId).then(function(response) {
-                console.log('deleted user record', response);
+            //let userId = user.userID;
+            let updatedUser = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userFirstName, "userDOB": user.userDOB, "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": "", "userType": user.userType, "userStatus": 'Locked', "editUserNameFlag": false, "userId": user.userID };
+            usersService.updateUser(updatedUser).then(function (response) {
+                console.log('Updated user record', response);
                 $scope.loadAllUsers();
-            }, function(error) {
+            }, function (error) {
                 console.log('error');
             });
 
         }
-        $scope.editUser = function() {
+        $scope.editUser = function () {
             console.log('Edit user details');
         }
-        $scope.onCancel = function() {
+        $scope.onCancel = function () {
             $scope.addClicked = false;
         }
 
 
-        $scope.isPasswordSame = function() {
+        $scope.isPasswordSame = function () {
             if ($scope.newUser.rePassword !== '' && $scope.newUser.userPassword !== '' && $scope.newUser.rePassword !== $scope.newUser.userPassword) {
                 return true;
             } else {
                 return false;
             }
         }
-        $scope.saveUser = function(user) {
+        $scope.saveUser = function (user) {
             loader.show();
             //var userType = [];
             //userType.push(user.userType);
-            var body = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": user.userDOB, "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": user.userType, "userStatus": user.userStatus };
-            usersService.addUser(body).then(function(success) {
-                $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": "", "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": [], "userStatus": "" };
+            var body = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": $filter('date')(user.userDOB, 'yyyy-MM-dd'), "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": user.userType, "userStatus": user.userStatus };
+            usersService.addUser(body).then(function (success) {
+                $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": null, "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": [], "userStatus": "" };
                 $scope.loadAllUsers();
                 $scope.addClicked = false;
                 loader.hide();
-            }, function(error) {
+            }, function (error) {
 
                 $scope.addClicked = true;
                 $scope.errorMessage = error.data.errorMessage;
@@ -154,7 +157,7 @@ angular.module('myApp.dashboard')
             });
         }
 
-        $scope.openEditModal = function(size, item) {
+        $scope.openEditModal = function (size, item) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'pages/tabs/modals/user-edit-modal.html',
@@ -162,15 +165,24 @@ angular.module('myApp.dashboard')
                 controllerAs: '$ctrl',
                 size: size,
                 resolve: {
-                    items: function() {
+                    items: function () {
                         return { 'user': item, 'dropDownValues': $scope.dropDownValues };
                     }
                 }
             });
 
+            modalInstance.result.then(function (selectedItem) {
+                console.log();
+                if(selectedItem.$value === 'updated'){
+                    $scope.loadAllUsers();
+                }
+              }, function () {
+                $log.info('modal-component dismissed at: ' + new Date());
+              });
+
         };
 
-        $scope.toggle_password = function(target) {
+        $scope.toggle_password = function (target) {
             var d = document;
             var tag = d.getElementById('myPassword');
             var tag2 = d.getElementById('eye');

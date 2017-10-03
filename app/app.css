@@ -254,6 +254,28 @@ button[disabled="disabled"] {
     z-index: 1;
 }
 
-.buttons:hover .tooltiptext {
+.hoverMsg:hover .tooltiptext {
     visibility: visible;
+}
+@media print {
+	.print-div tr:nth-child(odd) {
+		background: #f4f4f4 !important;
+		-webkit-print-color-adjust: exact;
+	}
+	.print-div tr td:nth-child(1) {
+		font-weight: bold;
+	}
+	.print-div tr td {
+		padding: 10px;
+	}
+}
+.print-div tr:nth-child(odd) {
+	background: #f4f4f4 !important;
+	-webkit-print-color-adjust: exact;
+}
+.print-div tr td:nth-child(1) {
+	font-weight: bold;
+}
+.print-div tr td {
+	padding: 10px;
 }

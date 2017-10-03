@@ -1,0 +1,64 @@
+<div class="modal-content">
+    <h2> <i class="fa fa-truck" aria-hidden="true"></i> Truck Operator Details:</h2>
+    <button type="button" class="close" ng-click="$ctrl.cancel()"> <span>×</span> </button>
+    <div class="modal-body" id="print-div">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <tbody>
+                <tr>
+                    <td width="50%" align="right">Truck Registration Number</td>
+                    <td width="50%">{{$ctrl.fanSlip.truckNumber}}</td>
+                </tr>
+                <tr>
+                    <td align="right">Driver Name </td>
+                    <td>{{$ctrl.fanSlip.driverName}}</td>
+                </tr>
+                <tr>
+                    <td align="right">Customer</td>
+                    <td>{{$ctrl.fanSlip.customer}}</td>
+                </tr>
+                <tr>
+                    <td align="right">Quantity</td>
+                    <td>{{$ctrl.fanSlip.quantity}}</td>
+                </tr>
+                <tr>
+                    <td align="right">Contractor</td>
+                    <td>{{$ctrl.fanSlip.contractorName}}</td>
+                </tr>
+                <tr>
+                    <td align="right">Destination</td>
+                    <td>{{$ctrl.fanSlip.destination}}</td>
+                </tr>
+                <tr>
+                    <td align="right">Location Code</td>
+                    <td>{{$ctrl.fanSlip.locationCode}}</td>
+                </tr>
+                <tr>
+                    <td align="right">Bay Number</td>
+                    <td>{{$ctrl.fanSlip.bayNum}}</td>
+                </tr>
+                <tr>
+                    <td align="right">Bay Status</td>
+                    <td>{{$ctrl.fanSlip.bayStatus}}</td>
+                </tr>
+                <tr>
+                    <td align="right">Expiration Date</td>
+                    <td>{{$ctrl.fanSlip.fanPinExpiration}}</td>
+                </tr>
+                <tr>
+                    <td align="right">FAN Slip Number </td>
+                    <td>XXXX</td>
+                </tr>
+                <tr>
+                    <td align="right"><b>PIN</b></td>
+                    <td><b>{{$ctrl.fanSlip.fanPin}}</b></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="buttons" style="text-align: center;"><button class="submit" type="button" style="width: auto;" ng-click="$ctrl.regenerate()"><span class="glyphicon glyphicon-refresh"> </span> <span>Re-Generate</span></button>
+                        <button class="submit" type="button" ng-click="$ctrl.print()"><i class="fa fa-print"> </i> <span>Print</span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

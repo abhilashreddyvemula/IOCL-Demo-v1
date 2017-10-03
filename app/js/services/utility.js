@@ -12,7 +12,7 @@ angular.module('myApp.utility',[])
     }
 
     this.getToken = function(){
-        return this.token;
+        return token;
     }
     this.generateToken = function(name, password){
         var hash = btoa(name+':'+password);
@@ -27,8 +27,23 @@ angular.module('myApp.utility',[])
         user = userdetails;
         // $http.defaults.headers.common['Authorization'] = this.generateToken(user.name, user.password);
     }
+    this.getCredentials = function(){
+        return user;
+    }
     this.clearCredentials = function(){
         user =  {'name': '', 'password': ''};
         // $http.defaults.headers.common.Authorization = 'Basic ';
+    }
+
+    this.getHTMLDiv = function(fanSlip) {
+        let html = '<table class="print-div" cellspacing="0" cellpadding="0" width="100%">'
+        fanSlip.forEach(function(item){
+            html += '<tr>';
+            html += '<td width="50%" align="right">'+ item.title +'</td><td width="50%">'+ item.value +'</td>';
+            html += '</tr>';
+        });
+        html += '</table>';
+
+        return html;
     }
 }]);
