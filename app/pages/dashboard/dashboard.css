@@ -657,7 +657,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 background: #ffffff; 
 }
 
-.top a { font-size:14px;    color:#000; display:inline-block; padding:5px 10px; margin:0 10px 0 0; line-height:50px; vertical-align:middle;  }
+.top a { cursor: pointer; font-size:14px;    color:#000; display:inline-block; padding:5px 10px; margin:0 10px 0 0; line-height:50px; vertical-align:middle;  }
 .top a .fa  , .top a .glyphicon{ font-size:20px;    margin-right:10px; vertical-align:middle; line-height:50px; top:-2px; position:relative;  }
 .top a .fa{ color:#004ea5; }
 .top a .glyphicon{ color:#f96413; }

@@ -26,6 +26,9 @@ angular.module('myApp.home', ['ngRoute'])
                     $location.path('dashboard');
                     loader.hide();
                 }
+                else{
+                    utility.clearCredentials();
+                }
                 $scope.inActiveFlag = false;
                 $scope.inValidFlag = false;
                 //$scope.errorFlag = false;
@@ -36,8 +39,12 @@ angular.module('myApp.home', ['ngRoute'])
             },
             function(error) {
                 loader.hide();
-
-                if (error.data !== null && error.data !== undefined && error.data['errorMessage'] == "User Locked or In Active. Please contact administrator") {
+                utility.clearCredentials();
+                if (error.data !== null && error.data !== undefined && error.data['errorCode'] == 422) {
+                    $scope.inValidFlag = true;
+                    $scope.errorMessage = error.data['errorMessage'];
+                }
+                else if (error.data !== null && error.data !== undefined && error.data['errorMessage'] == "User Locked or In Active. Please contact administrator") {
                     $scope.inActiveFlag = true;
                     $scope.inValidFlag = false;
 

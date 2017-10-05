@@ -1,13 +1,14 @@
 angular.module('myApp.utility',[])
-.service('utility', ['$http', function($http){
+.service('utility', ['$http', '$cookies', function($http, $cookies){
     var token = '';
-    var user = {'name': '', 'password': ''};
     var userRole = '';
     this.setUserRole = function(role){
         userRole = role;
+        $cookies.putObject('userRole', role);
     }
 
     this.getUserRole = function(){
+        let userRole = $cookies.getObject('userRole');
         return userRole;
     }
 
@@ -20,18 +21,23 @@ angular.module('myApp.utility',[])
     }
 
     this.getHeaders = function(){
+        let user = this.getCredentials();
         return { 'Content-Type': 'application/json', 'Authorization': this.generateToken(user.name, user.password) };
     }
 
     this.setCredentials = function(userdetails){
-        user = userdetails;
+        let user = userdetails;
+        this.clearCredentials();
+        $cookies.putObject('globals', user);
         // $http.defaults.headers.common['Authorization'] = this.generateToken(user.name, user.password);
     }
     this.getCredentials = function(){
-        return user;
+        let userdetails = $cookies.getObject('globals');
+        return userdetails;
     }
     this.clearCredentials = function(){
-        user =  {'name': '', 'password': ''};
+        $cookies.remove('globals');
+        $cookies.remove('userRole');
         // $http.defaults.headers.common.Authorization = 'Basic ';
     }
 

@@ -4,7 +4,7 @@
         <!-- <p> Please enter the User Id and Password to Login</p>
         <span>User Not Found. Please try with valid User Name!!</span>
         <span>Invalid User name or password</span> -->
-        <div ng-if="inValidFlag" class="input-field-errors errorFlaglogin">Invalid user name or password!</div>
+        <div ng-if="inValidFlag" class="input-field-errors errorFlaglogin">{{errorMessage}}</div>
         <div ng-if="inActiveFlag" class="input-field-errors errorFlaglogin">User Locked or In Active. Please contact administrator!</div>
         <div class="form-group">
             <div class="col-sm-12">

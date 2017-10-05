@@ -13,7 +13,7 @@
                 <tr>
                     <td align="right">Contractor Type</td>
                     <td>
-                        <select style="width: 50%;" name="contractorType" ng-init="$ctrl.contractor.contractorType = dropDownValues.Types[0]" ng-model="$ctrl.contractor.contractorType"
+                        <select style="width: 50%;" name="contractorType" ng-model="$ctrl.contractor.contractorType"
                             class="form-control" required ng-options="item for item in $ctrl.dropDownValues.Types">
                             <option value="">Select</option>
                         </select>
@@ -37,8 +37,7 @@
                 <tr>
                     <td align="right">State</td>
                     <td>
-                        <select name="contractorState" style="width: 50%;" ng-init="$ctrl.contractor.contractorState = $ctrl.dropDownValues.States[0]"
-                            ng-model="$ctrl.contractor.contractorState" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.States">
+                        <select name="contractorState" style="width: 50%;" ng-model="$ctrl.contractor.contractorState" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.States">
                             <option value="">Select</option>
                         </select>
                     </td>

@@ -104,14 +104,13 @@ angular.module('myApp.dashboard')
         $scope.deleteUser = function (user) {
 
             //let userId = user.userID;
-            let updatedUser = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userFirstName, "userDOB": user.userDOB, "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": "", "userType": user.userType, "userStatus": 'Inactive', "editUserNameFlag": false, "userId": user.userID };
+            let updatedUser = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userFirstName, "userDOB": user.userDOB, "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": user.userType, "userStatus": 'Not Active', "editUserNameFlag": false, "editPwdFlag": false, "userId": user.userID };
             usersService.updateUser(updatedUser).then(function (response) {
                 console.log('Updated user record', response);
                 $scope.loadAllUsers();
             }, function (error) {
                 console.log('error');
             });
-
         }
         $scope.editUser = function () {
             console.log('Edit user details');
