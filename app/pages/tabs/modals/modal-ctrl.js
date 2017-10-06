@@ -32,7 +32,9 @@ angular.module('myApp.modals', [])
     var $ctrl = this;
     $ctrl.format = 'yyyy-MM-dd';
     $ctrl.user = angular.copy(items.user);
+    var actualPassword = items.user.userPassword;
     $ctrl.user.userDOB = new Date($ctrl.user.userDOB);
+    $ctrl.user.userPassword = '********';
     let oldUser = $ctrl.user;
     $ctrl.dropDownValues = items.dropDownValues;
     console.log($ctrl.user, $ctrl.dropDownValues);
@@ -42,7 +44,18 @@ angular.module('myApp.modals', [])
         editUserNameFlag = true;
       }
       //$uibModalInstance.close($ctrl.selected.item);
-      let user = { "userName": $ctrl.user.userName, "userFirstName": $ctrl.user.userFirstName, "userLastName": $ctrl.user.userFirstName, "userDOB": $ctrl.user.userDOB, "userAadharNum": $ctrl.user.userAadharNum, "userMobileNum":$ctrl.user.userMobileNum, "userPassword": "", "userType": $ctrl.user.userType, "userStatus": $ctrl.user.userStatus, "editUserNameFlag": editUserNameFlag, "userId": $ctrl.user.userID };
+      var latestPassword = '';
+      var pwdEditFlad = false;
+      if($ctrl.user.userPassword === '********'){
+        pwdEditFlad = false;
+        latestPassword = actualPassword
+      }
+      else{
+        pwdEditFlad = true;
+        latestPassword = $ctrl.user.userPassword;
+
+      }
+      let user = { "userName": $ctrl.user.userName, "userFirstName": $ctrl.user.userFirstName, "userLastName": $ctrl.user.userFirstName, "userDOB": $ctrl.user.userDOB, "userAadharNum": $ctrl.user.userAadharNum, "userMobileNum":$ctrl.user.userMobileNum, "userPassword": latestPassword, "userType": $ctrl.user.userType, "userStatus": $ctrl.user.userStatus, "editUserNameFlag": editUserNameFlag, "userId": $ctrl.user.userID };
       UsersService.updateUser(user).then(function (response) {
         console.log('Response', response);
         $uibModalInstance.close({$value: 'updated'});
