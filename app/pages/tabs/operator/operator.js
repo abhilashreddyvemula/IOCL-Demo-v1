@@ -129,6 +129,13 @@ angular.module('myApp.dashboard')
                     }
                 }
             });
+
+            modalInstance.result.then(function (selectedItem) {
+                if (selectedItem.$value === 'regenerated') {
+                    $scope.loadFanSlipsList();
+                }
+            }, function () {
+            });
         }
 
         $scope.print = function (fanSlip) {
@@ -156,12 +163,16 @@ angular.module('myApp.dashboard')
             let newfanSlip = {"fanId": fanSlip.fanId, "truckNo": fanSlip.truckNumber, "driverName": fanSlip.driverName, "driverLicNo": "123456", "customer": fanSlip.customer, "quantity": fanSlip.quantity, "vehicleWgt": fanSlip.vehicleWeight,"destination": fanSlip.destination, "locationCode": fanSlip.locationCode, "bayNum": parseInt(fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name};
             fanSlipsService.regenerateFanSlip(newfanSlip).then(function(response){
               console.log('Response', response);
-              $ctrl.cancel();
+              $scope.loadFanSlipsList();
             }, function(error){});
         }
-        $scope.cancel = function(){
-
-        }
+        $scope.cancel = function(item){
+            let username = utility.getCredentials().name;
+            fanSlipsService.cancelFanSlip(item.fanId, username).then(function(response){
+                console.log(response);
+                $scope.loadFanSlipsList();
+            }, function(error){});
+        }   
 
 
         $scope.loadFanSlipsList();

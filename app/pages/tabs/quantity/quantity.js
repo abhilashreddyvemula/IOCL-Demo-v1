@@ -102,6 +102,13 @@ angular.module('myApp.dashboard')
                 }
             });
 
+            modalInstance.result.then(function (selectedItem) {
+                if (selectedItem.$value === 'updated') {
+                    $scope.loadAllQuantities();
+                }
+            }, function () {
+            });
+
         };
 
         $scope.loadAllQuantities();

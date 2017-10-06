@@ -101,6 +101,13 @@ angular.module('myApp.dashboard')
                 }
             });
 
+            modalInstance.result.then(function (selectedItem) {
+                if (selectedItem.$value === 'updated') {
+                    $scope.loadAllContractors();
+                }
+            }, function () {
+            });
+
         };
 
         $scope.loadAllContractors();

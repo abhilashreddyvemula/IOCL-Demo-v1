@@ -19,7 +19,8 @@ angular.module('myApp.modals', [])
       
       BayService.updateBay(bay).then(function (response) {
         console.log('Response', response);
-        $ctrl.cancel();
+        alert("Bay updated successfully...");
+        $uibModalInstance.close({$value: 'updated'});
       });
     };
 
@@ -37,7 +38,6 @@ angular.module('myApp.modals', [])
     $ctrl.user.userPassword = '********';
     let oldUser = $ctrl.user;
     $ctrl.dropDownValues = items.dropDownValues;
-    console.log($ctrl.user, $ctrl.dropDownValues);
     $ctrl.update = function () {
       let editUserNameFlag = false;
       if($ctrl.user.userName !== oldUser.userName){
@@ -58,6 +58,7 @@ angular.module('myApp.modals', [])
       let user = { "userName": $ctrl.user.userName, "userFirstName": $ctrl.user.userFirstName, "userLastName": $ctrl.user.userFirstName, "userDOB": $ctrl.user.userDOB, "userAadharNum": $ctrl.user.userAadharNum, "userMobileNum":$ctrl.user.userMobileNum, "userPassword": latestPassword, "userType": $ctrl.user.userType, "userStatus": $ctrl.user.userStatus, "editUserNameFlag": editUserNameFlag, "userId": $ctrl.user.userID };
       UsersService.updateUser(user).then(function (response) {
         console.log('Response', response);
+        alert("User updated successfully...");
         $uibModalInstance.close({$value: 'updated'});
       });
     };
@@ -82,7 +83,8 @@ angular.module('myApp.modals', [])
       let contractor = { "contractorId": $ctrl.contractor.contractorId, "contractorName": $ctrl.contractor.contractorName, "contractorType": $ctrl.contractor.contractorType, "contractorState": $ctrl.contractor.contractorState, "contractorPinCode": $ctrl.contractor.contractorPinCode, "contractorOperationalStatus": $ctrl.contractor.contractorOperationalStatus, "contractorCity": $ctrl.contractor.contractorCity, "contractorAddress": $ctrl.contractor.contractorAddress, "editContractorNameFlag": editContractorNameFlag };
       ContractorsService.updateContractor(contractor).then(function (response) {
         console.log('Response', response);
-        $ctrl.cancel();
+        alert("Contractor updated successfully...");
+        $uibModalInstance.close({$value: 'updated'});
       });
     };
 
@@ -110,7 +112,8 @@ angular.module('myApp.modals', [])
       let location = { "locationName": $ctrl.location.locationName, "locationCode": $ctrl.location.locationCode, "operationalStatus": $ctrl.location.operationalStatus, "locationAddress": $ctrl.location.locationAddress, "state": $ctrl.location.state, "city": $ctrl.location.city, "pinCode": $ctrl.location.pinCode, "locationId": $ctrl.location.locationId, "editLocationNameFlag": editLocationNameFlag, "editLocationCodeFlag": editLocationCodeFlag };
       LocationService.updateLocation(location).then(function (response) {
         console.log('Response', response);
-        $ctrl.cancel();
+        alert("Location updated successfully...");
+        $uibModalInstance.close({$value: 'updated'});
       });
     };
 
@@ -135,10 +138,13 @@ angular.module('myApp.modals', [])
         editQuantityNameFlag = true;
       }
       //$uibModalInstance.close($ctrl.selected.item);
-      let quantity = { "quantityName": $ctrl.quantity.quantityName, "quantity": $ctrl.quantity.quantity, "quantityStatus": $ctrl.quantity.quantityStatus, "editQuantityFlag": editQuantityFlag, "editQuantityNameFlag": editQuantityNameFlag, "quantityId": $ctrl.quantity.quantityId };
+      let quantity = { "quantityName": $ctrl.quantity.quantityName, "quantity": $ctrl.quantity.quantity, "quantityStatus": $ctrl.quantity.operationalStatus, "editQuantityFlag": editQuantityFlag, "editQuantityNameFlag": editQuantityNameFlag, "quantityId": $ctrl.quantity.qunatityId };
       QuantityService.updateQuantity(quantity).then(function (response) {
         console.log('Response', response);
-        $ctrl.cancel();
+        alert("Quantity updated successfully...");
+        $uibModalInstance.close({$value: 'updated'});
+      }, function(error){
+
       });
     };
 
@@ -152,11 +158,14 @@ angular.module('myApp.modals', [])
     $ctrl.fanSlip = angular.copy(items.fanSlip);
 
     $ctrl.regenerate = function(){
-      let fanSlip = {"truckNo": $ctrl.fanSlip.truckNumber, "driverName": $ctrl.fanSlip.driverName, "driverLicNo": "123456", "customer": $ctrl.fanSlip.customer, "quantity": $ctrl.fanSlip.quantity, "vehicleWgt": $ctrl.fanSlip.vehicleWeight,"destination": $ctrl.fanSlip.destination, "locationCode": $ctrl.fanSlip.locationCode, "bayNum": parseInt($ctrl.fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": $ctrl.fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name};
+      let fanSlip = {"fanId": $ctrl.fanSlip.fanId, "truckNo": $ctrl.fanSlip.truckNumber, "driverName": $ctrl.fanSlip.driverName, "driverLicNo": "123456", "customer": $ctrl.fanSlip.customer, "quantity": $ctrl.fanSlip.quantity, "vehicleWgt": $ctrl.fanSlip.vehicleWeight,"destination": $ctrl.fanSlip.destination, "locationCode": $ctrl.fanSlip.locationCode, "bayNum": parseInt($ctrl.fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": $ctrl.fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name};
       FanSlipsService.regenerateFanSlip(fanSlip).then(function(response){
         console.log('Response', response);
-        $ctrl.cancel();
-      }, function(error){});
+        alert("Fan Slip successfully Regenerated...");
+        $uibModalInstance.close({$value: 'regenerated'});
+      }, function(error){
+        
+      });
     }
 
     $ctrl.print = function(){

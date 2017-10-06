@@ -117,6 +117,13 @@ angular.module('myApp.dashboard')
                 }
             });
 
+            modalInstance.result.then(function (selectedItem) {
+                if (selectedItem.$value === 'updated') {
+                    $scope.loadBayList();
+                }
+            }, function () {
+            });
+
         };
         $scope.loadBayList();
         $scope.loadDropdownsData();

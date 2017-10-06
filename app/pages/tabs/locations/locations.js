@@ -96,6 +96,14 @@ angular.module('myApp.dashboard')
                 }
             });
 
+            modalInstance.result.then(function (selectedItem) {
+                if (selectedItem.$value === 'updated') {
+                    $scope.loadAllLocations();
+                }
+            }, function () {
+            });
+
+
         };
 
         $scope.loadAllLocations();

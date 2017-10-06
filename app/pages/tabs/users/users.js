@@ -171,13 +171,11 @@ angular.module('myApp.dashboard')
             });
 
             modalInstance.result.then(function (selectedItem) {
-                console.log();
-                if(selectedItem.$value === 'updated'){
+                if (selectedItem.$value === 'updated') {
                     $scope.loadAllUsers();
                 }
-              }, function () {
-                $log.info('modal-component dismissed at: ' + new Date());
-              });
+            }, function () {
+            });
 
         };
 

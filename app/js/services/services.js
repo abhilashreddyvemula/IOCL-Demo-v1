@@ -328,4 +328,15 @@ angular.module('myApp.services', [])
                 data: JSON.stringify(fanSlip)
             });
         }
+
+        this.cancelFanSlip = function(fanSlipId, user){
+            var headers = utility.getHeaders();
+            var url = baseUrl + '/fanslipCancellation?FanId='+fanSlipId+'&UserName='+ user;
+
+            return $http({
+                method: 'PUT',
+                url: url,
+                headers: headers
+            });
+        }
     }]);
