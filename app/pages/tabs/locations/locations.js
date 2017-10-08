@@ -13,7 +13,7 @@ angular.module('myApp.dashboard')
         $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "state": "", "city": "", "pinCode": "", "operationalStatus": "" };
         $scope.locationList = [];
 
-        $scope.dropDownValues = { 'status': [] };
+        $scope.dropDownValues = { 'status': [], 'states': [] };
 
 
 
@@ -46,6 +46,7 @@ angular.module('myApp.dashboard')
             //  alert("load user static data")
             locationService.getStaticLocationData().then(function (response) {
                 $scope.dropDownValues.status = response.data.data.LocationStatus;
+                $scope.dropDownValues.states = response.data.data.States;
                 console.log(response.data);
             }, function (error) { });
         }

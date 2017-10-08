@@ -28,8 +28,9 @@
                 <tr>
                     <td align="right">State</td>
                     <td>
-                        <input class="form-control" style="width: 50%;" name="address" ng-model="$ctrl.location.state" value="" size="35"
-                            data-error="Required" required="" type="text">
+                            <select name="state"  style="width: 50%;" ng-model="$ctrl.location.state" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.states">
+                                <option value="">Select State</option>
+                            </select>
                     </td>
                 </tr>
 

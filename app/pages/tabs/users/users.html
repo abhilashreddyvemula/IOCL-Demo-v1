@@ -79,7 +79,7 @@
                                     <div class="form-group  my-datepicker">
                                         <!-- <label>Date of Birth </label> -->
                                         <span class="mandatory-fields"> <label>Date of Birth </label>*</span>
-                                        <input size="20" class="form-control date" uib-datepicker-popup="{{format}}" ng-click="openDatePicker = true" is-open="openDatePicker" datepicker-options="{}" ng-model="newUser.userDOB" close-text="Close" name="date" value="" required type="text">
+                                        <input size="20" class="form-control date" uib-datepicker-popup="{{format}}" ng-click="openDatePicker = true" is-open="openDatePicker" datepicker-options="options" ng-model="newUser.userDOB" close-text="Close" name="date" value="" required type="text">
                                         <span ng-show="userForm.date.$touched && userForm.date.$invalid" class="input-field-errors">Please enter valid date(yyyy-mm-dd).</span>
                                     </div>
                                 </div>

@@ -339,4 +339,14 @@ angular.module('myApp.services', [])
                 headers: headers
             });
         }
+        this.getAvailableBays = function(){
+            var headers = utility.getHeaders();
+            var url = 'http://103.92.235.45/IOCLAutomation/iocl/baysmanagement/getAvailableBays';
+
+            return $http({
+                method: 'GET',
+                url: url,
+                headers: headers
+            });
+        }
     }]);

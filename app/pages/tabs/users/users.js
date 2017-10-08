@@ -16,6 +16,7 @@ angular.module('myApp.dashboard')
         $scope.dropDownValues = { 'UserStatus': [], 'UserTypes': [] };
 
         $scope.format = 'yyyy-MM-dd';
+        $scope.options = {maxDate: new Date()};
 
         $scope.pageChanged = function () {
             console.log('Page changed to: ' + $scope.currentPage);

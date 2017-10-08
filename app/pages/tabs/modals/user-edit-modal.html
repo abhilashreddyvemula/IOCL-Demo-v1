@@ -36,7 +36,7 @@
                 <tr>
                     <td align="right">Date of Birth</td>
                     <td class="my-datepicker">
-                        <input size="20" class="form-control date" style="width: 50%;" uib-datepicker-popup="{{$ctrl.format}}" is-open="showDatepicker" datepicker-options="{}"  ng-click="showDatepicker = true" ng-model="$ctrl.user.userDOB" name="date" value=""
+                        <input size="20" class="form-control date" style="width: 50%;" uib-datepicker-popup="{{$ctrl.format}}" is-open="showDatepicker" datepicker-options="$ctrl.options"  ng-click="showDatepicker = true" ng-model="$ctrl.user.userDOB" name="date" value=""
                             required type="text">
                     </td>
                 </tr>

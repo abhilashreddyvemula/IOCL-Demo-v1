@@ -46,13 +46,27 @@ angular.module('myApp.dashboard')
         }
 
         $scope.loadDropdownsData = function () {
+            loader.show();
             fanSlipsService.getfanSlipStaticData().then(function (response) {
                 $scope.dropDownValues.contractorNames = response.data.data.ContractorNames;
                 $scope.dropDownValues.locationCodes = response.data.data.LocationCodes;
-            }, function (error) { });
+                loader.hide();
+                fanSlipsService.getAvailableBays().then(function(res){
+                    $scope.bayNumbers = res.data;
+                    loader.hide();
+                }, function(){
+                    alert('Unable to load Bay numbers, Please try again...');
+                    loader.hide();
+                });
+            }, function (error) { 
+                alert('Unable to load static dropdown values, Please try again...');
+                loader.hide();
+            });
         }
 
         $scope.addNewFanSlip = function () {
+
+            $scope.loadDropdownsData();
             $scope.addClicked = true;
             $scope.newFanSlip = { "truckNo": "", "driverName": "", "driverLicNo": "", "customer": "", "quantity": "", "vehicleWgt": "", "destination": "", "locationCode": "", "bayNum": null, "mobileNumber": "", "contractorName": "", "fanCreatedBy": "" };
         }
@@ -84,37 +98,22 @@ angular.module('myApp.dashboard')
             fanSlipsService.addFanSlip(body).then(function (success) {
                 $scope.newFanSlip = { "truckNo": "", "driverName": "", "driverLicNo": "", "customer": "", "quantity": "", "vehicleWgt": "", "destination": "", "locationCode": "", "bayNum": null, "mobileNumber": "", "contractorName": "" };
                 $scope.addClicked = false;
-                $scope.loadFanSlipsList();
+                alert('Fan Slip added successfully...');
                 loader.hide();
+                $scope.loadFanSlipsList();
             }, function (error) {
-
                 $scope.addClicked = true;
                 $scope.errorMessage = error.data.errorMessage;
                 if ($scope.errorMessage !== null) {
                     $scope.formInvalid = true;
                 }
+                alert('Unable to add Fan slip, please try again...');
                 loader.hide();
-
                 return;
             });
 
 
         }
-
-        $scope.openEditModal = function (size, item) {
-            var modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: 'pages/tabs/modals/fanslip-edit-modal.html',
-                controller: 'FanSlipEditModalCtrl',
-                controllerAs: '$ctrl',
-                size: size,
-                resolve: {
-                    items: function () {
-                        return { 'fanSlip': item, 'dropDownValues': $scope.dropDownValues };
-                    }
-                }
-            });
-        };
 
         $scope.view = function (fanSlip) {
             var modalInstance = $uibModal.open({
@@ -167,14 +166,19 @@ angular.module('myApp.dashboard')
             }, function(error){});
         }
         $scope.cancel = function(item){
+            loader.show();
             let username = utility.getCredentials().name;
             fanSlipsService.cancelFanSlip(item.fanId, username).then(function(response){
                 console.log(response);
+                loader.hide();
+                alert('Fan slip cancelled successfully...');
                 $scope.loadFanSlipsList();
-            }, function(error){});
+            }, function(error){
+                loader.hide();
+                alert('Unable to cancel fan slip, Please try again...');
+            });
         }   
 
 
         $scope.loadFanSlipsList();
-        $scope.loadDropdownsData();
     }]);
