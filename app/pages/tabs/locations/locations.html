@@ -73,10 +73,10 @@
                                     <!-- <label>Location Code </label> -->
                                     <span class="mandatory-fields">
                                         <label>Location Code</label>*</span>
-                                    <input class="form-control " name="locationCode" ng-model="newLocation.locationCode" value="" size="35" data-error="Required"
-                                        required="" type="text">
-                                    <span ng-show="locationsForm.locationCode.$touched && locationsForm.locationCode.$invalid" class="input-field-errors">Location code is required.</span>
+                                    <input class="form-control " name="locationCode" ng-model="newLocation.locationCode" value="" size="35" data-error="Required" required="" type="text" ng-pattern="/^(0|[1-9][0-9]*)$/">
+                                    <span ng-show="locationsForm.locationCode.$touched && locationsForm.locationCode.$invalid && !locationsForm.locationCode.$error.pattern" class="input-field-errors">Location code is required.</span>
                                     <span ng-if="errorMessagelocationCode" class="input-field-errors">Location code Already Exist!</span>
+                                    <span ng-show="locationsForm.locationCode.$error.pattern" class="input-field-errors">Location code should be numbers only</span></br>
                                 </div>
                             </div>
                         </div>
@@ -115,9 +115,9 @@
                             <div class="form-group lname">
                                 <span class="mandatory-fields">
                                     <label>Pin code</label>*</span>
-                                <input class="form-control " name="pinCode" ng-model="newLocation.pinCode" value="" size="35" data-error="Required" required=""
-                                    type="text">
-                                <span ng-show="locationsForm.pinCode.$touched && locationsForm.pinCode.$invalid" class="input-field-errors">Location Pin code is required.</span>
+                                <input class="form-control " name="pinCode" ng-model="newLocation.pinCode" value="" size="35" data-error="Required" required="" type="text" ng-pattern="/^(0|[1-9][0-9]*)$/">
+                                <span ng-show="locationsForm.pinCode.$touched && locationsForm.pinCode.$invalid && !locationsForm.pinCode.$error.pattern" class="input-field-errors">Location Pin code is required.</span>
+                                <span ng-show="locationsForm.pinCode.$error.pattern" class="input-field-errors">Location Pin code should be numbers only</span></br>
                             </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">

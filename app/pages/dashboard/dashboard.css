@@ -36,6 +36,9 @@ button.cancel{
 .first{
     margin: 0px;
 }
+.first .no-padding{
+    padding: 0px;
+}
 .pagination{
     margin-top: 0px;
     float: right;

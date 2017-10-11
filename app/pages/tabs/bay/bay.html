@@ -1,6 +1,6 @@
 <form name="myForm">
     <div ng-controller="BayController">
-        <section class="bay title" style="">
+        <section class="bay title">
             <div class="row first">
 
                 <div class=" col-12" ng-show="addClicked" id="bay-save-btns">
@@ -8,10 +8,9 @@
                     <h2> <i class="fa fa-tint" aria-hidden="true"> </i><span></span><strong> Add  Bay</strong></h2>
                     <ul class="buttons">
                         <li class="hoverMsg">
-                            <button class="submit " type="submit" ng-click="addClicked;saveBay(newBay);" ng-disabled="myForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span>
+                            <button class="submit " type="submit" ng-click="saveBay(newBay);" ng-disabled="myForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span>
                            </button>
                             <span ng-if="myForm.$invalid" class="tooltiptext">Please fill all fields</span>
-
                         </li>
                         <li>
                             <button class="cancel" type="button" ng-click="onCancel()"><i class="fa fa-remove"> </i> <span>Cancel</span></button>

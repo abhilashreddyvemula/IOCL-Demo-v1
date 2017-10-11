@@ -45,8 +45,9 @@
                             <div class="form-group ">
                                 <!-- <label>Quantity (MT)  </label> -->
                                 <span class="mandatory-fields"> <label>Quantity (MT)  </label>*</span>
-                                <input class="form-control" name="quantity" value="" size="35" ng-model="newQuantity.quantity" data-error="Required" required="" type="text">
-                                <span ng-show="quantityForm.quantity.$touched && quantityForm.quantity.$invalid" class="input-field-errors">Quantity  is required.</span>
+                                <input class="form-control" name="quantity" value="" size="35" ng-model="newQuantity.quantity" data-error="Required" required="" type="text" ng-pattern="/^(0|[1-9][0-9]*)$/">
+                                <span ng-show="quantityForm.quantity.$touched && quantityForm.quantity.$invalid && !quantityForm.quantity.$error.pattern" class="input-field-errors">Quantity  is required.</span>
+                                <span ng-show="quantityForm.quantity.$error.pattern" class="input-field-errors">Quantity (MT) should be numbers only</span></br>
                             </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">

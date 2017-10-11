@@ -1,52 +1,67 @@
-<div class="modal-content">
-    <h2> <i class="fa fa-tint" aria-hidden="true"></i> Bay Details:</h2>
-    <div class="modal-body">
-        <table cellspacing="0" cellpadding="0" width="100%">
-            <tbody>
+<form name="myForm">
+    <div class="modal-content">
+        <h2><i class="fa fa-tint" aria-hidden="true"></i> Bay Details:</h2>
+        <div class="modal-body">
+            <table cellspacing="0" cellpadding="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="50%" align="right">Bay Name</td>
+                        <td width="50%">
+                            <input class="form-control" ng-disabled="true" style="width: 50%;" ng-model="$ctrl.bay.bayName" name="bayName" value="" size="35"
+                                data-error="Required" required="" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Bay Number</td>
+                        <td>
+                            <input class="form-control" style="width: 50%;" ng-model="$ctrl.bay.bayNum" name="bayNum" value="" maxlength="2" size="35"
+                                data-error="Required" required="" type="text" ng-pattern=/^[0-9]*$/>
+                            <span ng-show="myForm.bayNum.$touched && myForm.bayNum.$invalid" class="input-field-errors">Bay number is required(0 - 99).</span>
+                            <span ng-if="$ctrl.errorMessageBayNum" class="input-field-errors">Bay number already exist!</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Bay Type</td>
+                        <td>
+                            <select style="width: 50%;" name="bayType" ng-model="$ctrl.bay.bayType" ng-options="item for item in $ctrl.dropDownValues.bayTypes"
+                                class="form-control" required>
+                                <option value="">Select </option>
+                            </select>
+                            <span ng-show="myForm.bayType.$touched && myForm.bayType.$invalid" class="input-field-errors">Bay type is required.</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Functional Status</td>
+                        <td>
+                            <select style="width: 50%;" name="bayStatus" ng-model="$ctrl.bay.functionalStatus" ng-options="item for item in $ctrl.dropDownValues.bayStatus"
+                                class="form-control" required>
+                                <option value="">Select </option>
+                            </select>
+                            <span ng-show="myForm.bayStatus.$touched && myForm.bayStatus.$invalid" class="input-field-errors">Functional status is required.</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="buttons" cellspacing="0" cellpadding="0" width="100%">
                 <tr>
-                    <td width="50%" align="right">Bay Name</td>
-                    <td width="50%">
-                        <input class="form-control" ng-disabled="true" style="width: 50%;" ng-model="$ctrl.bay.bayName" name="bayName" value="" size="35" data-error="Required" required=""
-                            type="text">
+                    <td style="text-align: right;">
+                        <span class="hoverMsg">
+                            <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()" >
+                                <i class="fa fa-check"> </i>
+                                <span>Update</span>
+                            </button>
+                            <br>
+                            <!-- ng-disabled="myForm.$invalid" <span ng-if="myForm.$invalid" class="tooltiptext">Please fill all fields</span> -->
+                        </span>
                     </td>
-                </tr>
-                <tr>
-                    <td align="right">Bay Number</td>
                     <td>
-                        <input class="form-control" style="width: 50%;" ng-model="$ctrl.bay.bayNum" name="bayNum" value="" maxlength="2" size="35" data-error="Required"
-                            required="" type="text" ng-pattern=/^[0-9]*$/>
+                        <button class="cancel" type="button" ng-click="$ctrl.cancel()">
+                            <i class="fa fa-remove"> </i>
+                            <span>Cancel</span>
+                        </button>
                     </td>
                 </tr>
-                <tr>
-                    <td align="right">Bay Type</td>
-                    <td>
-                        <select style="width: 50%;" name="bayType" ng-model="$ctrl.bay.bayType" ng-options="item for item in $ctrl.dropDownValues.bayTypes" class="form-control"
-                            required>
-                            <option value="">Select </option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">Functional Status</td>
-                    <td>
-                        <select style="width: 50%;" name="bayStatus" ng-model="$ctrl.bay.functionalStatus" ng-options="item for item in $ctrl.dropDownValues.bayStatus"
-                            class="form-control" required>
-                            <option value="">Select </option>
-                        </select>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="buttons" cellspacing="0" cellpadding="0" width="100%">
-            <tr>
-                <td style="text-align: right;">
-                    <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()"><i class="fa fa-check"> </i> <span>Update</span>
-               </button>
-                </td>
-                <td>
-                    <button class="cancel" type="button" ng-click="$ctrl.cancel()"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
-                </td>
-            </tr>
-        </table>
+            </table>
+        </div>
     </div>
-</div>
+</form>

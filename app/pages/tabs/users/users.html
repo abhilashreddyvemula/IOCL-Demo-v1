@@ -46,7 +46,7 @@
                                         <!-- <label>User Name </label> -->
                                         <span class="mandatory-fields"> <label>User Name</label>*</span>
                                         <input class="form-control" ng-model="newUser.userName" name="userName" value="" size="35" data-error="Required" required="" type="text" ng-pattern="/^[a-zA-Z]*$/">
-                                        <span ng-show="userForm.userName.$touched && userForm.userName.$invalid" class="input-field-errors">User name is required.Enter only alphabets</span>
+                                        <span ng-show="userForm.userName.$touched && userForm.userName.$invalid" class="input-field-errors">User name is required. Enter only alphabets</span>
                                         <span ng-if="errorMessageUserName" class="input-field-errors">User name already exist!</span>
                                     </div>
                                 </div>
@@ -88,7 +88,7 @@
                                         <!-- <label> Mobile Number</label> -->
                                         <span class="mandatory-fields"> <label>Mobile Number</label>*</span>
                                         <input size="20" class="form-control" ng-model="newUser.userMobileNum" maxlength="10" name="userMobileNum" value="" required type="text" ng-pattern="/^[1-9]{1}[0-9]{9}$/ ">
-                                        <span ng-show="userForm.userMobileNum.$touched && userForm.userMobileNum.$invalid" class="input-field-errors">Please enter 10 digit  mobile number.</span></br>
+                                        <span ng-show="userForm.userMobileNum.$touched && userForm.userMobileNum.$invalid && !userForm.userMobileNum.$error.pattern" class="input-field-errors">Please enter 10 digit  mobile number.</span></br>
                                         <span ng-show="userForm.userMobileNum.$error.pattern" class="input-field-errors">Invalid Mobile Number</span></br>
 
                                         <!--   <input class="form-control p1" name="name" value=" " type="text">
