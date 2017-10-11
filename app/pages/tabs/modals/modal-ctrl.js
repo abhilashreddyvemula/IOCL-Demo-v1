@@ -119,6 +119,13 @@ angular.module('myApp.modals', [])
         LoaderService.hide();
         alert("Contractor updated successfully...");
       }, function (error) {
+        $ctrl.errorMessage = error.data.errorMessage;
+        if ($ctrl.errorMessage == "Contractor with contractor name Already Exist!") {
+          $ctrl.errorMessageContractorName = true;
+        }
+        if ($ctrl.errorMessage !== null) {
+          $ctrl.formInvalid = true;
+        }
         LoaderService.hide();
         alert('Unable to update Contractor, Please try again...');
       });
@@ -153,6 +160,16 @@ angular.module('myApp.modals', [])
         LoaderService.hide();
         alert("Location updated successfully...");
       }, function (error) {
+        $ctrl.errorMessage = error.data.errorMessage;
+        if ($ctrl.errorMessage == "Location name Already Exist!") {
+          $ctrl.errorMessageLocationName = true;
+        }
+        if ($ctrl.errorMessage == "Location with a location code already exist!") {
+          $ctrl.errorMessagelocationCode = true;
+        }
+        if ($ctrl.errorMessage !== null) {
+          $ctrl.formInvalid = true;
+        }
         LoaderService.hide();
         alert('Unable to update Location, Please try again...');
       });
@@ -187,6 +204,15 @@ angular.module('myApp.modals', [])
         LoaderService.hide();
         alert("Quantity updated successfully...");
       }, function (error) {
+        $ctrl.errorMessage = error.data.errorMessage;
+        if ($ctrl.errorMessage == "Qunatity with a qunatity name already exist!") {
+            $ctrl.errorMessageQuantityName = true;
+
+        }
+        if ($ctrl.errorMessage !== null) {
+            $ctrl.formInvalid = true;
+
+        }
         LoaderService.hide();
         alert('Unable to update Quantity, Please try again...');
       });

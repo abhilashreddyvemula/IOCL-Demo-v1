@@ -2,11 +2,11 @@
     <div ng-controller="UsersController">
         <section class="Users  title" style="">
             <div class="row first">
-                <div class=" col-12" ng-show="addClicked" id="user-save-btns">
-                    <h2> <i class="fa fa-user"> </i><span></span><strong> Add  User</strong></h2>
+                <div class="col-12" ng-if="addClicked" id="user-save-btns">
+                    <h2> <i class="fa fa-user"> </i><span></span><strong>Add  User</strong></h2>
                     <ul class="buttons">
                         <li class="hoverMsg">
-                            <button class="submit" type="button" ng-click="addClicked;saveUser(newUser)" ng-disabled="userForm.$invalid"><i class="fa fa-check"> </i><span>Save</span></button>
+                            <button class="submit" type="button" ng-click="saveUser(newUser)" ng-disabled="userForm.$invalid"><i class="fa fa-check"> </i><span>Save</span></button>
                             <span ng-if="userForm.$invalid" class="tooltiptext">Please fill all fields {{newUser.userName}}</span>
                         </li>
                         <li>
@@ -14,7 +14,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class=" col-12" style="display: block;" ng-hide="addClicked" id="user-add-btns">
+                <div class=" col-12" style="display: block;" ng-if="!addClicked" id="user-add-btns">
                     <h2> <i class="fa fa-user"> </i><span></span><strong> Users</strong></h2>
                     <ul class="buttons">
                         <li>
@@ -36,8 +36,8 @@
         </section>
         <div class="Users">
             <div class="container">
-                <div ng-show="addClicked" id="addUser">
-                    <div ng-show="addClicked" class="row" style="padding-left: 15px;"> <span class="mandatory-fields"> *</span> Fields are mandatory.</div>
+                <div ng-if="addClicked" id="addUser">
+                    <div ng-if="addClicked" class="row" style="padding-left: 15px;"> <span class="mandatory-fields"> *</span> Fields are mandatory.</div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                             <div class="row  ">
@@ -88,7 +88,7 @@
                                         <!-- <label> Mobile Number</label> -->
                                         <span class="mandatory-fields"> <label>Mobile Number</label>*</span>
                                         <input size="20" class="form-control" ng-model="newUser.userMobileNum" maxlength="10" name="userMobileNum" value="" required type="text" ng-pattern="/^[1-9]{1}[0-9]{9}$/ ">
-                                        <span ng-show="userForm.userMobileNum.$touched && userForm.userMobileNum.$invalid && !userForm.userMobileNum.$error.pattern" class="input-field-errors">Please enter 10 digit  mobile number.</span></br>
+                                        <span ng-show="userForm.userMobileNum.$touched && userForm.userMobileNum.$invalid && !userForm.userMobileNum.$error.pattern" class="input-field-errors">Please enter 10 digit  mobile number.</span>
                                         <span ng-show="userForm.userMobileNum.$error.pattern" class="input-field-errors">Invalid Mobile Number</span></br>
 
                                         <!--   <input class="form-control p1" name="name" value=" " type="text">

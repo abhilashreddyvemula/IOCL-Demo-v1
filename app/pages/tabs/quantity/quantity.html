@@ -3,26 +3,43 @@
         <section class="Quantity title" style="">
             <div class="row first">
                 <div class="col-12" ng-show="addClicked" id="quantity-save-btns">
-                    <h2> <i class="fa fa-map-marker"> </i><span></span><strong> Add  Quantity</strong></h2>
+                    <h2>
+                        <i class="fa fa-map-marker"> </i>
+                        <span></span>
+                        <strong> Add Quantity</strong>
+                    </h2>
                     <ul class="buttons">
                         <li class="hoverMsg">
-                            <button class="submit" type="button" ng-click="addClicked; saveQuantity(newQuantity)" ng-disabled="quantityForm.$invalid"><i class="fa fa-check"> </i> <span>Save</span></button>
+                            <button class="submit" type="button" ng-click="addClicked; saveQuantity(newQuantity)" ng-disabled="quantityForm.$invalid">
+                                <i class="fa fa-check"> </i>
+                                <span>Save</span>
+                            </button>
                             <span ng-if="quantityForm.$invalid" class="tooltiptext">Please fill all fields</span>
                         </li>
                         <li>
-                            <button class="cancel" type="button" ng-click="onCancel()"> </i> <span>Cancel</span></button>
+                            <button class="cancel" type="button" ng-click="onCancel()">
+                                </i>
+                                <span>Cancel</span>
+                            </button>
                         </li>
                     </ul>
                 </div>
                 <div class=" col-12" style="display: block;" ng-hide="addClicked" id="quantity-add-btns">
-                    <h2> <i class="fa fa-map-marker"> </i><span></span><strong> Quantity</strong></h2>
+                    <h2>
+                        <i class="fa fa-map-marker"> </i>
+                        <span></span>
+                        <strong> Quantity</strong>
+                    </h2>
                     <ul class="buttons">
                         <li>
                             <button class="submit" type="button" ng-show="isAddAvailable()" ng-click="addNewQuantity(); 
                             addClicked;
                             quantityForm.name.$touched=false;
                             quantityForm.quantity.$touched=false;
-                            quantityForm.status.$touched=false;"><i class="fa fa-plus"> </i> <span>Add</span></button>
+                            quantityForm.status.$touched=false;">
+                                <i class="fa fa-plus"> </i>
+                                <span>Add</span>
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -31,33 +48,41 @@
         <div class="Quantity">
             <div class="container">
                 <div ng-show="addClicked" id="addQuantity">
-                    <div ng-show="addClicked" class="row" style="padding-left: 15px;"> <span class="mandatory-fields"> *</span> Fields are mandatory.</div>
+                    <div ng-show="addClicked" class="row" style="padding-left: 15px;">
+                        <span class="mandatory-fields"> *</span> Fields are mandatory.</div>
                     <div class="row">
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group ">
                                 <!-- <label>Quantity Name </label> -->
-                                <span class="mandatory-fields"> <label>Quantity Name </label>*</span>
-                                <input class="form-control " name="name" value="" ng-model="newQuantity.quantityName" size="35" data-error="Required" required="" type="text">
+                                <span class="mandatory-fields">
+                                    <label>Quantity Name </label>*</span>
+                                <input class="form-control " name="name" value="" ng-model="newQuantity.quantityName" size="35" data-error="Required" required=""
+                                    type="text">
                                 <span ng-show="quantityForm.name.$touched && quantityForm.name.$invalid" class="input-field-errors">Quantity name is required.</span>
-                                <span ng-if="errorMessageQuantityName" class="input-field-errors">Quantity name Already Exist!</span></div>
+                                <span ng-if="errorMessageQuantityName" class="input-field-errors">Quantity name Already Exist!</span>
+                            </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group ">
                                 <!-- <label>Quantity (MT)  </label> -->
-                                <span class="mandatory-fields"> <label>Quantity (MT)  </label>*</span>
-                                <input class="form-control" name="quantity" value="" size="35" ng-model="newQuantity.quantity" data-error="Required" required="" type="text" ng-pattern="/^(0|[1-9][0-9]*)$/">
-                                <span ng-show="quantityForm.quantity.$touched && quantityForm.quantity.$invalid && !quantityForm.quantity.$error.pattern" class="input-field-errors">Quantity  is required.</span>
-                                <span ng-show="quantityForm.quantity.$error.pattern" class="input-field-errors">Quantity (MT) should be numbers only</span></br>
+                                <span class="mandatory-fields">
+                                    <label>Quantity (MT) </label>*</span>
+                                <input class="form-control" name="quantity" value="" size="35" ng-model="newQuantity.quantity" data-error="Required" required=""
+                                    type="text" ng-pattern="/^(0|[1-9][0-9]*)$/">
+                                <span ng-show="quantityForm.quantity.$touched && quantityForm.quantity.$invalid && !quantityForm.quantity.$error.pattern"
+                                    class="input-field-errors">Quantity is required.</span>
+                                <span ng-show="quantityForm.quantity.$error.pattern" class="input-field-errors">Quantity (MT) should be numbers only</span>
                             </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group lname">
                                 <!-- <label>Operational Status </label> -->
-                                <span class="mandatory-fields"> <label>Operational Status</label>*</span>
+                                <span class="mandatory-fields">
+                                    <label>Operational Status</label>*</span>
                                 <select name="status" ng-model="newQuantity.operationalStatus" class="form-control" required ng-options="item for item in dropDownValues.status">
                                     <option value="">Select</option>
                                 </select>
-                                <span ng-show="quantityForm.status.$touched && quantityForm.status.$invalid" class="input-field-errors">Status  is required.</span>
+                                <span ng-show="quantityForm.status.$touched && quantityForm.status.$invalid" class="input-field-errors">Status is required.</span>
                             </div>
                         </div>
                     </div>
@@ -70,17 +95,19 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 select-div">
                                     <label>Show
-                                    <select ng-model="viewby" convert-to-number ng-change="setItemsPerPage(viewby)" class="form-control form-control-sm">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                    entries
+                                        <select ng-model="viewby" convert-to-number ng-change="setItemsPerPage(viewby)" class="form-control form-control-sm">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                        entries
                                     </label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 search-div">
-                                    <label>Search:<input type="search" class="form-control form-control-sm" ng-model="quantitySearchKey" placeholder=""></label>
+                                    <label>Search:
+                                        <input type="search" class="form-control form-control-sm" ng-model="quantitySearchKey" placeholder="">
+                                    </label>
                                 </div>
                             </div>
                             <table width="100%" class="table table-bordered dataTable">
@@ -97,17 +124,27 @@
                                         <td class="center">{{item.quantityName}}</td>
                                         <td class="center">{{item.quantity}}</td>
                                         <td class="center">{{item.operationalStatus}}</td>
-                                        <td class="center"><a class="btn btn-primary" ng-click="openEditModal('lg', item)" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
+                                        <td class="center">
+                                            <a class="btn btn-primary" ng-click="openEditModal('lg', item)" title="Change">
+                                                <span class="glyphicon glyphicon-edit"></span>
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
-                                    <p style="margin-top: 7px;">Showing {{((quantityList | search: quantitySearchKey: 'quantity').length == 0 )? 0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((quantityList | search: quantitySearchKey: 'quantity').length))?
-                                        ((quantityList | search: quantitySearchKey:'quantity').length) : currentPage * itemsPerPage}} 0f {{(quantityList | search: quantitySearchKey:'quantity').length }} entries <span ng-show="quantitySearchKey.length > 0">(filtered from {{quantityList.length}} total entries)</span></p>
+                                    <p style="margin-top: 7px;">Showing {{((quantityList | search: quantitySearchKey: 'quantity').length == 0 )? 0:((currentPage-1)
+                                        * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((quantityList | search: quantitySearchKey:
+                                        'quantity').length))? ((quantityList | search: quantitySearchKey:'quantity').length)
+                                        : currentPage * itemsPerPage}} 0f {{(quantityList | search: quantitySearchKey:'quantity').length
+                                        }} entries
+                                        <span ng-show="quantitySearchKey.length > 0">(filtered from {{quantityList.length}} total entries)</span>
+                                    </p>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
+                                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage"
+                                        boundary-link-numbers="true" rotate="false"></ul>
                                 </div>
                             </div>
                         </div>

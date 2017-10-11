@@ -45,9 +45,9 @@
                                         <!-- <label>Contractor Name </label> -->
                                         <span class="mandatory-fields"> <label>Contractor Name</label>*</span>
                                         <input class="form-control" ng-model="newContractor.contractorName" name="contractorName" value="" size="35" data-error="Required" required="" type="text">
-
                                         <span ng-show="contractorForm.contractorName.$touched && contractorForm.contractorName.$invalid" class="input-field-errors">Contractor name is required.</span>
-                                        <span ng-if="errorMessageContractorName" class="input-field-errors">Contractor with contractor name Already Exist!</span></div>
+                                        <span ng-if="errorMessageContractorName" class="input-field-errors">Contractor with contractor name Already Exist!</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -58,8 +58,8 @@
                                         <!-- <label>Contractor Type </label> -->
                                         <span class="mandatory-fields"> <label>Contractor Type </label>*</span>
                                         <select name="contractorType" ng-init="newContractor.contractorType = dropDownValues.Types[0]" ng-model="newContractor.contractorType" class="form-control" required ng-options="item for item in dropDownValues.Types">
-                                        <option value="">Select</option>
-                                    </select>
+                                            <option value="">Select</option>
+                                        </select>
                                         <span ng-show="contractorForm.contractorType.$touched && contractorForm.contractorType.$invalid" class="input-field-errors">Contractor Type is required.</span>
 
                                     </div>
@@ -95,7 +95,6 @@
                                 <!-- <label>City <span class="req">*</span></label> -->
                                 <span class="mandatory-fields"> <label>City</label>*</span>
                                 <input class="form-control city" ng-model="newContractor.contractorCity" size="32" name="contractorCity" value="" data-error="Required" required="" type="text">
-
                                 <span ng-show="contractorForm.contractorCity.$touched && contractorForm.contractorCity.$invalid" class="input-field-errors">Contractor City is required.</span>
                             </div>
                         </div>
@@ -103,10 +102,9 @@
                             <div class="form-group state">
                                 <!-- <label>State <span class="req">*</span></label> -->
                                 <span class="mandatory-fields"> <label>State</label>*</span>
-
                                 <select name="contractorState" ng-init="newContractor.contractorState = dropDownValues.States[0]" ng-model="newContractor.contractorState" class="form-control" required ng-options="item for item in dropDownValues.States">
-                                        <option value="">Select</option>
-                                    </select>
+                                    <option value="">Select</option>
+                                </select>
                                 <span ng-show="contractorForm.contractorState.$touched && contractorForm.contractorState.$invalid" class="input-field-errors">Contractor State is required.</span> </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">

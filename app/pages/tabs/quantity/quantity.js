@@ -74,11 +74,10 @@ angular.module('myApp.dashboard')
             }, function (error) {
                 $scope.addClicked = true;
                 $scope.errorMessage = error.data.errorMessage;
-                if ($scope.errorMessage == "Quantity name Already Exist!") {
+                if ($scope.errorMessage == "Qunatity with a qunatity name already exist!") {
                     $scope.errorMessageQuantityName = true;
 
                 }
-
                 if ($scope.errorMessage !== null) {
                     $scope.formInvalid = true;
 

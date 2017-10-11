@@ -1,44 +1,60 @@
 <form name="quantityForm">
-<div class="modal-content">
-    <h2> <i class="fa fa-tint" aria-hidden="true"></i> Quantity Details:</h2>
-    <div class="modal-body">
-        <table cellspacing="0" cellpadding="0" width="100%">
-            <tbody>
+    <div class="modal-content">
+        <h2>
+            <i class="fa fa-tint" aria-hidden="true"></i> Quantity Details:</h2>
+        <div class="modal-body">
+            <table cellspacing="0" cellpadding="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="50%" align="right">Quantity Name</td>
+                        <td width="50%">
+                            <input class="form-control " style="width: 50%;" name="name" value="" ng-model="$ctrl.quantity.quantityName" size="35" data-error="Required"
+                                required="" type="text">
+                            <span ng-show="quantityForm.name.$touched && quantityForm.name.$invalid" class="input-field-errors">Quantity name is required.</span>
+                            <span ng-if="$ctrl.errorMessageQuantityName" class="input-field-errors">Quantity name Already Exist!</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Quantity (MT)</td>
+                        <td>
+                            <input style="width: 50%;" class="form-control" name="quantity" value="" size="35" ng-model="$ctrl.quantity.quantity" data-error="Required"
+                                required="" type="text" ng-pattern="/^(0|[1-9][0-9]*)$/">
+                            <span ng-show="quantityForm.quantity.$touched && quantityForm.quantity.$invalid && !quantityForm.quantity.$error.pattern"
+                                class="input-field-errors">Quantity is required.</span>
+                            <span ng-show="quantityForm.quantity.$error.pattern" class="input-field-errors">Quantity (MT) should be numbers only</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Operational Status</td>
+                        <td>
+                            <select style="width: 50%;" name="status" ng-model="$ctrl.quantity.operationalStatus" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.status">
+                                <option value="">Select</option>
+                            </select>
+                            <span ng-show="quantityForm.status.$touched && quantityForm.status.$invalid" class="input-field-errors">Status is required.</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="buttons" cellspacing="0" cellpadding="0" width="100%">
                 <tr>
-                    <td width="50%" align="right">Quantity Name</td>
-                    <td width="50%">
-                        <input class="form-control " style="width: 50%;" name="name" value="" ng-model="$ctrl.quantity.quantityName" size="35" data-error="Required"
-                            required="" type="text">
+                    <td style="text-align: right;">
+                        <span class="hoverMsg">
+                            <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()" ng-disabled="quantityForm.$invalid">
+                                <i class="fa fa-check"> </i>
+                                <span>Update</span>
+                            </button>
+                            <br>
+                            <span ng-if="quantityForm.$invalid" class="tooltiptext">Please fill all fields</span>
+                        </span>
                     </td>
-                </tr>
-                <tr>
-                    <td align="right">Quantity (MT)</td>
                     <td>
-                        <input style="width: 50%;" class="form-control" name="quantity" value="" size="35" ng-model="$ctrl.quantity.quantity" data-error="Required" required=""
-                            type="text" ng-pattern="^(0|[1-9][0-9]*)$">
+                        <button class="cancel" type="button" ng-click="$ctrl.cancel()">
+                            <i class="fa fa-remove"> </i>
+                            <span>Cancel</span>
+                        </button>
                     </td>
                 </tr>
-                <tr>
-                    <td align="right">Operational Status</td>
-                    <td>
-                        <select style="width: 50%;" name="status" ng-model="$ctrl.quantity.operationalStatus" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.status">
-                            <option value="">Select</option>
-                        </select>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="buttons" cellspacing="0" cellpadding="0" width="100%">
-            <tr>
-                <td style="text-align: right;">
-                    <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()"><i class="fa fa-check"> </i> <span>Update</span>
-                   </button>
-                </td>
-                <td>
-                    <button class="cancel" type="button" ng-click="$ctrl.cancel()"><i class="fa fa-remove"> </i> <span>Cancel</span></button>
-                </td>
-            </tr>
-        </table>
+            </table>
+        </div>
     </div>
-</div>
 </form>

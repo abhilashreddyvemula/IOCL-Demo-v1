@@ -46,12 +46,12 @@
                 <tr>
                     <td style="text-align: right;">
                         <span class="hoverMsg">
-                            <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()" >
+                            <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()" ng-disabled="myForm.$invalid" >
                                 <i class="fa fa-check"> </i>
                                 <span>Update</span>
                             </button>
                             <br>
-                            <!-- ng-disabled="myForm.$invalid" <span ng-if="myForm.$invalid" class="tooltiptext">Please fill all fields</span> -->
+                            <span ng-if="myForm.$invalid" class="tooltiptext">Please fill all fields</span>
                         </span>
                     </td>
                     <td>

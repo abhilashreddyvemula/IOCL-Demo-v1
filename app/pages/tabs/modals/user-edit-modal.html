@@ -1,39 +1,40 @@
 <form name="userForm">
     <div class="modal-content">
-        <h2><i class="fa fa-tint" aria-hidden="true"></i> User Details:</h2>
+        <h2>
+            <i class="fa fa-tint" aria-hidden="true"></i> User Details:</h2>
         <div class="modal-body">
             <table cellspacing="0" cellpadding="0" width="100%">
                 <tbody>
                     <tr>
                         <td width="50%" align="right">User Name</td>
                         <td width="50%">
-                            <input class="form-control" style="width: 50%;" ng-model="$ctrl.user.userName" name="userName" value="" size="35" data-error="Required"
-                                required="" type="text" ng-pattern="/^[a-zA-Z]*$/" ng-disabled="true"> 
+                            <input class="form-control" style="width: 50%;" ng-model="$ctrl.user.userName" name="edituserName" value="" size="35" data-error="Required"
+                                required="" type="text" ng-pattern="/^[a-zA-Z]*$/" ng-disabled="true">
                         </td>
                     </tr>
                     <tr>
                         <td align="right">First Name</td>
                         <td>
-                            <input class="form-control" style="width: 50%;" ng-model="$ctrl.user.userFirstName" name="fname" value="" size="35" data-error="Required"
+                            <input class="form-control" style="width: 50%;" ng-model="$ctrl.user.userFirstName" name="editfname" value="" size="35" data-error="Required"
                                 required="" type="text">
-                            <span ng-show="userForm.fname.$touched && userForm.fname.$invalid" class="input-field-errors">First name is required.</span>
+                            <span ng-show="userForm.editfname.$touched && userForm.editfname.$invalid" class="input-field-errors">First name is required.</span>
                         </td>
                     </tr>
                     <tr>
                         <td align="right">Last Name</td>
                         <td>
-                            <input class="form-control lname" style="width: 50%;" ng-model="$ctrl.user.userLastName" name="lname" value="" size="35"
+                            <input class="form-control lname" style="width: 50%;" ng-model="$ctrl.user.userLastName" name="editlname" value="" size="35"
                                 data-error="Required" required="" type="text">
-                            <span ng-show="userForm.lname.$touched && userForm.lname.$invalid" class="input-field-errors">Last name is required.</span>
+                            <span ng-show="userForm.editlname.$touched && userForm.editlname.$invalid" class="input-field-errors">Last name is required.</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td align="right">Password</td>
                         <td>
-                            <input class="form-control lname" style="width: 50%;" ng-model="$ctrl.user.userPassword" name="lname" value="" size="35"
-                                data-error="Required" required="" type="password">
-                            <span ng-show="userForm.userPassword.$touched && userForm.userPassword.$invalid" class="input-field-errors">Password should be atleast 8 characters long and should contain one number,one character and
+                            <input class="form-control lname" style="width: 50%;" ng-model="$ctrl.user.userPassword" name="edituserPassword" value=""
+                                size="35" data-error="Required" required="" type="password">
+                            <span ng-show="userForm.edituserPassword.$touched && userForm.edituserPassword.$invalid" class="input-field-errors">Password should be atleast 8 characters long and should contain one number,one character and
                                 one special character.</span>
                         </td>
                     </tr>
@@ -43,50 +44,50 @@
                         <td class="my-datepicker">
                             <input size="20" class="form-control date" style="width: 50%;" uib-datepicker-popup="{{$ctrl.format}}" is-open="showDatepicker"
                                 datepicker-options="$ctrl.options" ng-click="showDatepicker = true" ng-model="$ctrl.user.userDOB"
-                                name="date" value="" required type="text">
-                            <span ng-show="userForm.date.$touched && userForm.date.$invalid" class="input-field-errors">Please enter valid date(yyyy-mm-dd).</span>
+                                name="editdate" value="" required type="text">
+                            <span ng-show="userForm.editdate.$touched && userForm.editdate.$invalid" class="input-field-errors">Please enter valid date(yyyy-mm-dd).</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td align="right">Mobile Number</td>
                         <td>
-                            <input size="20" class="form-control" style="width: 50%;" ng-model="$ctrl.user.userMobileNum" maxlength="10" name="userMobileNum"
+                            <input size="20" class="form-control" style="width: 50%;" ng-model="$ctrl.user.edituserMobileNum" maxlength="10" name="userMobileNum"
                                 value="" required type="text" ng-pattern="/^[1-9]{1}[0-9]{9}$/ ">
-                            <span ng-show="userForm.userMobileNum.$touched && userForm.userMobileNum.$invalid" class="input-field-errors">Please enter 10 digit mobile number.</span>
+                            <span ng-show="userForm.edituserMobileNum.$touched && userForm.edituserMobileNum.$invalid" class="input-field-errors">Please enter 10 digit mobile number.</span>
                             </br>
-                            <span ng-show="userForm.userMobileNum.$error.pattern" class="input-field-errors">Invalid Mobile Number</span>
+                            <span ng-show="userForm.edituserMobileNum.$error.pattern" class="input-field-errors">Invalid Mobile Number</span>{{'pattern::'+ userForm.userMobileNum.$error.pattern}}
                             </br>
                         </td>
                     </tr>
                     <tr>
                         <td align="right">Aadhaar No</td>
                         <td>
-                            <input class="form-control" style="width: 50%;" ng-model="$ctrl.user.userAadharNum" name="userAadharNum" value="" size="35"
+                            <input class="form-control" style="width: 50%;" ng-model="$ctrl.user.userAadharNum" name="edituserAadharNum" value="" size="35"
                                 maxlength="12" data-error="Required" required="" type="text" ng-pattern="/^[0-9]{12}$/ ">
-                            <span ng-show="userForm.userAadharNum.$touched && userForm.userAadharNum.$invalid" class="input-field-errors">Please enter Aadhar number.</span>
+                            <span ng-show="userForm.edituserAadharNum.$touched && userForm.edituserAadharNum.$invalid" class="input-field-errors">Please enter Aadhar number.</span>
                             </br>
-                            <span ng-show="userForm.userAadharNum.$error.pattern" class="input-field-errors">Invalid Aadhar Number</span>
+                            <span ng-show="userForm.edituserAadharNum.$error.pattern" class="input-field-errors">Invalid Aadhar Number</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td align="right">User Type</td>
                         <td>
-                            <select style="width: 50%;" name="usertype" ng-model="$ctrl.user.userType[0]" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.UserTypes">
+                            <select style="width: 50%;" name="editusertype" ng-model="$ctrl.user.userType[0]" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.UserTypes">
                                 <option value="">Select User Type</option>
                             </select>
-                            <span ng-show="userForm.usertype.$touched && userForm.usertype.$invalid" class="input-field-errors">User type is required.</span>
+                            <span ng-show="userForm.editusertype.$touched && userForm.editusertype.$invalid" class="input-field-errors">User type is required.</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td align="right">Status</td>
                         <td>
-                            <select style="width: 50%;" name="userStatus" ng-model="$ctrl.user.userStatus" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.UserStatus">
+                            <select style="width: 50%;" name="edituserStatus" ng-model="$ctrl.user.userStatus" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.UserStatus">
                                 <option value="">Select Status</option>
                             </select>
-                            <span ng-show="userForm.userStatus.$touched && userForm.userStatus.$invalid" class="input-field-errors">User Status is required.</span>
+                            <span ng-show="userForm.edituserStatus.$touched && userForm.edituserStatus.$invalid" class="input-field-errors">User Status is required.</span>
                         </td>
                     </tr>
                 </tbody>
@@ -94,10 +95,12 @@
             <table class="buttons" cellspacing="0" cellpadding="0" width="100%">
                 <tr>
                     <td style="text-align: right;">
-                        <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()">
+                        <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()" ng-disabled="myForm.$invalid">
                             <i class="fa fa-check"> </i>
                             <span>Update</span>
                         </button>
+                        <br>
+                        <span ng-if="myForm.$invalid" class="tooltiptext">Please fill all fields</span>
                     </td>
                     <td>
                         <button class="cancel" type="button" ng-click="$ctrl.cancel()">

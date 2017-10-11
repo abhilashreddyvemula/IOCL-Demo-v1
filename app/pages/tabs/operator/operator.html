@@ -3,7 +3,7 @@
     <div class="" id="Operator">
       <section class="Contractors  title" style="">
         <div class="row first">
-          <div class=" col-12" ng-show="addClicked" id="contractor-save-btns">
+          <div class="col-12" ng-show="addClicked" id="contractor-save-btns">
             <h2>
               <i class="fa fa-truck" aria-hidden="true"> </i>
               <span></span>
@@ -11,11 +11,11 @@
             </h2>
             <ul class="buttons">
               <li class="hoverMsg">
-                <button class="submit" type="button" ng-click="saveFanSlip(newFanSlip);" ng-disabled="myForm.$invalid">
+                <button class="submit" type="button" ng-click="saveFanSlip(newFanSlip);" ng-disabled="operatorForm.$invalid">
                   <i class="fa fa-check"> </i>
                   <span>Save</span>
                 </button>
-                <span ng-if="myForm.$invalid" class="tooltiptext">Please fill all fields</span>
+                <span ng-if="operatorForm.$invalid" class="tooltiptext">Please fill all fields</span>
               </li>
               <li>
                 <button class="cancel" type="button" ng-click="onCancel()">
@@ -33,7 +33,8 @@
             </h2>
             <ul class="buttons">
               <li>
-                <button class="submit" type="button" ng-click="addNewFanSlip();">
+                <button class="submit" type="button" ng-click="addNewFanSlip();
+                operatorForm.bayName.$touched=false;">
                   <i class="fa fa-plus"> </i>
                   <span>Add</span>
                 </button>
@@ -50,8 +51,10 @@
                 <div class="row">
                   <div class=" col-12 col-sm-12">
                     <div class="form-group ">
-                      <label>Truck Registration Number</label>
-                      <input class="form-control" name="" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.truckNo">
+                      <!-- <label>Truck Registration Number</label> -->
+                      <span class="mandatory-fields"> <label>Truck Registration Number</label>*</span>
+                      <input class="form-control" name="truckNo" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.truckNo">
+                      <span ng-show="operatorForm.truckNo.$touched && operatorForm.truckNo.$invalid" class="input-field-errors">Truck Registration Number is required</span>
                     </div>
                   </div>
                 </div>
@@ -60,8 +63,10 @@
                 <div class="row">
                   <div class=" col-12 col-sm-12">
                     <div class="form-group ">
-                      <label>Driver Name </label>
-                      <input class="form-control" name="" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.driverName">
+                      <!-- <label>Driver Name</label> -->
+                      <span class="mandatory-fields"> <label>Driver Name</label>*</span>
+                      <input class="form-control" name="driverName" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.driverName">
+                      <span ng-show="operatorForm.driverName.$touched && operatorForm.driverName.$invalid" class="input-field-errors">Driver Name is required</span>
                     </div>
                   </div>
                 </div>
@@ -70,8 +75,10 @@
                 <div class="row  ">
                   <div class=" col-12 col-sm-12">
                     <div class="form-group ">
-                      <label>Driver License Number </label>
-                      <input class="form-control" name="" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.driverLicNo">
+                      <!-- <label>Driver License Number </label> -->
+                      <span class="mandatory-fields"> <label>Driver License Number</label>*</span>
+                      <input class="form-control" name="driverLicNo" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.driverLicNo">
+                      <span ng-show="operatorForm.driverLicNo.$touched && operatorForm.driverLicNo.$invalid" class="input-field-errors">Driver License Number is required</span>
                     </div>
                   </div>
                 </div>
@@ -81,16 +88,20 @@
                   <div class=" col-12 col-sm-12">
                     <div class="col-xs-12  col-sm-6 col-md-6 col-lg-6">
                       <div class="form-group ">
-                        <label>Customer</label>
-                        <input class="form-control" name="" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.customer">
+                        <!-- <label>Customer</label> -->
+                        <span class="mandatory-fields"> <label>Customer</label>*</span>
+                        <input class="form-control" name="customer" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.customer">
+                        <span ng-show="operatorForm.customer.$touched && operatorForm.customer.$invalid" class="input-field-errors">Customer is required</span>
                       </div>
                     </div>
                     <div class="col-xs-12  col-sm-6 col-md-6 col-lg-6">
                       <div class="form-group ">
-                        <label>Contractor</label>
-                        <select name="usertype" class="form-control" ng-options="item for item in dropDownValues.contractorNames" ng-model="newFanSlip.contractorName">
-                          <option value="">Select Contractor</option>
+                        <!-- <label>Contractor</label> -->
+                        <span class="mandatory-fields"> <label>Contractor</label>*</span>
+                        <select name="contractorName" ng-model="newFanSlip.contractorName" class="form-control" required ng-options="item for item in dropDownValues.contractorNames">
+                            <option value="">Select Contractor</option>
                         </select>
+                        <span ng-show="operatorForm.contractorName.$touched && operatorForm.contractorName.$invalid" class="input-field-errors">User Status is required.</span>
                       </div>
                     </div>
                   </div>
@@ -102,40 +113,49 @@
                 <div class="row  ">
                   <div class=" col-12 col-sm-6">
                     <div class="form-group ">
-                      <label>Quantity</label>
-                      <input class="form-control" name="" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity">
+                      <!-- <label>Quantity</label> -->
+                      <span class="mandatory-fields"> <label>Quantity</label>*</span>
+                      <input class="form-control" name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity">
+                      <span ng-show="operatorForm.quantity.$touched && operatorForm.quantity.$invalid" class="input-field-errors">Quantity is required</span>
                     </div>
                   </div>
                   <div class=" col-12 col-sm-6">
                     <div class="form-group">
-                      <label>Vehicle Weight</label>
-                      <input class="form-control " name="" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.vehicleWgt">
+                      <!-- <label>Vehicle Weight</label> -->
+                      <span class="mandatory-fields"> <label>Vehicle Weight</label>*</span>
+                      <input class="form-control " name="vehicleWgt" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.vehicleWgt">
+                      <span ng-show="operatorForm.vehicleWgt.$touched && operatorForm.vehicleWgt.$invalid" class="input-field-errors">Vehicle Weight is required</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
                 <div class="form-group">
-                  <label>Destination</label>
-                  <input class="form-control" size="32" name="name" value="" data-error="Required" required="" type="text" ng-model="newFanSlip.destination">
+                  <!-- <label>Destination</label> -->
+                  <span class="mandatory-fields"> <label>Destination</label>*</span>
+                  <input class="form-control" size="32" name="destination" value="" data-error="Required" required="" type="text" ng-model="newFanSlip.destination">
+                  <span ng-show="operatorForm.destination.$touched && operatorForm.destination.$invalid" class="input-field-errors">Destination is required</span>
                 </div>
               </div>
               <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
                 <div class="form-group zip">
-                  <label>Location Code</label>
-                  <!-- <input class="form-control zip" size="5" name="name" value="" data-error="Required" required="" type="text" ng-model="newFanSlip.locationCode"> -->
-                  <select name="usertype" class="form-control" ng-options="item for item in dropDownValues.locationCodes" ng-model="newFanSlip.locationCode">
-                    <option>Select Location Code</option>
+                  <!-- <label>Location Code</label> -->
+                  <span class="mandatory-fields"> <label>Location Code</label>*</span>
+                  <select name="locationCode" class="form-control" required ng-options="item for item in dropDownValues.locationCodes" ng-model="newFanSlip.locationCode">
+                    <option value="">Select Location Code</option>
                   </select>
+                  <span ng-show="operatorForm.locationCode.$touched && operatorForm.locationCode.$invalid" class="input-field-errors">Location Code is required</span>
                 </div>
               </div>
               <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
                 <div class="form-group">
-                  <label>Bay Number</label>
-                  <select name="bayNumber" class="form-control" ng-model="newFanSlip.bayNum">
+                  <!-- <label>Bay Number</label> -->
+                  <span class="mandatory-fields"> <label>Bay Number</label>*</span>
+                  <select name="bayNum" class="form-control" required ng-model="newFanSlip.bayNum">
                     <option value="">Select Bay number</option>
-                    <option ng-repeat="item in bayNumbers" value="{{item.bayNumber}}">{{item.bayNumber}}</option>
+                    <option ng-repeat="item in bayNumbers | filter: {'bayFunctionalStatus':'active'}" value="{{item.bayNumber}}">{{item.bayNumber}}</option>
                   </select>
+                  <span ng-show="operatorForm.bayNum.$touched && operatorForm.bayNum.$invalid" class="input-field-errors">Bay Number is required</span>
                 </div>
               </div>
             </div>

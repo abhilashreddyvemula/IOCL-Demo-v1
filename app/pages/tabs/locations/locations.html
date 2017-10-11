@@ -10,7 +10,7 @@
                     </h2>
                     <ul class="buttons">
                         <li class="hoverMsg">
-                            <button class="submit" type="button" ng-click="addClicked;saveLocation(newLocation)" ng-disabled="locationsForm.$invalid">
+                            <button class="submit" type="button" ng-click="saveLocation(newLocation)" ng-disabled="locationsForm.$invalid">
                                 <i class="fa fa-check"> </i>
                                 <span>Save</span>
                             </button>
@@ -73,10 +73,13 @@
                                     <!-- <label>Location Code </label> -->
                                     <span class="mandatory-fields">
                                         <label>Location Code</label>*</span>
-                                    <input class="form-control " name="locationCode" ng-model="newLocation.locationCode" value="" size="35" data-error="Required" required="" type="text" ng-pattern="/^(0|[1-9][0-9]*)$/">
-                                    <span ng-show="locationsForm.locationCode.$touched && locationsForm.locationCode.$invalid && !locationsForm.locationCode.$error.pattern" class="input-field-errors">Location code is required.</span>
+                                    <input class="form-control " name="locationCode" ng-model="newLocation.locationCode" value="" size="35" data-error="Required"
+                                        required="" type="text" ng-pattern="/^(0|[1-9][0-9]*)$/">
+                                    <span ng-show="locationsForm.locationCode.$touched && locationsForm.locationCode.$invalid && !locationsForm.locationCode.$error.pattern"
+                                        class="input-field-errors">Location code is required.</span>
                                     <span ng-if="errorMessagelocationCode" class="input-field-errors">Location code Already Exist!</span>
-                                    <span ng-show="locationsForm.locationCode.$error.pattern" class="input-field-errors">Location code should be numbers only</span></br>
+                                    <span ng-show="locationsForm.locationCode.$error.pattern" class="input-field-errors">Location code should be numbers only</span>
+                                    </br>
                                 </div>
                             </div>
                         </div>
@@ -115,9 +118,12 @@
                             <div class="form-group lname">
                                 <span class="mandatory-fields">
                                     <label>Pin code</label>*</span>
-                                <input class="form-control " name="pinCode" ng-model="newLocation.pinCode" value="" size="35" data-error="Required" required="" type="text" ng-pattern="/^(0|[1-9][0-9]*)$/">
-                                <span ng-show="locationsForm.pinCode.$touched && locationsForm.pinCode.$invalid && !locationsForm.pinCode.$error.pattern" class="input-field-errors">Location Pin code is required.</span>
-                                <span ng-show="locationsForm.pinCode.$error.pattern" class="input-field-errors">Location Pin code should be numbers only</span></br>
+                                <input class="form-control " name="pinCode" ng-model="newLocation.pinCode" value="" size="35" data-error="Required" required=""
+                                    type="text" ng-pattern="/^(0|[1-9][0-9]*)$/">
+                                <span ng-show="locationsForm.pinCode.$touched && locationsForm.pinCode.$invalid && !locationsForm.pinCode.$error.pattern"
+                                    class="input-field-errors">Location Pin code is required.</span>
+                                <span ng-show="locationsForm.pinCode.$error.pattern" class="input-field-errors">Location Pin code should be numbers only</span>
+                                </br>
                             </div>
                         </div>
                         <div class="col-xs-12  col-sm-12 col-md-4 col-lg-4">
@@ -128,7 +134,7 @@
                                 <select name="status" ng-model="newLocation.operationalStatus" class="form-control" required ng-options="item for item in dropDownValues.status">
                                     <option value="">Select</option>
                                 </select>
-                                <span ng-show="locationsForm.status.$touched && locationsForm.status.$invalid" class="input-field-errors">Location status is required.</span>
+                                <span ng-show="locationsForm.status.$touched && locationsForm.status.$invalid" class="input-field-errors">Operational status is required.</span>
                             </div>
                         </div>
                     </div>
@@ -151,8 +157,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-6 search-div">
                                         <label>Search:
-                                            <input type="search" class="form-control form-control-sm" ng-model="locationsSearchKey"
-                                                placeholder="">
+                                            <input type="search" class="form-control form-control-sm" ng-model="locationsSearchKey" placeholder="">
                                         </label>
                                     </div>
                                 </div>

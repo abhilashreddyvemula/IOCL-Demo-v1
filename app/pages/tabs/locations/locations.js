@@ -73,7 +73,9 @@ angular.module('myApp.dashboard')
                 $scope.errorMessage = error.data.errorMessage;
                 if ($scope.errorMessage == "Location  name Already Exist!") {
                     $scope.errorMessageLocationName = true;
-
+                }
+                if($scope.errorMessage == "Location with a location code already exist!"){
+                    $scope.errorMessagelocationCode = true;
                 }
                 if ($scope.errorMessage !== null) {
                     $scope.formInvalid = true;

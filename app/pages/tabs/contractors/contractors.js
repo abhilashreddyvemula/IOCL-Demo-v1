@@ -74,12 +74,9 @@ angular.module('myApp.dashboard')
                 $scope.errorMessage = error.data.errorMessage;
                 if ($scope.errorMessage == "Contractor with contractor name Already Exist!") {
                     $scope.errorMessageContractorName = true;
-
                 }
-
                 if ($scope.errorMessage !== null) {
                     $scope.formInvalid = true;
-
                 }
                 loader.hide();
 

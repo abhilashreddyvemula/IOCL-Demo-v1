@@ -8,6 +8,8 @@
 
 .input-field-errors {
     color: red;
+    font-size: 12px;
+    display: block;
 }
 
 .errorFlaglogin {
