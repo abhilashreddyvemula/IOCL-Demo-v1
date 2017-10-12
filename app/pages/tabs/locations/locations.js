@@ -1,25 +1,15 @@
 angular.module('myApp.dashboard')
     .controller('LocationsController', ['$scope', '$uibModal', 'utility', 'LocationService', 'LoaderService', function ($scope, $uibModal, utility, locationService, loader) {
-
         $scope.userRole = utility.getUserRole();
-
         $scope.viewby = 10;
         $scope.currentPage = 1;
         $scope.itemsPerPage = $scope.viewby;
-
-
         $scope.formInvalid = false;
         $scope.addClicked = false;
         $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "state": "", "city": "", "pinCode": "", "operationalStatus": "" };
         $scope.locationList = [];
-
         $scope.dropDownValues = { 'status': [], 'states': [] };
 
-
-
-        $scope.pageChanged = function () {
-            console.log('Page changed to: ' + $scope.currentPage);
-        };
         $scope.setItemsPerPage = function (num) {
             $scope.itemsPerPage = num;
             $scope.currentPage = 1; //reset to first page
@@ -35,26 +25,29 @@ angular.module('myApp.dashboard')
         $scope.loadAllLocations = function () {
             loader.show();
             locationService.getLocationsList().then(function (response) {
-                console.log('locationList',response.data);
                 $scope.locationList = response.data;
                 $scope.totalItems = $scope.locationList.length;
                 loader.hide();
-            }, function (error) { });
+            }, function (error) {
+                alert('Unable to load the Contractors details, Please reload the page...');
+             });
         }
 
         $scope.loadDropdownsData = function () {
-            //  alert("load user static data")
             locationService.getStaticLocationData().then(function (response) {
                 $scope.dropDownValues.status = response.data.data.LocationStatus;
                 $scope.dropDownValues.states = response.data.data.States;
-                console.log(response.data);
-            }, function (error) { });
+            }, function (error) { 
+                alert('Unable to load the dropdown values, please try again...');
+                $scope.addClicked = false;
+            });
         }
 
         $scope.addNewLocation = function () {
             $scope.addClicked = true;
             $scope.errorMessageLocationName = false;
             $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "state": "", "city": "", "pinCode": "", "operationalStatus": "" };
+            $scope.loadDropdownsData();
         }
 
         $scope.onCancel = function () {
@@ -65,6 +58,7 @@ angular.module('myApp.dashboard')
             var body = { "locationName": location.locationName, "locationCode": location.locationCode, "locationAddress": location.locationAddress, "state": location.state, "city": location.city, "pinCode": location.pinCode, "operationalStatus": location.operationalStatus };
             locationService.addLocation(body).then(function (success) {
                 $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "state": "", "city": "", "pinCode": "", "operationalStatus": "" };
+                alert('Location added successfully...');
                 $scope.loadAllLocations();
                 $scope.addClicked = false;
                 loader.hide();
@@ -79,6 +73,7 @@ angular.module('myApp.dashboard')
                 }
                 if ($scope.errorMessage !== null) {
                     $scope.formInvalid = true;
+                    alert('Unable to add new Location, please try again...');
                 }
                 loader.hide();
                 return;

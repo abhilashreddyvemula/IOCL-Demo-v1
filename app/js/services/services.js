@@ -272,9 +272,9 @@ angular.module('myApp.services', [])
     // Fan Slip Services
     .service('FanSlipsService', ['$http', '$filter', 'utility', function ($http, $filter, utility) {
         var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/fanslipmanagement';
-        this.getFanSlipsList = function () {
+        this.getFanSlipsList = function (fanSlipDate) {
             var headers = utility.getHeaders();
-            var current_date = $filter('date')(new Date(), "yyyy-MM-dd");
+            var current_date = $filter('date')(fanSlipDate, "yyyy-MM-dd");
             var url = baseUrl + '/getFanslipsDetails?selectedDate=' + current_date;
             return $http({
                 method: 'GET',

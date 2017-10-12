@@ -52,12 +52,11 @@
                     <tr>
                         <td align="right">Mobile Number</td>
                         <td>
-                            <input size="20" class="form-control" style="width: 50%;" ng-model="$ctrl.user.edituserMobileNum" maxlength="10" name="userMobileNum"
+                            <input size="20" class="form-control" style="width: 50%;" ng-model="$ctrl.user.userMobileNum" maxlength="10" name="edituserMobileNum"
                                 value="" required type="text" ng-pattern="/^[1-9]{1}[0-9]{9}$/ ">
-                            <span ng-show="userForm.edituserMobileNum.$touched && userForm.edituserMobileNum.$invalid" class="input-field-errors">Please enter 10 digit mobile number.</span>
-                            </br>
-                            <span ng-show="userForm.edituserMobileNum.$error.pattern" class="input-field-errors">Invalid Mobile Number</span>{{'pattern::'+ userForm.userMobileNum.$error.pattern}}
-                            </br>
+                            <span ng-show="userForm.edituserMobileNum.$touched && userForm.edituserMobileNum.$invalid && !userForm.edituserMobileNum.$error.pattern"
+                                class="input-field-errors">Please enter 10 digit mobile number.</span>
+                            <span ng-show="userForm.edituserMobileNum.$error.pattern" class="input-field-errors">Invalid Mobile Number</span>
                         </td>
                     </tr>
                     <tr>
@@ -65,8 +64,7 @@
                         <td>
                             <input class="form-control" style="width: 50%;" ng-model="$ctrl.user.userAadharNum" name="edituserAadharNum" value="" size="35"
                                 maxlength="12" data-error="Required" required="" type="text" ng-pattern="/^[0-9]{12}$/ ">
-                            <span ng-show="userForm.edituserAadharNum.$touched && userForm.edituserAadharNum.$invalid" class="input-field-errors">Please enter Aadhar number.</span>
-                            </br>
+                            <span ng-show="userForm.edituserAadharNum.$touched && userForm.edituserAadharNum.$invalid && !userForm.edituserAadharNum.$error.pattern" class="input-field-errors">Please enter Aadhar number.</span>
                             <span ng-show="userForm.edituserAadharNum.$error.pattern" class="input-field-errors">Invalid Aadhar Number</span>
                         </td>
                     </tr>
@@ -95,12 +93,15 @@
             <table class="buttons" cellspacing="0" cellpadding="0" width="100%">
                 <tr>
                     <td style="text-align: right;">
-                        <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()" ng-disabled="myForm.$invalid">
-                            <i class="fa fa-check"> </i>
-                            <span>Update</span>
-                        </button>
-                        <br>
-                        <span ng-if="myForm.$invalid" class="tooltiptext">Please fill all fields</span>
+
+                        <span class="hoverMsg">
+                            <button class="submit" style="width: 130px;" type="submit" ng-click="$ctrl.update()" ng-disabled="userForm.$invalid">
+                                <i class="fa fa-check"> </i>
+                                <span>Update</span>
+                            </button>
+                            <br>
+                            <span ng-if="userForm.$invalid" class="tooltiptext">Please fill all fields</span>
+                        </span>
                     </td>
                     <td>
                         <button class="cancel" type="button" ng-click="$ctrl.cancel()">

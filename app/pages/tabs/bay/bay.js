@@ -1,7 +1,6 @@
 angular.module('myApp.dashboard')
     .controller('BayController', ['$scope', '$uibModal', 'utility', 'BayService', 'LoaderService', function ($scope, $uibModal, utility, bayService, loader) {
         $scope.userRole = utility.getUserRole();
-
         $scope.bayItems = [];
         $scope.newBay = { "bayName": "", "bayNum": null, "bayType": "", "functionalStatus": "" }
         $scope.viewby = 10;
@@ -11,9 +10,7 @@ angular.module('myApp.dashboard')
         $scope.errorMessageBayName = false;
         $scope.errorMessageBayNum = false;
         $scope.formInvalid = false;
-
         $scope.addClicked = false;
-
         $scope.orderByField = 'bayId';
         $scope.dropDownValues = { 'bayStatus': [], 'bayTypes': [] }
 
@@ -23,9 +20,7 @@ angular.module('myApp.dashboard')
             else
                 return false;
         }
-        $scope.pageChanged = function () {
-            console.log('Page changed to: ' + $scope.currentPage);
-        };
+
         $scope.setItemsPerPage = function (num) {
             $scope.itemsPerPage = num;
             $scope.currentPage = 1; //reset to first paghe
@@ -39,9 +34,8 @@ angular.module('myApp.dashboard')
                     $scope.totalItems = $scope.bayItems.length;
                     loader.hide();
                 }
-
             }, function (error) {
-                console.log(error);
+                alert('Unable to load the Bays details, Please reload the page...');
                 loader.hide();
             });
         }
@@ -50,23 +44,22 @@ angular.module('myApp.dashboard')
             bayService.getBayStaticData().then(function (response) {
                 $scope.dropDownValues.bayStatus = response.data.data.BayStatus;
                 $scope.dropDownValues.bayTypes = response.data.data.BayTypes;
-            }, function (error) { });
+            }, function (error) { 
+                alert('Unable to load the dropdown values, please try again...');
+                $scope.addClicked = false;
+            });
         }
 
         $scope.addNewBay = function () {
-
             $scope.addClicked = true;
             $scope.errorMessageBayNum = false;
             $scope.errorMessageBayName = false;
-
-            $scope.newBay = { "bayName": "", "bayNum": null, "bayType": "", "functionalStatus": "" }
-
+            $scope.newBay = { "bayName": "", "bayNum": null, "bayType": "", "functionalStatus": "" };
+            $scope.loadDropdownsData();
         }
 
         $scope.onCancel = function () {
             $scope.addClicked = false;
-
-
         }
 
 
@@ -77,10 +70,10 @@ angular.module('myApp.dashboard')
             bayService.addBay(body).then(function (success) {
                 $scope.newBay = { "bayName": "", "bayNum": null, "bayType": "", "functionalStatus": "" }
                 $scope.addClicked = false;
+                alert('Bay added successfully...');
                 $scope.loadBayList();
                 loader.hide();
             }, function (error) {
-
                 $scope.addClicked = true;
                 $scope.errorMessage = error.data.errorMessage;
                 if ($scope.errorMessage == "Bay with a bay num already exist!") {
@@ -93,14 +86,11 @@ angular.module('myApp.dashboard')
                 }
                 if ($scope.errorMessage !== null) {
                     $scope.formInvalid = true;
-
+                    alert('Unable to add new bay, please try again...');
                 }
                 loader.hide();
-
                 return;
             });
-
-
         }
 
         $scope.openEditModal = function (size, item) {
@@ -123,8 +113,8 @@ angular.module('myApp.dashboard')
                 }
             }, function () {
             });
-
         };
+
         $scope.loadBayList();
         $scope.loadDropdownsData();
     }]);

@@ -10,11 +10,12 @@ angular.module('myApp.dashboard')
         $scope.itemsPerPage = $scope.viewby;
         $scope.errorMessage = '';
         $scope.formInvalid = false;
-
         $scope.addClicked = false;
-
         $scope.orderByField = 'fanId';
-        $scope.dropDownValues = { 'contractorNames': [], 'locationCodes': [] }
+        $scope.dropDownValues = { 'contractorNames': [], 'locationCodes': [] };
+        $scope.format = 'yyyy-MM-dd';
+        $scope.options = { maxDate: new Date() };
+        $scope.fanSlipDate = new Date();
 
         $scope.isAddAvailable = function () {
             if ($scope.userRole === 'Super Admin')
@@ -32,7 +33,7 @@ angular.module('myApp.dashboard')
 
         $scope.loadFanSlipsList = function () {
             loader.show();
-            fanSlipsService.getFanSlipsList().then(function (response) {
+            fanSlipsService.getFanSlipsList($scope.fanSlipDate).then(function (response) {
                 if (response.status == 200) {
                     $scope.fanSlips = response.data;
                     $scope.totalItems = $scope.fanSlips.length;
@@ -179,6 +180,11 @@ angular.module('myApp.dashboard')
             });
         }   
 
-
-        $scope.loadFanSlipsList();
+        $scope.$watch('fanSlipDate', function(newVal, oldVal){
+            if(newVal !== oldVal){
+                $scope.loadFanSlipsList();
+            }
+        });
+        
+        $scope.loadDropdownsData();
     }]);

@@ -1,26 +1,19 @@
 angular.module('myApp.dashboard')
     .controller('ContractorsController', ['$scope', '$uibModal', 'utility', 'ContractorsService', 'LoaderService', function($scope, $uibModal, utility, contractorsService, loader) {
         $scope.userRole = utility.getUserRole();
-
         $scope.viewby = 10;
         $scope.currentPage = 1;
         $scope.itemsPerPage = $scope.viewby;
-
         $scope.formInvalid = false;
         $scope.addClicked = false;
         $scope.newContractor = { "contractorName": "", "contractorType": "", "contractorState": "", "contractorPinCode": "", "contractorOperationalStatus": "", "contractorCity": "", "contractorAddress": "" };
         $scope.contractorList = [];
-
         $scope.dropDownValues = { 'UserStatus': [], 'UserTypes': [] };
 
-        $scope.pageChanged = function() {
-            console.log('Page changed to: ' + $scope.currentPage);
-        };
         $scope.setItemsPerPage = function(num) {
             $scope.itemsPerPage = num;
             $scope.currentPage = 1; //reset to first page
         }
-
 
         $scope.isAddAvailable = function() {
             if ($scope.userRole === 'Super Admin')
@@ -37,35 +30,37 @@ angular.module('myApp.dashboard')
                 loader.hide();
             }, function(error) {
                 loader.hide();
+                alert('Unable to load the Contractors details, Please reload the page...');
             });
         }
 
         $scope.loadDropdownsData = function() {
-            //  alert("load user static data")
             contractorsService.getContractorsStaticData().then(function(response) {
                 $scope.dropDownValues.ContractorStatus = response.data.data.ContractorStatus;
                 $scope.dropDownValues.States = response.data.data.States;
                 $scope.dropDownValues.Types = response.data.data.Types;
-                console.log(response.data);
-            }, function(error) {});
+            }, function(error) {
+                alert('Unable to load the dropdown values, please try again...');
+                $scope.addClicked = false;
+            });
         }
 
         $scope.addNewContractor = function() {
             $scope.addClicked = true;
             $scope.errorMessageContractorName = false;
             $scope.newContractor = { "contractorName": "", "contractorType": "", "contractorState": "", "contractorPinCode": "", "contractorOperationalStatus": "", "contractorCity": "", "contractorAddress": "" };
+            $scope.loadDropdownsData();
         }
 
         $scope.onCancel = function() {
             $scope.addClicked = false;
-
-
         }
         $scope.saveContractor = function(contractor) {
             loader.show();
             var body = { "contractorName": contractor.contractorName, "contractorType": contractor.contractorType, "contractorState": contractor.contractorState, "contractorPinCode": contractor.contractorPinCode, "contractorOperationalStatus": contractor.contractorOperationalStatus, "contractorCity": contractor.contractorCity, "contractorAddress": contractor.contractorAddress };
             contractorsService.addContractor(body).then(function(success) {
                 $scope.newContractor = { "contractorName": "", "contractorType": "", "contractorState": "", "contractorPinCode": "", "contractorOperationalStatus": "", "contractorCity": "", "contractorAddress": "" };
+                alert('Contractor added successfully...');
                 $scope.loadAllContractors();
                 $scope.addClicked = false;
                 loader.hide();
@@ -77,6 +72,7 @@ angular.module('myApp.dashboard')
                 }
                 if ($scope.errorMessage !== null) {
                     $scope.formInvalid = true;
+                    alert('Unable to add new Contractor, please try again...');
                 }
                 loader.hide();
 
