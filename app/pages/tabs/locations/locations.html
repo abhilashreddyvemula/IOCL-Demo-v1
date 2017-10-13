@@ -98,7 +98,7 @@
                                 <!-- <label>State </label> -->
                                 <span class="mandatory-fields">
                                     <label>State</label>*</span>
-                                <select name="state" ng-model="newLocation.state" class="form-control" required ng-options="item for item in dropDownValues.states">
+                                <select name="state" ng-model="newLocation.state" class="form-control" required ng-options="item for item in dropDownValues.states | orderBy">
                                     <option value="">Select State</option>
                                 </select>
                                 <span ng-show="locationsForm.state.$touched && locationsForm.state.$invalid" class="input-field-errors">Location State is required.</span>

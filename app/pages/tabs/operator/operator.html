@@ -90,7 +90,7 @@
                       <!-- <label>Driver License Number </label> -->
                       <span class="mandatory-fields">
                         <label>Driver License Number</label>*</span>
-                      <input class="form-control" name="driverLicNo" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.driverLicNo">
+                      <input class="form-control" name="driverLicNo" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.driverLicenceNumber">
                       <span ng-show="operatorForm.driverLicNo.$touched && operatorForm.driverLicNo.$invalid" class="input-field-errors">Driver License Number is required</span>
                     </div>
                   </div>
@@ -184,7 +184,7 @@
           <div class="row">
             <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
               <div class="grid-list">
-                <div class="table-responsive">
+                <div class="table-responsive" style="min-height: 500px;">
                   <div class="row">
                     <div class="col-sm-12 col-md-4 select-div">
                       <label>Show
@@ -235,16 +235,18 @@
                           width="3%">Bay Number</th>
                         <th class="sorting" ng-click="orderByField='bayStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayStatus') && !reverseSort, 'sorting_desc': (orderByField == 'bayStatus') && reverseSort}"
                           width="9%">Bay Status</th>
+                        <th class="sorting" ng-click="orderByField='fanPinStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPinStatus') && !reverseSort, 'sorting_desc': (orderByField == 'fanPinStatus') && reverseSort}"
+                          width="9%">Fan Pin Status</th>
                         <th class="sorting" ng-click="orderByField='fanPinExpiration'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPinExpiration') && !reverseSort, 'sorting_desc': (orderByField == 'fanPinExpiration') && reverseSort}"
                           width="12%">Expiration Date</th>
-                        <th width="12%">Actions</th>
+                        <th width="15%">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-class="{'green': fanSlip.bayStatus == 'Completed'}" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"><!-- 'red': fanSlip.bayStatus == 'Not Reached' -->
                         <td class="center">{{fanSlip.truckNumber}}</td>
                         <td class="center">{{fanSlip.driverName}}</td>
-                        <td class="center">{{fanSlip.driverLicNo}}</td>
+                        <td class="center">{{fanSlip.driverLicenceNumber}}</td>
                         <td class="center">{{fanSlip.fanPin}}</td>
                         <td class="center">{{fanSlip.customer}}</td>
                         <td class="center">{{fanSlip.quantity}}</td>
@@ -254,6 +256,7 @@
                         <td class="center">{{fanSlip.locationCode}}</td>
                         <td class="center">{{fanSlip.bayNum}}</td>
                         <td class="center">{{fanSlip.bayStatus}}</td>
+                        <td class="center">{{fanSlip.fanPinStatus}}</td>
                         <td class="center">{{fanSlip.fanPinExpiration}}</td>
                         <td class="center operator-actions">
                           <a class="btn btn-primary" ng-if="userRole === 'Supervisor'" title="View" ng-click="view(fanSlip)">
