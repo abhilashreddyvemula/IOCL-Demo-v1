@@ -46,6 +46,7 @@ angular.module('myApp.dashboard')
         $scope.addNewLocation = function () {
             $scope.addClicked = true;
             $scope.errorMessageLocationName = false;
+            $scope.errorMessagelocationCode = false;
             $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "state": "", "city": "", "pinCode": "", "operationalStatus": "" };
             $scope.loadDropdownsData();
         }
@@ -55,6 +56,7 @@ angular.module('myApp.dashboard')
         }
         $scope.saveLocation = function (location) {
             loader.show();
+            $scope.errorMessageLocationName = false;
             var body = { "locationName": location.locationName, "locationCode": location.locationCode, "locationAddress": location.locationAddress, "state": location.state, "city": location.city, "pinCode": location.pinCode, "operationalStatus": location.operationalStatus };
             locationService.addLocation(body).then(function (success) {
                 $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "state": "", "city": "", "pinCode": "", "operationalStatus": "" };
@@ -65,7 +67,7 @@ angular.module('myApp.dashboard')
             }, function (error) {
                 $scope.addClicked = true;
                 $scope.errorMessage = error.data.errorMessage;
-                if ($scope.errorMessage == "Location  name Already Exist!") {
+                if ($scope.errorMessage == "Location with a location name already exist!") {
                     $scope.errorMessageLocationName = true;
                 }
                 if($scope.errorMessage == "Location with a location code already exist!"){

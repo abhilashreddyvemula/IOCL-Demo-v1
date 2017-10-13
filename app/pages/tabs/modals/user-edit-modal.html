@@ -9,7 +9,9 @@
                         <td width="50%" align="right">User Name</td>
                         <td width="50%">
                             <input class="form-control" style="width: 50%;" ng-model="$ctrl.user.userName" name="edituserName" value="" size="35" data-error="Required"
-                                required="" type="text" ng-pattern="/^[a-zA-Z]*$/" ng-disabled="true">
+                                required="" type="text" ng-pattern="/^[a-zA-Z]*$/" ng-disabled="$ctrl.isNotSuperAdmin()">
+                            <span ng-show="userForm.edituserName.$touched && userForm.edituserName.$invalid" class="input-field-errors">User name is required. Enter only alphabets</span>
+                            <span ng-if="$ctrl.errorMessageUserName" class="input-field-errors">User name already exist!</span>
                         </td>
                     </tr>
                     <tr>
@@ -33,8 +35,9 @@
                         <td align="right">Password</td>
                         <td>
                             <input class="form-control lname" style="width: 50%;" ng-model="$ctrl.user.userPassword" name="edituserPassword" value=""
-                                size="35" data-error="Required" required="" type="password">
-                            <span ng-show="userForm.edituserPassword.$touched && userForm.edituserPassword.$invalid" class="input-field-errors">Password should be atleast 8 characters long and should contain one number,one character and
+                                size="35" data-error="Required" required="" type="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/">
+                            <span ng-show="userForm.edituserPassword.$touched && userForm.edituserPassword.$invalid && !userForm.edituserPassword.$error.pattern" class="input-field-errors">Password is required.</span>
+                            <span ng-show="userForm.edituserPassword.$error.pattern" class="input-field-errors">Password should be atleast 8 characters long and should contain one number,one character and
                                 one special character.</span>
                         </td>
                     </tr>
@@ -64,7 +67,8 @@
                         <td>
                             <input class="form-control" style="width: 50%;" ng-model="$ctrl.user.userAadharNum" name="edituserAadharNum" value="" size="35"
                                 maxlength="12" data-error="Required" required="" type="text" ng-pattern="/^[0-9]{12}$/ ">
-                            <span ng-show="userForm.edituserAadharNum.$touched && userForm.edituserAadharNum.$invalid && !userForm.edituserAadharNum.$error.pattern" class="input-field-errors">Please enter Aadhar number.</span>
+                            <span ng-show="userForm.edituserAadharNum.$touched && userForm.edituserAadharNum.$invalid && !userForm.edituserAadharNum.$error.pattern"
+                                class="input-field-errors">Please enter Aadhar number.</span>
                             <span ng-show="userForm.edituserAadharNum.$error.pattern" class="input-field-errors">Invalid Aadhar Number</span>
                         </td>
                     </tr>

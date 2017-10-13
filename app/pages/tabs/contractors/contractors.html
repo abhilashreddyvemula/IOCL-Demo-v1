@@ -102,7 +102,7 @@
                             <div class="form-group state">
                                 <!-- <label>State <span class="req">*</span></label> -->
                                 <span class="mandatory-fields"> <label>State</label>*</span>
-                                <select name="contractorState" ng-init="newContractor.contractorState = dropDownValues.States[0]" ng-model="newContractor.contractorState" class="form-control" required ng-options="item for item in dropDownValues.States">
+                                <select name="contractorState" ng-init="newContractor.contractorState = dropDownValues.States[0]" ng-model="newContractor.contractorState" class="form-control" required ng-options="item for item in dropDownValues.States | orderBy">
                                     <option value="">Select</option>
                                 </select>
                                 <span ng-show="contractorForm.contractorState.$touched && contractorForm.contractorState.$invalid" class="input-field-errors">Contractor State is required.</span> </div>

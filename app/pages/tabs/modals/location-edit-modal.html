@@ -38,7 +38,7 @@
                     <tr>
                         <td align="right">State</td>
                         <td>
-                            <select name="state" style="width: 50%;" ng-model="$ctrl.location.state" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.states">
+                            <select name="state" style="width: 50%;" ng-model="$ctrl.location.state" class="form-control" required ng-options="item for item in $ctrl.dropDownValues.states | orderBy">
                                 <option value="">Select State</option>
                             </select>
                             <span ng-show="locationsForm.state.$touched && locationsForm.state.$invalid" class="input-field-errors">Location State is required.</span>

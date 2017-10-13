@@ -131,8 +131,9 @@
                       <!-- <label>Quantity</label> -->
                       <span class="mandatory-fields">
                         <label>Quantity</label>*</span>
-                      <input class="form-control" name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity">
-                      <span ng-show="operatorForm.quantity.$touched && operatorForm.quantity.$invalid" class="input-field-errors">Quantity is required</span>
+                      <input class="form-control" name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity" ng-pattern="/^\d+(\.\d{1,2})?$/">
+                      <span ng-show="operatorForm.quantity.$touched && operatorForm.quantity.$invalid && !operatorForm.quantity.$error.pattern" class="input-field-errors">Quantity is required</span>
+                      <span ng-show="operatorForm.quantity.$error.pattern" class="input-field-errors">Invalid Quantity</span>
                     </div>
                   </div>
                   <div class=" col-12 col-sm-6">
@@ -240,7 +241,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-class="{'green': fanSlip.bayStatus == 'Completed', 'red': fanSlip.bayStatus == 'Not Reached'}" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                      <tr ng-class="{'green': fanSlip.bayStatus == 'Completed'}" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"><!-- 'red': fanSlip.bayStatus == 'Not Reached' -->
                         <td class="center">{{fanSlip.truckNumber}}</td>
                         <td class="center">{{fanSlip.driverName}}</td>
                         <td class="center">{{fanSlip.driverLicNo}}</td>

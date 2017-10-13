@@ -89,7 +89,7 @@
                                         <span class="mandatory-fields"> <label>Mobile Number</label>*</span>
                                         <input size="20" class="form-control" ng-model="newUser.userMobileNum" maxlength="10" name="userMobileNum" value="" required type="text" ng-pattern="/^[1-9]{1}[0-9]{9}$/ ">
                                         <span ng-show="userForm.userMobileNum.$touched && userForm.userMobileNum.$invalid && !userForm.userMobileNum.$error.pattern" class="input-field-errors">Please enter 10 digit  mobile number.</span>
-                                        <span ng-show="userForm.userMobileNum.$error.pattern" class="input-field-errors">Invalid Mobile Number</span></br>
+                                        <span ng-show="userForm.userMobileNum.$error.pattern" class="input-field-errors">Invalid Mobile Number</span>
 
                                         <!--   <input class="form-control p1" name="name" value=" " type="text">
                                     <input class="form-control p2" name="name" value=" " type="text">
@@ -218,7 +218,8 @@
                                             <td class="center">{{item.userStatus}} </td>
                                             <td class="center">
                                                 <button ng-disabled="!item.userEditFlag" class="btn btn-primary  edit-delete-icon" title="Change" ng-click="openEditModal('ls', item)"><span class="glyphicon glyphicon-edit"></span></button>
-                                                <button ng-disabled="!item.userEditFlag" class="btn btn-danger edit-delete-icon" title="Delete" ng-click="deleteUser(item)"><span class="glyphicon glyphicon-trash"></span></button>
+                                                <button ng-disabled="!item.userEditFlag" class="btn btn-danger edit-delete-icon" title="Delete" confirmed-click="deleteUser(item)" 
+                                                ng-confirm-click="Would you like to delete the User?"><span class="glyphicon glyphicon-trash"></span></button>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -1,14 +1,17 @@
 <form name="myForm">
     <div class="modal-content">
-        <h2><i class="fa fa-tint" aria-hidden="true"></i> Bay Details:</h2>
+        <h2>
+            <i class="fa fa-tint" aria-hidden="true"></i> Bay Details:</h2>
         <div class="modal-body">
             <table cellspacing="0" cellpadding="0" width="100%">
                 <tbody>
                     <tr>
                         <td width="50%" align="right">Bay Name</td>
                         <td width="50%">
-                            <input class="form-control" ng-disabled="true" style="width: 50%;" ng-model="$ctrl.bay.bayName" name="bayName" value="" size="35"
-                                data-error="Required" required="" type="text">
+                            <input class="form-control" ng-disabled="$ctrl.isNotSuperAdmin()" style="width: 50%;" ng-model="$ctrl.bay.bayName" name="bayName" value="" size="35"
+                                data-error="Required" required="" type="text" ng-pattern=/^[0-9a-zA-Z]*$/>
+                            <span ng-show="myForm.bayName.$touched && myForm.bayName.$invalid" class="input-field-errors">Bay name should consists only alphabets.</span>
+                            <span ng-if="$ctrl.errorMessageBayName" class="input-field-errors">Bay name already exist!</span>
                         </td>
                     </tr>
                     <tr>
@@ -46,7 +49,7 @@
                 <tr>
                     <td style="text-align: right;">
                         <span class="hoverMsg">
-                            <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()" ng-disabled="myForm.$invalid" >
+                            <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()" ng-disabled="myForm.$invalid">
                                 <i class="fa fa-check"> </i>
                                 <span>Update</span>
                             </button>

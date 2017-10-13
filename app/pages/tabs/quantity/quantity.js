@@ -55,6 +55,7 @@ angular.module('myApp.dashboard')
         }
         $scope.saveQuantity = function (newQuantity) {
             loader.show();
+            $scope.errorMessageQuantityName = false;
             var body = { "quantityName": newQuantity.quantityName, "quantity": newQuantity.quantity, "quantityStatus": newQuantity.operationalStatus };
             quantityService.addQuantity(body).then(function (success) {
                 $scope.newQuantity = { "quantityName": "", "quantity": "", "operationalStatus": "" };

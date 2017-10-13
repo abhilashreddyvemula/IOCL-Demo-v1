@@ -41,7 +41,7 @@
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group ">
                                         <span class="mandatory-fields"> <label>Bay Name </label>*</span>
-                                        <input class="form-control" ng-model="newBay.bayName" name="bayName" value="" size="35" data-error="Required" required="" type="text" ng-trim="false" ng-pattern=/^[a-zA-Z]*$/>
+                                        <input class="form-control" ng-model="newBay.bayName" name="bayName" value="" size="35" data-error="Required" required="" type="text" ng-trim="false" ng-pattern=/^[0-9a-zA-Z]*$/>
                                         <span ng-show="myForm.bayName.$touched && myForm.bayName.$invalid" class="input-field-errors">Bay name should consists only alphabets.</span>
                                         <span ng-if="errorMessageBayName" class="input-field-errors">Bay name already exist!</span>
                                     </div>
@@ -126,7 +126,6 @@
                                             <td class="center">{{bay.functionalStatus}}</td>
                                             <td class="center"><a class="btn btn-primary" ng-click="openEditModal('lg', bay)" ><span class="glyphicon glyphicon-edit"></span></a></td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                                 <div class="row">

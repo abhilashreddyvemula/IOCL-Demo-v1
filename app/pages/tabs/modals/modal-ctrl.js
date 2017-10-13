@@ -1,6 +1,7 @@
 angular.module('myApp.modals', [])
-  .controller('BayEditModalCtrl', function ($uibModalInstance, items, BayService, LoaderService) {
+  .controller('BayEditModalCtrl', function ($uibModalInstance, items, utility, BayService, LoaderService) {
     var $ctrl = this;
+    $ctrl.userRole = utility.getUserRole();
     $ctrl.bay = angular.copy(items.bay);
     let oldBay = angular.copy($ctrl.bay);
     $ctrl.dropDownValues = items.dropDownValues;
@@ -10,6 +11,8 @@ angular.module('myApp.modals', [])
       //$uibModalInstance.close($ctrl.selected.item);
       let editbayNumFlag = false;
       let editbayNameFlag = false;
+      $ctrl.errorMessageBayNum = false;
+      $ctrl.errorMessageBayName = false;
       if ($ctrl.bay.bayName !== oldBay.bayName) {
         editbayNameFlag = true;
       }
@@ -30,6 +33,10 @@ angular.module('myApp.modals', [])
           $ctrl.errorMessageBayNum = true;
           $ctrl.errorMessageBayName = false;
         }
+        if ($ctrl.errorMessage == "Bay with a bay name already exist!") {
+          $ctrl.errorMessageBayName = true;
+          $ctrl.errorMessageBayNum = false;
+        }
         if ($ctrl.errorMessage !== null) {
           $ctrl.formInvalid = true;
 
@@ -39,40 +46,50 @@ angular.module('myApp.modals', [])
       });
     };
 
+    $ctrl.isNotSuperAdmin = function () {
+      if ($ctrl.userRole === 'Super Admin') {
+        return false;
+      }
+      else
+        return true;
+    }
+
     $ctrl.cancel = function () {
       $uibModalInstance.dismiss('cancel');
     };
   })
 
-  .controller('UserEditModalCtrl', function ($uibModalInstance, items, UsersService, LoaderService) {
+  .controller('UserEditModalCtrl', function ($uibModalInstance, items, utility, UsersService, LoaderService) {
     var $ctrl = this;
+    $ctrl.userRole = utility.getUserRole();
     $ctrl.format = 'yyyy-MM-dd';
     $ctrl.options = { maxDate: new Date() };
     $ctrl.user = angular.copy(items.user);
     var actualPassword = items.user.userPassword;
     $ctrl.user.userDOB = new Date($ctrl.user.userDOB);
-    $ctrl.user.userPassword = '********';
+    $ctrl.user.userPassword = 'WWWWW!09090';
     let oldUser = angular.copy($ctrl.user);
     $ctrl.dropDownValues = items.dropDownValues;
     $ctrl.update = function () {
       LoaderService.show();
+      $ctrl.errorMessageUserName = false;
       let editUserNameFlag = false;
       if ($ctrl.user.userName !== oldUser.userName) {
         editUserNameFlag = true;
       }
       //$uibModalInstance.close($ctrl.selected.item);
       var latestPassword = '';
-      var pwdEditFlad = false;
-      if ($ctrl.user.userPassword === '********') {
-        pwdEditFlad = false;
+      var pwdEditFlag = false;
+      if ($ctrl.user.userPassword === 'WWWWW!09090') {
+        pwdEditFlag = false;
         latestPassword = actualPassword
       }
       else {
-        pwdEditFlad = true;
+        pwdEditFlag = true;
         latestPassword = $ctrl.user.userPassword;
 
       }
-      let user = { "userName": $ctrl.user.userName, "userFirstName": $ctrl.user.userFirstName, "userLastName": $ctrl.user.userLastName, "userDOB": $ctrl.user.userDOB, "userAadharNum": $ctrl.user.userAadharNum, "userMobileNum": $ctrl.user.userMobileNum, "userPassword": latestPassword, "userType": $ctrl.user.userType, "userStatus": $ctrl.user.userStatus, "editUserNameFlag": editUserNameFlag, "userId": $ctrl.user.userID };
+      let user = { "userName": $ctrl.user.userName, "userFirstName": $ctrl.user.userFirstName, "userLastName": $ctrl.user.userLastName, "userDOB": $ctrl.user.userDOB, "userAadharNum": $ctrl.user.userAadharNum, "userMobileNum": $ctrl.user.userMobileNum, "userPassword": btoa(latestPassword), "userType": $ctrl.user.userType, "userStatus": $ctrl.user.userStatus, "editUserNameFlag": editUserNameFlag, "editPwdFlag": pwdEditFlag, "userId": $ctrl.user.userID };
       UsersService.updateUser(user).then(function (response) {
         console.log('Response', response);
         $uibModalInstance.close({ $value: 'updated' });
@@ -80,12 +97,11 @@ angular.module('myApp.modals', [])
         alert("User updated successfully...");
       }, function (error) {
         LoaderService.hide();
-        $ctrl.errorMessage = error.data.errorMessage;
-        if ($ctrl.errorMessage == "User Already Exist!!") {
+        if (error.data !== null && error.data !== undefined)
+          $ctrl.errorMessage = error.data.errorMessage;
+        if ($ctrl.errorMessage == "User with user name already exist!!") {
           $ctrl.errorMessageUserName = true;
-
         }
-
         if ($ctrl.errorMessage !== null) {
           $ctrl.formInvalid = true;
 
@@ -93,6 +109,14 @@ angular.module('myApp.modals', [])
         alert('Unable to update User, Please try again...');
       });
     };
+
+    $ctrl.isNotSuperAdmin = function () {
+      if ($ctrl.userRole === 'Super Admin') {
+        return false;
+      }
+      else
+        return true;
+    }
 
     $ctrl.cancel = function () {
       $uibModalInstance.dismiss('cancel');
@@ -107,6 +131,7 @@ angular.module('myApp.modals', [])
     console.log($ctrl.contractor, $ctrl.dropDownValues);
     $ctrl.update = function () {
       LoaderService.show();
+      $ctrl.errorMessageContractorName = false;
       let editContractorNameFlag = false;
       if ($ctrl.contractor.contractorName !== oldContractor.contractorName) {
         editContractorNameFlag = true;
@@ -119,7 +144,8 @@ angular.module('myApp.modals', [])
         LoaderService.hide();
         alert("Contractor updated successfully...");
       }, function (error) {
-        $ctrl.errorMessage = error.data.errorMessage;
+        if (error.data !== null && error.data !== undefined)
+          $ctrl.errorMessage = error.data.errorMessage;
         if ($ctrl.errorMessage == "Contractor with contractor name Already Exist!") {
           $ctrl.errorMessageContractorName = true;
         }
@@ -144,6 +170,8 @@ angular.module('myApp.modals', [])
     console.log($ctrl.location, $ctrl.dropDownValues);
     $ctrl.update = function () {
       LoaderService.show();
+      $ctrl.errorMessageLocationName = false;
+      $ctrl.errorMessagelocationCode = false;
       let editLocationNameFlag = false;
       let editLocationCodeFlag = false;
       if ($ctrl.location.locationName !== oldLocation.locationName) {
@@ -160,8 +188,9 @@ angular.module('myApp.modals', [])
         LoaderService.hide();
         alert("Location updated successfully...");
       }, function (error) {
-        $ctrl.errorMessage = error.data.errorMessage;
-        if ($ctrl.errorMessage == "Location name Already Exist!") {
+        if (error.data !== null && error.data !== undefined)
+          $ctrl.errorMessage = error.data.errorMessage;
+        if ($ctrl.errorMessage == "Location with a location name already exist!") {
           $ctrl.errorMessageLocationName = true;
         }
         if ($ctrl.errorMessage == "Location with a location code already exist!") {
@@ -188,6 +217,7 @@ angular.module('myApp.modals', [])
     console.log($ctrl.quantity, $ctrl.dropDownValues);
     $ctrl.update = function () {
       LoaderService.show();
+      $ctrl.errorMessageQuantityName = false;
       let editQuantityFlag = false;
       let editQuantityNameFlag = false;
       if ($ctrl.quantity.quantity !== oldQuantity.quantity) {
@@ -204,13 +234,13 @@ angular.module('myApp.modals', [])
         LoaderService.hide();
         alert("Quantity updated successfully...");
       }, function (error) {
-        $ctrl.errorMessage = error.data.errorMessage;
+        if (error.data !== null && error.data !== undefined)
+          $ctrl.errorMessage = error.data.errorMessage;
         if ($ctrl.errorMessage == "Qunatity with a qunatity name already exist!") {
-            $ctrl.errorMessageQuantityName = true;
-
+          $ctrl.errorMessageQuantityName = true;
         }
         if ($ctrl.errorMessage !== null) {
-            $ctrl.formInvalid = true;
+          $ctrl.formInvalid = true;
 
         }
         LoaderService.hide();

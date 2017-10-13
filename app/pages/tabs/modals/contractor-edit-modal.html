@@ -44,7 +44,7 @@
                     <tr>
                         <td align="right">State</td>
                         <td>
-                            <select name="contractorState" style="width: 50%;" ng-model="$ctrl.contractor.contractorState" class="form-control" required
+                            <select name="contractorState" style="width: 50%;" ng-model="$ctrl.contractor.contractorState | orderBy" class="form-control" required
                                 ng-options="item for item in $ctrl.dropDownValues.States">
                                 <option value="">Select</option>
                             </select>

@@ -57,6 +57,7 @@ angular.module('myApp.dashboard')
         }
         $scope.saveContractor = function(contractor) {
             loader.show();
+            $scope.errorMessageContractorName = false;
             var body = { "contractorName": contractor.contractorName, "contractorType": contractor.contractorType, "contractorState": contractor.contractorState, "contractorPinCode": contractor.contractorPinCode, "contractorOperationalStatus": contractor.contractorOperationalStatus, "contractorCity": contractor.contractorCity, "contractorAddress": contractor.contractorAddress };
             contractorsService.addContractor(body).then(function(success) {
                 $scope.newContractor = { "contractorName": "", "contractorType": "", "contractorState": "", "contractorPinCode": "", "contractorOperationalStatus": "", "contractorCity": "", "contractorAddress": "" };
