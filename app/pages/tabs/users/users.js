@@ -84,7 +84,7 @@ angular.module('myApp.dashboard')
             var body = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": $filter('date')(user.userDOB, 'yyyy-MM-dd'), "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": user.userType, "userStatus": user.userStatus };
             usersService.addUser(body).then(function (success) {
                 $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": null, "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": [], "userStatus": "" };
-                alert('Quantity added successfully...');
+                alert('User added successfully...');
                 $scope.loadAllUsers();
                 $scope.addClicked = false;
                 loader.hide();

@@ -248,7 +248,7 @@ angular.module('myApp.modals', [])
   .controller('OperatorViewModalCtrl', function ($uibModalInstance, items, FanSlipsService, utility, LoaderService) {
     var $ctrl = this;
     $ctrl.fanSlip = angular.copy(items.fanSlip);
-
+    $ctrl.userRole = utility.getUserRole();
     $ctrl.regenerate = function () {
       LoaderService.show();
       let fanSlip = { "fanId": $ctrl.fanSlip.fanId, "truckNo": $ctrl.fanSlip.truckNumber, "driverName": $ctrl.fanSlip.driverName, "driverLicNo": $ctrl.fanSlip.driverLicenceNumber, "customer": $ctrl.fanSlip.customer, "quantity": $ctrl.fanSlip.quantity, "vehicleWgt": $ctrl.fanSlip.vehicleWeight, "destination": $ctrl.fanSlip.destination, "locationCode": $ctrl.fanSlip.locationCode, "bayNum": parseInt($ctrl.fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": $ctrl.fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name };

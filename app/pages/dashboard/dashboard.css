@@ -786,7 +786,7 @@ border-bottom: 1px solid #ccc;
 }
 .table-responsive table{
     margin-top: 6px;
-    border: 1px solid #c7c9eb !important;
+    border: 2px solid #c7c9eb !important;
 }
 /*.bay .first  [class^="col-"] { */
   /*background: #d8ebf9; !* Old browsers *!*/
@@ -1009,12 +1009,20 @@ button, input {
 
 .table tbody tr.green, .table tbody tr.green:hover {
     background-color: #006400;
-    color: #ffffff;
+    /* color: #ffffff; */
 }
 
 .table tbody tr.red, .table tbody tr.red:hover {
     background-color: #f00;
-    color: #ffffff;
+    /* color: #ffffff; */
+}
+.table tbody tr.white, .table tbody tr.white:hover {
+    background-color: #fff;
+    /* color: #ffffff; */
+}
+.table tbody tr.orange, .table tbody tr.orange:hover {
+    background-color: #ff9900;
+    /* color: #ffffff; */
 }
 
 .btn{
@@ -1039,6 +1047,8 @@ button, input {
 
 .operator-actions .btn {
     padding: 0.5rem 3px;
+    margin-bottom: 6px;
+    border: 1px solid #e6e5e5;
 }
 
 

@@ -141,8 +141,9 @@
                       <!-- <label>Vehicle Weight</label> -->
                       <span class="mandatory-fields">
                         <label>Vehicle Weight</label>*</span>
-                      <input class="form-control " name="vehicleWgt" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.vehicleWgt">
-                      <span ng-show="operatorForm.vehicleWgt.$touched && operatorForm.vehicleWgt.$invalid" class="input-field-errors">Vehicle Weight is required</span>
+                      <input class="form-control " name="vehicleWgt" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.vehicleWgt" ng-pattern="/^\d+(\.\d{1,2})?$/">
+                      <span ng-show="operatorForm.vehicleWgt.$touched && operatorForm.vehicleWgt.$invalid && !operatorForm.vehicleWgt.$error.pattern" class="input-field-errors">Vehicle Weight is required</span>
+                      <span ng-show="operatorForm.vehicleWgt.$error.pattern" class="input-field-errors">Invalid Quantity</span>
                     </div>
                   </div>
                 </div>
@@ -243,7 +244,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-class="{'green': fanSlip.bayStatus == 'Completed'}" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"><!-- 'red': fanSlip.bayStatus == 'Not Reached' -->
+                      <tr ng-class="{'white': fanSlip.fanPinStatus == 'Created','green': fanSlip.fanPinStatus == 'Completed', 'orange': fanSlip.fanPinStatus == 'Inprogress', 'red': (fanSlip.fanPinStatus == 'Expired' || fanSlip.fanPinStatus == 'Cancelled') }" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"><!-- 'red': fanSlip.bayStatus == 'Not Reached' -->
                         <td class="center">{{fanSlip.truckNumber}}</td>
                         <td class="center">{{fanSlip.driverName}}</td>
                         <td class="center">{{fanSlip.driverLicenceNumber}}</td>
@@ -259,16 +260,18 @@
                         <td class="center">{{fanSlip.fanPinStatus}}</td>
                         <td class="center">{{fanSlip.fanPinExpiration}}</td>
                         <td class="center operator-actions">
-                          <a class="btn btn-primary" ng-if="userRole === 'Supervisor'" title="View" ng-click="view(fanSlip)">
+                          <a class="btn btn-primary" title="View" ng-click="view(fanSlip)">
                             <span title="View" class="fa fa-eye"></span>
                           </a>&nbsp;
-                          <a class="btn btn-success" title="Print" ng-click="print(fanSlip)">
+                          <a class="btn btn-success" title="Print" ng-click="print(fanSlip)" ng-disabled="userRole === 'TTES Operator' && (fanSlip.fanPinStatus === 'Expired' || fanSlip.fanPinStatus === 'Cancelled' || fanSlip.fanPinStatus === 'Completed')">
                             <span class="glyphicon glyphicon-print"></span>
                           </a>&nbsp;
-                          <a class="btn btn-danger" ng-if="userRole === 'Supervisor'" title="Re-Generate" ng-click="regenerate(fanSlip)">
+                          <a class="btn btn-danger" ng-if="userRole === 'Supervisor'" title="Re-Generate" confirmed-click="regenerate(fanSlip)" 
+                          ng-confirm-click="Would you like to Regenerate the Fan slip?">
                             <span class="glyphicon glyphicon-refresh"></span>
                           </a>&nbsp;
-                          <a class="btn btn-default" ng-if="userRole === 'Supervisor'" title="Cancel" ng-click="cancel(fanSlip)">
+                          <a class="btn btn-default" ng-if="userRole === 'Supervisor'" title="Cancel" confirmed-click="cancel(fanSlip)" 
+                          ng-confirm-click="Would you like to Cancel the Fan slip?">
                             <span class="glyphicon glyphicon-remove"></span>
                           </a>
 

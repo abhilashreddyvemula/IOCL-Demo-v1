@@ -29,9 +29,9 @@ angular.module('myApp.dashboard')
             $scope.currentPage = 1; //reset to first paghe
         }
 
-        $scope.loadFanSlipsList = function () {
+        $scope.loadFanSlipsList = function (fanSlipDate) {
             loader.show();
-            fanSlipsService.getFanSlipsList($scope.fanSlipDate).then(function (response) {
+            fanSlipsService.getFanSlipsList(fanSlipDate).then(function (response) {
                 if (response.status == 200) {
                     $scope.fanSlips = response.data;
                     $scope.totalItems = $scope.fanSlips.length;
@@ -98,7 +98,7 @@ angular.module('myApp.dashboard')
                 $scope.addClicked = false;
                 alert('Fan Slip added successfully...');
                 loader.hide();
-                $scope.loadFanSlipsList();
+                $scope.loadFanSlipsList(new Date());
             }, function (error) {
                 $scope.addClicked = true;
                 $scope.errorMessage = error.data.errorMessage;
@@ -129,7 +129,7 @@ angular.module('myApp.dashboard')
 
             modalInstance.result.then(function (selectedItem) {
                 if (selectedItem.$value === 'regenerated') {
-                    $scope.loadFanSlipsList();
+                    $scope.loadFanSlipsList(new Date());
                 }
             }, function () {
             });
@@ -147,7 +147,7 @@ angular.module('myApp.dashboard')
             { 'title': 'Bay Status', 'value': fanSlip.bayStatus },
             { 'title': 'Expiration Date', 'value': fanSlip.fanPinExpiration },
             { 'title': 'FAN Slip Number', 'value': fanSlip.fanId },
-            { 'title': 'FAN Pin Status', 'value': fanPinStatus},
+            { 'title': 'FAN Pin Status', 'value': fanSlip.fanPinStatus},
             { 'title': 'PIN', 'value': fanSlip.fanPin }
             ];
             var printContents = utility.getHTMLDiv(newfanSlip);
@@ -160,7 +160,7 @@ angular.module('myApp.dashboard')
         $scope.regenerate = function(fanSlip){
             let newfanSlip = {"fanId": fanSlip.fanId, "truckNo": fanSlip.truckNumber, "driverName": fanSlip.driverName, "driverLicNo": "123456", "customer": fanSlip.customer, "quantity": fanSlip.quantity, "vehicleWgt": fanSlip.vehicleWeight,"destination": fanSlip.destination, "locationCode": fanSlip.locationCode, "bayNum": parseInt(fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name};
             fanSlipsService.regenerateFanSlip(newfanSlip).then(function(response){
-              $scope.loadFanSlipsList();
+              $scope.loadFanSlipsList(new Date());
             }, function(error){});
         }
         $scope.cancel = function(item){
@@ -169,7 +169,7 @@ angular.module('myApp.dashboard')
             fanSlipsService.cancelFanSlip(item.fanId, username).then(function(response){
                 loader.hide();
                 alert('Fan slip cancelled successfully...');
-                $scope.loadFanSlipsList();
+                $scope.loadFanSlipsList(new Date());
             }, function(error){
                 loader.hide();
                 alert('Unable to cancel fan slip, Please try again...');
@@ -178,9 +178,9 @@ angular.module('myApp.dashboard')
 
         $scope.$watch('fanSlipDate', function(newVal, oldVal){
             if(newVal !== oldVal){
-                $scope.loadFanSlipsList();
+                $scope.loadFanSlipsList(newVal);
             }
         });
-        
+        $scope.loadFanSlipsList(new Date());
         $scope.loadDropdownsData();
     }]);
