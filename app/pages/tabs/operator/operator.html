@@ -244,7 +244,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-class="{'white': fanSlip.fanPinStatus == 'Created','green': fanSlip.fanPinStatus == 'Completed', 'orange': fanSlip.fanPinStatus == 'Inprogress', 'red': (fanSlip.fanPinStatus == 'Expired' || fanSlip.fanPinStatus == 'Cancelled') }" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"><!-- 'red': fanSlip.bayStatus == 'Not Reached' -->
+                      <tr ng-class="{'white': fanSlip.fanPinStatus == 'Created','green': fanSlip.fanPinStatus == 'Completed', 'orange': fanSlip.fanPinStatus == 'InProgress', 'red': (fanSlip.fanPinStatus == 'Expired' || fanSlip.fanPinStatus == 'Cancelled') }" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"><!-- 'red': fanSlip.bayStatus == 'Not Reached' -->
                         <td class="center">{{fanSlip.truckNumber}}</td>
                         <td class="center">{{fanSlip.driverName}}</td>
                         <td class="center">{{fanSlip.driverLicenceNumber}}</td>
