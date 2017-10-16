@@ -3,7 +3,7 @@
     <div class="" id="Operator">
       <section class="Contractors  title" style="">
         <div class="row first">
-          <div class="col-12" ng-show="addClicked" id="contractor-save-btns">
+          <div class="col-12" ng-if="addClicked" id="contractor-save-btns">
             <h2>
               <i class="fa fa-truck" aria-hidden="true"> </i>
               <span></span>
@@ -25,7 +25,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-12" style="display: block;" ng-hide="addClicked" id="contractor-add-btns">
+          <div class="col-12" style="display: block;" ng-if="!addClicked" id="contractor-add-btns">
             <h2>
               <i class="fa fa-truck"> </i>
               <span></span>
@@ -55,7 +55,7 @@
       </section>
       <div class="Contractors">
         <div class="container">
-          <div ng-show="addClicked" id="addOperator">
+          <div ng-if="addClicked" id="addOperator">
             <div class="row">
               <div class="col-xs-12  col-sm-12 col-md-3 col-lg-3">
                 <div class="row">
@@ -114,9 +114,9 @@
                         <span class="mandatory-fields">
                           <label>Contractor</label>*</span>
                         <select name="contractorName" ng-model="newFanSlip.contractorName" class="form-control" required ng-options="item for item in dropDownValues.contractorNames">
-                          <option value="">Select Contractor</option>
+                          <option value="">Select</option>
                         </select>
-                        <span ng-show="operatorForm.contractorName.$touched && operatorForm.contractorName.$invalid" class="input-field-errors">User Status is required.</span>
+                        <span ng-show="operatorForm.contractorName.$touched && operatorForm.contractorName.$invalid" class="input-field-errors">Contractor is required.</span>
                       </div>
                     </div>
                   </div>
@@ -131,8 +131,10 @@
                       <!-- <label>Quantity</label> -->
                       <span class="mandatory-fields">
                         <label>Quantity</label>*</span>
-                      <input class="form-control" name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity" ng-pattern="/^\d+(\.\d{1,2})?$/">
-                      <span ng-show="operatorForm.quantity.$touched && operatorForm.quantity.$invalid && !operatorForm.quantity.$error.pattern" class="input-field-errors">Quantity is required</span>
+                      <input class="form-control" name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity"
+                        ng-pattern="/^\d+(\.\d{1,2})?$/">
+                      <span ng-show="operatorForm.quantity.$touched && operatorForm.quantity.$invalid && !operatorForm.quantity.$error.pattern"
+                        class="input-field-errors">Quantity is required</span>
                       <span ng-show="operatorForm.quantity.$error.pattern" class="input-field-errors">Invalid Quantity</span>
                     </div>
                   </div>
@@ -141,8 +143,10 @@
                       <!-- <label>Vehicle Weight</label> -->
                       <span class="mandatory-fields">
                         <label>Vehicle Weight</label>*</span>
-                      <input class="form-control " name="vehicleWgt" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.vehicleWgt" ng-pattern="/^\d+(\.\d{1,2})?$/">
-                      <span ng-show="operatorForm.vehicleWgt.$touched && operatorForm.vehicleWgt.$invalid && !operatorForm.vehicleWgt.$error.pattern" class="input-field-errors">Vehicle Weight is required</span>
+                      <input class="form-control " name="vehicleWgt" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.vehicleWgt"
+                        ng-pattern="/^\d+(\.\d{1,2})?$/">
+                      <span ng-show="operatorForm.vehicleWgt.$touched && operatorForm.vehicleWgt.$invalid && !operatorForm.vehicleWgt.$error.pattern"
+                        class="input-field-errors">Vehicle Weight is required</span>
                       <span ng-show="operatorForm.vehicleWgt.$error.pattern" class="input-field-errors">Invalid Quantity</span>
                     </div>
                   </div>
@@ -163,9 +167,9 @@
                   <span class="mandatory-fields">
                     <label>Location Code</label>*</span>
                   <select name="locationCode" class="form-control" required ng-options="item for item in dropDownValues.locationCodes" ng-model="newFanSlip.locationCode">
-                    <option value="">Select Location Code</option>
+                    <option value="">Select Location Name</option>
                   </select>
-                  <span ng-show="operatorForm.locationCode.$touched && operatorForm.locationCode.$invalid" class="input-field-errors">Location Code is required</span>
+                  <span ng-show="operatorForm.locationCode.$touched && operatorForm.locationCode.$invalid" class="input-field-errors">Location Name is required</span>
                 </div>
               </div>
               <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
@@ -173,11 +177,11 @@
                   <!-- <label>Bay Number</label> -->
                   <span class="mandatory-fields">
                     <label>Bay Number</label>*</span>
-                  <select name="bayNum" class="form-control" required ng-model="newFanSlip.bayNum">
+                  <select name="bayNum" class="form-control" ng-options="item as item.bayNumber for item in bayNumbers | bayfilter"  required ng-model="selectedBay" ng-change="bayChanged(selectedBay)">
                     <option value="">Select Bay number</option>
-                    <option ng-repeat="item in bayNumbers | filter: {'bayFunctionalStatus':'active'}" value="{{item.bayNumber}}">{{item.bayNumber}}</option>
                   </select>
                   <span ng-show="operatorForm.bayNum.$touched && operatorForm.bayNum.$invalid" class="input-field-errors">Bay Number is required</span>
+                  <span ng-show="!(operatorForm.bayNum.$touched && operatorForm.bayNum.$invalid) && showMessage" class="input-field-msg">{{selectedBay.bayAvailableStatus}} Bay selected</span>
                 </div>
               </div>
             </div>
@@ -199,9 +203,18 @@
                       </label>
                     </div>
                     <div class="col-sm-12 col-md-4 my-datepicker">
-                      <input size="20" style="width: 50%; margin-left: 25%;" class="form-control date" uib-datepicker-popup="{{format}}" ng-click="openDatePicker = true" is-open="openDatePicker"
-                        datepicker-options="options" ng-model="fanSlipDate" close-text="Close" name="date" value="" required
-                        type="text">
+                      <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                          <input size="20" style="width: 50%; margin-left: 25%;" class="form-control date" uib-datepicker-popup="{{format}}" ng-click="openDatePicker = true"
+                            is-open="openDatePicker" datepicker-options="options" ng-model="fanSlipDate" close-text="Close"
+                            name="date" value="" required type="text">
+                        </div>
+                        <divclass="col-sm-12 col-md-6">
+                          <button ng-click="refresh()" style="margin-top: 7px;">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                            <span>Refresh</span>
+                          </button>
+                      </div>
                     </div>
                     <div class="col-sm-12 col-md-4 search-div">
                       <label>Search:
@@ -219,7 +232,7 @@
                         <th class="sorting" ng-click="orderByField='driverLicNo'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'driverLicNo') && !reverseSort, 'sorting_desc': (orderByField == 'driverLicNo') && reverseSort}"
                           width="9%">Driver License Number</th>
                         <th class="sorting" ng-click="orderByField='fanPin'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPin') && !reverseSort, 'sorting_desc': (orderByField == 'fanPin') && reverseSort}"
-                          width="10%">FAN Slip Number</th>
+                          width="10%">FAN Pin Number</th>
                         <th class="sorting" ng-click="orderByField='customer'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'customer') && !reverseSort, 'sorting_desc': (orderByField == 'customer') && reverseSort}"
                           width="7%">Customer</th>
                         <th class="sorting" ng-click="orderByField='quantity'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'quantity') && !reverseSort, 'sorting_desc': (orderByField == 'quantity') && reverseSort}"
@@ -231,7 +244,7 @@
                         <th class="sorting" ng-click="orderByField='destination'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'destination') && !reverseSort, 'sorting_desc': (orderByField == 'destination') && reverseSort}"
                           width="8%">Destination</th>
                         <th class="sorting" ng-click="orderByField='locationCode'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'locationCode') && !reverseSort, 'sorting_desc': (orderByField == 'locationCode') && reverseSort}"
-                          width="6%">Location Code</th>
+                          width="6%">Location Name</th>
                         <th class="sorting" ng-click="orderByField='bayNum'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayNum') && !reverseSort, 'sorting_desc': (orderByField == 'bayNum') && reverseSort}"
                           width="3%">Bay Number</th>
                         <th class="sorting" ng-click="orderByField='bayStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayStatus') && !reverseSort, 'sorting_desc': (orderByField == 'bayStatus') && reverseSort}"
@@ -244,7 +257,9 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-class="{'white': fanSlip.fanPinStatus == 'Created','green': fanSlip.fanPinStatus == 'Completed', 'orange': fanSlip.fanPinStatus == 'InProgress', 'red': (fanSlip.fanPinStatus == 'Expired' || fanSlip.fanPinStatus == 'Cancelled') }" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"><!-- 'red': fanSlip.bayStatus == 'Not Reached' -->
+                      <tr ng-class="{'white': fanSlip.fanPinStatus == 'Created','green': fanSlip.fanPinStatus == 'Completed', 'orange': fanSlip.fanPinStatus == 'InProgress', 'red': (fanSlip.fanPinStatus == 'Expired' || fanSlip.fanPinStatus == 'Cancelled') }"
+                        ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                        <!-- 'red': fanSlip.bayStatus == 'Not Reached' -->
                         <td class="center">{{fanSlip.truckNumber}}</td>
                         <td class="center">{{fanSlip.driverName}}</td>
                         <td class="center">{{fanSlip.driverLicenceNumber}}</td>
@@ -266,12 +281,10 @@
                           <a class="btn btn-success" title="Print" ng-click="print(fanSlip)" ng-disabled="userRole === 'TTES Operator' && (fanSlip.fanPinStatus === 'Expired' || fanSlip.fanPinStatus === 'Cancelled' || fanSlip.fanPinStatus === 'Completed')">
                             <span class="glyphicon glyphicon-print"></span>
                           </a>&nbsp;
-                          <a class="btn btn-danger" ng-if="userRole === 'Supervisor'" title="Re-Generate" confirmed-click="regenerate(fanSlip)" 
-                          ng-confirm-click="Would you like to Regenerate the Fan slip?">
+                          <a class="btn btn-danger" ng-if="userRole === 'Supervisor'" title="Re-Generate" confirmed-click="regenerate(fanSlip)" ng-confirm-click="Would you like to Regenerate the Fan slip?">
                             <span class="glyphicon glyphicon-refresh"></span>
                           </a>&nbsp;
-                          <a class="btn btn-default" ng-if="userRole === 'Supervisor'" title="Cancel" confirmed-click="cancel(fanSlip)" 
-                          ng-confirm-click="Would you like to Cancel the Fan slip?">
+                          <a class="btn btn-default" ng-if="userRole === 'Supervisor'" title="Cancel" confirmed-click="cancel(fanSlip)" ng-confirm-click="Would you like to Cancel the Fan slip?">
                             <span class="glyphicon glyphicon-remove"></span>
                           </a>
 

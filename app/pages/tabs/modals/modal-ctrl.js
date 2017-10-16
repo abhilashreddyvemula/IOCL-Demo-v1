@@ -90,6 +90,19 @@ angular.module('myApp.modals', [])
       }
       let user = { "userName": $ctrl.user.userName, "userFirstName": $ctrl.user.userFirstName, "userLastName": $ctrl.user.userLastName, "userDOB": $ctrl.user.userDOB, "userAadharNum": $ctrl.user.userAadharNum, "userMobileNum": $ctrl.user.userMobileNum, "userPassword": btoa(latestPassword), "userType": $ctrl.user.userType, "userStatus": $ctrl.user.userStatus, "editUserNameFlag": editUserNameFlag, "editPwdFlag": pwdEditFlag, "userId": $ctrl.user.userID };
       UsersService.updateUser(user).then(function (response) {
+        console.log(response);
+        var currentUserId = utility.getUserId();
+        if (currentUserId === response.data.userID) {
+          var userdetails = utility.getCredentials();
+          if (pwdEditFlag) {
+            userdetails.password = latestPassword;
+          }
+          if (editUserNameFlag) {
+            userdetails.name = $ctrl.user.userName;
+          }
+          utility.setCredentials(userdetails);
+          utility.setUserRole(response.data.userType);
+        }
         $uibModalInstance.close({ $value: 'updated' });
         LoaderService.hide();
         alert("User updated successfully...");
@@ -274,7 +287,7 @@ angular.module('myApp.modals', [])
       { 'title': 'Bay Status', 'value': $ctrl.fanSlip.bayStatus },
       { 'title': 'Expiration Date', 'value': $ctrl.fanSlip.fanPinExpiration },
       { 'title': 'FAN Slip Number', 'value': $ctrl.fanSlip.fanId },
-      { 'title': 'FAN Pin Status', 'value': $ctrl.fanSlip.fanPinStatus},
+      { 'title': 'FAN Pin Status', 'value': $ctrl.fanSlip.fanPinStatus },
       { 'title': 'PIN', 'value': $ctrl.fanSlip.fanPin }
       ];
       var printContents = utility.getHTMLDiv(fanSlip);
@@ -282,6 +295,18 @@ angular.module('myApp.modals', [])
       popupWin.document.open();
       popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="app.css" /></head><body onload="window.print()">' + printContents + '</body></html>');
       popupWin.document.close();
+    }
+    $ctrl.cancelPin = function () {
+      LoaderService.show();
+      let username = utility.getCredentials().name;
+      FanSlipsService.cancelFanSlip($ctrl.fanSlip.fanId, username).then(function (response) {
+        $uibModalInstance.close({ $value: 'cancelled' });
+        LoaderService.hide();
+        alert('Fan slip cancelled successfully...');
+      }, function (error) {
+        LoaderService.hide();
+        alert('Unable to cancel fan slip, Please try again...');
+      });
     }
 
     $ctrl.cancel = function () {

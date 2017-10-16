@@ -23,6 +23,7 @@ angular.module('myApp.home', ['ngRoute'])
                 console.log(response.data);
                 if (response.status === 200) {
                     utility.setUserRole(response.data.userRole);
+                    utility.setUserId(response.data.userId);
                     $location.path('dashboard');
                     loader.hide();
                 }

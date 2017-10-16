@@ -1,7 +1,7 @@
 angular.module('myApp.services', [])
     // Login Services
     .service('loginService', ['$http', 'utility', function ($http, utility) {
-        var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/usermanagement';
+        var baseUrl = utility.getBaseURL() + '/iocl/usermanagement';
 
         this.userValidation = function () {
             var headers = utility.getHeaders();
@@ -16,7 +16,7 @@ angular.module('myApp.services', [])
     }])
     // Bay Services
     .service('BayService', ['$http', 'utility', function ($http, utility) {
-        var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/baysmanagement';
+        var baseUrl = utility.getBaseURL() + '/iocl/baysmanagement';
 
         this.getBayList = function () {
             var headers = utility.getHeaders();
@@ -67,7 +67,7 @@ angular.module('myApp.services', [])
 
     // Users Services
     .service('UsersService', ['$http', 'utility', function ($http, utility) {
-        var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/usermanagement';
+        var baseUrl = utility.getBaseURL() + '/iocl/usermanagement';
         this.getUsersList = function () {
             var headers = utility.getHeaders();
             var url = baseUrl + '/getUsers?UserRole=' + utility.getUserRole();
@@ -126,7 +126,7 @@ angular.module('myApp.services', [])
 
     // Contractors Services
     .service('ContractorsService', ['$http', 'utility', function ($http, utility) {
-        var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/contractorsmanagement';
+        var baseUrl = utility.getBaseURL() + '/iocl/contractorsmanagement';
 
         this.getContractorsList = function () {
             var headers = utility.getHeaders();
@@ -175,7 +175,7 @@ angular.module('myApp.services', [])
 
     // Location Services
     .service('LocationService', ['$http', 'utility', function ($http, utility) {
-        var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/locationsmanagement';
+        var baseUrl = utility.getBaseURL() + '/iocl/locationsmanagement';
         this.getLocationsList = function () {
             var headers = utility.getHeaders();
             var url = baseUrl + '/getLocationDetails';
@@ -223,7 +223,7 @@ angular.module('myApp.services', [])
 
     // Quantity Services
     .service('QuantityService', ['$http', 'utility', function ($http, utility) {
-        var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/quantitymanagement';
+        var baseUrl = utility.getBaseURL() + '/iocl/quantitymanagement';
         this.getQuantityList = function () {
             var headers = utility.getHeaders();
             var url = baseUrl + '/getQuantityDetails';
@@ -271,7 +271,7 @@ angular.module('myApp.services', [])
 
     // Fan Slip Services
     .service('FanSlipsService', ['$http', '$filter', 'utility', function ($http, $filter, utility) {
-        var baseUrl = 'http://103.92.235.45/IOCLAutomation/iocl/fanslipmanagement';
+        var baseUrl = utility.getBaseURL() + '/iocl/fanslipmanagement';
         this.getFanSlipsList = function (fanSlipDate) {
             var headers = utility.getHeaders();
             var current_date = $filter('date')(fanSlipDate, "yyyy-MM-dd");
@@ -341,7 +341,7 @@ angular.module('myApp.services', [])
         }
         this.getAvailableBays = function(){
             var headers = utility.getHeaders();
-            var url = 'http://103.92.235.45/IOCLAutomation/iocl/baysmanagement/getAvailableBays';
+            var url = utility.getBaseURL() + '/iocl/baysmanagement/getAvailableBays';
 
             return $http({
                 method: 'GET',

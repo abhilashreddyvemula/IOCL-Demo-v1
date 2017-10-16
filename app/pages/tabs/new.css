@@ -11,6 +11,11 @@
     font-size: 12px;
     display: block;
 }
+.input-field-msg {
+    color: green;
+    font-size: 12px;
+    display: block;
+}
 
 .errorFlaglogin {
     text-align: center;

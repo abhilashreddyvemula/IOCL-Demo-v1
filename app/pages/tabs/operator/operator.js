@@ -50,14 +50,14 @@ angular.module('myApp.dashboard')
                 $scope.dropDownValues.contractorNames = response.data.data.ContractorNames;
                 $scope.dropDownValues.locationCodes = response.data.data.LocationCodes;
                 loader.hide();
-                fanSlipsService.getAvailableBays().then(function(res){
+                fanSlipsService.getAvailableBays().then(function (res) {
                     $scope.bayNumbers = res.data;
                     loader.hide();
-                }, function(){
+                }, function () {
                     alert('Unable to load Bay numbers, Please try again...');
                     loader.hide();
                 });
-            }, function (error) { 
+            }, function (error) {
                 alert('Unable to load static dropdown values, Please try again...');
                 loader.hide();
             });
@@ -128,7 +128,7 @@ angular.module('myApp.dashboard')
             });
 
             modalInstance.result.then(function (selectedItem) {
-                if (selectedItem.$value === 'regenerated') {
+                if (selectedItem.$value === 'regenerated' || selectedItem.$value === 'cancelled') {
                     $scope.loadFanSlipsList(new Date());
                 }
             }, function () {
@@ -136,51 +136,64 @@ angular.module('myApp.dashboard')
         }
 
         $scope.print = function (fanSlip) {
-            let newfanSlip = [{ 'title': 'Truck Registration Number', 'value': fanSlip.truckNumber },
-            { 'title': 'Driver Name', 'value': fanSlip.driverName },
-            { 'title': 'Customer', 'value': fanSlip.customer },
-            { 'title': 'Quantity', 'value': fanSlip.quantity },
-            { 'title': 'Contractor', 'value': fanSlip.contractorName },
-            { 'title': 'Destination', 'value': fanSlip.destination },
-            { 'title': 'Location Code', 'value': fanSlip.locationCode },
-            { 'title': 'Bay Number', 'value': parseInt(fanSlip.bayNum) },
-            { 'title': 'Bay Status', 'value': fanSlip.bayStatus },
-            { 'title': 'Expiration Date', 'value': fanSlip.fanPinExpiration },
-            { 'title': 'FAN Slip Number', 'value': fanSlip.fanId },
-            { 'title': 'FAN Pin Status', 'value': fanSlip.fanPinStatus},
-            { 'title': 'PIN', 'value': fanSlip.fanPin }
-            ];
-            var printContents = utility.getHTMLDiv(newfanSlip);
-            var popupWin = window.open('', '_blank', 'width=500,height=500, top=100px, left=500px');
-            popupWin.document.open();
-            popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="app.css" /></head><body onload="window.print()">' + printContents + '</body></html>');
-            popupWin.document.close();
+            if (!($scope.userRole === 'TTES Operator' && (fanSlip.fanPinStatus === 'Expired' || fanSlip.fanPinStatus === 'Cancelled' || fanSlip.fanPinStatus === 'Completed'))) {
+                let newfanSlip = [{ 'title': 'Truck Registration Number', 'value': fanSlip.truckNumber },
+                { 'title': 'Driver Name', 'value': fanSlip.driverName },
+                { 'title': 'Customer', 'value': fanSlip.customer },
+                { 'title': 'Quantity', 'value': fanSlip.quantity },
+                { 'title': 'Contractor', 'value': fanSlip.contractorName },
+                { 'title': 'Destination', 'value': fanSlip.destination },
+                { 'title': 'Location Code', 'value': fanSlip.locationCode },
+                { 'title': 'Bay Number', 'value': parseInt(fanSlip.bayNum) },
+                { 'title': 'Bay Status', 'value': fanSlip.bayStatus },
+                { 'title': 'Expiration Date', 'value': fanSlip.fanPinExpiration },
+                { 'title': 'FAN Slip Number', 'value': fanSlip.fanId },
+                { 'title': 'FAN Pin Status', 'value': fanSlip.fanPinStatus },
+                { 'title': 'PIN', 'value': fanSlip.fanPin }
+                ];
+                var printContents = utility.getHTMLDiv(newfanSlip);
+                var popupWin = window.open('', '_blank', 'width=500,height=500, top=100px, left=500px');
+                popupWin.document.open();
+                popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="app.css" /></head><body onload="window.print()">' + printContents + '</body></html>');
+                popupWin.document.close();
+            }
         }
 
-        $scope.regenerate = function(fanSlip){
-            let newfanSlip = {"fanId": fanSlip.fanId, "truckNo": fanSlip.truckNumber, "driverName": fanSlip.driverName, "driverLicNo": "123456", "customer": fanSlip.customer, "quantity": fanSlip.quantity, "vehicleWgt": fanSlip.vehicleWeight,"destination": fanSlip.destination, "locationCode": fanSlip.locationCode, "bayNum": parseInt(fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name};
-            fanSlipsService.regenerateFanSlip(newfanSlip).then(function(response){
-              $scope.loadFanSlipsList(new Date());
-            }, function(error){});
+        $scope.regenerate = function (fanSlip) {
+            let newfanSlip = { "fanId": fanSlip.fanId, "truckNo": fanSlip.truckNumber, "driverName": fanSlip.driverName, "driverLicNo": "123456", "customer": fanSlip.customer, "quantity": fanSlip.quantity, "vehicleWgt": fanSlip.vehicleWeight, "destination": fanSlip.destination, "locationCode": fanSlip.locationCode, "bayNum": parseInt(fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name };
+            fanSlipsService.regenerateFanSlip(newfanSlip).then(function (response) {
+                $scope.loadFanSlipsList(new Date());
+            }, function (error) { });
         }
-        $scope.cancel = function(item){
+        $scope.cancel = function (item) {
             loader.show();
             let username = utility.getCredentials().name;
-            fanSlipsService.cancelFanSlip(item.fanId, username).then(function(response){
+            fanSlipsService.cancelFanSlip(item.fanId, username).then(function (response) {
                 loader.hide();
                 alert('Fan slip cancelled successfully...');
                 $scope.loadFanSlipsList(new Date());
-            }, function(error){
+            }, function (error) {
                 loader.hide();
                 alert('Unable to cancel fan slip, Please try again...');
             });
-        }   
+        }
 
-        $scope.$watch('fanSlipDate', function(newVal, oldVal){
-            if(newVal !== oldVal){
+        $scope.refresh = function () {
+            $scope.fanSlipDate = new Date();
+            $scope.loadFanSlipsList(new Date());
+        }
+
+        $scope.$watch('fanSlipDate', function (newVal, oldVal) {
+            if (newVal !== oldVal) {
                 $scope.loadFanSlipsList(newVal);
             }
         });
+        $scope.bayChanged = function(selectedBay){
+            $scope.newFanSlip.bayNum = selectedBay.bayNumber;
+            $scope.showMessage = true;
+            $scope.selectedBayStatus = item.bayAvailableStatus;
+        }
+
         $scope.loadFanSlipsList(new Date());
         $scope.loadDropdownsData();
     }]);

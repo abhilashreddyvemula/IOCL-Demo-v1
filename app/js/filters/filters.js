@@ -52,3 +52,25 @@ angular.module('myApp.filters', [])
                 return input;
         };
     })
+    .filter('bayfilter', function () {
+        return function (input) {
+            var outputEmpty = [];
+            var outputInQueue = [];
+            if (input !== undefined) {
+                input.forEach(function (item) {
+                    if (item.bayFunctionalStatus === 'Active') {
+                        if (item.bayAvailableStatus === 'Empty') {
+                            outputEmpty.push(item);
+                        }
+                        if (item.bayAvailableStatus === 'InQueue') {
+                            outputInQueue.push(item)
+                        }
+                    }
+                });
+            }
+            if (outputEmpty.length === 0) {
+                return outputInQueue;
+            }
+            else return outputEmpty;
+        };
+    })

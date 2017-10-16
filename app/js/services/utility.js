@@ -2,6 +2,22 @@ angular.module('myApp.utility',[])
 .service('utility', ['$http', '$cookies', function($http, $cookies){
     var token = '';
     var userRole = '';
+    var userId = null;
+    var baseURL = 'http://103.92.235.45/IOCLAutomationTest';
+
+    this.getBaseURL = function(){
+        return baseURL;
+    }
+
+    this.setUserId = function(id){
+        userId = id;
+        $cookies.putObject('userId', id);
+    }
+
+    this.getUserId = function(){
+        let userId = $cookies.getObject('userId');
+        return userId;
+    }
     this.setUserRole = function(role){
         userRole = role;
         $cookies.putObject('userRole', role);
