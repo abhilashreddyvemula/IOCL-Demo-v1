@@ -3,7 +3,7 @@ angular.module('myApp.utility',[])
     var token = '';
     var userRole = '';
     var userId = null;
-    var baseURL = 'http://103.92.235.45/IOCLAutomationTest';
+    var baseURL = 'http://103.92.235.45/IOCLAutomation';
 
     this.getBaseURL = function(){
         return baseURL;
