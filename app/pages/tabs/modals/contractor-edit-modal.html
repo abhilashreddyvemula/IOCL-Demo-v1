@@ -44,56 +44,56 @@
                     <tr>
                         <td align="right">State</td>
                         <td>
-                            <select name="contractorState" style="width: 50%;" ng-model="$ctrl.contractor.contractorState | orderBy" class="form-control" required
-                                ng-options="item for item in $ctrl.dropDownValues.States">
+                            <select name="contractorState" style="width: 50%;" ng-model="$ctrl.contractor.contractorState" class="form-control"
+                                required ng-options="item for item in $ctrl.dropDownValues.States | orderBy">
                                 <option value="">Select</option>
                             </select>
                             <span ng-show="contractorForm.contractorState.$touched && contractorForm.contractorState.$invalid" class="input-field-errors">Contractor State is required.</span>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Pin Code</td>
+                        <td>
+                            <input class="form-control zip" style="width: 50%;" ng-model="$ctrl.contractor.contractorPinCode" size="5" name="contractorPinCode"
+                                value="" type="text" required ng-pattern="/^[0-9]{6}$/ " maxlength="6">
+                            <span ng-show="contractorForm.contractorPinCode.$touched && contractorForm.contractorPinCode.$invalid" class="input-field-errors">Please enter 6 digit pincode</span>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Operational Status</td>
+                        <td>
+                            <select style="width: 50%;" name="contractorOperationalStatus" ng-model="$ctrl.contractor.contractorOperationalStatus" class="form-control"
+                                required ng-options="item for item in $ctrl.dropDownValues.ContractorStatus">
+                                <option value="">Select</option>
+                            </select>
+                            <span ng-show="contractorForm.contractorOperationalStatus.$touched && contractorForm.contractorOperationalStatus.$invalid"
+                                class="input-field-errors">Status is required.</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="buttons" cellspacing="0" cellpadding="0" width="100%">
+                <tr>
+                    <td style="text-align: right;">
+                        <span class="hoverMsg">
+                            <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()" ng-disabled="contractorForm.$invalid">
+                                <i class="fa fa-check"> </i>
+                                <span>Update</span>
+                            </button>
+                            <br>
+                            <span ng-if="contractorForm.$invalid" class="tooltiptext">Please fill all fields</span>
+                        </span>
+                    </td>
+                    <td>
+                        <button class="cancel" type="button" ng-click="$ctrl.cancel()">
+                            <i class="fa fa-remove"> </i>
+                            <span>Cancel</span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
         </div>
-        </td>
-        </tr>
-        <tr>
-            <td align="right">Pin Code</td>
-            <td>
-                <input class="form-control zip" style="width: 50%;" ng-model="$ctrl.contractor.contractorPinCode" size="5" name="contractorPinCode"
-                    value="" type="text" required ng-pattern="/^[0-9]{6}$/ " maxlength="6">
-                <span ng-show="contractorForm.contractorPinCode.$touched && contractorForm.contractorPinCode.$invalid" class="input-field-errors">Please enter 6 digit pincode</span>
-    </div>
-    </td>
-    </tr>
-    <tr>
-        <td align="right">Operational Status</td>
-        <td>
-            <select style="width: 50%;" name="contractorOperationalStatus" ng-model="$ctrl.contractor.contractorOperationalStatus" class="form-control"
-                required ng-options="item for item in $ctrl.dropDownValues.ContractorStatus">
-                <option value="">Select</option>
-            </select>
-            <span ng-show="contractorForm.contractorOperationalStatus.$touched && contractorForm.contractorOperationalStatus.$invalid"
-                class="input-field-errors">Status is required.</span>
-        </td>
-    </tr>
-    </tbody>
-    </table>
-    <table class="buttons" cellspacing="0" cellpadding="0" width="100%">
-        <tr>
-            <td style="text-align: right;">
-                <span class="hoverMsg">
-                    <button class="submit hoverMsg" style="width: 130px;" type="submit" ng-click="$ctrl.update()" ng-disabled="contractorForm.$invalid">
-                        <i class="fa fa-check"> </i>
-                        <span>Update</span>
-                    </button>
-                    <br>
-                    <span ng-if="contractorForm.$invalid" class="tooltiptext">Please fill all fields</span>
-                </span>
-            </td>
-            <td>
-                <button class="cancel" type="button" ng-click="$ctrl.cancel()">
-                    <i class="fa fa-remove"> </i>
-                    <span>Cancel</span>
-                </button>
-            </td>
-        </tr>
-    </table>
-    </div>
     </div>
 </form>
