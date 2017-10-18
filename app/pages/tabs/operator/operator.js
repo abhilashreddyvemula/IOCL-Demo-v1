@@ -143,7 +143,7 @@ angular.module('myApp.dashboard')
                 { 'title': 'Quantity', 'value': fanSlip.quantity },
                 { 'title': 'Contractor', 'value': fanSlip.contractorName },
                 { 'title': 'Destination', 'value': fanSlip.destination },
-                { 'title': 'Location Code', 'value': fanSlip.locationCode },
+                { 'title': 'Location Name', 'value': fanSlip.locationCode },
                 { 'title': 'Bay Number', 'value': parseInt(fanSlip.bayNum) },
                 { 'title': 'Bay Status', 'value': fanSlip.bayStatus },
                 { 'title': 'Expiration Date', 'value': fanSlip.fanPinExpiration },

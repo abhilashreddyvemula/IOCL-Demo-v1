@@ -282,7 +282,7 @@ angular.module('myApp.modals', [])
       { 'title': 'Quantity', 'value': $ctrl.fanSlip.quantity },
       { 'title': 'Contractor', 'value': $ctrl.fanSlip.contractorName },
       { 'title': 'Destination', 'value': $ctrl.fanSlip.destination },
-      { 'title': 'Location Code', 'value': $ctrl.fanSlip.locationCode },
+      { 'title': 'Location Name', 'value': $ctrl.fanSlip.locationCode },
       { 'title': 'Bay Number', 'value': parseInt($ctrl.fanSlip.bayNum) },
       { 'title': 'Bay Status', 'value': $ctrl.fanSlip.bayStatus },
       { 'title': 'Expiration Date', 'value': $ctrl.fanSlip.fanPinExpiration },
