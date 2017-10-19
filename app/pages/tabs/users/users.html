@@ -6,7 +6,7 @@
                     <h2> <i class="fa fa-user"> </i><span></span><strong>Add  User</strong></h2>
                     <ul class="buttons">
                         <li class="hoverMsg">
-                            <button class="submit" type="button" ng-click="saveUser(newUser)" ng-disabled="userForm.$invalid"><i class="fa fa-check"> </i><span>Save</span></button>
+                            <button class="submit" type="button" ng-click="saveUser(newUser)" ng-disabled="userForm.$invalid || isPasswordSame()"><i class="fa fa-check"> </i><span>Save</span></button>
                             <span ng-if="userForm.$invalid" class="tooltiptext">Please fill all fields {{newUser.userName}}</span>
                         </li>
                         <li>

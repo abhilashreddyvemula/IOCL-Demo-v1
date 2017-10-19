@@ -251,7 +251,9 @@ button[disabled="disabled"] {
     text-align: center;
     padding: 5px 0;
     position: absolute;
-    z-index: 1;
+	z-index: 1;
+	left: 0;
+	bottom: -37px;
 }
 
 .hoverMsg:hover .tooltiptext {
