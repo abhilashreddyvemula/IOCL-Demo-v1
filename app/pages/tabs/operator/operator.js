@@ -188,10 +188,12 @@ angular.module('myApp.dashboard')
                 $scope.loadFanSlipsList(newVal);
             }
         });
-        $scope.bayChanged = function(selectedBay){
-            $scope.newFanSlip.bayNum = selectedBay.bayNumber;
-            $scope.showMessage = true;
-            $scope.selectedBayStatus = item.bayAvailableStatus;
+        $scope.bayChanged = function (selectedBay) {
+            if (selectedBay !== undefined) {
+                $scope.newFanSlip.bayNum = selectedBay.bayNumber;
+                $scope.showMessage = true;
+                $scope.selectedBayStatus = selectedBay.bayAvailableStatus;
+            }
         }
 
         $scope.loadFanSlipsList(new Date());

@@ -182,6 +182,7 @@
                   </select>
                   <span ng-show="operatorForm.bayNum.$touched && operatorForm.bayNum.$invalid" class="input-field-errors">Bay Number is required</span>
                   <span ng-show="!(operatorForm.bayNum.$touched && operatorForm.bayNum.$invalid) && showMessage" class="input-field-msg">{{selectedBay.bayAvailableStatus}} Bay selected</span>
+                  <span ng-show="(bayNumbers | bayfilter).length === 0" class="input-field-errors">No bays available</span>
                 </div>
               </div>
             </div>

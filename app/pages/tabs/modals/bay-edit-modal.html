@@ -17,7 +17,7 @@
                     <tr>
                         <td align="right">Bay Number</td>
                         <td>
-                            <input class="form-control" style="width: 50%;" ng-model="$ctrl.bay.bayNum" name="bayNum" value="" maxlength="2" size="35"
+                            <input class="form-control" ng-disabled="$ctrl.isNotSuperAdmin()" style="width: 50%;" ng-model="$ctrl.bay.bayNum" name="bayNum" value="" maxlength="2" size="35"
                                 data-error="Required" required="" type="text" ng-pattern=/^[0-9]*$/>
                             <span ng-show="myForm.bayNum.$touched && myForm.bayNum.$invalid" class="input-field-errors">Bay number is required(0 - 99).</span>
                             <span ng-if="$ctrl.errorMessageBayNum" class="input-field-errors">Bay number already exist!</span>
