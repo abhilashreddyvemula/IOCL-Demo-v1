@@ -94,7 +94,7 @@ angular.module('myApp.modals', [])
         if (currentUserId === response.data.userID) {
           var userdetails = utility.getCredentials();
           if (pwdEditFlag) {
-            userdetails.password = latestPassword;
+            userdetails.password = $ctrl.user.userPassword;
           }
           if (editUserNameFlag) {
             userdetails.name = $ctrl.user.userName;
