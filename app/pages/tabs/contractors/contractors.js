@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('ContractorsController', ['$scope', '$uibModal', 'utility', 'ContractorsService', 'LoaderService', function($scope, $uibModal, utility, contractorsService, loader) {
+    .controller('ContractorsController', ['$scope', '$rootScope', '$uibModal', 'utility', 'ContractorsService', 'LoaderService', function($scope, $rootScope, $uibModal, utility, contractorsService, loader) {
         $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
         $scope.currentPage = 1;
@@ -58,7 +58,7 @@ angular.module('myApp.dashboard')
         $scope.saveContractor = function(contractor) {
             loader.show();
             $scope.errorMessageContractorName = false;
-            var body = { "contractorName": contractor.contractorName, "contractorType": contractor.contractorType, "contractorState": contractor.contractorState, "contractorPinCode": contractor.contractorPinCode, "contractorOperationalStatus": contractor.contractorOperationalStatus, "contractorCity": contractor.contractorCity, "contractorAddress": contractor.contractorAddress };
+            var body = { "contractorName": contractor.contractorName, "contractorType": contractor.contractorType, "contractorState": contractor.contractorState, "contractorPinCode": contractor.contractorPinCode, "contractorOperationalStatus": contractor.contractorOperationalStatus, "contractorCity": contractor.contractorCity, "contractorAddress": contractor.contractorAddress, "userName": $rootScope.user.name };
             contractorsService.addContractor(body).then(function(success) {
                 $scope.newContractor = { "contractorName": "", "contractorType": "", "contractorState": "", "contractorPinCode": "", "contractorOperationalStatus": "", "contractorCity": "", "contractorAddress": "" };
                 alert('Contractor added successfully...');
@@ -81,7 +81,7 @@ angular.module('myApp.dashboard')
             });
         }
 
-        $scope.openEditModal = function (size, item) {
+        $scope.openEditModal = function(size, item) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'pages/tabs/modals/contractor-edit-modal.html',
@@ -89,18 +89,17 @@ angular.module('myApp.dashboard')
                 controllerAs: '$ctrl',
                 size: size,
                 resolve: {
-                    items: function () {
-                        return {'contractor': item, 'dropDownValues': $scope.dropDownValues};
+                    items: function() {
+                        return { 'contractor': item, 'dropDownValues': $scope.dropDownValues };
                     }
                 }
             });
 
-            modalInstance.result.then(function (selectedItem) {
+            modalInstance.result.then(function(selectedItem) {
                 if (selectedItem.$value === 'updated') {
                     $scope.loadAllContractors();
                 }
-            }, function () {
-            });
+            }, function() {});
 
         };
 

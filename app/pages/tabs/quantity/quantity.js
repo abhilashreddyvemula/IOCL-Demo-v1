@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('QuantController', ['$scope', '$uibModal', 'utility', 'QuantityService', 'LoaderService', function ($scope, $uibModal, utility, quantityService, loader) {
+    .controller('QuantController', ['$scope', '$rootScope', '$uibModal', 'utility', 'QuantityService', 'LoaderService', function($scope, $rootScope, $uibModal, utility, quantityService, loader) {
         $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
         $scope.currentPage = 1;
@@ -10,31 +10,31 @@ angular.module('myApp.dashboard')
         $scope.quantityList = [];
         $scope.dropDownValues = { 'status': [] };
 
-        $scope.setItemsPerPage = function (num) {
+        $scope.setItemsPerPage = function(num) {
             $scope.itemsPerPage = num;
             $scope.currentPage = 1; //reset to first page
         }
 
-        $scope.isAddAvailable = function () {
+        $scope.isAddAvailable = function() {
             if ($scope.userRole === 'Super Admin')
                 return true;
             else
                 return false;
         }
 
-        $scope.loadAllQuantities = function () {
+        $scope.loadAllQuantities = function() {
             loader.show();
-            quantityService.getQuantityList().then(function (response) {
+            quantityService.getQuantityList().then(function(response) {
                 $scope.quantityList = response.data;
                 $scope.totalItems = $scope.quantityList.length;
                 loader.hide();
-            }, function (error) { 
+            }, function(error) {
                 loader.hide();
                 alert('Unable to load the Quantity details, Please reload the page...');
             });
         }
 
-        $scope.loadDropdownsData = function () {
+        $scope.loadDropdownsData = function() {
             quantityService.getStaticQuantityData().then(function(response) {
                 $scope.dropDownValues.status = response.data.data.Status;
             }, function(error) {
@@ -43,27 +43,27 @@ angular.module('myApp.dashboard')
             });
         }
 
-        $scope.addNewQuantity = function () {
+        $scope.addNewQuantity = function() {
             $scope.addClicked = true;
             $scope.errorMessageQuantityName = false;
             $scope.newQuantity = { "quantityName": "", "quantity": "", "operationalStatus": "" };
             $scope.loadDropdownsData();
         }
 
-        $scope.onCancel = function () {
+        $scope.onCancel = function() {
             $scope.addClicked = false;
         }
-        $scope.saveQuantity = function (newQuantity) {
+        $scope.saveQuantity = function(newQuantity) {
             loader.show();
             $scope.errorMessageQuantityName = false;
-            var body = { "quantityName": newQuantity.quantityName, "quantity": newQuantity.quantity, "quantityStatus": newQuantity.operationalStatus };
-            quantityService.addQuantity(body).then(function (success) {
+            var body = { "quantityName": newQuantity.quantityName, "quantity": newQuantity.quantity, "quantityStatus": newQuantity.operationalStatus, "userName": $rootScope.user.name };
+            quantityService.addQuantity(body).then(function(success) {
                 $scope.newQuantity = { "quantityName": "", "quantity": "", "operationalStatus": "" };
                 alert('Quantity added successfully...');
                 $scope.loadAllQuantities();
                 $scope.addClicked = false;
                 loader.hide();
-            }, function (error) {
+            }, function(error) {
                 $scope.addClicked = true;
                 $scope.errorMessage = error.data.errorMessage;
                 if ($scope.errorMessage == "Qunatity with a qunatity name already exist!") {
@@ -78,7 +78,7 @@ angular.module('myApp.dashboard')
             });
         }
 
-        $scope.openEditModal = function (size, item) {
+        $scope.openEditModal = function(size, item) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'pages/tabs/modals/quantity-edit-modal.html',
@@ -86,18 +86,17 @@ angular.module('myApp.dashboard')
                 controllerAs: '$ctrl',
                 size: size,
                 resolve: {
-                    items: function () {
-                        return {'quantity': item, 'dropDownValues': $scope.dropDownValues};
+                    items: function() {
+                        return { 'quantity': item, 'dropDownValues': $scope.dropDownValues };
                     }
                 }
             });
 
-            modalInstance.result.then(function (selectedItem) {
+            modalInstance.result.then(function(selectedItem) {
                 if (selectedItem.$value === 'updated') {
                     $scope.loadAllQuantities();
                 }
-            }, function () {
-            });
+            }, function() {});
         };
 
         $scope.loadAllQuantities();

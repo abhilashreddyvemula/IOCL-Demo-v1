@@ -1,5 +1,7 @@
 angular.module('myApp.dashboard')
-    .controller('LocationsController', ['$scope', '$uibModal', 'utility', 'LocationService', 'LoaderService', function ($scope, $uibModal, utility, locationService, loader) {
+    .controller('LocationsController', ['$scope', '$rootScope', '$uibModal', 'utility', 'LocationService', 'LoaderService', function($scope, $rootScope, $uibModal, utility, locationService, loader) {
+
+
         $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
         $scope.currentPage = 1;
@@ -10,40 +12,42 @@ angular.module('myApp.dashboard')
         $scope.locationList = [];
         $scope.dropDownValues = { 'status': [], 'states': [] };
 
-        $scope.setItemsPerPage = function (num) {
+        $scope.setItemsPerPage = function(num) {
             $scope.itemsPerPage = num;
             $scope.currentPage = 1; //reset to first page
         }
 
-        $scope.isAddAvailable = function () {
+        $scope.isAddAvailable = function() {
             if ($scope.userRole === 'Super Admin')
                 return true;
             else
                 return false;
         }
 
-        $scope.loadAllLocations = function () {
+        $scope.loadAllLocations = function() {
+            console.log("loggedUserName", $rootScope.user.name);
             loader.show();
-            locationService.getLocationsList().then(function (response) {
+            locationService.getLocationsList().then(function(response) {
                 $scope.locationList = response.data;
                 $scope.totalItems = $scope.locationList.length;
                 loader.hide();
-            }, function (error) {
+            }, function(error) {
                 alert('Unable to load the Contractors details, Please reload the page...');
-             });
+            });
         }
 
-        $scope.loadDropdownsData = function () {
-            locationService.getStaticLocationData().then(function (response) {
+        $scope.loadDropdownsData = function() {
+            locationService.getStaticLocationData().then(function(response) {
                 $scope.dropDownValues.status = response.data.data.LocationStatus;
-                $scope.dropDownValues.states = response.data.data.States;
-            }, function (error) { 
+                $scope.dropDownValues.states = ["abc", "def"];
+                // $scope.dropDownValues.states = response.data.data.States;
+            }, function(error) {
                 alert('Unable to load the dropdown values, please try again...');
                 $scope.addClicked = false;
             });
         }
 
-        $scope.addNewLocation = function () {
+        $scope.addNewLocation = function() {
             $scope.addClicked = true;
             $scope.errorMessageLocationName = false;
             $scope.errorMessagelocationCode = false;
@@ -51,26 +55,26 @@ angular.module('myApp.dashboard')
             $scope.loadDropdownsData();
         }
 
-        $scope.onCancel = function () {
+        $scope.onCancel = function() {
             $scope.addClicked = false;
         }
-        $scope.saveLocation = function (location) {
+        $scope.saveLocation = function(location) {
             loader.show();
             $scope.errorMessageLocationName = false;
-            var body = { "locationName": location.locationName, "locationCode": location.locationCode, "locationAddress": location.locationAddress, "state": location.state, "city": location.city, "pinCode": location.pinCode, "operationalStatus": location.operationalStatus };
-            locationService.addLocation(body).then(function (success) {
+            var body = { "locationName": location.locationName, "locationCode": location.locationCode, "locationAddress": location.locationAddress, "state": location.state, "city": location.city, "pinCode": location.pinCode, "operationalStatus": location.operationalStatus, "userName": $rootScope.user.name };
+            locationService.addLocation(body).then(function(success) {
                 $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "state": "", "city": "", "pinCode": "", "operationalStatus": "" };
                 alert('Location added successfully...');
                 $scope.loadAllLocations();
                 $scope.addClicked = false;
                 loader.hide();
-            }, function (error) {
+            }, function(error) {
                 $scope.addClicked = true;
                 $scope.errorMessage = error.data.errorMessage;
                 if ($scope.errorMessage == "Location with a location name already exist!") {
                     $scope.errorMessageLocationName = true;
                 }
-                if($scope.errorMessage == "Location with a location code already exist!"){
+                if ($scope.errorMessage == "Location with a location code already exist!") {
                     $scope.errorMessagelocationCode = true;
                 }
                 if ($scope.errorMessage !== null) {
@@ -82,7 +86,7 @@ angular.module('myApp.dashboard')
             });
         }
 
-        $scope.openEditModal = function (size, item) {
+        $scope.openEditModal = function(size, item) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'pages/tabs/modals/location-edit-modal.html',
@@ -90,18 +94,17 @@ angular.module('myApp.dashboard')
                 controllerAs: '$ctrl',
                 size: size,
                 resolve: {
-                    items: function () {
-                        return {'location': item, 'dropDownValues': $scope.dropDownValues};
+                    items: function() {
+                        return { 'location': item, 'dropDownValues': $scope.dropDownValues };
                     }
                 }
             });
 
-            modalInstance.result.then(function (selectedItem) {
+            modalInstance.result.then(function(selectedItem) {
                 if (selectedItem.$value === 'updated') {
                     $scope.loadAllLocations();
                 }
-            }, function () {
-            });
+            }, function() {});
 
 
         };
