@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('BayController', ['$scope', '$rootScope', '$uibModal', 'utility', 'BayService', 'LoaderService', function($scope, $rootScope, $uibModal, utility, bayService, loader) {
+    .controller('BayController', ['$scope', '$uibModal', 'utility', 'BayService', 'LoaderService', function($scope, $uibModal, utility, bayService, loader) {
         $scope.userRole = utility.getUserRole();
         $scope.bayItems = [];
         $scope.newBay = { "bayName": "", "bayNum": null, "bayType": "", "functionalStatus": "" }
@@ -66,7 +66,7 @@ angular.module('myApp.dashboard')
 
         $scope.saveBay = function(bay) {
             loader.show();
-            var body = { 'bayName': bay.bayName, 'bayNum': parseInt(bay.bayNum), 'bayType': bay.bayType, 'functionalStatus': bay.functionalStatus, "userName": $rootScope.user.name };
+            var body = { 'bayName': bay.bayName, 'bayNum': parseInt(bay.bayNum), 'bayType': bay.bayType, 'functionalStatus': bay.functionalStatus, "userName": utility.getCredentials().name };
             bayService.addBay(body).then(function(success) {
                 $scope.newBay = { "bayName": "", "bayNum": null, "bayType": "", "functionalStatus": "" }
                 $scope.addClicked = false;

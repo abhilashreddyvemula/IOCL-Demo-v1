@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('UsersController', ['$scope', '$rootScope', '$filter', '$uibModal', 'utility', 'UsersService', 'LoaderService', function($scope, $rootScope, $filter, $uibModal, utility, usersService, loader) {
+    .controller('UsersController', ['$scope', '$filter', '$uibModal', 'utility', 'UsersService', 'LoaderService', function($scope, $filter, $uibModal, utility, usersService, loader) {
 
         $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
@@ -81,7 +81,7 @@ angular.module('myApp.dashboard')
         $scope.saveUser = function(user) {
             loader.show();
             $scope.errorMessageUserName = false;
-            var body = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": $filter('date')(user.userDOB, 'yyyy-MM-dd'), "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": user.userType, "userStatus": user.userStatus, "userCreatedBy": $rootScope.user.name };
+            var body = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": $filter('date')(user.userDOB, 'yyyy-MM-dd'), "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": user.userType, "userStatus": user.userStatus, "userCreatedBy": utility.getCredentials().name };
             usersService.addUser(body).then(function(success) {
                 $scope.newUser = { "userName": "", "userFirstName": "", "userLastName": "", "userDOB": null, "userAadharNum": "", "userMobileNum": "", "userPassword": "", "rePassword": "", "userType": [], "userStatus": "" };
                 alert('User added successfully...');

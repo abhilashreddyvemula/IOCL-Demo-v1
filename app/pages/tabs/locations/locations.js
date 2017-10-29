@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('LocationsController', ['$scope', '$rootScope', '$uibModal', 'utility', 'LocationService', 'LoaderService', function($scope, $rootScope, $uibModal, utility, locationService, loader) {
+    .controller('LocationsController', ['$scope', '$uibModal', 'utility', 'LocationService', 'LoaderService', function($scope, $uibModal, utility, locationService, loader) {
 
 
         $scope.userRole = utility.getUserRole();
@@ -18,14 +18,13 @@ angular.module('myApp.dashboard')
         }
 
         $scope.isAddAvailable = function() {
-            if ($scope.userRole === 'Super Admin')
+            if ($scope.userRole === 'Super Admin' || $scope.userRole === 'Admin')
                 return true;
             else
                 return false;
         }
 
         $scope.loadAllLocations = function() {
-            console.log("loggedUserName", $rootScope.user.name);
             loader.show();
             locationService.getLocationsList().then(function(response) {
                 $scope.locationList = response.data;
@@ -61,7 +60,7 @@ angular.module('myApp.dashboard')
         $scope.saveLocation = function(location) {
             loader.show();
             $scope.errorMessageLocationName = false;
-            var body = { "locationName": location.locationName, "locationCode": location.locationCode, "locationAddress": location.locationAddress, "state": location.state, "city": location.city, "pinCode": location.pinCode, "operationalStatus": location.operationalStatus, "userName": $rootScope.user.name };
+            var body = { "locationName": location.locationName, "locationCode": location.locationCode, "locationAddress": location.locationAddress, "state": location.state, "city": location.city, "pinCode": location.pinCode, "operationalStatus": location.operationalStatus, "userName": utility.getCredentials().name };
             locationService.addLocation(body).then(function(success) {
                 $scope.newLocation = { "locationName": "", "locationCode": "", "locationAddress": "", "state": "", "city": "", "pinCode": "", "operationalStatus": "" };
                 alert('Location added successfully...');

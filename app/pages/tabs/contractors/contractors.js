@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('ContractorsController', ['$scope', '$rootScope', '$uibModal', 'utility', 'ContractorsService', 'LoaderService', function($scope, $rootScope, $uibModal, utility, contractorsService, loader) {
+    .controller('ContractorsController', ['$scope', '$uibModal', 'utility', 'ContractorsService', 'LoaderService', function($scope, $uibModal, utility, contractorsService, loader) {
         $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
         $scope.currentPage = 1;
@@ -16,7 +16,7 @@ angular.module('myApp.dashboard')
         }
 
         $scope.isAddAvailable = function() {
-            if ($scope.userRole === 'Super Admin')
+            if ($scope.userRole === 'Super Admin' || $scope.userRole === 'Admin')
                 return true;
             else
                 return false;
@@ -58,7 +58,7 @@ angular.module('myApp.dashboard')
         $scope.saveContractor = function(contractor) {
             loader.show();
             $scope.errorMessageContractorName = false;
-            var body = { "contractorName": contractor.contractorName, "contractorType": contractor.contractorType, "contractorState": contractor.contractorState, "contractorPinCode": contractor.contractorPinCode, "contractorOperationalStatus": contractor.contractorOperationalStatus, "contractorCity": contractor.contractorCity, "contractorAddress": contractor.contractorAddress, "userName": $rootScope.user.name };
+            var body = { "contractorName": contractor.contractorName, "contractorType": contractor.contractorType, "contractorState": contractor.contractorState, "contractorPinCode": contractor.contractorPinCode, "contractorOperationalStatus": contractor.contractorOperationalStatus, "contractorCity": contractor.contractorCity, "contractorAddress": contractor.contractorAddress, "userName": utility.getCredentials().name };
             contractorsService.addContractor(body).then(function(success) {
                 $scope.newContractor = { "contractorName": "", "contractorType": "", "contractorState": "", "contractorPinCode": "", "contractorOperationalStatus": "", "contractorCity": "", "contractorAddress": "" };
                 alert('Contractor added successfully...');

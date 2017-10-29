@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('QuantController', ['$scope', '$rootScope', '$uibModal', 'utility', 'QuantityService', 'LoaderService', function($scope, $rootScope, $uibModal, utility, quantityService, loader) {
+    .controller('QuantController', ['$scope', '$uibModal', 'utility', 'QuantityService', 'LoaderService', function($scope, $uibModal, utility, quantityService, loader) {
         $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
         $scope.currentPage = 1;
@@ -16,7 +16,7 @@ angular.module('myApp.dashboard')
         }
 
         $scope.isAddAvailable = function() {
-            if ($scope.userRole === 'Super Admin')
+            if ($scope.userRole === 'Super Admin' || $scope.userRole === 'Admin')
                 return true;
             else
                 return false;
@@ -56,7 +56,7 @@ angular.module('myApp.dashboard')
         $scope.saveQuantity = function(newQuantity) {
             loader.show();
             $scope.errorMessageQuantityName = false;
-            var body = { "quantityName": newQuantity.quantityName, "quantity": newQuantity.quantity, "quantityStatus": newQuantity.operationalStatus, "userName": $rootScope.user.name };
+            var body = { "quantityName": newQuantity.quantityName, "quantity": newQuantity.quantity, "quantityStatus": newQuantity.operationalStatus, "userName": utility.getCredentials().name };
             quantityService.addQuantity(body).then(function(success) {
                 $scope.newQuantity = { "quantityName": "", "quantity": "", "operationalStatus": "" };
                 alert('Quantity added successfully...');

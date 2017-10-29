@@ -9,13 +9,11 @@ angular.module('myApp.home', ['ngRoute'])
     });
 }])
 
-.controller('HomeCtrl', ['$scope', '$rootScope', '$location', 'utility', 'loginService', 'LoaderService', function($scope, $rootScope, $location, utility, loginService, loader) {
-    $rootScope.user = { 'name': '', 'password': '' };
+.controller('HomeCtrl', ['$scope', '$location', 'prompt', 'utility', 'loginService', 'LoaderService', function($scope, $location, prompt, utility, loginService, loader) {
     $scope.errorFlag = false;
     $scope.inActiveFlag = false;
     $scope.inValidFlag = false;
     $scope.submit = function(user) {
-        console.log(user);
         loader.show();
         utility.setCredentials(user);
         loginService.userValidation(user).then(function(response) {
@@ -32,11 +30,6 @@ angular.module('myApp.home', ['ngRoute'])
                 }
                 $scope.inActiveFlag = false;
                 $scope.inValidFlag = false;
-                //$scope.errorFlag = false;
-                //if(user.name === 'superadmin' && user.password === 'superadmin')
-
-                //else
-                // alert("Invalid Username or password");
             },
             function(error) {
                 loader.hide();

@@ -160,21 +160,43 @@ angular.module('myApp.dashboard')
         }
 
         $scope.regenerate = function (fanSlip) {
-            let newfanSlip = { "fanId": fanSlip.fanId, "truckNo": fanSlip.truckNumber, "driverName": fanSlip.driverName, "driverLicNo": "123456", "customer": fanSlip.customer, "quantity": fanSlip.quantity, "vehicleWgt": fanSlip.vehicleWeight, "destination": fanSlip.destination, "locationCode": fanSlip.locationCode, "bayNum": parseInt(fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name };
-            fanSlipsService.regenerateFanSlip(newfanSlip).then(function (response) {
-                $scope.loadFanSlipsList(new Date());
-            }, function (error) { });
+            prompt({
+                title: 'Would you like to Regenerate the Fan slip?',
+                message: 'Comments Please',
+                input: true,
+                label: '',
+                value: ''
+            }).then(function (comments) {
+                loader.show();
+                let newfanSlip = { "fanId": fanSlip.fanId, "truckNo": fanSlip.truckNumber, "driverName": fanSlip.driverName, "driverLicNo": "123456", "customer": fanSlip.customer, "quantity": fanSlip.quantity, "vehicleWgt": fanSlip.vehicleWeight, "destination": fanSlip.destination, "locationCode": fanSlip.locationCode, "bayNum": parseInt(fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name };
+                fanSlipsService.regenerateFanSlip(newfanSlip).then(function (response) {
+                    loader.hide();
+                    alert("Fan Slip successfully Regenerated...");
+                    $scope.loadFanSlipsList(new Date());
+                }, function (error) {
+                    loader.hide();
+                    alert('Unable to regenerate Fan Slip, Please try again...');
+                });
+            });
         }
         $scope.cancel = function (item) {
-            loader.show();
-            let username = utility.getCredentials().name;
-            fanSlipsService.cancelFanSlip(item.fanId, username).then(function (response) {
-                loader.hide();
-                alert('Fan slip cancelled successfully...');
-                $scope.loadFanSlipsList(new Date());
-            }, function (error) {
-                loader.hide();
-                alert('Unable to cancel fan slip, Please try again...');
+            prompt({
+                title: 'Would you like to Cancel the Fan slip?',
+                message: 'Comments Please',
+                input: true,
+                label: '',
+                value: ''
+            }).then(function (comments) {
+                loader.show();
+                let username = utility.getCredentials().name;
+                fanSlipsService.cancelFanSlip(item.fanId, username).then(function (response) {
+                    loader.hide();
+                    alert('Fan slip cancelled successfully...');
+                    $scope.loadFanSlipsList(new Date());
+                }, function (error) {
+                    loader.hide();
+                    alert('Unable to cancel fan slip, Please try again...');
+                });
             });
         }
 
