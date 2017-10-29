@@ -203,6 +203,10 @@
                                             <th class="sorting" ng-click="orderByField='userMobileNum'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'userMobileNum') && !reverseSort, 'sorting_desc': (orderByField == 'userMobileNum') && reverseSort}">Mobile Number</th>
                                             <th class="sorting" ng-click="orderByField='userType'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'userType') && !reverseSort, 'sorting_desc': (orderByField == 'userType') && reverseSort}">User Type</th>
                                             <th class="sorting" ng-click="orderByField='userStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'userStatus') && !reverseSort, 'sorting_desc': (orderByField == 'userStatus') && reverseSort}">Status</th>
+                                            <th class="sorting" ng-click="orderByField='createdBy'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'createdBy') && !reverseSort, 'sorting_desc': (orderByField == 'createdBy') && reverseSort}">Created By</th>
+                                            <th class="sorting" ng-click="orderByField='createdOn'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'createdOn') && !reverseSort, 'sorting_desc': (orderByField == 'createdOn') && reverseSort}">Created On</th>
+                                            <th class="sorting" ng-click="orderByField='updatedBy'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'updatedBy') && !reverseSort, 'sorting_desc': (orderByField == 'updatedBy') && reverseSort}">Updated By</th>
+                                            <th class="sorting" ng-click="orderByField='updatedOn'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'updatedOn') && !reverseSort, 'sorting_desc': (orderByField == 'updatedOn') && reverseSort}">Updated On</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -216,6 +220,10 @@
                                             <td class="center">{{item.userMobileNum}}</td>
                                             <td class="center">{{item.userType[0]}}</td>
                                             <td class="center">{{item.userStatus}} </td>
+                                            <td class="center">{{item.userCreatedBy}} </td>
+                                            <td class="center">{{item.userCreatedOn}} </td>
+                                            <td class="center">{{item.userUpdatedBy}} </td>
+                                            <td class="center">{{item.userUpdatedOn}} </td>
                                             <td class="center">
                                                 <button ng-disabled="!item.userEditFlag" class="btn btn-primary  edit-delete-icon" title="Change" ng-click="openEditModal('ls', item)"><span class="glyphicon glyphicon-edit"></span></button>
                                                 <button ng-disabled="!item.userEditFlag" class="btn btn-danger edit-delete-icon" title="Delete" confirmed-click="deleteUser(item)" 

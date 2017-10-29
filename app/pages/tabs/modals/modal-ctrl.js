@@ -86,8 +86,7 @@ angular.module('myApp.modals', [])
                 latestPassword = btoa($ctrl.user.userPassword);
             }
             let user = { "userName": $ctrl.user.userName, "userFirstName": $ctrl.user.userFirstName, "userLastName": $ctrl.user.userLastName, "userDOB": $ctrl.user.userDOB, "userAadharNum": $ctrl.user.userAadharNum, "userMobileNum": $ctrl.user.userMobileNum, "userPassword": latestPassword, "userType": $ctrl.user.userType, "userStatus": $ctrl.user.userStatus, "editUserNameFlag": editUserNameFlag, "editPwdFlag": pwdEditFlag, "userId": $ctrl.user.userID, "userUpdatedBy": utility.getCredentials().name };
-            UsersService.updateUser(user).then(function (response) {
-                console.log(response);
+            UsersService.updateUser(user).then(function (response) {    
                 var currentUserId = utility.getUserId();
                 if (currentUserId === response.data.userID) {
                     var userdetails = utility.getCredentials();

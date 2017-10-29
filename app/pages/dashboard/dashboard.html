@@ -43,6 +43,9 @@
                     <li ng-show="userPrivilages.operator">
                         <a ng-class="main.active.tab == 'operator'? 'active': 'in_active'" ng-click="main.active.tab = 'operator'" > <i class="fa fa-file" aria-hidden="true"> </i> <span>Truck operator </span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
                     </li>
+                    <li ng-show="userPrivilages.baydetails">
+                        <a ng-class="main.active.tab == 'baydetails'? 'active': 'in_active'" ng-click="main.active.tab = 'baydetails'" > <i class="fa fa-file" aria-hidden="true"> </i> <span>Bay Operational Details</span> &nbsp; <i class="fa fa-angle-up" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i> </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -69,6 +72,9 @@
         </div>
         <div ng-switch-when="operator" class="" id="Operator">
             <div ng-include="'pages/tabs/operator/operator.html'"></div>
+        </div>
+        <div ng-switch-when="baydetails" class="" id="BayDetails">
+            <div ng-include="'pages/tabs/bayDetails/bay-details.html'"></div>
         </div>
     </div>
 </div>

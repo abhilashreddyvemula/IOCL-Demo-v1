@@ -145,6 +145,10 @@
                                             <th class="sorting" ng-click="orderByField='contractorState'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractorState') && !reverseSort, 'sorting_desc': (orderByField == 'contractorState') && reverseSort}">State</th>
                                             <th class="sorting" ng-click="orderByField='contractorPinCode'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractorPinCode') && !reverseSort, 'sorting_desc': (orderByField == 'contractorPinCode') && reverseSort}">Pin Code</th>
                                             <th class="sorting" ng-click="orderByField='contractorOperationalStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractorOperationalStatus') && !reverseSort, 'sorting_desc': (orderByField == 'contractorOperationalStatus') && reverseSort}">Operational Status</th>
+                                            <th class="sorting" ng-click="orderByField='createdBy'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'createdBy') && !reverseSort, 'sorting_desc': (orderByField == 'createdBy') && reverseSort}">Created By</th>
+                                            <th class="sorting" ng-click="orderByField='createdOn'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'createdOn') && !reverseSort, 'sorting_desc': (orderByField == 'createdOn') && reverseSort}">Created On</th>
+                                            <th class="sorting" ng-click="orderByField='updatedBy'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'updatedBy') && !reverseSort, 'sorting_desc': (orderByField == 'updatedBy') && reverseSort}">Updated By</th>
+                                            <th class="sorting" ng-click="orderByField='updatedOn'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'updatedOn') && !reverseSort, 'sorting_desc': (orderByField == 'updatedOn') && reverseSort}">Updated On</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -157,6 +161,10 @@
                                             <td class="center">{{item.contractorState}}</td>
                                             <td class="center">{{item.contractorPinCode}}</td>
                                             <td class="center">{{item.contractorOperationalStatus}}</td>
+                                            <td class="center">{{item.contractorCreatedBy}}</td>
+                                            <td class="center">{{item.contractorCreatedOn}}</td>
+                                            <td class="center">{{item.contractorUpdatedBy}}</td>
+                                            <td class="center">{{item.contractorUpdatedOn}}</td>
                                             <td class="center"><a class="btn btn-primary" ng-click="openEditModal('lg', item)" title="Change"><span class="glyphicon glyphicon-edit"></span></a> </td>
                                         </tr>
                                     </tbody>

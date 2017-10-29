@@ -1,0 +1,49 @@
+<form name="myForm">
+    <div ng-controller="BayController">
+        <section class="bay title">
+            <div class="row first">
+            </div>
+        </section>
+        <div class="bay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+                        <div class="grid-list">
+                            <div class="table-responsive">
+                                <table width="100%" class="table table-bordered dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th class="sorting" ng-click="orderByField='bayNum'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayNum') && !reverseSort, 'sorting_desc': (orderByField == 'bayNum') && reverseSort}">Bay Number</th>
+                                            <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}">Bay Name</th>
+                                            <th class="sorting" ng-click="orderByField='fanPin'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPin') && !reverseSort, 'sorting_desc': (orderByField == 'fanPin') && reverseSort}">Fan Slip Number</th>
+                                            <th class="sorting" ng-click="orderByField='truckNumber'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'truckNumber') && !reverseSort, 'sorting_desc': (orderByField == 'truckNumber') && reverseSort}">Truck Number</th>
+                                            <th class="sorting" ng-click="orderByField='functionalStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'functionalStatus') && !reverseSort, 'sorting_desc': (orderByField == 'functionalStatus') && reverseSort}">Truck Number</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="bay in (bayItems | orderBy: orderByField: reverseSort | search:baySearchKey:'bay').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                                            <td class="center">{{bay.bayNumber}}</td>
+                                            <td class="center">{{bay.bayName}}</td>
+                                            <td class="center">{{bay.fanPin}}</td>
+                                            <td class="center">{{bay.truckNumber}}</td>
+                                            <td class="center">{{bay.bayFunctionalStatus}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <p style="margin-top: 7px;">Showing {{((bayItems | search:baySearchKey:'bay').length == 0 )? 0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((bayItems | search:baySearchKey:'bay').length))? ((bayItems | search:baySearchKey:'bay').length)
+                                            : currentPage * itemsPerPage}} 0f {{(bayItems | search:baySearchKey:'bay').length }} entries <span ng-show="baySearchKey.length > 0">(filtered from {{bayItems.length}} total entries)</span></p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <ul uib-pagination total-items="(bayItems | search:baySearchKey:'bay').length" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -58,7 +58,7 @@ angular.module('myApp.dashboard')
         }
 
         $scope.deleteUser = function(user) {
-            let updatedUser = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": user.userDOB, "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": user.userType, "userStatus": 'Not Active', "editUserNameFlag": false, "editPwdFlag": false, "userId": user.userID };
+            let updatedUser = { "userName": user.userName, "userFirstName": user.userFirstName, "userLastName": user.userLastName, "userDOB": user.userDOB, "userAadharNum": user.userAadharNum, "userMobileNum": user.userMobileNum, "userPassword": user.userPassword, "userType": user.userType, "userStatus": 'Not Active', "editUserNameFlag": false, "editPwdFlag": false, "userId": user.userID, "userUpdatedBy": utility.getCredentials().name };
             usersService.updateUser(updatedUser).then(function(response) {
                 alert("User deleted successfully...");
                 $scope.loadAllUsers();

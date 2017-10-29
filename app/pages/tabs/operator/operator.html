@@ -131,8 +131,11 @@
                                             <!-- <label>Quantity</label> -->
                                             <span class="mandatory-fields">
                                                 <label>Pre-Set</label>*</span>
-                                            <input class="form-control" name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity"
-                                                ng-pattern="/^\d+(\.\d{1,2})?$/">
+                                            <!-- <input class="form-control" name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity"
+                                                ng-pattern="/^\d+(\.\d{1,2})?$/"> -->
+                                            <select name="quantity" class="form-control" required ng-options="item as item.quantity for item in dropDownValues.quantities" ng-model="selectedQuantity" ng-change="quantityChanged(selectedQuantity)">
+                                                <option value="">Select Pre-Set</option>
+                                            </select>
                                             <span ng-show="operatorForm.quantity.$touched && operatorForm.quantity.$invalid && !operatorForm.quantity.$error.pattern"
                                                 class="input-field-errors">Pre-Set is required</span>
                                             <span ng-show="operatorForm.quantity.$error.pattern" class="input-field-errors">Invalid Pre-Set</span>

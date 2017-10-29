@@ -116,6 +116,10 @@
                                         <th class="sorting" ng-click="orderByField='quantityName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'quantityName') && !reverseSort, 'sorting_desc': (orderByField == 'quantityName') && reverseSort}">Quantity Name</th>
                                         <th class="sorting" ng-click="orderByField='quantity'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'quantity') && !reverseSort, 'sorting_desc': (orderByField == 'quantity') && reverseSort}">Quantity (MT)</th>
                                         <th class="sorting" ng-click="orderByField='operationalStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'operationalStatus') && !reverseSort, 'sorting_desc': (orderByField == 'operationalStatus') && reverseSort}">Operational Status</th>
+                                        <th class="sorting" ng-click="orderByField='createdBy'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'createdBy') && !reverseSort, 'sorting_desc': (orderByField == 'createdBy') && reverseSort}">Created By</th>
+                                        <th class="sorting" ng-click="orderByField='createdOn'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'createdOn') && !reverseSort, 'sorting_desc': (orderByField == 'createdOn') && reverseSort}">Created On</th>
+                                        <th class="sorting" ng-click="orderByField='updatedBy'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'updatedBy') && !reverseSort, 'sorting_desc': (orderByField == 'updatedBy') && reverseSort}">Updated By</th>
+                                        <th class="sorting" ng-click="orderByField='updatedOn'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'updatedOn') && !reverseSort, 'sorting_desc': (orderByField == 'updatedOn') && reverseSort}">Updated On</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -124,6 +128,10 @@
                                         <td class="center">{{item.quantityName}}</td>
                                         <td class="center">{{item.quantity}}</td>
                                         <td class="center">{{item.operationalStatus}}</td>
+                                        <td class="center">{{item.quantityCreatedBy}}</td>
+                                        <td class="center">{{item.quantityCreatedOn}}</td>
+                                        <td class="center">{{item.quantityUpdatedBy}}</td>
+                                        <td class="center">{{item.quantityUpdatedOn}}</td>
                                         <td class="center">
                                             <a class="btn btn-primary" ng-click="openEditModal('lg', item)" title="Change">
                                                 <span class="glyphicon glyphicon-edit"></span>

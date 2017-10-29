@@ -17,9 +17,6 @@ angular.module('myApp.home', ['ngRoute'])
         loader.show();
         utility.setCredentials(user);
         loginService.userValidation(user).then(function(response) {
-                console.log(response);
-                console.log(response.data);
-                console.log(response.data.userId);
                 if (response.status === 200) {
                     utility.setUserRole(response.data.userRole);
                     utility.setUserId(response.data.userId);

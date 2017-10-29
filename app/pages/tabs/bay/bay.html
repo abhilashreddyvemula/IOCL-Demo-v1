@@ -115,6 +115,10 @@
                                             <th class="sorting" ng-click="orderByField='bayNum'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayNum') && !reverseSort, 'sorting_desc': (orderByField == 'bayNum') && reverseSort}">Bay Number</th>
                                             <th class="sorting" ng-click="orderByField='bayType'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayType') && !reverseSort, 'sorting_desc': (orderByField == 'bayType') && reverseSort}">Bay Type</th>
                                             <th class="sorting" ng-click="orderByField='functionalStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'functionalStatus') && !reverseSort, 'sorting_desc': (orderByField == 'functionalStatus') && reverseSort}">Functional Status</th>
+                                            <th class="sorting" ng-click="orderByField='createdBy'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'createdBy') && !reverseSort, 'sorting_desc': (orderByField == 'createdBy') && reverseSort}">Created By</th>
+                                            <th class="sorting" ng-click="orderByField='createdOn'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'createdOn') && !reverseSort, 'sorting_desc': (orderByField == 'createdOn') && reverseSort}">Created On</th>
+                                            <th class="sorting" ng-click="orderByField='updatedBy'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'updatedBy') && !reverseSort, 'sorting_desc': (orderByField == 'updatedBy') && reverseSort}">Updated By</th>
+                                            <th class="sorting" ng-click="orderByField='updatedOn'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'updatedOn') && !reverseSort, 'sorting_desc': (orderByField == 'updatedOn') && reverseSort}">Updated On</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -124,6 +128,10 @@
                                             <td class="center">{{bay.bayNum}}</td>
                                             <td class="center">{{bay.bayType}}</td>
                                             <td class="center">{{bay.functionalStatus}}</td>
+                                            <td class="center">{{bay.bayCreatedBy}}</td>
+                                            <td class="center">{{bay.bayCreatedOn}}</td>
+                                            <td class="center">{{bay.bayUpdatedBy}}</td>
+                                            <td class="center">{{bay.bayUpdatedOn}}</td>
                                             <td class="center"><a class="btn btn-primary" ng-click="openEditModal('lg', bay)" ><span class="glyphicon glyphicon-edit"></span></a></td>
                                         </tr>
                                     </tbody>

@@ -171,6 +171,10 @@
                                             <th class="sorting" ng-click="orderByField='city'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'city') && !reverseSort, 'sorting_desc': (orderByField == 'city') && reverseSort}">City</th>
                                             <th class="sorting" ng-click="orderByField='pinCode'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'pinCode') && !reverseSort, 'sorting_desc': (orderByField == 'pinCode') && reverseSort}">Pin Code</th>
                                             <th class="sorting" ng-click="orderByField='operationalStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'operationalStatus') && !reverseSort, 'sorting_desc': (orderByField == 'operationalStatus') && reverseSort}">Operational Status</th>
+                                            <th class="sorting" ng-click="orderByField='createdBy'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'createdBy') && !reverseSort, 'sorting_desc': (orderByField == 'createdBy') && reverseSort}">Created By</th>
+                                            <th class="sorting" ng-click="orderByField='createdOn'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'createdOn') && !reverseSort, 'sorting_desc': (orderByField == 'createdOn') && reverseSort}">Created On</th>
+                                            <th class="sorting" ng-click="orderByField='updatedBy'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'updatedBy') && !reverseSort, 'sorting_desc': (orderByField == 'updatedBy') && reverseSort}">Updated By</th>
+                                            <th class="sorting" ng-click="orderByField='updatedOn'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'updatedOn') && !reverseSort, 'sorting_desc': (orderByField == 'updatedOn') && reverseSort}">Updated On</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -183,6 +187,10 @@
                                             <td class="center">{{location.city}}</td>
                                             <td class="center">{{location.pinCode}}</td>
                                             <td class="center">{{location.operationalStatus}}</td>
+                                            <td class="center">{{location.locationCreatedBy}}</td>
+                                            <td class="center">{{location.locationCreatedOn}}</td>
+                                            <td class="center">{{location.locationUpdatedBy}}</td>
+                                            <td class="center">{{location.locationUpdatedOn}}</td>
                                             <td class="center">
                                                 <a class="btn btn-primary" ng-click="openEditModal('lg', location)" title="Change">
                                                     <span class="glyphicon glyphicon-edit"></span>

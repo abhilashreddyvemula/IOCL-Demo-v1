@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-    .controller('OperatorsController', ['$scope', '$uibModal', 'utility', 'FanSlipsService', 'LoaderService', function ($scope, $uibModal, utility, fanSlipsService, loader) {
+    .controller('OperatorsController', ['$scope', '$uibModal', 'prompt', 'utility', 'FanSlipsService', 'LoaderService', function ($scope, $uibModal, prompt, utility, fanSlipsService, loader) {
 
         $scope.userRole = utility.getUserRole();
 
@@ -49,7 +49,13 @@ angular.module('myApp.dashboard')
             fanSlipsService.getfanSlipStaticData().then(function (response) {
                 $scope.dropDownValues.contractorNames = response.data.data.ContractorNames;
                 $scope.dropDownValues.locationCodes = response.data.data.LocationCodes;
-                loader.hide();
+                let quantity = response.data.quantitesData.Quantity;
+                let quantityList = [];
+                for(let key in quantity){
+                    quantityList.push({'quantityId': key, 'quantity': quantity[key]});
+                }
+                $scope.dropDownValues.quantities = quantityList;
+                // loader.hide();
                 fanSlipsService.getAvailableBays().then(function (res) {
                     $scope.bayNumbers = res.data;
                     loader.hide();
@@ -84,6 +90,7 @@ angular.module('myApp.dashboard')
                 "driverLicNo": fanSlip.driverLicenceNumber,
                 "customer": fanSlip.customer,
                 "quantity": fanSlip.quantity,
+                "quantityID": fanSlip.quantityID,
                 "vehicleWgt": fanSlip.vehicleWgt,
                 "destination": fanSlip.destination,
                 "locationCode": fanSlip.locationCode,
@@ -94,7 +101,7 @@ angular.module('myApp.dashboard')
             }
 
             fanSlipsService.addFanSlip(body).then(function (success) {
-                $scope.newFanSlip = { "truckNo": "", "driverName": "", "driverLicenceNumber": "", "customer": "", "quantity": "", "vehicleWgt": "", "destination": "", "locationCode": "", "bayNum": null, "mobileNumber": "", "contractorName": "" };
+                $scope.newFanSlip = { "truckNo": "", "driverName": "", "driverLicenceNumber": "", "customer": "", "quantity": "", "quantityID": "", "vehicleWgt": "", "destination": "", "locationCode": "", "bayNum": null, "mobileNumber": "", "contractorName": "" };
                 $scope.addClicked = false;
                 alert('Fan Slip added successfully...');
                 loader.hide();
@@ -168,7 +175,7 @@ angular.module('myApp.dashboard')
                 value: ''
             }).then(function (comments) {
                 loader.show();
-                let newfanSlip = { "fanId": fanSlip.fanId, "truckNo": fanSlip.truckNumber, "driverName": fanSlip.driverName, "driverLicNo": "123456", "customer": fanSlip.customer, "quantity": fanSlip.quantity, "vehicleWgt": fanSlip.vehicleWeight, "destination": fanSlip.destination, "locationCode": fanSlip.locationCode, "bayNum": parseInt(fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name };
+                let newfanSlip = { "fanId": fanSlip.fanId, "truckNo": fanSlip.truckNumber, "driverName": fanSlip.driverName, "driverLicNo": "123456", "customer": fanSlip.customer, "quantity": fanSlip.quantity, "quantityID": fanSlip.quantityID, "vehicleWgt": fanSlip.vehicleWeight, "destination": fanSlip.destination, "locationCode": fanSlip.locationCode, "bayNum": parseInt(fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name };
                 fanSlipsService.regenerateFanSlip(newfanSlip).then(function (response) {
                     loader.hide();
                     alert("Fan Slip successfully Regenerated...");
@@ -210,11 +217,19 @@ angular.module('myApp.dashboard')
                 $scope.loadFanSlipsList(newVal);
             }
         });
+
         $scope.bayChanged = function (selectedBay) {
             if (selectedBay !== undefined) {
                 $scope.newFanSlip.bayNum = selectedBay.bayNumber;
                 $scope.showMessage = true;
                 $scope.selectedBayStatus = selectedBay.bayAvailableStatus;
+            }
+        }
+        
+        $scope.quantityChanged = function(selectedQuantity){
+            if (selectedQuantity !== undefined) {
+                $scope.newFanSlip.quantityID = selectedQuantity.quantityId;
+                $scope.newFanSlip.quantity = selectedQuantity.quantity;
             }
         }
 

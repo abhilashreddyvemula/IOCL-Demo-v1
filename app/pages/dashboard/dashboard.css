@@ -373,6 +373,7 @@ input.pid { width: 150px; }
 .table>tbody>tr>td   {  
    border: none; 
    position:relative; 
+   padding: 8px 5px;
 } 
 table.dataTable {  
    border: 1px solid #c7c9eb !important;

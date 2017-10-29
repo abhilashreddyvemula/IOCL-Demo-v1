@@ -6,7 +6,6 @@ angular.module('myApp.services', [])
         this.userValidation = function () {
             var headers = utility.getHeaders();
             var url = baseUrl + '/uservalidation';
-            console.log(url, headers);
             return $http({
                 method: 'GET',
                 url: url,
@@ -61,6 +60,16 @@ angular.module('myApp.services', [])
                 url: url,
                 headers: headers,
                 data: JSON.stringify(bay)
+            });
+        }
+
+        this.getCurrentBayOperationalDetails = function(){
+            var headers = utility.getHeaders();
+            var url = baseUrl + '/getCurrentBayOperationalDetails';
+            return $http({
+                method: 'GET',
+                url: url,
+                headers: headers
             });
         }
     }])
