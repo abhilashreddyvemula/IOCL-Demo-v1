@@ -267,7 +267,7 @@ angular.module('myApp.modals', [])
                 value: ''
             }).then(function (comments) {
                 LoaderService.show();
-                let fanSlip = { "fanId": $ctrl.fanSlip.fanId, "truckNo": $ctrl.fanSlip.truckNumber, "driverName": $ctrl.fanSlip.driverName, "driverLicNo": $ctrl.fanSlip.driverLicenceNumber, "customer": $ctrl.fanSlip.customer, "quantity": $ctrl.fanSlip.quantity, "vehicleWgt": $ctrl.fanSlip.vehicleWeight, "destination": $ctrl.fanSlip.destination, "locationCode": $ctrl.fanSlip.locationCode, "bayNum": parseInt($ctrl.fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": $ctrl.fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name };
+                let fanSlip = { "fanId": $ctrl.fanSlip.fanId, "truckNo": $ctrl.fanSlip.truckNumber, "driverName": $ctrl.fanSlip.driverName, "driverLicNo": $ctrl.fanSlip.driverLicenceNumber, "customer": $ctrl.fanSlip.customer, "quantity": $ctrl.fanSlip.quantity, "vehicleWgt": $ctrl.fanSlip.vehicleWeight, "destination": $ctrl.fanSlip.destination, "locationCode": $ctrl.fanSlip.locationCode, "bayNum": parseInt($ctrl.fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": $ctrl.fanSlip.contractorName, "comments": comments, "fanCreatedBy": utility.getCredentials().name };
                 FanSlipsService.regenerateFanSlip(fanSlip).then(function (response) {
                     $uibModalInstance.close({ $value: 'regenerated' });
                     LoaderService.hide();
@@ -311,7 +311,12 @@ angular.module('myApp.modals', [])
             }).then(function (comments) {
                 LoaderService.show();
                 let username = utility.getCredentials().name;
-                FanSlipsService.cancelFanSlip($ctrl.fanSlip.fanId, username).then(function (response) {
+                let body = {
+                    "FanId": $ctrl.fanSlip.fanId,
+                    "UserName": username,
+                    "comments": comments
+                }
+                FanSlipsService.cancelFanSlip(body).then(function (response) {
                     $uibModalInstance.close({ $value: 'cancelled' });
                     LoaderService.hide();
                     alert('Fan slip cancelled successfully...');

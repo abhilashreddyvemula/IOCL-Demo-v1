@@ -15,7 +15,7 @@ angular.module('myApp.dashboard')
         $scope.dropDownValues = { 'bayStatus': [], 'bayTypes': [] }
 
         $scope.isAddAvailable = function() {
-            if ($scope.userRole === 'Super Admin')
+            if ($scope.userRole === 'Super Admin' || $scope.userRole === 'Admin')
                 return true;
             else
                 return false;

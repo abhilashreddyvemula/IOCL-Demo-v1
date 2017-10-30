@@ -175,7 +175,7 @@ angular.module('myApp.dashboard')
                 value: ''
             }).then(function (comments) {
                 loader.show();
-                let newfanSlip = { "fanId": fanSlip.fanId, "truckNo": fanSlip.truckNumber, "driverName": fanSlip.driverName, "driverLicNo": "123456", "customer": fanSlip.customer, "quantity": fanSlip.quantity, "quantityID": fanSlip.quantityID, "vehicleWgt": fanSlip.vehicleWeight, "destination": fanSlip.destination, "locationCode": fanSlip.locationCode, "bayNum": parseInt(fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": fanSlip.contractorName, "fanCreatedBy": utility.getCredentials().name };
+                let newfanSlip = { "fanId": fanSlip.fanId, "truckNo": fanSlip.truckNumber, "driverName": fanSlip.driverName, "driverLicNo": "123456", "customer": fanSlip.customer, "quantity": fanSlip.quantity, "quantityID": fanSlip.quantityID, "vehicleWgt": fanSlip.vehicleWeight, "destination": fanSlip.destination, "locationCode": fanSlip.locationCode, "bayNum": parseInt(fanSlip.bayNum), "mobileNumber": "9898989898", "contractorName": fanSlip.contractorName, "comments": comments, "fanCreatedBy": utility.getCredentials().name };
                 fanSlipsService.regenerateFanSlip(newfanSlip).then(function (response) {
                     loader.hide();
                     alert("Fan Slip successfully Regenerated...");
@@ -196,7 +196,12 @@ angular.module('myApp.dashboard')
             }).then(function (comments) {
                 loader.show();
                 let username = utility.getCredentials().name;
-                fanSlipsService.cancelFanSlip(item.fanId, username).then(function (response) {
+                let body = {
+                    "fanId": item.fanId,
+                    "userName": username,
+                    "comments": comments
+                }
+                fanSlipsService.cancelFanSlip(body).then(function (response) {
                     loader.hide();
                     alert('Fan slip cancelled successfully...');
                     $scope.loadFanSlipsList(new Date());

@@ -338,14 +338,15 @@ angular.module('myApp.services', [])
             });
         }
 
-        this.cancelFanSlip = function(fanSlipId, user){
+        this.cancelFanSlip = function(body){
             var headers = utility.getHeaders();
-            var url = baseUrl + '/fanslipCancellation?FanId='+fanSlipId+'&UserName='+ user;
+            var url = baseUrl + '/fanslipCancellation';
 
             return $http({
                 method: 'PUT',
                 url: url,
-                headers: headers
+                headers: headers,
+                data: JSON.stringify(body)
             });
         }
         this.getAvailableBays = function(){

@@ -1,5 +1,5 @@
 angular.module('myApp.dashboard')
-.controller('BayController', ['$scope', '$uibModal', 'utility', 'BayService', 'LoaderService', function($scope, $uibModal, utility, bayService, loader) {
+.controller('BayDetailsController', ['$scope', '$uibModal', 'utility', 'BayService', 'LoaderService', function($scope, $uibModal, utility, bayService, loader) {
     $scope.userRole = utility.getUserRole();
     $scope.bayItems = [];
     $scope.viewby = 10;
