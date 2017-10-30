@@ -1,7 +1,5 @@
 angular.module('myApp.dashboard')
     .controller('LocationsController', ['$scope', '$uibModal', 'utility', 'LocationService', 'LoaderService', function($scope, $uibModal, utility, locationService, loader) {
-
-
         $scope.userRole = utility.getUserRole();
         $scope.viewby = 10;
         $scope.currentPage = 1;
@@ -38,8 +36,8 @@ angular.module('myApp.dashboard')
         $scope.loadDropdownsData = function() {
             locationService.getStaticLocationData().then(function(response) {
                 $scope.dropDownValues.status = response.data.data.LocationStatus;
-                $scope.dropDownValues.states = ["abc", "def"];
-                // $scope.dropDownValues.states = response.data.data.States;
+                //$scope.dropDownValues.states = ["abc", "def"];
+                $scope.dropDownValues.states = response.data.data.States;
             }, function(error) {
                 alert('Unable to load the dropdown values, please try again...');
                 $scope.addClicked = false;
