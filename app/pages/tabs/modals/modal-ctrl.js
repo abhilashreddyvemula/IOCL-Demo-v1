@@ -129,7 +129,7 @@ angular.module('myApp.modals', [])
         };
     })
 
-    .controller('ContractorEditModalCtrl', function ($uibModalInstance, items, ContractorsService, LoaderService) {
+    .controller('ContractorEditModalCtrl', function ($uibModalInstance, utility, items, ContractorsService, LoaderService) {
         var $ctrl = this;
         $ctrl.contractor = angular.copy(items.contractor);
         let oldContractor = angular.copy($ctrl.contractor);
@@ -166,7 +166,7 @@ angular.module('myApp.modals', [])
         };
     })
 
-    .controller('LocationEditModalCtrl', function ($uibModalInstance, items, LocationService, LoaderService) {
+    .controller('LocationEditModalCtrl', function ($uibModalInstance, utility, items, LocationService, LoaderService) {
         var $ctrl = this;
         $ctrl.location = angular.copy(items.location);
         let oldLocation = angular.copy($ctrl.location);
@@ -211,7 +211,7 @@ angular.module('myApp.modals', [])
         };
     })
 
-    .controller('QuantityEditModalCtrl', function ($uibModalInstance, items, QuantityService, LoaderService) {
+    .controller('QuantityEditModalCtrl', function ($uibModalInstance, utility, items, QuantityService, LoaderService) {
         var $ctrl = this;
         $ctrl.quantity = angular.copy(items.quantity);
         let oldQuantity = angular.copy($ctrl.quantity);
