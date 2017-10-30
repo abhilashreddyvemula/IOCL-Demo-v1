@@ -16,6 +16,7 @@ body, h1, h2, h3, h4, h5, h6, p, div   {
 .tabs-div .container{
     padding-right: 15px !important;
     padding-left: 15px !important;
+    width: 100% !important;
 }
 @media (min-width: 1400px)  {
     div[ng-view]>.container {
