@@ -25,7 +25,7 @@
                                         <tr ng-repeat="bay in (bayItems | orderBy: orderByField: reverseSort | search:baySearchKey:'bay').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
                                             <td class="center">{{bay.bayNumber}}</td>
                                             <td class="center">{{bay.bayName}}</td>
-                                            <td class="center">{{bay.fanPin}}</td>
+                                            <td class="center">{{bay.fanId}}</td>
                                             <td class="center">{{bay.truckNumber}}</td>
                                             <td class="center">{{bay.bayFunctionalStatus}}</td>
                                             <td class="center">{{bay.bayAvailableStatus}}</td>

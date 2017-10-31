@@ -54,7 +54,7 @@ button.cancel{
     float: right;
 }
 .sorting{
-    padding-right: 30px;
+    padding-right: 15px !important;
     cursor: pointer;
     position: relative;
 }
@@ -63,7 +63,7 @@ button.cancel{
     bottom: 0.9em;
     display: block;
     opacity: 0.3;
-    right: 1em;
+    right: 0;
     content: "\2191";
 }
 .sorting:after{
