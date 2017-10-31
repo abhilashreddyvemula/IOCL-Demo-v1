@@ -119,10 +119,10 @@
                                 <span class="mandatory-fields">
                                     <label>Pin code</label>*</span>
                                 <input class="form-control " name="pinCode" ng-model="newLocation.pinCode" value="" size="35" data-error="Required" required=""
-                                    type="text" ng-pattern="/^(0|[1-9][0-9]*)$/">
+                                    type="text" ng-pattern="/^(0|[1-9][0-9]*){6,6}$/" maxlength="6">
                                 <span ng-show="locationsForm.pinCode.$touched && locationsForm.pinCode.$invalid && !locationsForm.pinCode.$error.pattern"
                                     class="input-field-errors">Location Pin code is required.</span>
-                                <span ng-show="locationsForm.pinCode.$error.pattern" class="input-field-errors">Location Pin code should be numbers only</span>
+                                <span ng-show="locationsForm.pinCode.$error.pattern" class="input-field-errors">Location Pin code should be six numbers</span>
                                 </br>
                             </div>
                         </div>

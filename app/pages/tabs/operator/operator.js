@@ -4,7 +4,7 @@ angular.module('myApp.dashboard')
         $scope.userRole = utility.getUserRole();
 
         $scope.fanSlips = [];
-        $scope.newFanSlip = { "truckNo": "", "driverName": "", "driverLicenceNumber": "", "customer": "", "quantity": "", "vehicleWgt": "", "destination": "", "locationCode": "", "bayNum": null, "mobileNumber": "9898989899", "contractorName": "", "fanPinStatus": "", "fanCreatedBy": "" };
+        $scope.newFanSlip = { "truckNo": "", "driverName": "", "driverLicenceNumber": "", "customer": "", "quantity": "", "quantityID": "", "vehicleWgt": "", "destination": "", "locationCode": "", "bayNum": null, "mobileNumber": "9898989899", "contractorName": "", "fanPinStatus": "", "fanCreatedBy": "" };
         $scope.viewby = 10;
         $scope.currentPage = 1;
         $scope.itemsPerPage = $scope.viewby;
@@ -73,7 +73,7 @@ angular.module('myApp.dashboard')
 
             $scope.loadDropdownsData();
             $scope.addClicked = true;
-            $scope.newFanSlip = { "truckNo": "", "driverName": "", "driverLicenceNumber": "", "customer": "", "quantity": "", "vehicleWgt": "", "destination": "", "locationCode": "", "bayNum": null, "mobileNumber": "", "contractorName": "", "fanPinStatus": "", "fanCreatedBy": "" };
+            $scope.newFanSlip = { "truckNo": "", "driverName": "", "driverLicenceNumber": "", "customer": "", "quantity": "", "quantityID": "", "vehicleWgt": "", "destination": "", "locationCode": "", "bayNum": null, "mobileNumber": "", "contractorName": "", "fanPinStatus": "", "fanCreatedBy": "" };
         }
 
         $scope.onCancel = function () {
@@ -231,12 +231,12 @@ angular.module('myApp.dashboard')
             }
         }
         
-        $scope.quantityChanged = function(selectedQuantity){
-            if (selectedQuantity !== undefined) {
-                $scope.newFanSlip.quantityID = selectedQuantity.quantityId;
-                $scope.newFanSlip.quantity = selectedQuantity.quantity;
-            }
-        }
+        // $scope.quantityChanged = function(selectedQuantity){
+        //     if (selectedQuantity !== undefined) {
+        //         $scope.newFanSlip.quantityID = selectedQuantity.quantityId;
+        //         $scope.newFanSlip.quantity = selectedQuantity.quantity;
+        //     }
+        // }
 
         $scope.loadFanSlipsList(new Date());
         $scope.loadDropdownsData();

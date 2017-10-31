@@ -130,17 +130,33 @@
                                         <div class="form-group ">
                                             <!-- <label>Quantity</label> -->
                                             <span class="mandatory-fields">
-                                                <label>Pre-Set</label>*</span>
+                                                <label>Qunatity</label>*</span>
                                             <!-- <input class="form-control" name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity"
                                                 ng-pattern="/^\d+(\.\d{1,2})?$/"> -->
-                                            <select name="quantity" class="form-control" required ng-options="item as item.quantity for item in dropDownValues.quantities" ng-model="selectedQuantity" ng-change="quantityChanged(selectedQuantity)">
-                                                <option value="">Select Pre-Set</option>
+                                            <select name="quantityID" class="form-control" required ng-options="item.quantityId as item.quantity for item in dropDownValues.quantities"
+                                                ng-model="newFanSlip.quantityID">
+                                                <option value="">Select Quantity</option>
                                             </select>
-                                            <span ng-show="operatorForm.quantity.$touched && operatorForm.quantity.$invalid && !operatorForm.quantity.$error.pattern"
-                                                class="input-field-errors">Pre-Set is required</span>
+                                            <span ng-show="operatorForm.quantityID.$touched && operatorForm.quantityID.$invalid && !operatorForm.quantityID.$error.pattern"
+                                                class="input-field-errors">Quantity is required</span>
+                                            <span ng-show="operatorForm.quantityID.$error.pattern" class="input-field-errors">Invalid Qunatity</span>
+                                        </div>
+                                    </div>
+                                    <div class=" col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <!-- <label>Vehicle Weight</label> -->
+                                            <span class="mandatory-fields">
+                                                <label>Pre-Set</label>*</span>
+                                            <input class="form-control " name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity"
+                                                ng-pattern="/^(0|[1-9][0-9]*)$/">
+                                            <span ng-show="operatorForm.quantity.$touched && operatorForm.quantity.$invalid && !operatorForm.quantity.$error.pattern" class="input-field-errors">Pre-Set is required</span>
                                             <span ng-show="operatorForm.quantity.$error.pattern" class="input-field-errors">Invalid Pre-Set</span>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
+                                <div class="row">
                                     <div class=" col-12 col-sm-6">
                                         <div class="form-group">
                                             <!-- <label>Vehicle Weight</label> -->
@@ -153,15 +169,16 @@
                                             <span ng-show="operatorForm.vehicleWgt.$error.pattern" class="input-field-errors">Invalid Vehicle weight</span>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
-                                <div class="form-group">
-                                    <!-- <label>Destination</label> -->
-                                    <span class="mandatory-fields">
-                                        <label>Destination</label>*</span>
-                                    <input class="form-control" size="32" name="destination" value="" data-error="Required" required="" type="text" ng-model="newFanSlip.destination">
-                                    <span ng-show="operatorForm.destination.$touched && operatorForm.destination.$invalid" class="input-field-errors">Destination is required</span>
+                                    <div class=" col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <!-- <label>Destination</label> -->
+                                            <span class="mandatory-fields">
+                                                <label>Destination</label>*</span>
+                                            <input class="form-control" size="32" name="destination" value="" data-error="Required" required="" type="text" ng-model="newFanSlip.destination">
+                                            <span ng-show="operatorForm.destination.$touched && operatorForm.destination.$invalid" class="input-field-errors">Destination is required</span>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-xs-12  col-sm-12 col-md-6 col-lg-3">
@@ -241,7 +258,7 @@
                                                 <!-- <th class="sorting" ng-click="orderByField='customer'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'customer') && !reverseSort, 'sorting_desc': (orderByField == 'customer') && reverseSort}"
                                                     width="7%">Customer</th> -->
                                                 <th class="sorting" ng-click="orderByField='quantity'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'quantity') && !reverseSort, 'sorting_desc': (orderByField == 'quantity') && reverseSort}"
-                                                    width="6%">Pre-Set</th>
+                                                    width="6%">Quantity</th>
                                                 <th class="sorting" ng-click="orderByField='vehicleWeight'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'vehicleWeight') && !reverseSort, 'sorting_desc': (orderByField == 'vehicleWeight') && reverseSort}"
                                                     width="6%">Vehicle Weight</th>
                                                 <th class="sorting" ng-click="orderByField='contractor'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractor') && !reverseSort, 'sorting_desc': (orderByField == 'contractor') && reverseSort}"
