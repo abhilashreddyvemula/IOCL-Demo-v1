@@ -17,7 +17,8 @@
                                             <th class="sorting" ng-click="orderByField='bayName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayName') && !reverseSort, 'sorting_desc': (orderByField == 'bayName') && reverseSort}">Bay Name</th>
                                             <th class="sorting" ng-click="orderByField='fanPin'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPin') && !reverseSort, 'sorting_desc': (orderByField == 'fanPin') && reverseSort}">Fan Slip Number</th>
                                             <th class="sorting" ng-click="orderByField='truckNumber'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'truckNumber') && !reverseSort, 'sorting_desc': (orderByField == 'truckNumber') && reverseSort}">Truck Number</th>
-                                            <th class="sorting" ng-click="orderByField='functionalStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'functionalStatus') && !reverseSort, 'sorting_desc': (orderByField == 'functionalStatus') && reverseSort}">Status</th>
+                                            <th class="sorting" ng-click="orderByField='bayFunctionalStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayFunctionalStatus') && !reverseSort, 'sorting_desc': (orderByField == 'bayFunctionalStatus') && reverseSort}">Status</th>
+                                            <th class="sorting" ng-click="orderByField='bayAvailableStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayAvailableStatus') && !reverseSort, 'sorting_desc': (orderByField == 'bayAvailableStatus') && reverseSort}">Operational Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -27,6 +28,7 @@
                                             <td class="center">{{bay.fanPin}}</td>
                                             <td class="center">{{bay.truckNumber}}</td>
                                             <td class="center">{{bay.bayFunctionalStatus}}</td>
+                                            <td class="center">{{bay.bayAvailableStatus}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
