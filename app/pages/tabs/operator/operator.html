@@ -133,12 +133,10 @@
                                                 <label>Qunatity</label>*</span>
                                             <!-- <input class="form-control" name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity"
                                                 ng-pattern="/^\d+(\.\d{1,2})?$/"> -->
-                                            <select name="quantityID" class="form-control" required ng-options="item.quantityId as item.quantity for item in dropDownValues.quantities"
-                                                ng-model="newFanSlip.quantityID">
+                                            <select name="quantityID" class="form-control" required ng-options="item.quantityId as item.quantity for item in dropDownValues.quantities" ng-model="newFanSlip.quantityID">
                                                 <option value="">Select Quantity</option>
                                             </select>
-                                            <span ng-show="operatorForm.quantityID.$touched && operatorForm.quantityID.$invalid && !operatorForm.quantityID.$error.pattern"
-                                                class="input-field-errors">Quantity is required</span>
+                                            <span ng-show="operatorForm.quantityID.$touched && operatorForm.quantityID.$invalid && !operatorForm.quantityID.$error.pattern" class="input-field-errors">Quantity is required</span>
                                             <span ng-show="operatorForm.quantityID.$error.pattern" class="input-field-errors">Invalid Qunatity</span>
                                         </div>
                                     </div>
@@ -147,8 +145,7 @@
                                             <!-- <label>Vehicle Weight</label> -->
                                             <span class="mandatory-fields">
                                                 <label>Pre-Set</label>*</span>
-                                            <input class="form-control " name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity"
-                                                ng-pattern="/^(0|[1-9][0-9]*)$/">
+                                            <input class="form-control " name="quantity" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.quantity" ng-pattern="/^\d+(\.\d{1,2})?$/">
                                             <span ng-show="operatorForm.quantity.$touched && operatorForm.quantity.$invalid && !operatorForm.quantity.$error.pattern" class="input-field-errors">Pre-Set is required</span>
                                             <span ng-show="operatorForm.quantity.$error.pattern" class="input-field-errors">Invalid Pre-Set</span>
                                         </div>
@@ -162,10 +159,8 @@
                                             <!-- <label>Vehicle Weight</label> -->
                                             <span class="mandatory-fields">
                                                 <label>Vehicle Weight</label>*</span>
-                                            <input class="form-control " name="vehicleWgt" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.vehicleWgt"
-                                                ng-pattern="/^\d+(\.\d{1,2})?$/">
-                                            <span ng-show="operatorForm.vehicleWgt.$touched && operatorForm.vehicleWgt.$invalid && !operatorForm.vehicleWgt.$error.pattern"
-                                                class="input-field-errors">Vehicle Weight is required</span>
+                                            <input class="form-control " name="vehicleWgt" value="" size="35" data-error="Required" required="" type="text" ng-model="newFanSlip.vehicleWgt" ng-pattern="/^\d+(\.\d{1,2})?$/">
+                                            <span ng-show="operatorForm.vehicleWgt.$touched && operatorForm.vehicleWgt.$invalid && !operatorForm.vehicleWgt.$error.pattern" class="input-field-errors">Vehicle Weight is required</span>
                                             <span ng-show="operatorForm.vehicleWgt.$error.pattern" class="input-field-errors">Invalid Vehicle weight</span>
                                         </div>
                                     </div>
@@ -197,8 +192,7 @@
                                     <!-- <label>Bay Number</label> -->
                                     <span class="mandatory-fields">
                                         <label>Bay Number</label>*</span>
-                                    <select name="bayNum" class="form-control" ng-options="item as item.bayNumber for item in bayNumbers | bayfilter" required
-                                        ng-model="selectedBay" ng-change="bayChanged(selectedBay)">
+                                    <select name="bayNum" class="form-control" ng-options="item as item.bayNumber for item in bayNumbers | bayfilter" required ng-model="selectedBay" ng-change="bayChanged(selectedBay)">
                                         <option value="">Select Bay number</option>
                                     </select>
                                     <span ng-show="operatorForm.bayNum.$touched && operatorForm.bayNum.$invalid" class="input-field-errors">Bay Number is required</span>
@@ -227,9 +221,8 @@
                                         <div class="col-sm-12 col-md-4 my-datepicker">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-6">
-                                                    <input size="20" style="width: 50%; margin-left: 25%;" class="form-control date" uib-datepicker-popup="{{format}}" ng-click="openDatePicker = true"
-                                                        is-open="openDatePicker" datepicker-options="options" ng-model="fanSlipDate"
-                                                        close-text="Close" name="date" value="" required type="text">
+                                                    <input size="20" style="width: 50%; margin-left: 25%;" class="form-control date" uib-datepicker-popup="{{format}}" ng-click="openDatePicker = true" is-open="openDatePicker" datepicker-options="options" ng-model="fanSlipDate" close-text="Close" name="date"
+                                                        value="" required type="text">
                                                 </div>
                                                 <divclass="col-sm-12 col-md-6">
                                                     <button ng-click="refresh()" style="margin-top: 7px;">
@@ -247,49 +240,35 @@
                                     <table width="100%" class="table table-bordered" style="font-size: 13px;">
                                         <thead>
                                             <tr>
-                                                <th class="sorting" ng-click="orderByField='fanId'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanId') && !reverseSort, 'sorting_desc': (orderByField == 'fanId') && reverseSort}"
-                                                    width="5%">FAN Slip Number</th>
-                                                <th class="sorting" ng-click="orderByField='truckNumber'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'truckNumber') && !reverseSort, 'sorting_desc': (orderByField == 'truckNumber') && reverseSort}"
-                                                    width="11%">Truck Registration Number</th>
-                                                <th class="sorting" ng-click="orderByField='driverName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'driverName') && !reverseSort, 'sorting_desc': (orderByField == 'driverName') && reverseSort}"
-                                                    width="11%">Driver Name</th>
-                                                <th class="sorting" ng-click="orderByField='driverLicNo'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'driverLicNo') && !reverseSort, 'sorting_desc': (orderByField == 'driverLicNo') && reverseSort}"
-                                                    width="9%">Driver License Number</th>
-                                                <th class="sorting" ng-click="orderByField='fanPin'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPin') && !reverseSort, 'sorting_desc': (orderByField == 'fanPin') && reverseSort}"
-                                                    width="10%">Pin Number</th>
+                                                <th class="sorting" ng-click="orderByField='fanId'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanId') && !reverseSort, 'sorting_desc': (orderByField == 'fanId') && reverseSort}" width="5%">FAN Slip Number</th>
+                                                <th class="sorting" ng-click="orderByField='truckNumber'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'truckNumber') && !reverseSort, 'sorting_desc': (orderByField == 'truckNumber') && reverseSort}" width="11%">Truck Registration Number</th>
+                                                <th class="sorting" ng-click="orderByField='driverName'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'driverName') && !reverseSort, 'sorting_desc': (orderByField == 'driverName') && reverseSort}" width="11%">Driver Name</th>
+                                                <th class="sorting" ng-click="orderByField='driverLicNo'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'driverLicNo') && !reverseSort, 'sorting_desc': (orderByField == 'driverLicNo') && reverseSort}" width="9%">Driver License Number</th>
+                                                <th class="sorting" ng-click="orderByField='fanPin'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPin') && !reverseSort, 'sorting_desc': (orderByField == 'fanPin') && reverseSort}" width="10%">Pin Number</th>
                                                 <!-- <th class="sorting" ng-click="orderByField='customer'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'customer') && !reverseSort, 'sorting_desc': (orderByField == 'customer') && reverseSort}"
                                                     width="7%">Customer</th> -->
-                                                <th class="sorting" ng-click="orderByField='quantity'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'quantity') && !reverseSort, 'sorting_desc': (orderByField == 'quantity') && reverseSort}"
-                                                    width="6%">Quantity</th>
-                                                <th class="sorting" ng-click="orderByField='vehicleWeight'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'vehicleWeight') && !reverseSort, 'sorting_desc': (orderByField == 'vehicleWeight') && reverseSort}"
-                                                    width="6%">Vehicle Weight</th>
-                                                <th class="sorting" ng-click="orderByField='contractor'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractor') && !reverseSort, 'sorting_desc': (orderByField == 'contractor') && reverseSort}"
-                                                    width="7%">Contractor</th>
-                                                <th class="sorting" ng-click="orderByField='destination'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'destination') && !reverseSort, 'sorting_desc': (orderByField == 'destination') && reverseSort}"
-                                                    width="8%">Destination</th>
+                                                <th class="sorting" ng-click="orderByField='quantity'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'quantity') && !reverseSort, 'sorting_desc': (orderByField == 'quantity') && reverseSort}" width="6%">Pre-Set</th>
+                                                <th class="sorting" ng-click="orderByField='vehicleWeight'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'vehicleWeight') && !reverseSort, 'sorting_desc': (orderByField == 'vehicleWeight') && reverseSort}" width="6%">Vehicle Weight</th>
+                                                <th class="sorting" ng-click="orderByField='contractor'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'contractor') && !reverseSort, 'sorting_desc': (orderByField == 'contractor') && reverseSort}" width="7%">Contractor</th>
+                                                <th class="sorting" ng-click="orderByField='destination'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'destination') && !reverseSort, 'sorting_desc': (orderByField == 'destination') && reverseSort}" width="8%">Destination</th>
                                                 <!-- <th class="sorting" ng-click="orderByField='locationCode'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'locationCode') && !reverseSort, 'sorting_desc': (orderByField == 'locationCode') && reverseSort}"
                           width="6%">Location Name</th> -->
-                                                <th class="sorting" ng-click="orderByField='bayNum'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayNum') && !reverseSort, 'sorting_desc': (orderByField == 'bayNum') && reverseSort}"
-                                                    width="3%">Bay Number</th>
-                                                <th class="sorting" ng-click="orderByField='bayStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayStatus') && !reverseSort, 'sorting_desc': (orderByField == 'bayStatus') && reverseSort}"
-                                                    width="9%">Bay Status</th>
-                                                <th class="sorting" ng-click="orderByField='fanPinStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPinStatus') && !reverseSort, 'sorting_desc': (orderByField == 'fanPinStatus') && reverseSort}"
-                                                    width="9%">Fan Status</th>
-                                                <th class="sorting" ng-click="orderByField='fanPinExpiration'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPinExpiration') && !reverseSort, 'sorting_desc': (orderByField == 'fanPinExpiration') && reverseSort}"
-                                                    width="12%">Expiration Date</th>
+                                                <th class="sorting" ng-click="orderByField='bayNum'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayNum') && !reverseSort, 'sorting_desc': (orderByField == 'bayNum') && reverseSort}" width="3%">Bay Number</th>
+                                                <th class="sorting" ng-click="orderByField='bayStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'bayStatus') && !reverseSort, 'sorting_desc': (orderByField == 'bayStatus') && reverseSort}" width="9%">Bay Status</th>
+                                                <th class="sorting" ng-click="orderByField='fanPinStatus'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPinStatus') && !reverseSort, 'sorting_desc': (orderByField == 'fanPinStatus') && reverseSort}" width="9%">Fan Status</th>
+                                                <th class="sorting" ng-click="orderByField='fanPinExpiration'; reverseSort = !reverseSort" ng-class="{'sorting_asc': (orderByField == 'fanPinExpiration') && !reverseSort, 'sorting_desc': (orderByField == 'fanPinExpiration') && reverseSort}" width="12%">Expiration Date</th>
                                                 <th width="15%">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-class="{'white': fanSlip.fanPinStatus == 'Created','green': fanSlip.fanPinStatus == 'Completed', 'orange': fanSlip.fanPinStatus == 'InProgress', 'red': (fanSlip.fanPinStatus == 'Expired' || fanSlip.fanPinStatus == 'Cancelled') }"
-                                                ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                                            <tr ng-class="{'white': fanSlip.fanPinStatus == 'Created','green': fanSlip.fanPinStatus == 'Completed', 'orange': fanSlip.fanPinStatus == 'InProgress', 'red': (fanSlip.fanPinStatus == 'Expired' || fanSlip.fanPinStatus == 'Cancelled') }" ng-repeat="fanSlip in (fanSlips | orderBy: orderByField: reverseSort | search:fanSlipSearchKey:'fanSlip').slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
                                                 <td class="center">{{fanSlip.fanId}}</td>
                                                 <td class="center" style="word-break: break-word;">{{fanSlip.truckNumber}}</td>
                                                 <td class="center">{{fanSlip.driverName}}</td>
                                                 <td class="center">{{fanSlip.driverLicenceNumber}}</td>
                                                 <td class="center">{{fanSlip.fanPin}}</td>
                                                 <!-- <td class="center">{{fanSlip.customer}}</td> -->
-                                                <td class="center">{{fanSlip.quantity}}</td>
+                                                <td class="center">{{fanSlip.preSet}}</td>
                                                 <td class="center">{{fanSlip.vehicleWeight}}</td>
                                                 <td class="center">{{fanSlip.contractorName}}</td>
                                                 <td class="center">{{fanSlip.destination}}</td>
@@ -318,17 +297,13 @@
                                     </table>
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6">
-                                            <p style="margin-top: 7px;">Showing {{((fanSlips | search: fanSlipSearchKey:'fanSlip').length == 0 )? 0:((currentPage-1)
-                                                * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((fanSlips | search:
-                                                fanSlipSearchKey:'fanSlip').length))? ((fanSlips | search: fanSlipSearchKey:'fanSlip').length)
-                                                : currentPage * itemsPerPage}} 0f {{(fanSlips | search: fanSlipSearchKey:'fanSlip').length
-                                                }} entries
+                                            <p style="margin-top: 7px;">Showing {{((fanSlips | search: fanSlipSearchKey:'fanSlip').length == 0 )? 0:((currentPage-1) * itemsPerPage)+1}} to {{(currentPage * itemsPerPage > ((fanSlips | search: fanSlipSearchKey:'fanSlip').length))?
+                                                ((fanSlips | search: fanSlipSearchKey:'fanSlip').length) : currentPage * itemsPerPage}} 0f {{(fanSlips | search: fanSlipSearchKey:'fanSlip').length }} entries
                                                 <span ng-show="fanSlipSearchKey.length > 0">(filtered from {{fanSlips.length}} total entries)</span>
                                             </p>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
-                                            <ul uib-pagination total-items="(fanSlips | search: fanSlipSearchKey:'fanSlip').length" ng-model="currentPage" class="pagination-sm pagination"
-                                                items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
+                                            <ul uib-pagination total-items="(fanSlips | search: fanSlipSearchKey:'fanSlip').length" ng-model="currentPage" class="pagination-sm pagination" items-per-page="itemsPerPage" boundary-link-numbers="true" rotate="false"></ul>
                                         </div>
                                     </div>
 
