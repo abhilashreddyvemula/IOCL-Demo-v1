@@ -59,9 +59,9 @@
 
                 <tr>
                     <td colspan="2" class="buttons" style="text-align: center;">
-                        <button class="submit" type="button" ng-if="$ctrl.userRole === 'Supervisor'" style="width: auto;" ng-click="$ctrl.regenerate()"><span class="glyphicon glyphicon-refresh"> </span> <span>Re-Generate</span></button>
+                        <button class="submit" type="button" ng-if="$ctrl.userRole === 'Supervisor' &&  $ctrl.fanSlip.fanPinStatus !== 'Completed'" style="width: auto;" ng-click="$ctrl.regenerate()"><span class="glyphicon glyphicon-refresh"> </span> <span>Re-Generate</span></button>
                         <button class="submit" type="button" ng-click="$ctrl.print()" ng-disabled="$ctrl.userRole === 'TTES Operator' && ($ctrl.fanSlip.fanPinStatus === 'Expired' || $ctrl.fanSlip.fanPinStatus === 'Cancelled' || $ctrl.fanSlip.fanPinStatus === 'Completed')"><i class="fa fa-print"> </i> <span>Print</span></button>
-                        <button class="submit" type="button" ng-if="$ctrl.userRole === 'Supervisor'" style="width: 180px;" ng-click="$ctrl.cancelPin()" ng-disabled="$ctrl.userRole === 'TTES Operator' && ($ctrl.fanSlip.fanPinStatus === 'Expired' || $ctrl.fanSlip.fanPinStatus === 'Cancelled' || $ctrl.fanSlip.fanPinStatus === 'Completed')"><i class="glyphicon glyphicon-remove"> </i> <span>Cancel Fanslip</span></button>
+                        <button class="submit" type="button" ng-if="$ctrl.userRole === 'Supervisor' &&  $ctrl.fanSlip.fanPinStatus !== 'Completed'" style="width: 180px;" ng-click="$ctrl.cancelPin()" ng-disabled="$ctrl.userRole === 'TTES Operator' && ($ctrl.fanSlip.fanPinStatus === 'Expired' || $ctrl.fanSlip.fanPinStatus === 'Cancelled' || $ctrl.fanSlip.fanPinStatus === 'Completed')"><i class="glyphicon glyphicon-remove"> </i> <span>Cancel Fanslip</span></button>
                     </td>
                 </tr>
             </tbody>
